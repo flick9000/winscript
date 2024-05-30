@@ -17,6 +17,8 @@ WinScript is a an open-source tool that allows you to build a Windows script fro
 -  💻 Offline: [Download](https://github.com/flick9000/winscript/releases)
 
 ## Support
+### ⭐ Star
+Feel free to leave a star and help the project reach more people!
 ### 👷 Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
@@ -25,8 +27,6 @@ Contributions are welcome! Please fork the repository and create a pull request 
 3. Commit your changes
 4. Push to the branch
 5. Create a new Pull Request
-### ⭐ Star
-Feel free to leave a star and help the project reach more people!
 
 ## License
 📒 This project is licensed under the GPL v3 License. See the [LICENSE](LICENSE) file for more details.
