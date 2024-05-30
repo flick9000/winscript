@@ -7,7 +7,17 @@ function addScript(className, scriptContent) {
     newDiv.appendChild(codeElement);
     parentDiv.appendChild(newDiv);
     hljs.highlightAll()
+    return codeElement;
+}
 
+function addScriptNoHighlight(className, scriptContent) {
+    const parentDiv = document.querySelector('.allScripts');
+    const newDiv = document.createElement('div');
+    newDiv.className = className;
+    const codeElement = document.createElement('code');
+    codeElement.textContent = scriptContent;
+    newDiv.appendChild(codeElement);
+    parentDiv.appendChild(newDiv);
     return codeElement;
 }
 
@@ -34,7 +44,10 @@ function handleCheckboxChange(id, checkedHandler, uncheckedHandler) {
 const scripts = {
     onedrive: [
         'echo -- Uninstalling OneDrive',
-        'powershell -command "irm asheroto.com/uninstallonedrive | iex"'
+        'taskkill /f /im OneDrive.exe',
+        '%systemroot%\\SysWOW64\\OneDriveSetup.exe /uninstall',
+        'reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
+        'reg delete "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
     ],
     edge: [
         'echo -- Uninstalling Edge',
@@ -861,6 +874,10 @@ const scripts = {
 // Functions to handle checking and unchecking of checkboxes
 function handleChecked(type) {
     scripts[type].forEach(script => addScript(type, script));
+}
+
+function handleCheckedNoHighlight(type) {
+    scripts[type].forEach(script => addScriptNoHighlight(type, script));
 }
 
 function handleUnchecked(type) {

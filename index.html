@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>WinScript</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon-32x32.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="tailwind.css" class="stylesheet">
     <link rel="stylesheet" href="style.css" class="stylesheet">
@@ -21,7 +22,15 @@
       </div>
       <div class="main-wrapper">
         <div class="build-container">
-          <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All</button>
+          <div class="tooltip" data-tip="Deselects all scripts.">
+            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All 🚫</button>
+          </div>
+          <div class="tooltip" data-tip="Reccomended, good balance beetween privacy/performance and functionality.">
+            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="basicPreset">Basic 🔑</button>
+          </div>
+          <div class="tooltip" data-tip="Heavy focus on privacy and performance though it disables some non-essential features, review all the scripts one by one before executing it.">
+            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="strictPreset">Strict ⚠️</button>
+          </div>
           <div id="cards" class="cards">
       
             <div onclick="showDebloat()" class="box">
@@ -609,8 +618,8 @@
                 <pre><code>echo -- Installing these apps: </code></pre>
                 <pre><code>echo -- </code><span class="installingApps"></span></pre>
                 <pre><code class="commandDisplay"></code></pre>
+                <pre><code></code></pre>
               </div>
-              <pre><code></code></pre>
               <div><pre><code>:: Pause the script</code></pre></div>
               <div><pre><code>pause</code></pre></div>
               <div><pre><code>:: Restore previous environment</code></pre></div>

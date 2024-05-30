@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 90vh;
-    gap: 3rem;
+    gap: 3vh;
 }
 
 .info-container {
@@ -32,7 +32,9 @@ body {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
-    text-decoration: underline;
+    a {
+        border-bottom: 1px solid #A6ADBB;
+    }
 }
 
 
@@ -53,7 +55,7 @@ body {
 .mockup-code {
     overflow: auto;
     scrollbar-width: thin;
-    width: clamp(250px, 35vw, 800px);
+    width: clamp(250px, 40vw, 675px);
     max-height: 330px;
 }
 
