@@ -2,7 +2,7 @@
 
 WinScript is a an open-source tool that allows you to build a Windows script from scratch. It features security, privacy, and performance tweaks, along with the ability to install applications through the terminal.
 
-<img src="https://i.imgur.com/vQruChl.png">
+<img src="animation.gif">
 
 ## Features
 
