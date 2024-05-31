@@ -8,7 +8,7 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     // Create a download link
     var link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
-    link.download = 'content.bat';
+    link.download = 'winscript.bat';
 
     // Append the link to the body
     document.body.appendChild(link);
