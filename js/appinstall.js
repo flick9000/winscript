@@ -74,6 +74,7 @@ function appsInstall() {
     
     // Display the command in the div
     document.querySelector('.div-install').style.display = (urls.length > 0) ? 'block' : 'none';
+    document.querySelector('.chocolatey-container').style.display = (urls.length > 0) ? 'block' : 'none';
     const commandDisplay = document.querySelector('.commandDisplay');
     commandDisplay.textContent = command;
     const installingApps = document.querySelector('.installingApps');

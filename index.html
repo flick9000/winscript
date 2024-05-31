@@ -603,13 +603,18 @@
           </div>
         </div>
         <div class="vl"></div>
-        <div>
+        <div class="code-container">
           <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="downloadBtn">Download as .bat</button>
           <div class="mockup-code">
             <div id="code" class="code">
               <div><pre><code>:: WinScript </code></pre></div>
               <div><pre><code>@echo off</code></pre></div>
               <div><pre><code>setlocal EnableExtensions DisableDelayedExpansion</code></pre></div>
+              <div class="chocolatey-container">
+                <pre><code></code></pre>
+                <pre><code>echo -- Installing Chocolatey:</code></pre>
+                <pre><code>powershell -command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"</code></pre>
+              </div>
               <div class="scripts-container">
                 <pre><code class="allScripts"></code></pre>
                 <pre><code></code></pre>

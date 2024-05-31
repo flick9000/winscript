@@ -52,16 +52,21 @@ function backButton() {
     }
 }
 
-document.getElementById('uncheckAll').addEventListener('click', function() {
+function uncheckAll() {
     checkboxItems.forEach(item => {
         document.getElementById(item.id).checked = false;
         handleUnchecked(item.type);
     });
+}
+
+document.getElementById('uncheckAll').addEventListener('click', function() {
+    uncheckAll();
 });
 
 var basicIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'clipboard', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance'];
 
 document.getElementById('basicPreset').addEventListener('click', function() {
+    uncheckAll();
     checkboxItems.forEach(item => {
         // Check if the current item's id is in the list of specific ids
         if (basicIds.includes(item.id)) {
@@ -78,9 +83,10 @@ document.getElementById('basicPreset').addEventListener('click', function() {
     hljs.highlightAll()
 });
 
-var strictIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'xbox', 'onedrive', 'widgets', 'wupdate', 'clipboard', 'nvidiatelemetry', 'vscodetelemetry', 'mediatelemetry', 'powershelltelemetry', 'ccleanertelemetry', 'googleupdates', 'adobeupdates', 'messagingaccess', 'notificationaccess', 'diagaccess', 'phoneaccess', 'lockscreencamera', 'manualservices', 'disablehibernation'];
+var strictIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'callhistoryaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'xbox', 'onedrive', 'widgets', 'wupdate', 'clipboard', 'nvidiatelemetry', 'vscodetelemetry', 'mediatelemetry', 'powershelltelemetry', 'ccleanertelemetry', 'googleupdates', 'adobeupdates', 'messagingaccess', 'notificationaccess', 'diagaccess', 'phoneaccess', 'lockscreencamera', 'manualservices', 'disablehibernation'];
 
 document.getElementById('strictPreset').addEventListener('click', function() {
+    uncheckAll();
     checkboxItems.forEach(item => {
         // Check if the current item's id is in the list of specific ids
         if (strictIds.includes(item.id)) {
