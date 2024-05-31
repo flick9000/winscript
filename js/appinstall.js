@@ -68,7 +68,7 @@ function appsInstall() {
     
     const finalURL = urls.join(" ");
     const command = urls.length > 0
-    ? 'start cmd /k choco feature enable -n allowGlobalConfirmation & start cmd /k ' + baseChoco + finalURL
+    ? 'start cmd /k choco feature enable -n allowGlobalConfirmation && start cmd /k ' + baseChoco + finalURL
     : '';
     
     
