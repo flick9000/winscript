@@ -68,7 +68,7 @@ function appsInstall() {
     
     const finalURL = urls.join(" ");
     const command = urls.length > 0
-    ? 'start cmd /k ' + baseChoco + finalURL + ' -y'
+    ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k ' + baseChoco + finalURL + ' -y'
     : '';
     
     
