@@ -46,13 +46,14 @@ const scripts = {
         'echo -- Uninstalling OneDrive',
         'taskkill /f /im OneDrive.exe',
         'start %systemroot%\\SysWOW64\\OneDriveSetup.exe /uninstall',
+        'start %systemroot%\\System32\\OneDriveSetup.exe /uninstall',
         'reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
         'reg delete "HKEY_CLASSES_ROOT\\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
     ],
     edge: [
         'echo -- Uninstalling Edge',
         'reg add "HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\EdgeUpdateDev" /v "AllowUninstall" /t REG_DWORD /d "1" /f',
-        'Povchell -ExecutionPolicy Unrestricted -Command "$installer = (Get-ChildItem \\"$($env:ProgramFiles)*\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe\\"); if (!$installer) { Write-Host \\"Installer not found. Microsoft Edge may already be uninstalled.\\"; } else { $installer | ForEach-Object { $uninstallerPath = $_.FullName; $installerArguments = @(\\"--uninstall\\", \\"--system-level\\", \\"--verbose-logging\\", \\"--force-uninstall\\"); Write-Output \\"Uninstalling through uninstaller: $uninstallerPath\\"; $process = Start-Process -FilePath \\"$uninstallerPath\\" -ArgumentList $installerArguments -Wait -PassThru; if ($process.ExitCode -eq 0 -or $process.ExitCode -eq 19) { Write-Host \\"Successfully uninstalled Edge.\\"; } else { Write-Error \\"Failed to uninstall, uninstaller failed with exit code $($process.ExitCode).\\"; }; }; }"'
+        'Powershell -ExecutionPolicy Unrestricted -Command "$installer = (Get-ChildItem \\"$($env:ProgramFiles)*\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe\\"); if (!$installer) { Write-Host \\"Installer not found. Microsoft Edge may already be uninstalled.\\"; } else { $installer | ForEach-Object { $uninstallerPath = $_.FullName; $installerArguments = @(\\"--uninstall\\", \\"--system-level\\", \\"--verbose-logging\\", \\"--force-uninstall\\"); Write-Output \\"Uninstalling through uninstaller: $uninstallerPath\\"; $process = Start-Process -FilePath \\"$uninstallerPath\\" -ArgumentList $installerArguments -Wait -PassThru; if ($process.ExitCode -eq 0 -or $process.ExitCode -eq 19) { Write-Host \\"Successfully uninstalled Edge.\\"; } else { Write-Error \\"Failed to uninstall, uninstaller failed with exit code $($process.ExitCode).\\"; }; }; }"'
     ],
     copilot: [
         'echo -- Disabling Copilot',
