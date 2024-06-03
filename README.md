@@ -13,7 +13,7 @@ WinScript is a an open-source tool that allows you to build a Windows script fro
 
 
 ## Usage
--  🌍 Online: [Website](winscript.pages.dev)
+-  🌍 Online: [Website](https://winscript.pages.dev)
 -  💻 Offline: [Download](https://github.com/flick9000/winscript/releases)
 
 ## Support
