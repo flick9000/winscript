@@ -19,6 +19,8 @@ function appsInstall() {
         { id: "EpicGames", url: "epicgameslauncher" },
         { id: "EAApp", url: "ea-app" },
         { id: "Minecraft", url: "minecraft-launcher" },
+        { id: "PlayNite", url: "playnite" },
+        { id: "PrismLauncher", url: "prismlauncher" },
         // Utilities
         { id: "Everything", url: "everything" },
         { id: "CCleaner", url: "ccleaner" },
