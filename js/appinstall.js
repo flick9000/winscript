@@ -14,6 +14,7 @@ function appsInstall() {
         { id: "7Zip", url: "7zip" },
         { id: "PeaZip", url: "peazip" },
         { id: "WinRAR", url: "winrar" },
+        { id: "NanaZip", url: "nanazip" },
         // Gaming
         { id: "Steam", url: "steam" },
         { id: "EpicGames", url: "epicgameslauncher" },
@@ -32,9 +33,22 @@ function appsInstall() {
         { id: "BulkCrapUninstaller", url: "bulk-crap-uninstaller" },
         { id: "BulkRename", url: "bulkrenameutility" },
         { id: "qBitTorrent", url: "qbittorrent" },
+        { id: "Afterburner", url: "msiafterburner" },
         { id: "CPU-Z", url: "cpu-z" },
         { id: "HWInfo", url: "hwinfo" },
         { id: "HWMonitor", url: "hwmonitor" },
+        { id: "DDU", url: "ddu" },
+        { id: "Rainmeter", url: "rainmeter" },
+        { id: "StartAllBack", url: "startallback" },
+        { id: "TranslucentTB", url: "translucenttb" },
+        // Microsoft Tools
+        { id: "OneDrive", url: "onedrive" },
+        { id: "PowerToys", url: "powertoys" },
+        { id: "Autoruns", url: "autoruns" },
+        { id: "WinTerminal", url: "microsoft-windows-terminal" },
+        { id: "ProcessMonitor", url: "procmon" },
+        { id: "Nuget", url: "nuget.commandline" },
+        { id: "vcredist", url: "vcredist140" },
         // Media
         { id: "VLC", url: "vlc" },
         { id: "Blender", url: "blender" },
@@ -47,6 +61,7 @@ function appsInstall() {
         { id: "Spotify", url: "spotify" },
         { id: "HandBrake", url: "handbrake" },
         { id: "MediaMonkey", url: "mediamonkey" },
+        { id: "OBS", url: "obs-studio" },
         // Comunication
         { id: "Discord", url: "discord" },
         { id: "Zoom", url: "zoom" },
@@ -76,11 +91,16 @@ function appsInstall() {
         { id: "Avast", url: "avastfreeantivirus" },
         { id: "AVG", url: "avgantivirusfree" },
         // For Developers
+        { id: "Git", url: "git" },
+        { id: "GitHub", url: "github-desktop" },
+        { id: "NodeJS", url: "nodejs" },
         { id: "Python3", url: "python3" },
         { id: "Java", url: "javaruntime" },
         { id: "NET48", url: "netfx-4.8" },
         { id: "NET8", url: "dotnet" },
         { id: "Notepad++", url: "notepadplusplus" },
+        { id: "SublimeText", url: "sublimetext3" },
+        { id: "Neovim", url: "neovim" },
         { id: "VSCode", url: "vscode" },
     ];
     
