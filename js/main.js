@@ -1,7 +1,3 @@
-function onWindowClose() {
-    Neutralino.app.exit();
-}
-
 document.getElementById('downloadBtn').addEventListener('click', function() {
     // Get the text content from the div
     var textContent = document.getElementById('code').innerText;
@@ -106,9 +102,3 @@ document.getElementById('strictPreset').addEventListener('click', function() {
     });
     hljs.highlightAll()
 });
-
-// Initialize Neutralino
-Neutralino.init();
-
-// Register event listeners
-Neutralino.events.on("windowClose", onWindowClose);
