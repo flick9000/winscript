@@ -7,6 +7,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
     min-height: 90vh;
     gap: 3vh;
 }
@@ -16,10 +17,10 @@ body {
     flex-direction: column;
     align-items: center;
     p {
-        font-size: clamp(0.8rem, 1.7vw, 1rem);
+        font-size: clamp(1rem, 1.7vw, 1rem);
     }
     .title {
-        font-size: clamp(2rem, 8vw, 5rem);
+        font-size: clamp(3rem, 8vw, 5rem);
         font-weight: bold;
         user-select: none;
     }
@@ -142,4 +143,67 @@ summary > span {
 
 .scripts-container {
     margin-left: 1rem;
+}
+
+.restore-container {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .main-container {
+        min-height: 100vh;
+        gap: 8px;
+    }
+    .main-wrapper {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .links-container,
+    .description {
+        display: none;
+    }
+    .build-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .vl {
+        display: none;
+    }
+    .box {
+        width: clamp(140px, 30vw, 200px);
+        height: 8rem;
+    }
+    .card {
+        width: clamp(280px + 8px, 60vw + 8px, 400px + 8px);
+        height: calc(16rem + 8px);
+    }
+    .code-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .mockup-code {
+        width: clamp(250px, 60vw, 400px + 8px);
+        height: 16rem;
+    }
+}
+
+@media (max-width: 700px) and (max-height: 737px) {
+    .main-container {
+        min-height: 100vh;
+        gap: 1.5rem;
+    }
+    .main-wrapper {
+        gap: 1.5rem;
+    }
+    .box {
+        height: 6rem;
+    }
+    .card {
+        height: calc(12rem + 8px);
+    }
+    .mockup-code {
+        height: 12rem;
+    }
 }

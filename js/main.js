@@ -102,3 +102,14 @@ document.getElementById('strictPreset').addEventListener('click', function() {
     });
     hljs.highlightAll()
 });
+
+let isFunction1 = true;
+document.getElementById('restoreBtn').addEventListener('click', function() {
+    if (isFunction1) {
+        document.querySelector('.restore-container').style.display = 'block';
+    }
+    else {
+        document.querySelector('.restore-container').style.display = 'none';
+    }
+    isFunction1 = !isFunction1;
+});
