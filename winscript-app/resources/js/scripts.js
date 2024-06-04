@@ -793,6 +793,32 @@ const scripts = {
         'echo -- Disabling Hibernation',
         'powercfg.exe /hibernate off'
     ],
+
+    darkmode: [
+        'echo -- Enabling Dark Mode',
+        'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 0 /f',
+        'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d 0 /f',
+    ],
+    filextensions: [
+        'echo -- Showing File Extensions',
+        'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f',
+    ],
+    stickykeys: [
+        'echo -- Disabling Sticky Keys',
+        'reg add "HKCU\\Control Panel\\Accessibility\\StickyKeys" /v "Flags" /t REG_SZ /d "58" /f',
+    ],
+    taskbarwidgets: [
+        'echo -- Disabling Taskbar Widgets',
+        'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "TaskbarDa" /t REG_DWORD /d 0 /f',
+    ],
+    numlockstartup: [
+        'echo -- Disabling Num Lock on Startup',
+        'reg add "HKCU\\Control Panel\\Keyboard" /v "InitialKeyboardIndicators" /t REG_SZ /d "0" /f',
+    ],
+    snapflyout: [
+        'echo -- Disabling Snap Assist Flyout',
+        'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d 0 /f',
+    ],
 };
 
 // Functions to handle checking and unchecking of checkboxes
@@ -877,6 +903,14 @@ const checkboxItems = [
     { id: 'ultimateperformance', type: 'ultimateperformance' },
     { id: 'manualservices', type: 'manualservices' },
     { id: 'disablehibernation', type: 'disablehibernation' },
+
+    { id: 'darkmode', type: 'darkmode' },
+    { id: 'filextensions', type: 'filextensions' },
+    { id: 'stickykeys', type: 'stickykeys' },
+    { id: 'taskbarwidgets', type: 'taskbarwidgets' },
+    { id: 'numlockstartup', type: 'numlockstartup' },
+    { id: 'snapflyout', type: 'snapflyout' },
+
 ];
 
 // Attach event listeners to each checkbox

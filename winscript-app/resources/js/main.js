@@ -39,7 +39,7 @@ function showPrivacy() {
 function showPerformance() {
     showCard('performance');
 }
-function showMisc() {
+function showInstall() {
     showCard('install');
 }
 
@@ -64,7 +64,7 @@ document.getElementById('uncheckAll').addEventListener('click', function() {
     uncheckAll();
 });
 
-var basicIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'clipboard', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance'];
+let basicIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'clipboard', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'filextensions', 'stickykeys', 'taskbarwidgets'];
 
 document.getElementById('basicPreset').addEventListener('click', function() {
     uncheckAll();
@@ -84,7 +84,7 @@ document.getElementById('basicPreset').addEventListener('click', function() {
     hljs.highlightAll()
 });
 
-var strictIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'callhistoryaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'xbox', 'onedrive', 'widgets', 'wupdate', 'clipboard', 'nvidiatelemetry', 'vscodetelemetry', 'mediatelemetry', 'powershelltelemetry', 'ccleanertelemetry', 'googleupdates', 'adobeupdates', 'messagingaccess', 'notificationaccess', 'diagaccess', 'phoneaccess', 'lockscreencamera', 'manualservices', 'disablehibernation'];
+let strictIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'callhistoryaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'xbox', 'onedrive', 'widgets', 'wupdate', 'clipboard', 'nvidiatelemetry', 'vscodetelemetry', 'mediatelemetry', 'powershelltelemetry', 'ccleanertelemetry', 'googleupdates', 'adobeupdates', 'messagingaccess', 'notificationaccess', 'diagaccess', 'phoneaccess', 'lockscreencamera', 'manualservices', 'disablehibernation', 'filextensions', 'stickykeys', 'taskbarwidgets'];
 
 document.getElementById('strictPreset').addEventListener('click', function() {
     uncheckAll();
