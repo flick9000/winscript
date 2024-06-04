@@ -123,16 +123,26 @@ summary {
     margin-left: -2rem;
 }
 
-details > summary {
-    list-style-type: '➡️';
+summary::before {
+    font-family: 'Font Awesome 6 Free';
+    content: '\f105';
+    margin-left: 6px;
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+    font-weight: 900;
 }
 
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+details > summary,
 details[open] > summary {
-    list-style-type: '⬇️';
+    list-style-type: '';
 }
 
 summary > span {
-    margin-left: 9px;
+    margin-left: 16px;
 }
 
 .code,

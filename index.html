@@ -9,11 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/tailwind.css" class="stylesheet">
     <link rel="stylesheet" href="css/style.css" class="stylesheet">
-    <link rel="stylesheet" href="css/fontawesome.css" class="stylesheet" media="print" onload="this.media='all'">
   </head>
   <body>
     <div class="main-container">
@@ -28,18 +26,19 @@
       <div class="main-wrapper">
         <div class="build-container">
           <div class="build-buttons">
-            <div class="tooltip" data-tip="Deselects all scripts.">
-              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All 🚫</button>
-            </div>
-            <div class="tooltip" data-tip="Reccomended, good balance beetween privacy/performance and functionality.">
-              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="basicPreset">Basic 🔑</button>
-            </div>
-            <div class="tooltip" data-tip="Heavy focus on privacy and performance though it disables some non-essential features, review all the scripts one by one before executing it.">
-              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="strictPreset">Strict ⚠️</button>
+            <div>
+              <div class="tooltip" data-tip="Deselects all scripts.">
+                <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All 🚫</button>
+              </div>
+              <div class="tooltip" data-tip="Reccomended, good balance beetween privacy/performance and functionality.">
+                <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="basicPreset">Basic 🔑</button>
+              </div>
+              <div class="tooltip" data-tip="Heavy focus on privacy and performance though it disables some non-essential features, review all the scripts one by one before executing it.">
+                <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="strictPreset">Strict ⚠️</button>
+              </div>
             </div>
           </div>
           <div id="cards" class="cards">
-      
             <div onclick="showDebloat()" class="box">
               <span>Debloat</span>
             </div>
@@ -49,13 +48,13 @@
             <div onclick="showPerformance()" class="box">
               <span>Performance</span>
             </div>
-            <div onclick="showMisc()" class="box">
+            <div onclick="showInstall()" class="box">
               <span>Install Apps</span>
             </div>
           </div>
           <div class="card debloat">
             <div>
-              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
+              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-primary btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
             </div>
             <details>
               <summary><span>Remove Windows Apps</span></summary>
@@ -123,7 +122,7 @@
           </div>
           <div class="card privacy">
             <div>
-              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
+              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-primary btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
             </div>
             <details>
               <summary><span>Disable Telemetry & Data Collection</span></summary>
@@ -311,7 +310,7 @@
           </div>
           <div class="card performance">
             <div>
-              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
+              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-primary btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
             </div>
             <details>
               <summary><span>Set as DNS</span></summary>
@@ -347,6 +346,35 @@
                 </label>
               </div>
             </details>
+            <details>
+              <summary><span>Misc Options</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="darkmode" type="checkbox" class="checkbox" />
+                  <span>Enable Dark Mode</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="filextensions" type="checkbox" class="checkbox" />
+                  <span>Show File Extensions</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="stickykeys" type="checkbox" class="checkbox" />
+                  <span>Disable Sticky Keys</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="taskbarwidgets" type="checkbox" class="checkbox" />
+                  <span>Disable Taskbar Widgets</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="numlockstartup" type="checkbox" class="checkbox" />
+                  <span>Numlock on Startup</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="snapflyout" type="checkbox" class="checkbox" />
+                  <span>Disable Snap Flyout</span>
+                </label>
+              </div>
+            </details>
             <label class="checkbox-wrap">
               <input id="ultimateperformance" type="checkbox" class="checkbox" />
               <span>Add Ultimate Performance</span>
@@ -362,7 +390,7 @@
           </div>
           <div class="card install">
             <div>
-              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
+              <button onclick="backButton()" id="back-button" class="btn btn-outline btn-primary btn-xs"><i class="fa-solid fa-backward-step"></i>Back</button>
             </div>
             <details>
               <summary><span>Browsers</span></summary>
@@ -773,7 +801,7 @@
         <div class="code-container">
           <div class="code-buttons">
             <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="downloadBtn">Download .bat</button>
-            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="restoreBtn">On/Off Restore Point</button>
+            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="restoreBtn">Toggle Restore Point</button>
           </div>
           <div class="mockup-code">
             <div id="code" class="code">
@@ -817,6 +845,7 @@
   <script src="js/scripts.js"></script>
   <script src="js/appinstall.js"></script>
   <link rel="stylesheet" href="highlight/atom-one-dark.css" media="print" onload="this.media='all'">
+  <script src="js/fontawesome.js"></script>
   <script src="highlight/highlight.js"></script>
   <script src="highlight/dos.js"></script>
   <script>hljs.highlightAll();</script>
