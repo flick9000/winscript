@@ -3,9 +3,7 @@ function onWindowClose() {
 }
 
 document.getElementById('downloadBtn').addEventListener('click', async function() {
-    // Get the text content from the div
-    var textContent = document.getElementById('code').innerText;
-
+    let textContent = document.getElementById('code').innerText;
     try {
         // Get the TEMP directory path
         const tempDir = await Neutralino.os.getEnv('TEMP');
@@ -29,22 +27,18 @@ document.getElementById('downloadBtn').addEventListener('click', async function(
 function showCard(cardClass) {
     document.getElementById("cards").style.display = "none";
     document.querySelector(`.card.${cardClass}`).style.display = "flex";
-    // Store current card class
     currentCardClass = cardClass;
 }
 
 function showDebloat() {
     showCard('debloat');
 }
-
 function showPrivacy() {
     showCard('privacy');
 }
-
 function showPerformance() {
     showCard('performance');
 }
-
 function showMisc() {
     showCard('install');
 }
@@ -59,6 +53,7 @@ function backButton() {
 }
 
 function uncheckAll() {
+    document.querySelector('.restore-container').style.display = 'none';
     checkboxItems.forEach(item => {
         document.getElementById(item.id).checked = false;
         handleUnchecked(item.type);
@@ -107,6 +102,17 @@ document.getElementById('strictPreset').addEventListener('click', function() {
         }
     });
     hljs.highlightAll()
+});
+
+let isFunction1 = true;
+document.getElementById('restoreBtn').addEventListener('click', function() {
+    if (isFunction1) {
+        document.querySelector('.restore-container').style.display = 'block';
+    }
+    else {
+        document.querySelector('.restore-container').style.display = 'none';
+    }
+    isFunction1 = !isFunction1;
 });
 
 // Initialize Neutralino

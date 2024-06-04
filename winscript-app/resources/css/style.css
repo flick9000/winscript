@@ -147,3 +147,7 @@ summary > span {
 .scripts-container {
     margin-left: 1rem;
 }
+
+.restore-container {
+    display: none;
+}

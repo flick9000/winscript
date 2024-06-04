@@ -27,14 +27,16 @@
       </div>
       <div class="main-wrapper">
         <div class="build-container">
-          <div class="tooltip" data-tip="Deselects all scripts.">
-            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All 🚫</button>
-          </div>
-          <div class="tooltip" data-tip="Reccomended, good balance beetween privacy/performance and functionality.">
-            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="basicPreset">Basic 🔑</button>
-          </div>
-          <div class="tooltip" data-tip="Heavy focus on privacy and performance though it disables some non-essential features, review all the scripts one by one before executing it.">
-            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="strictPreset">Strict ⚠️</button>
+          <div class="build-buttons">
+            <div class="tooltip" data-tip="Deselects all scripts.">
+              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All 🚫</button>
+            </div>
+            <div class="tooltip" data-tip="Reccomended, good balance beetween privacy/performance and functionality.">
+              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="basicPreset">Basic 🔑</button>
+            </div>
+            <div class="tooltip" data-tip="Heavy focus on privacy and performance though it disables some non-essential features, review all the scripts one by one before executing it.">
+              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="strictPreset">Strict ⚠️</button>
+            </div>
           </div>
           <div id="cards" class="cards">
       
@@ -769,12 +771,20 @@
         </div>
         <div class="vl"></div>
         <div class="code-container">
-          <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="downloadBtn">Run .bat</button>
+          <div class="code-buttons">
+            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="downloadBtn">Run .bat</button>
+            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="restoreBtn">On/Off Restore Point</button>
+          </div>
           <div class="mockup-code">
             <div id="code" class="code">
               <div><pre><code>:: WinScript </code></pre></div>
               <div><pre><code>@echo off</code></pre></div>
               <div><pre><code>setlocal EnableExtensions DisableDelayedExpansion</code></pre></div>
+              <div class="restore-container">
+                <pre><code></code></pre>
+                <pre><code>echo -- Creating a restore point:</code></pre>
+                <pre><code>powershell -command "Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS""</code></pre>
+              </div>
               <div class="chocolatey-container">
                 <pre><code></code></pre>
                 <pre><code>echo -- Installing Chocolatey:</code></pre>
