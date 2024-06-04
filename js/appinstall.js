@@ -40,7 +40,7 @@ function appsInstall() {
         { id: "DDU", url: "ddu" },
         { id: "Rainmeter", url: "rainmeter" },
         { id: "StartAllBack", url: "startallback" },
-        { id: "TranslucentTB", url: "translucenttb" },
+        { id: "TransluscentTB", url: "translucenttb" },
         // Microsoft Tools
         { id: "OneDrive", url: "onedrive" },
         { id: "PowerToys", url: "powertoys" },
