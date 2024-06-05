@@ -117,7 +117,7 @@ function appsInstall() {
     // Create the final URL
     const finalURL = urls.join(" ");
     const command = urls.length > 0
-    ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k ' + baseChoco + finalURL + ' -y'
+    ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "refreshenv && ' + baseChoco + finalURL + ' -y"'
     : '';
     
     
