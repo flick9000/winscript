@@ -49,10 +49,18 @@ const scripts = {
     onedrive: [
         'echo -- Uninstalling OneDrive',
         'taskkill /f /im OneDrive.exe',
+        'echo -- Uninstalling OneDrive through the installers',
         'start %systemroot%\\SysWOW64\\OneDriveSetup.exe /uninstall',
-        'start %systemroot%\\SysWOW32\\OneDriveSetup.exe /uninstall',
+        'start %programfiles(x86)%\\Microsoft Office\\root\\Integration\\Addons\\OneDriveSetup.exe /uninstall',
+        'echo -- Removing OneDrive registry keys',
         'reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
         'reg delete "HKEY_CLASSES_ROOT\\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
+        'reg delete "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDrive" /f',
+        'echo -- Removing OneDrive folders',
+        'rd "%UserProfile%\\OneDrive" /Q /S',
+        'rd "%LocalAppData%\\Microsoft\\OneDrive" /Q /S',
+        'rd "%ProgramData%\\Microsoft OneDrive" /Q /S',
+        'rd "C:\\OneDriveTemp" /Q /S'
     ],
     edge: [
         'echo -- Uninstalling Edge',
