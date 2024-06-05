@@ -1,9 +1,12 @@
+/* Author: @flick9000 */
+/* Global Styling */
+
 * {
     user-select: none;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif, system-ui;
 }
 
 .main-container {
@@ -11,19 +14,23 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
     min-height: 90vh;
     gap: 3vh;
 }
+
+/* Header Styling */
 
 .info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    p {
-        font-size: clamp(0.8rem, 1.7vw, 1rem);
+
+    .description {
+        font-size: clamp(1rem, 1.7vw, 1rem);
     }
     .title {
-        font-size: clamp(2rem, 8vw, 5rem);
+        font-size: clamp(3rem, 8vw, 5rem);
         font-weight: bold;
         user-select: none;
     }
@@ -38,6 +45,7 @@ body {
     }
 }
 
+/* Main Content Styling */
 
 .main-wrapper {
     display: flex;
@@ -51,13 +59,6 @@ body {
     top: 1rem;
     min-height: 350px;
     border-left: 5px solid rgba(42, 50, 60, 0.5);
-}
-
-.mockup-code {
-    overflow: auto;
-    scrollbar-width: thin;
-    width: clamp(250px, 40vw, 675px);
-    max-height: 330px;
 }
 
 .cards {
@@ -76,10 +77,10 @@ body {
     background-color: #2A323C;
     border-radius: 15px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 .box:hover {
     background-color: #383F47;
-    transition: background-color 0.3s;
     }
 
 .card {
@@ -103,6 +104,27 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
+
+/* Code Styling */
+
+.mockup-code {
+    overflow: auto;
+    scrollbar-width: thin;
+    width: clamp(250px, 40vw, 675px);
+    max-height: 330px;
+}
+
+.code,
+.scripts-container {
+    margin-left: 1rem;
+}
+
+.restore-container {
+    display: none;
+}
+
+
+/* Collapse Styling */
 
 .checkbox-wrap {
     display: flex;
@@ -141,23 +163,9 @@ details[open] summary::before {
 
 details > summary,
 details[open] > summary {
-    list-style-type: '';
+    list-style-type: none;
 }
 
 summary > span {
-    margin-left: 16px;
-}
-
-.code,
-#code-footer {
-    padding: 0 20px;
-}
-
-
-.scripts-container {
     margin-left: 1rem;
-}
-
-.restore-container {
-    display: none;
 }

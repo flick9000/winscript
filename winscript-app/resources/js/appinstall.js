@@ -1,5 +1,7 @@
 function appsInstall() {
+    // Define the base choco command
     const baseChoco = "choco install ";
+    // Define the list of apps
     const appList = [
         // Browsers
         { id: "Chrome", url: "googlechrome" },
@@ -104,6 +106,7 @@ function appsInstall() {
         { id: "VSCode", url: "vscode" },
     ];
     
+    // Get the checked checkboxes
     const urls = appList
     .filter(app => {
         const element = document.getElementById(app.id);
@@ -111,13 +114,14 @@ function appsInstall() {
     })
     .map(app => app.url);
     
+    // Create the final URL
     const finalURL = urls.join(" ");
     const command = urls.length > 0
     ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k ' + baseChoco + finalURL + ' -y'
     : '';
     
     
-    // Display the command in the div
+    // Display the final URL in the div
     document.querySelector('.div-install').style.display = (urls.length > 0) ? 'block' : 'none';
     document.querySelector('.chocolatey-container').style.display = (urls.length > 0) ? 'block' : 'none';
     const commandDisplay = document.querySelector('.commandDisplay');
@@ -126,7 +130,10 @@ function appsInstall() {
     installingApps.textContent = finalURL;
 }
 
+
+// Call the function
 appsInstall()
+
 
 // Select the "uncheck all" button
 const uncheckAllButton = document.getElementById('uncheckAll');
@@ -147,6 +154,7 @@ uncheckAllButton.addEventListener('click', () => {
 });
 
 
+// Add a 'DOMContentLoaded' event listener to the document
 document.addEventListener('DOMContentLoaded', () => {
     const checkboxes = document.querySelectorAll('[js-target=install]');
     checkboxes.forEach(checkbox => {

@@ -1,3 +1,4 @@
+// Function to add scripts to the page
 function addScript(className, scriptContent) {
     const parentDiv = document.querySelector('.allScripts');
     const newDiv = document.createElement('div');
@@ -10,6 +11,7 @@ function addScript(className, scriptContent) {
     return codeElement;
 }
 
+// Add script without highlighting
 function addScriptNoHighlight(className, scriptContent) {
     const parentDiv = document.querySelector('.allScripts');
     const newDiv = document.createElement('div');
@@ -21,12 +23,13 @@ function addScriptNoHighlight(className, scriptContent) {
     return codeElement;
 }
 
-// Helper function to remove scripts by class name
+// Remove scripts from the page
 function removeScripts(className) {
     const parentDiv = document.querySelector('.allScripts');
     const scriptsToRemove = parentDiv.querySelectorAll(`.${className}`);
     scriptsToRemove.forEach(script => parentDiv.removeChild(script));
 }
+
 
 // Function to handle checkbox changes
 function handleCheckboxChange(id, checkedHandler, uncheckedHandler) {
@@ -40,7 +43,8 @@ function handleCheckboxChange(id, checkedHandler, uncheckedHandler) {
     });
 }
 
-// Script content stored in an object
+
+// Script content stored in an array
 const scripts = {
     onedrive: [
         'echo -- Uninstalling OneDrive',
@@ -821,6 +825,7 @@ const scripts = {
     ],
 };
 
+
 // Functions to handle checking and unchecking of checkboxes
 function handleChecked(type) {
     scripts[type].forEach(script => addScript(type, script));
@@ -833,6 +838,7 @@ function handleCheckedNoHighlight(type) {
 function handleUnchecked(type) {
     removeScripts(type);
 }
+
 
 // Checkbox items array
 const checkboxItems = [
@@ -912,6 +918,7 @@ const checkboxItems = [
     { id: 'snapflyout', type: 'snapflyout' },
 
 ];
+
 
 // Attach event listeners to each checkbox
 checkboxItems.forEach(item => {
