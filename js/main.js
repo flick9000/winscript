@@ -1,31 +1,29 @@
 document.getElementById('downloadBtn').addEventListener('click', function() {
     // Get the text content from the div
     var textContent = document.getElementById('code').innerText;
-
     // Create a Blob with the text content
     var blob = new Blob([textContent], { type: 'text/plain' });
-
     // Create a download link
     var link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.download = 'winscript.bat';
-
     // Append the link to the body
     document.body.appendChild(link);
-
     // Programmatically click the download link
     link.click();
-
     // Remove the link from the document
     document.body.removeChild(link);
 });
 
+
 function showCard(cardClass) {
+    // Hide and show the correct card
     document.getElementById("cards").style.display = "none";
     document.querySelector(`.card.${cardClass}`).style.display = "flex";
     // Store current card class
     currentCardClass = cardClass;
 }
+
 
 function showDebloat() {
     showCard('debloat');
@@ -44,6 +42,7 @@ function showInstall() {
 }
 
 
+// Back button
 function backButton() {
     if (currentCardClass) {
         document.querySelector(`.card.${currentCardClass}`).style.display = "none";
@@ -53,18 +52,23 @@ function backButton() {
     }
 }
 
+
+// Uncheck all checkboxes
 function uncheckAll() {
     checkboxItems.forEach(item => {
         document.getElementById(item.id).checked = false;
         handleUnchecked(item.type);
     });
 }
-
 document.getElementById('uncheckAll').addEventListener('click', function() {
     uncheckAll();
 });
 
+
+// Presets
 let basicIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'clipboard', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'filextensions', 'stickykeys', 'taskbarwidgets'];
+let strictIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'callhistoryaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'xbox', 'onedrive', 'widgets', 'wupdate', 'clipboard', 'nvidiatelemetry', 'vscodetelemetry', 'mediatelemetry', 'powershelltelemetry', 'ccleanertelemetry', 'googleupdates', 'adobeupdates', 'messagingaccess', 'notificationaccess', 'diagaccess', 'phoneaccess', 'lockscreencamera', 'manualservices', 'disablehibernation', 'filextensions', 'stickykeys', 'taskbarwidgets'];
+
 
 document.getElementById('basicPreset').addEventListener('click', function() {
     uncheckAll();
@@ -84,8 +88,6 @@ document.getElementById('basicPreset').addEventListener('click', function() {
     hljs.highlightAll()
 });
 
-let strictIds = ['thirdparty', 'copilot', 'faxscan', 'iexplorer', 'wtelemetry', 'wsearchtelemetry', 'blockhosts', 'officetelemetry', 'appexperience', 'wfeedback', 'handwriting', 'targetads', 'privacyconsent', 'cloudsync', 'wifisense', 'screenrecording', 'automap', 'activityfeed', 'voiceactivationaccess', 'locationaccess', 'accinfoaccess', 'callhistoryaccess', 'motionaccess', 'trustedaccess', 'contactsaccess', 'calendaraccess', 'emailaccess', 'tasksaccess', 'radioaccess', 'systemaccess', 'cleantemp', 'ultimateperformance', 'xbox', 'onedrive', 'widgets', 'wupdate', 'clipboard', 'nvidiatelemetry', 'vscodetelemetry', 'mediatelemetry', 'powershelltelemetry', 'ccleanertelemetry', 'googleupdates', 'adobeupdates', 'messagingaccess', 'notificationaccess', 'diagaccess', 'phoneaccess', 'lockscreencamera', 'manualservices', 'disablehibernation', 'filextensions', 'stickykeys', 'taskbarwidgets'];
-
 document.getElementById('strictPreset').addEventListener('click', function() {
     uncheckAll();
     checkboxItems.forEach(item => {
@@ -104,6 +106,8 @@ document.getElementById('strictPreset').addEventListener('click', function() {
     hljs.highlightAll()
 });
 
+
+// Restore button
 let isFunction1 = true;
 document.getElementById('restoreBtn').addEventListener('click', function() {
     if (isFunction1) {
