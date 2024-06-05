@@ -153,7 +153,7 @@ const scripts = {
     iexplorer: [
         'echo -- Disabling Internet Explorer',
         'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-amd64" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-amd64." } catch { Write-Output "Feature not found." }"',
-        'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x84" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x84." } catch { Write-Output "Feature not found." }"',
+        'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x86" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x86." } catch { Write-Output "Feature not found." }"',
         'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x64" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x64." } catch { Write-Output "Feature not found." }"',
         ],
     hyperv: [
