@@ -27,17 +27,16 @@
         <div class="build-container">
           <div class="build-buttons">
             <div class="tooltip" data-tip="Deselects all scripts.">
-              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All 🚫</button>
+                <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="uncheckAll">Uncheck All 🚫</button>
             </div>
             <div class="tooltip" data-tip="Reccomended, good balance beetween privacy/performance and functionality.">
-              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="basicPreset">Basic 🔑</button>
+                <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="basicPreset">Basic 🔑</button>
             </div>
             <div class="tooltip" data-tip="Heavy focus on privacy and performance though it disables some non-essential features, review all the scripts one by one before executing it.">
-              <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="strictPreset">Strict ⚠️</button>
+                <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-primary btn-xs" id="strictPreset">Strict ⚠️</button>
             </div>
           </div>
           <div id="cards" class="cards">
-      
             <div onclick="showDebloat()" class="box">
               <span>Debloat</span>
             </div>
@@ -60,19 +59,31 @@
               <div class="collapsable-content">
                 <label class="checkbox-wrap">
                   <input id="thirdparty" type="checkbox" class="checkbox" />
-                  <span>Remove 3rd-party apps (Spotify, Shazam etc..)</span>
+                  <span>Remove 3rd-party apps</span>
+                  <div class="tooltip tooltip-primary" data-tip="Removes pre-installed software as Spotify, Candy Crush, Netflix etc...">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="extensions" type="checkbox" class="checkbox" />
-                  <span>Remove Extension Apps (VP9, HEVC etc..)</span>
+                  <span>Remove Extension Apps</span>
+                  <div class="tooltip tooltip-primary" data-tip="Removes pre-installed extensions apps as VP9, HEVC etc... ">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="msapps" type="checkbox" class="checkbox" />
-                  <span>Remove Microsoft Apps (Sticky, MS People etc..)</span>
+                  <span>Remove Microsoft Apps</span>
+                  <div class="tooltip tooltip-primary" data-tip="Removes pre-installed Microsoft apps as Microsoft Teams, Sticky Notes, People etc...">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="xbox" type="checkbox" class="checkbox" />
                   <span>Remove Xbox Apps</span>
+                  <div class="tooltip tooltip-primary" data-tip="Removes all the pre-installed Xbox apps.">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
               </div>
             </details>
@@ -86,6 +97,9 @@
                 <label class="checkbox-wrap">
                   <input id="hyperv" type="checkbox" class="checkbox" />
                   <span>Disable Hyper-V</span>
+                  <div class="tooltip tooltip-primary" data-tip="Virtual Machines might not work anymore when disabling this feature.">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="faxscan" type="checkbox" class="checkbox" />
@@ -98,6 +112,9 @@
                 <label class="checkbox-wrap">
                   <input id="wsearch" type="checkbox" class="checkbox" />
                   <span>Disable Search</span>
+                  <div class="tooltip tooltip-primary" data-tip="Indexing and Search functionality will not work anymore when disabling this feature.">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
               </div>
             </details>
@@ -194,10 +211,16 @@
                 <label class="checkbox-wrap">
                   <input id="googleupdates" type="checkbox" class="checkbox" />
                   <span>Disable Google Backgroud Updates</span>
+                  <div class="tooltip tooltip-primary" data-tip="Google Chrome might not update automatically anymore when disabling this feature.">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="adobeupdates" type="checkbox" class="checkbox" />
                   <span>Disable Adobe Backgroud Updates</span>
+                  <div class="tooltip tooltip-primary" data-tip="Adobe Products might not update automatically anymore when disabling this feature.">
+                    <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+                  </div>
                 </label>
               </div>
             </details>
@@ -305,6 +328,9 @@
             <label class="checkbox-wrap">
               <input id="biometrics" type="checkbox" class="checkbox" />
               <span>Disable Biometrics</span>
+              <div class="tooltip tooltip-primary" data-tip="Fingerpriting/Facial login might not work anymore when disabling this feature.">
+                <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+              </div>
             </label>
           </div>
           <div class="card performance">
@@ -366,7 +392,7 @@
                 </label>
                 <label class="checkbox-wrap">
                   <input id="numlockstartup" type="checkbox" class="checkbox" />
-                  <span>Numlock on Startup</span>
+                  <span>Disable Numlock on Startup</span>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="snapflyout" type="checkbox" class="checkbox" />
@@ -377,6 +403,9 @@
             <label class="checkbox-wrap">
               <input id="ultimateperformance" type="checkbox" class="checkbox" />
               <span>Add Ultimate Performance</span>
+              <div class="tooltip tooltip-primary" data-tip="This script only adds Ultimate Performance, it does not activate it automatically (yet), to enable it open Power Options in Control Panel and enable manually.">
+                <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+              </div>
             </label>
             <label class="checkbox-wrap">
               <input id="manualservices" type="checkbox" class="checkbox" />
@@ -822,6 +851,9 @@
                 <pre><code></code></pre>
               </div>
               <div class="div-install">
+                <pre><code>echo -- Refresh environment: </code></pre>
+                <pre><code>call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"</code></pre>
+                <pre><code>call RefreshEnv.cmd</code></pre>
                 <pre><code>echo -- Installing these apps: </code></pre>
                 <pre><code>echo -- </code><span class="installingApps"></span></pre>
                 <pre><code class="commandDisplay"></code></pre>
