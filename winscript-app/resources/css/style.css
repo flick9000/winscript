@@ -14,9 +14,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden;
     min-height: 90vh;
     gap: 3vh;
+}
+
+.tooltip::before {
+    max-width: 32ch;
 }
 
 /* Header Styling */

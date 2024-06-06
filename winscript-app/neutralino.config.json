@@ -34,10 +34,12 @@
   "modes": {
     "window": {
       "title": "WinScript",
+      "minWidth": 800,
+      "minHeight": 600,
       "width": 1200,
       "height": 800,
-      "minWidth": 1200,
-      "minHeight": 800,
+      "maxWidth": 1920,
+      "maxHeight": 1080,
       "center": true,
       "fullScreen": false,
       "alwaysOnTop": false,
@@ -46,7 +48,7 @@
       "borderless": false,
       "maximize": false,
       "hidden": false,
-      "resizable": false,
+      "resizable": true,
       "exitProcessOnClose": false
     },
     "browser": {
