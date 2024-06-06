@@ -15,6 +15,10 @@ body {
     gap: 3vh;
 }
 
+.tooltip::before {
+    max-width: 32ch;
+}
+
 /* Header Styling */
 
 .info-container {
