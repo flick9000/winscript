@@ -46,13 +46,25 @@ function handleCheckboxChange(id, checkedHandler, uncheckedHandler) {
 
 // Script content stored in an array
 const scripts = {
+    microsoftstore: [
+        'echo -- Uninstalling Microsoft Store',
+        'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "*Microsoft.WindowsStore*" | Remove-AppxPackage"'
+    ],
     onedrive: [
         'echo -- Uninstalling OneDrive',
         'taskkill /f /im OneDrive.exe',
+        'echo -- Uninstalling OneDrive through the installers',
         'start %systemroot%\\SysWOW64\\OneDriveSetup.exe /uninstall',
-        'start %systemroot%\\SysWOW32\\OneDriveSetup.exe /uninstall',
+        'start %programfiles(x86)%\\Microsoft Office\\root\\Integration\\Addons\\OneDriveSetup.exe /uninstall',
+        'echo -- Removing OneDrive registry keys',
         'reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
         'reg delete "HKEY_CLASSES_ROOT\\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
+        'reg delete "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDrive" /f',
+        'echo -- Removing OneDrive folders',
+        'rd "%UserProfile%\\OneDrive" /Q /S',
+        'rd "%LocalAppData%\\Microsoft\\OneDrive" /Q /S',
+        'rd "%ProgramData%\\Microsoft OneDrive" /Q /S',
+        'rd "C:\\OneDriveTemp" /Q /S'
     ],
     edge: [
         'echo -- Uninstalling Edge',
@@ -145,7 +157,7 @@ const scripts = {
     iexplorer: [
         'echo -- Disabling Internet Explorer',
         'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-amd64" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-amd64." } catch { Write-Output "Feature not found." }"',
-        'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x84" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x84." } catch { Write-Output "Feature not found." }"',
+        'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x86" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x86." } catch { Write-Output "Feature not found." }"',
         'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x64" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x64." } catch { Write-Output "Feature not found." }"',
         ],
     hyperv: [
@@ -797,6 +809,11 @@ const scripts = {
         'echo -- Disabling Hibernation',
         'powercfg.exe /hibernate off'
     ],
+    disableprefetch: [
+        'echo -- Disabling Prefetch',
+        'sc stop sysmain',
+        'sc config sysmain start=disabled',
+    ],
 
     darkmode: [
         'echo -- Enabling Dark Mode',
@@ -842,6 +859,7 @@ function handleUnchecked(type) {
 
 // Checkbox items array
 const checkboxItems = [
+    { id: 'microsoftstore', type: 'microsoftstore' },
     { id: 'onedrive', type: 'onedrive' },
     { id: 'edge', type: 'edge' },
     { id: 'copilot', type: 'copilot' },
@@ -909,6 +927,7 @@ const checkboxItems = [
     { id: 'ultimateperformance', type: 'ultimateperformance' },
     { id: 'manualservices', type: 'manualservices' },
     { id: 'disablehibernation', type: 'disablehibernation' },
+    { id: 'disableprefetch', type: 'disableprefetch' },
 
     { id: 'darkmode', type: 'darkmode' },
     { id: 'filextensions', type: 'filextensions' },
