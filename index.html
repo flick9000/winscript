@@ -119,6 +119,13 @@
               </div>
             </details>
             <label class="checkbox-wrap">
+              <input id="microsoftstore" type="checkbox" class="checkbox" />
+              <span>Remove Microsoft Store</span>
+              <div class="tooltip tooltip-primary" data-tip="Removes Microsoft Store, once uninstalled you may not be able to install Store Apps anymore.">
+                <i class="fa-solid fa-circle-info" style="color: #646ee4;"></i>
+              </div>
+            </label>
+            <label class="checkbox-wrap">
               <input id="onedrive" type="checkbox" class="checkbox" />
               <span>Remove OneDrive</span>
             </label>
@@ -414,6 +421,10 @@
             <label class="checkbox-wrap">
               <input id="disablehibernation" type="checkbox" class="checkbox" />
               <span>Disable Hibernation</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="disableprefetch" type="checkbox" class="checkbox" />
+              <span>Disable Prefetch</span>
             </label>
           </div>
           <div class="card install">
@@ -830,6 +841,7 @@
           <div class="code-buttons">
             <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="downloadBtn">Download .bat</button>
             <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="restoreBtn">Toggle Restore Point</button>
+            <button style="margin-left: 4px; margin-bottom: 8px;" class="btn btn-outline btn-secondary btn-xs" id="copyBtn">Copy</button>
           </div>
           <div class="mockup-code">
             <div id="code" class="code">

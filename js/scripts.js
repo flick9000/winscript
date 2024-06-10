@@ -46,6 +46,10 @@ function handleCheckboxChange(id, checkedHandler, uncheckedHandler) {
 
 // Script content stored in an array
 const scripts = {
+    microsoftstore: [
+        'echo -- Uninstalling Microsoft Store',
+        'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "*Microsoft.WindowsStore*" | Remove-AppxPackage"'
+    ],
     onedrive: [
         'echo -- Uninstalling OneDrive',
         'taskkill /f /im OneDrive.exe',
@@ -805,6 +809,11 @@ const scripts = {
         'echo -- Disabling Hibernation',
         'powercfg.exe /hibernate off'
     ],
+    disableprefetch: [
+        'echo -- Disabling Prefetch',
+        'sc stop sysmain',
+        'sc config sysmain start=disabled',
+    ],
 
     darkmode: [
         'echo -- Enabling Dark Mode',
@@ -850,6 +859,7 @@ function handleUnchecked(type) {
 
 // Checkbox items array
 const checkboxItems = [
+    { id: 'microsoftstore', type: 'microsoftstore' },
     { id: 'onedrive', type: 'onedrive' },
     { id: 'edge', type: 'edge' },
     { id: 'copilot', type: 'copilot' },
@@ -917,6 +927,7 @@ const checkboxItems = [
     { id: 'ultimateperformance', type: 'ultimateperformance' },
     { id: 'manualservices', type: 'manualservices' },
     { id: 'disablehibernation', type: 'disablehibernation' },
+    { id: 'disableprefetch', type: 'disableprefetch' },
 
     { id: 'darkmode', type: 'darkmode' },
     { id: 'filextensions', type: 'filextensions' },

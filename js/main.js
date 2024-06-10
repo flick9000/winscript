@@ -118,3 +118,15 @@ document.getElementById('restoreBtn').addEventListener('click', function() {
     }
     isFunction1 = !isFunction1;
 });
+
+// Copy to clipboard button
+document.getElementById('copyBtn').addEventListener('click', function() {
+    // Get the text content from the div
+    var textContent = document.getElementById('code').innerText;
+    // Copy the text content to the clipboard
+    navigator.clipboard.writeText(textContent).then(function() {
+        alert('Script copied to clipboard');
+    }, function(err) {
+        alert('Error copying text to clipboard: ', err);
+    });
+});
