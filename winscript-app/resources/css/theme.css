@@ -1,0 +1,70 @@
+:root {
+  --background: #0d112b;
+  --background-light: #1a203d;
+  --text: #fffdfa;
+  --primary: #3498db;
+  --secondary: #f230e5;
+  --hover: #282d48;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+.build-buttons > .tooltip::before {
+  background-color: var(--background-light);
+  margin-bottom: 4px;
+}
+
+.tooltip::before {
+  background-color: var(--primary);
+}
+
+.btn-outline.btn-primary {
+  color: var(--primary);
+}
+
+.btn-outline.btn-primary:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline.btn-secondary {
+  color: var(--secondary);
+}
+
+.btn-outline.btn-secondary:hover {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.vl {
+  border-left: 5px solid rgba(25, 30, 54, 0.5);
+}
+
+#back-button {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+#back-button:hover {
+  background-color: var(--text);
+  color: var(--background);
+}
+
+.box,
+.mockup-code,
+.card {
+  background-color: var(--background-light);
+}
+
+.box:hover {
+  background-color: var(--hover);
+}
