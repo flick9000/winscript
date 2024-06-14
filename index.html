@@ -11,16 +11,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="icons/favicon-32x32.png"
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
     />
     <link
-    rel="icon"
-    type="image/png"
-    sizes="16x16"
-    href="icons/favicon-16x16.png"
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
     />
     <script defer src="js/main.js"></script>
     <script defer src="js/fontawesome.js"></script>
@@ -35,16 +35,21 @@
       <div class="nav-items">
         <a href="https://winscript.pages.dev">Home</a>
         <a id="privacy-item">Privacy</a>
-        <a href="https://github.com/flick9000/winscript" target="_blank">GitHub</a>
+        <a href="https://github.com/flick9000/winscript" target="_blank"
+          >GitHub</a
+        >
       </div>
       <div class="nav-items right">
-        <button class="support-button lg">
+        <a href="" class="support-button lg">
           <i class="fa-solid fa-mug-hot"></i>
-          &nbsp; <a href="https://www.paypal.com/donate/?hosted_button_id=ULUWJR89TTBEN" target="_blank">Buy me a coffe!</a>
-        </button>
-        <button class="support-button sm">
-          <a href="https://www.paypal.com/donate/?hosted_button_id=ULUWJR89TTBEN" target="_blank">Donate</a>
-        </button>
+          &nbsp;
+          <span>Buy me a coffee!</span>
+        </a>
+        <a href="" class="support-button sm">
+          <i class="fa-solid fa-mug-hot"></i>
+          &nbsp;
+          <span>Donate!</span>
+        </a>
       </div>
       <i onclick="responsiveNav()" class="fa-solid fa-bars-staggered"></i>
     </nav>
@@ -52,7 +57,12 @@
       <div id="privacy-modal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <p>🤖 Website automatically deployed from <a href="https://github.com/flick9000/winscript" target="_blank">GitHub</a>.</p>
+          <p>
+            🤖 Website automatically deployed from
+            <a href="https://github.com/flick9000/winscript" target="_blank"
+              >GitHub</a
+            >.
+          </p>
           <p>👁️ We do not log IP Address.</p>
           <p>🍪 We do not use cookies.</p>
         </div>
@@ -61,36 +71,42 @@
         <h1 class="hero-title">Fix Windows.</h1>
         <p class="hero-description lg">
           Open-source tool to build your Windows 10/11 script from scratch.
-          <br>
+          <br />
           It includes debloat, privacy, performance & app installing scripts.
         </p>
         <p class="hero-description sm">
-          Open-source tool to create Windows scripts for debloating, privacy, performance, and 3rd party app installation.
+          Open-source tool to create Windows scripts for debloating, privacy,
+          performance, and 3rd party app installation.
         </p>
         <div class="cta">
-          <button class="button-download lg">
+          <a
+            href="https://github.com/flick9000/winscript/releases"
+            class="button-download lg"
+            target="_blank"
+          >
             <i class="fa-solid fa-download"></i>
             &nbsp;
-            <a href="https://github.com/flick9000/winscript" target="_blank"
-              >Download for Windows</a
-            >
-          <button class="button-download sm">
+            <span>Download for Windows</span>
+          </a>
+          <a
+            href="https://github.com/flick9000/winscript/releases"
+            class="button-download sm"
+            target="_blank"
+          >
             <i class="fa-solid fa-download"></i>
             &nbsp;
-            <a href="https://github.com/flick9000/winscript" target="_blank"
-              >Download</a
-            >
-          </button>
-          <button class="online-button">
+            <span>Download</span>
+          </a>
+          <a href="winscript-online/index.html" class="online-button">
             <i class="fa-solid fa-globe"></i>
             &nbsp;
-            <a href="winscript-online/index.html">Online</a>
-          </button>
+            <span>Online</span>
+          </a>
         </div>
       </div>
       <div class="hero-right">
         <a href="https://winscript.pages.dev" target="_blank">
-          <img src="img/winscript.png" alt="WinScript"/>
+          <img src="img/winscript.png" alt="WinScript" />
         </a>
       </div>
     </main>
