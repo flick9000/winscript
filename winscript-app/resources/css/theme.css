@@ -1,0 +1,97 @@
+:root {
+  --background: #0d112b;
+  --text: #fffdfa;
+  --primary: #3498db;
+  --secondary: #f230e5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url(../icons/flux.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+.main-container {
+  position: relative;
+  z-index: 1;
+}
+
+.build-buttons > .tooltip::before {
+  background: rgba(255, 253, 250, 0.1);
+  color: rgba(255, 253, 250, 0.8);
+  margin-bottom: 4px;
+}
+
+.tooltip::before {
+  background-color: var(--primary);
+}
+
+.btn-outline.btn-primary {
+  color: var(--primary);
+}
+
+.btn-outline.btn-primary:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline.btn-secondary {
+  color: var(--secondary);
+}
+
+.btn-outline.btn-secondary:hover {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.vl {
+  border-color: rgba(255, 253, 250, 0.04);
+}
+
+#back-button {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+#back-button:hover {
+  background-color: var(--text);
+  color: var(--background);
+}
+
+.box,
+.mockup-code,
+.card {
+  background: rgba(255, 253, 250, 0.04);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+}
+
+.box:hover {
+  background: rgba(255, 253, 250, 0.06);
+}
+
+.checkbox {
+  --chkbg: var(--text);
+  --chkfg: var(--background);
+  border-color: rgba(255, 253, 250, 0.2);
+}

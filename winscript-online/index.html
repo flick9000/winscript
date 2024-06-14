@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Build your Windows 10/11 script from scratch."
+    />
+    <title>WinScript</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
+    />
+    <link rel="stylesheet" href="css/daisyui.css" />
+    <link rel="stylesheet" href="css/style.css" class="stylesheet" />
+    <link rel="stylesheet" href="css/theme.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="info-container">
+        <h1 class="title">WinScript</h1>
+        <p class="description">Build your Windows script from scratch.</p>
+        <div class="links-container">
+          <a href="https://github.com/flick9000/winscript" target="_blank"
+            >Source Code</a
+          >
+          <a
+            href="https://github.com/flick9000/winscript/releases"
+            target="_blank"
+            >Desktop Version</a
+          >
+        </div>
+      </div>
+      <div class="main-wrapper">
+        <div class="build-container">
+          <div class="build-buttons">
+            <div class="tooltip" data-tip="Deselects all scripts.">
+              <button
+                style="margin-left: 4px; margin-bottom: 8px"
+                class="btn btn-outline btn-primary btn-xs"
+                id="uncheckAll"
+              >
+                Uncheck All 🚫
+              </button>
+            </div>
+            <!-- prettier-ignore -->
+            <div class="tooltip" data-tip="Reccomended, good balance beetween privacy/performance and functionality." >
+              <!-- prettier-ignore -->
+              <button
+                style="margin-left: 4px; margin-bottom: 8px"
+                class="btn btn-outline btn-primary btn-xs"
+                id="basicPreset">
+                Basic 🔑
+              </button>
+            </div>
+            <!-- prettier-ignore -->
+            <div class="tooltip" data-tip="Heavy focus on privacy and performance though it disables some non-essential features, review all the scripts one by one before executing it.">
+              <button
+                style="margin-left: 4px; margin-bottom: 8px"
+                class="btn btn-outline btn-primary btn-xs"
+                id="strictPreset"
+              >
+                Strict ⚠️
+              </button>
+            </div>
+          </div>
+          <div id="cards" class="cards">
+            <div onclick="showDebloat()" class="box">
+              <span>Debloat</span>
+            </div>
+            <div onclick="showPrivacy()" class="box">
+              <span>Privacy</span>
+            </div>
+            <div onclick="showPerformance()" class="box">
+              <span>Performance</span>
+            </div>
+            <div onclick="showInstall()" class="box">
+              <span>Install Apps</span>
+            </div>
+          </div>
+          <div class="card debloat">
+            <div>
+              <button
+                onclick="backButton()"
+                id="back-button"
+                class="btn btn-outline btn-xs"
+              >
+                <i class="fa-solid fa-backward-step"></i>Back
+              </button>
+            </div>
+            <details>
+              <summary><span>Remove Windows Apps</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="thirdparty" type="checkbox" class="checkbox" />
+                  <span>Remove 3rd-party apps</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Removes pre-installed software as Spotify, Candy Crush, Netflix etc..."
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="extensions" type="checkbox" class="checkbox" />
+                  <span>Remove Extension Apps</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Removes pre-installed extensions apps as VP9, HEVC etc... "
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="msapps" type="checkbox" class="checkbox" />
+                  <span>Remove Microsoft Apps</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Removes pre-installed Microsoft apps as Microsoft Teams, Sticky Notes, People etc..."
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="xbox" type="checkbox" class="checkbox" />
+                  <span>Remove Xbox Apps</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Removes all the pre-installed Xbox apps."
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Disable Windows Features</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="iexplorer" type="checkbox" class="checkbox" />
+                  <span>Disable Internet Explorer</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="hyperv" type="checkbox" class="checkbox" />
+                  <span>Disable Hyper-V</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Virtual Machines might not work anymore when disabling this feature."
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="faxscan" type="checkbox" class="checkbox" />
+                  <span>Disable Fax & Scan</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="mediaplayer" type="checkbox" class="checkbox" />
+                  <span>Disable Media Player</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="wsearch" type="checkbox" class="checkbox" />
+                  <span>Disable Search</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Indexing and Search functionality will not work anymore when disabling this feature."
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+              </div>
+            </details>
+            <label class="checkbox-wrap">
+              <input id="microsoftstore" type="checkbox" class="checkbox" />
+              <span>Remove Microsoft Store</span>
+              <div
+                class="tooltip tooltip-primary"
+                data-tip="Removes Microsoft Store, once uninstalled you may not be able to install Store Apps anymore."
+              >
+                <i class="fa-solid fa-circle-info" style="color: #3498db"></i>
+              </div>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="onedrive" type="checkbox" class="checkbox" />
+              <span>Remove OneDrive</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="edge" type="checkbox" class="checkbox" />
+              <span>Remove Edge</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="copilot" type="checkbox" class="checkbox" />
+              <span>Remove CoPilot</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="widgets" type="checkbox" class="checkbox" />
+              <span>Remove Widgets</span>
+            </label>
+          </div>
+          <div class="card privacy">
+            <div>
+              <button
+                onclick="backButton()"
+                id="back-button"
+                class="btn btn-outline btn-xs"
+              >
+                <i class="fa-solid fa-backward-step"></i>Back
+              </button>
+            </div>
+            <details>
+              <!-- prettier-ignore -->
+              <summary><span>Disable Telemetry & Data Collection</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="wtelemetry" type="checkbox" class="checkbox" />
+                  <span>Disable Windows telemetry & data collection</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="wupdate" type="checkbox" class="checkbox" />
+                  <span>Disable Windows Update data collection</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="wsearchtelemetry"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable Windows Search data collection</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="officetelemetry"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable Office Telemetry</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="appexperience" type="checkbox" class="checkbox" />
+                  <span>Disable Application Experience data collection</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="wfeedback" type="checkbox" class="checkbox" />
+                  <span>Disable feedback data collection</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="handwriting" type="checkbox" class="checkbox" />
+                  <span>Disable Handwriting data collection</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="clipboard" type="checkbox" class="checkbox" />
+                  <span>Disable Clipboard data collection</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="targetads" type="checkbox" class="checkbox" />
+                  <span>Disable Targeted Ads</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="privacyconsent" type="checkbox" class="checkbox" />
+                  <span>Opt out of Privacy Consent</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Configure 3rd-party Apps Telemetry</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    id="nvidiatelemetry"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable Nvidia telemetry</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="vscodetelemetry"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable VS Code Telemetry</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="mediatelemetry" type="checkbox" class="checkbox" />
+                  <span>Disable Media Player Telemetry</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="powershelltelemetry"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable Powershell Telemetry</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="ccleanertelemetry"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable CCleaner Telemetry</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="googleupdates" type="checkbox" class="checkbox" />
+                  <span>Disable Google Backgroud Updates</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Google Chrome might not update automatically anymore when disabling this feature."
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="adobeupdates" type="checkbox" class="checkbox" />
+                  <span>Disable Adobe Backgroud Updates</span>
+                  <div
+                    class="tooltip tooltip-primary"
+                    data-tip="Adobe Products might not update automatically anymore when disabling this feature."
+                  >
+                    <i
+                      class="fa-solid fa-circle-info"
+                      style="color: #3498db"
+                    ></i>
+                  </div>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Disable app access</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="locationaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to location</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="cameraccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to camera</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="microphoneaccess"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable app access to microphone</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="systemaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to file system</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="accinfoaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to account information</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="contactsaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to your contacts</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="callhistoryaccess"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable app access to call history</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="messagingaccess"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable app access to messaging</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="notificationaccess"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable app access to notifications</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="emailaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to email</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="tasksaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to tasks</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="diagaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to diagnostic info</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    id="voiceactivationaccess"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable app access to voice activation</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="phoneaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to phone</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="trustedaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to trusted devices</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="calendaraccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to calendar</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="motionaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to motion data</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="radioaccess" type="checkbox" class="checkbox" />
+                  <span>Disable app access to radios</span>
+                </label>
+              </div>
+            </details>
+            <label class="checkbox-wrap">
+              <input id="wifisense" type="checkbox" class="checkbox" />
+              <span>Disable Wi-fi Sense</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="cloudsync" type="checkbox" class="checkbox" />
+              <span>Disable Cloud Sync</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="activityfeed" type="checkbox" class="checkbox" />
+              <span>Disable Activity Feed</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="screenrecording" type="checkbox" class="checkbox" />
+              <span>Disable Screen Recording</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="automap" type="checkbox" class="checkbox" />
+              <span>Disable Automatic Map Downloads</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="lockscreencamera" type="checkbox" class="checkbox" />
+              <span>Disable Lockscreen camera access</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="biometrics" type="checkbox" class="checkbox" />
+              <span>Disable Biometrics</span>
+              <div
+                class="tooltip tooltip-primary"
+                data-tip="Fingerpriting/Facial login might not work anymore when disabling this feature."
+              >
+                <i class="fa-solid fa-circle-info" style="color: #3498db"></i>
+              </div>
+            </label>
+          </div>
+          <div class="card performance">
+            <div>
+              <button
+                onclick="backButton()"
+                id="back-button"
+                class="btn btn-outline btn-xs"
+              >
+                <i class="fa-solid fa-backward-step"></i>Back
+              </button>
+            </div>
+            <details>
+              <summary><span>Set as DNS</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="googledns" type="checkbox" class="checkbox" />
+                  <span>Google (8.8.8.8)</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="cloudflaredns" type="checkbox" class="checkbox" />
+                  <span>Cloudflare (1.1.1.1)</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="quad9dns" type="checkbox" class="checkbox" />
+                  <span>Quad9 (9.9.9.9)</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="opendns" type="checkbox" class="checkbox" />
+                  <span>OpenDNS (208.67.222.222)</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Clean-up</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="cleantemp" type="checkbox" class="checkbox" />
+                  <span>Clean Temporary Files</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="emptyrecycle" type="checkbox" class="checkbox" />
+                  <span>Empty Recycle Bin</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Misc Options</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="darkmode" type="checkbox" class="checkbox" />
+                  <span>Enable Dark Mode</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="filextensions" type="checkbox" class="checkbox" />
+                  <span>Show File Extensions</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="stickykeys" type="checkbox" class="checkbox" />
+                  <span>Disable Sticky Keys</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="taskbarwidgets" type="checkbox" class="checkbox" />
+                  <span>Disable Taskbar Widgets</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="numlockstartup" type="checkbox" class="checkbox" />
+                  <span>Disable Numlock on Startup</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="snapflyout" type="checkbox" class="checkbox" />
+                  <span>Disable Snap Flyout</span>
+                </label>
+              </div>
+            </details>
+            <label class="checkbox-wrap">
+              <input
+                id="ultimateperformance"
+                type="checkbox"
+                class="checkbox"
+              />
+              <span>Add Ultimate Performance</span>
+              <div
+                class="tooltip tooltip-primary"
+                data-tip="This script only adds Ultimate Performance, it does not activate it automatically (yet), to enable it open Power Options in Control Panel and enable manually."
+              >
+                <i class="fa-solid fa-circle-info" style="color: #3498db"></i>
+              </div>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="manualservices" type="checkbox" class="checkbox" />
+              <span>Set Services to Manual</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="disablehibernation" type="checkbox" class="checkbox" />
+              <span>Disable Hibernation</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="disableprefetch" type="checkbox" class="checkbox" />
+              <span>Disable Prefetch</span>
+            </label>
+          </div>
+          <div class="card install">
+            <div>
+              <button
+                onclick="backButton()"
+                id="back-button"
+                class="btn btn-outline btn-xs"
+              >
+                <i class="fa-solid fa-backward-step"></i>Back
+              </button>
+            </div>
+            <details>
+              <summary><span>Browsers</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Chrome"
+                  />
+                  <span>Chrome</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Firefox"
+                  />
+                  <span>Firefox</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Brave"
+                  />
+                  <span>Brave</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Opera"
+                  />
+                  <span>Opera</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Vivaldi"
+                  />
+                  <span>Vivaldi</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="LibreWolf"
+                  />
+                  <span>LibreWolf</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Chromium"
+                  />
+                  <span>Chromium</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Ungoogled"
+                  />
+                  <span>Ungoogled</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Compression</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="7Zip"
+                  />
+                  <span>7Zip</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="PeaZip"
+                  />
+                  <span>PeaZip</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="WinRAR"
+                  />
+                  <span>WinRAR</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="NanaZip"
+                  />
+                  <span>NanaZip</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Gaming</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Steam"
+                  />
+                  <span>Steam</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="EpicGames"
+                  />
+                  <span>Epic Games</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="EAApp"
+                  />
+                  <span>EA App</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Minecraft"
+                  />
+                  <span>Minecraft</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="PlayNite"
+                  />
+                  <span>PlayNite</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="PrismLauncher"
+                  />
+                  <span>Prism Launcher</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Utilities</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Everything"
+                  />
+                  <span>Everything</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="CCleaner"
+                  />
+                  <span>CCleaner</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Revo"
+                  />
+                  <span>Revo Uninstaller</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="TeamViewer"
+                  />
+                  <span>TeamViewer</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="AnyDesk"
+                  />
+                  <span>AnyDesk</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="ImgBurn"
+                  />
+                  <span>ImgBurn</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="qBitTorrent"
+                  />
+                  <span>qBitTorrent</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="BulkCrapUninstaller"
+                  />
+                  <span>Bulk Crap Uninstaller</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="BulkRename"
+                  />
+                  <span>Bulk Rename Utility</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Afterburner"
+                  />
+                  <span>MSI Afterburner</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="CPU-Z"
+                  />
+                  <span>CPU-Z</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="HWInfo"
+                  />
+                  <span>HWinfo</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="HWMonitor"
+                  />
+                  <span>HWMonitor</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="DDU"
+                  />
+                  <span>Display Driver Uninstaller</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Rainmeter"
+                  />
+                  <span>Rainmeter</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="StartAllBack"
+                  />
+                  <span>StartAllBack</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="TransluscentTB"
+                  />
+                  <span>Translucent Taskbar</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Microsoft Tools</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="OneDrive"
+                  />
+                  <span>OneDrive</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="PowerToys"
+                  />
+                  <span>PowerToys</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="WinTerminal"
+                  />
+                  <span>Windows Terminal</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Autoruns"
+                  />
+                  <span>Autoruns</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="ProcessMonitor"
+                  />
+                  <span>Process Monitor</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Nuget"
+                  />
+                  <span>Nuget</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="vcredist"
+                  />
+                  <span>Visual C++ 2015-22</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Multimedia</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="VLC"
+                  />
+                  <span>VLC</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="AIMP"
+                  />
+                  <span>AIMP</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="iTunes"
+                  />
+                  <span>iTunes</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="foobar2000"
+                  />
+                  <span>foobar2000</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Audacity"
+                  />
+                  <span>Audacity</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Spotify"
+                  />
+                  <span>Spotify</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="HandBrake"
+                  />
+                  <span>HandBrake</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="MediaMonkey"
+                  />
+                  <span>MediaMonkey</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="OBS"
+                  />
+                  <span>OBS Studio</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Communication</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Discord"
+                  />
+                  <span>Discord</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Zoom"
+                  />
+                  <span>Zoom</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Telegram"
+                  />
+                  <span>Telegram</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Whatsapp"
+                  />
+                  <span>Whatsapp</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Skype"
+                  />
+                  <span>Skype</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Teams"
+                  />
+                  <span>Teams</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Slack"
+                  />
+                  <span>Slack</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Thunderbird"
+                  />
+                  <span>Thunderbird</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Imaging</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Blender"
+                  />
+                  <span>Blender</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="DarkTable"
+                  />
+                  <span>DarkTable</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Krita"
+                  />
+                  <span>Krita</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="GIMP"
+                  />
+                  <span>GIMP</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="InkScape"
+                  />
+                  <span>InkScape</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="ShareX"
+                  />
+                  <span>ShareX</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="LightShot"
+                  />
+                  <span>LightShot</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Greenshot"
+                  />
+                  <span>Greenshot</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Documents</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="AdobeReader"
+                  />
+                  <span>Adobe Acrobat Reader</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="LibreOffice"
+                  />
+                  <span>LibreOffice</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="SumatraPDF"
+                  />
+                  <span>SumatraPDF</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="OpenOffice"
+                  />
+                  <span>OpenOffice</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Obsidian"
+                  />
+                  <span>Obsidian</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Joplin"
+                  />
+                  <span>Joplin</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Security</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="MalwareBytes"
+                  />
+                  <span>MalwareBytes</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Avast"
+                  />
+                  <span>Avast</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="AVG"
+                  />
+                  <span>AVG</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>For Developers</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Git"
+                  />
+                  <span>Git</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="GitHub"
+                  />
+                  <span>GitHub Desktop</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="NodeJS"
+                  />
+                  <span>NodeJS</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Python3"
+                  />
+                  <span>Python 3</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Java"
+                  />
+                  <span>JDK 8</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="NET48"
+                  />
+                  <span>NET 4.8</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="NET8"
+                  />
+                  <span>NET 8</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Notepad++"
+                  />
+                  <span>Notepad++</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="SublimeText"
+                  />
+                  <span>Sublime Text</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Neovim"
+                  />
+                  <span>Neovim</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="VSCode"
+                  />
+                  <span>VS Code</span>
+                </label>
+              </div>
+            </details>
+          </div>
+        </div>
+        <div class="vl"></div>
+        <div class="code-container">
+          <div class="code-buttons">
+            <button
+              style="margin-left: 4px; margin-bottom: 8px"
+              class="btn btn-outline btn-secondary btn-xs"
+              id="downloadBtn"
+            >
+              Download .bat
+            </button>
+            <button
+              style="margin-left: 4px; margin-bottom: 8px"
+              class="btn btn-outline btn-secondary btn-xs"
+              id="restoreBtn"
+            >
+              Toggle Restore Point
+            </button>
+            <button
+              style="margin-left: 4px; margin-bottom: 8px"
+              class="btn btn-outline btn-secondary btn-xs"
+              id="copyBtn"
+            >
+              Copy
+            </button>
+          </div>
+          <div class="mockup-code">
+            <div id="code" class="code">
+              <div>
+                <pre><code>:: WinScript </code></pre>
+              </div>
+              <div>
+                <pre><code>@echo off</code></pre>
+              </div>
+              <div>
+                <pre><code>setlocal EnableExtensions DisableDelayedExpansion</code></pre>
+              </div>
+              <div class="restore-container">
+                <pre><code></code></pre>
+                <pre><code>echo -- Creating a restore point:</code></pre>
+                <pre><code>powershell -command "Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS""</code></pre>
+              </div>
+              <div class="chocolatey-container">
+                <pre><code></code></pre>
+                <pre><code>echo -- Installing Chocolatey:</code></pre>
+                <pre><code>powershell -command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"</code></pre>
+              </div>
+              <div class="scripts-container">
+                <pre><code class="allScripts"></code></pre>
+                <pre><code></code></pre>
+              </div>
+              <div class="div-install">
+                <pre><code>echo -- Refresh environment: </code></pre>
+                <pre><code>call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"</code></pre>
+                <pre><code>call RefreshEnv.cmd</code></pre>
+                <pre><code>echo -- Installing these apps: </code></pre>
+                <pre><code>echo -- </code><span class="installingApps"></span></pre>
+                <pre><code class="commandDisplay"></code></pre>
+                <pre><code></code></pre>
+              </div>
+              <div>
+                <pre><code>:: Pause the script</code></pre>
+              </div>
+              <div>
+                <pre><code>pause</code></pre>
+              </div>
+              <div>
+                <pre><code>:: Restore previous environment</code></pre>
+              </div>
+              <div>
+                <pre><code>endlocal</code></pre>
+              </div>
+              <div>
+                <pre><code>:: Exit the script</code></pre>
+              </div>
+              <div>
+                <pre><code>exit /b 0</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/main.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="js/appinstall.js"></script>
+  <link
+    rel="stylesheet"
+    href="highlight/atom-one-dark.css"
+    media="print"
+    onload="this.media='all'"
+  />
+  <script src="js/fontawesome.js"></script>
+  <script src="highlight/highlight.js"></script>
+  <script src="highlight/dos.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+</html>
