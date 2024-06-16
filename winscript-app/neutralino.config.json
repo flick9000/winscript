@@ -10,8 +10,8 @@
   "enableNativeAPI": true,
   "tokenSecurity": "one-time",
   "logging": {
-    "enabled": true,
-    "writeToLogFile": true
+    "enabled": false,
+    "writeToLogFile": false
   },
   "nativeAllowList": ["app.*", "os.*", "filesystem.*", "debug.log"],
   "globalVariables": {
@@ -40,7 +40,8 @@
       "maximize": false,
       "hidden": false,
       "resizable": true,
-      "exitProcessOnClose": false
+      "exitProcessOnClose": false,
+      "useSavedState": false
     },
     "browser": {
       "globalVariables": {
