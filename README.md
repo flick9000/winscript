@@ -1,7 +1,7 @@
 
 <h1 align="center">WinScript</h1>
 
-<p align="center">WinScript is an open-source tool designed to help you build custom scripts for Windows 10 and 11. It includes debloat, privacy, performance scripts & more, along with the ability to install all your favourite apps with a single click.</p>
+<p align="center">WinScript is an open-source tool built to help you build custom scripts for Windows 10 and 11. It includes debloat, privacy, performance scripts & more, along with the ability to install all your favourite apps within the terminal.</p>
 
 ![App Screenshot](winscript.png)
 
