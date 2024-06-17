@@ -1,17 +1,16 @@
 
-# WinScript
+<h1 align="center">WinScript</h1>
 
-WinScript is an open-source tool designed to help you build custom scripts for Windows 10 and 11. It includes features for debloating, enhancing privacy, applying system tweaks, and improving performance, along with the ability to install all your favourite apps with a single click.
+<p align="center">WinScript is an open-source tool designed to help you build custom scripts for Windows 10 and 11. It includes debloat, privacy, system tweaks, and performance scripts, along with the ability to install all your favourite apps with a single click.</p>
+
+![App Screenshot](winscript.png)
+
 ## Features
 
 - 🧹 **Debloat**: Remove Windows bloatware, CoPilot, Edge, OneDrive & pre-installed features.
 - 🔏 **Privacy**: Disable Windows and 3rd party telemetry & data collection, tracking, app access & more.
 - 🚀 **Performance**: Set background services to manual to free resources, set your preferred DNS, clean temp files & more.
 - ⬇️ **Install Apps**: Install all your favourite apps simultaneously in one click through chocolatey.
-
-## Screenshot
-
-![App Screenshot](winscript.png)
 
 ## Usage
 **WinScript must be run as Administrator to work properly.**\
