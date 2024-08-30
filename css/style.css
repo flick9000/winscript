@@ -162,11 +162,12 @@ main {
   display: flex;
   flex-direction: column;
   /* max-width: 64ch; */
-  gap: 1rem;
+  /* gap: 1rem; */
 }
 
 .hero-title {
   font-size: var(--step-xxxxl);
+  line-height: 1.4;
   font-weight: 700;
 }
 
@@ -182,7 +183,7 @@ main {
 .hero-right > a > img {
   cursor: pointer;
   border-radius: 15px;
-  max-width: clamp(450px, 45vw, 800px);
+  max-width: clamp(450px, 45vw, 700px);
   box-shadow: 0px 0px 20px 5px rgba(5, 6, 15, 0.452);
 }
 
@@ -203,6 +204,7 @@ main {
   border-radius: 15px;
   font-size: var(--step-md);
   border: 1px solid #0e1120;
+  margin-left: -10px;
   box-shadow: 0 10px 10px rgba(5, 6, 15, 0.452);
   min-width: fit-content;
 }
@@ -236,6 +238,9 @@ main {
   }
   .hero-right > a > img {
     max-width: clamp(50px, 89vw, 700px);
+  }
+  .button-download {
+    margin-left: 0px;
   }
 }
 
