@@ -92,10 +92,7 @@ body::after {
   border-radius: 15px;
   border: 1px solid #0e1120;
   box-shadow: 0 10px 10px rgba(5, 6, 15, 0.452);
-}
-
-.support-button.sm {
-  display: none;
+  white-space: nowrap;
 }
 
 .fa-solid.fa-bars-staggered {
@@ -210,10 +207,6 @@ main {
   min-width: fit-content;
 }
 
-.button-download.sm {
-  display: none;
-}
-
 .online-button {
   display: block;
   background-color: var(--cta);
@@ -284,15 +277,6 @@ main {
   }
 }
 
-@media screen and (max-width: 800px) {
-  .support-button {
-    display: none;
-  }
-  .support-button.sm {
-    display: block;
-  }
-}
-
 @media screen and (max-width: 600px) {
   .modal-content {
     width: 80%;
@@ -302,12 +286,6 @@ main {
     display: none;
   }
   .hero-description.sm {
-    display: block;
-  }
-  .button-download {
-    display: none;
-  }
-  .button-download.sm {
     display: block;
   }
 }

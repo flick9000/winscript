@@ -16,10 +16,10 @@ function adjustMargin(mainElement) {
   let marginTop = "0";
 
   const marginValues = [
-    { max: 750, value: "175px" },
-    { max: 800, value: "150px" },
-    { max: 850, value: "125px" },
-    { max: 950, value: "80px" },
+    { max: 700, value: "125px" },
+    { max: 800, value: "100px" },
+    { max: 850, value: "75px" },
+    { max: 950, value: "50px" },
     { max: 1000, value: "75px" },
     { max: 1100, value: "50px" },
     { max: 1150, value: "25px" },
@@ -34,6 +34,7 @@ function adjustMargin(mainElement) {
   }
 
   mainElement.style.marginTop = marginTop;
+  // mainElement.style.marginTop = "25px";
 }
 
 // window.addEventListener("resize", () => responsiveNav());
