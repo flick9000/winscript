@@ -8,7 +8,7 @@
 }
 
 .nav-items a {
-  opacity: 0.8;
+  opacity: 0.95;
   transition: opacity 0.3s ease;
 }
 
@@ -29,19 +29,6 @@
   height: 1px;
   opacity: 1;
   background-color: var(--text);
-}
-
-.nav-items.right > .support-button {
-  scale: 0.95;
-  opacity: 1;
-  transition: scale 0.3s ease;
-}
-.nav-items.right > .support-button:hover {
-  scale: 1;
-}
-
-.nav-items.right > .support-button::after {
-  display: none;
 }
 
 .navbar.responsive > .nav-items {

@@ -7,9 +7,15 @@
       name="description"
       content="Build your Windows 10/11 script from scratch."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <link
       rel="icon"
       type="image/png"
@@ -28,85 +34,151 @@
     <title>WinScript</title>
   </head>
   <body>
-    <nav id="navbar" class="navbar">
-      <div class="nav-logo">
-        <img src="img/logo.webp" width="64px" alt="WinScript Logo" />
-        <h1>WinScript</h1>
-      </div>
-      <div class="nav-items">
-        <a href="https://winscript.pages.dev">Home</a>
-        <a id="privacy-item">Privacy</a>
-        <a href="https://github.com/flick9000/winscript" target="_blank"
-          >GitHub</a
-        >
-      </div>
-      <div class="nav-items right">
-        <a
-          href="https://ko-fi.com/flick9000"
-          class="support-button sm"
-          target="_blank"
-        >
-          <i class="fa-solid fa-mug-hot"></i>
-          &nbsp;
-          <span>Donate!</span>
-        </a>
-      </div>
-      <i
-        onclick="responsiveNav()"
-        class="fa-solid fa-bars-staggered"
-        style="color: #f53de9"
-      ></i>
-    </nav>
-    <main>
-      <div id="privacy-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>
-            🤖 Website automatically deployed from
-            <a href="https://github.com/flick9000/winscript" target="_blank"
-              >GitHub</a
-            >.
-          </p>
-          <p>👁️ We do not log IP Address.</p>
-          <p>🍪 We do not use cookies.</p>
-        </div>
-      </div>
-      <div class="hero-left">
-        <h1 class="hero-title">Fix Windows.</h1>
-        <p class="hero-description lg">
-          Open-source tool to build your Windows 10/11 script from scratch.
-          <br />
-          It includes debloat, privacy, performance & app installing scripts.
-        </p>
-        <p class="hero-description sm">
-          Open-source tool to build your <br />
-          Windows 10/11 script from scratch.
-        </p>
-        <div class="cta">
+    <header class="sticky">
+      <nav id="navbar" class="navbar">
+        <img src="img/logo.svg" width="48px" alt="" />
+        <div class="nav-items center">
+          <a href="https://winscript.pages.dev">Home</a>
+          <a id="privacy-item">Privacy</a>
+          <a href="https://github.com/flick9000/winscript" target="_blank"
+            >GitHub</a
+          >
           <a
-            href="https://github.com/flick9000/winscript/releases"
-            class="button-download"
+            href="https://ko-fi.com/flick9000"
+            class="support-button sm"
             target="_blank"
           >
-            <i class="fa-solid fa-download"></i>
-            &nbsp;
-            <span>Download</span>
-          </a>
-          <a
-            href="https://winscript.pages.dev/winscript-online/"
-            class="online-button"
-          >
-            <i class="fa-solid fa-globe"></i>
-            &nbsp;
-            <span>Online</span>
+            Donate
           </a>
         </div>
-      </div>
-      <div class="hero-right">
-        <a href="https://winscript.pages.dev" target="_blank">
-          <img src="img/winscript.png" alt="WinScript" />
-        </a>
-      </div>
+        <div class="nav-items right">
+          <a href=""> <i class="fa-solid fa-download"></i> </a>
+          <a
+            href="https://ko-fi.com/flick9000"
+            class="support-button sm"
+            target="_blank"
+          >
+            <i class="fa-solid fa-mug-hot"></i>
+          </a>
+          <a href="https://github.com/flick9000/winscript" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+        <i onclick="responsiveNav()" class="fa-solid fa-bars-staggered"></i>
+      </nav>
+    </header>
+    <div class="radial-wrapper">
+      <div class="radial-bg"></div>
+    </div>
+    <main>
+      <section class="hero">
+        <div id="privacy-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+              🤖 Website automatically deployed from
+              <a href="https://github.com/flick9000/winscript" target="_blank"
+                >GitHub</a
+              >.
+            </p>
+            <p>👁️ We do not log IP Address.</p>
+            <p>🍪 We do not use cookies.</p>
+          </div>
+        </div>
+        <div class="hero-wrapper">
+          <h1 class="hero-title">Make Windows Yours.</h1>
+          <p class="hero-description lg">
+            Open-source tool to build your Windows 10/11 script from scratch.
+            <br />
+            It includes debloat, privacy, performance & app installing scripts.
+          </p>
+          <p class="hero-description sm">
+            Open-source tool to build your <br />
+            Windows 10/11 script from scratch.
+          </p>
+          <p class="version">The latest version is: 2024.06.14</p>
+          <a
+            href="https://github.com/flick9000/winscript"
+            class="cta"
+            target="_blank"
+          >
+            <span>Get Started -></span>
+          </a>
+        </div>
+        <div class="banner">
+          <a href="https://winscript.pages.dev" target="_blank">
+            <img src="img/winscript.png" alt="WinScript" />
+          </a>
+        </div>
+      </section>
+      <section>
+        <h1 class="card-title">Features</h1>
+        <div class="card-wrapper">
+          <div
+            class="card"
+            style="
+              background: linear-gradient(180deg, #0c1633, #2d5ace);
+              border: 1px solid hsl(223, 64%, 47%);
+            "
+          >
+            <h1><i class="fa-solid fa-shield-halved"></i>&nbsp; Privacy</h1>
+            <p>
+              Disable Windows and 3rd party telemetry & data collection,
+              tracking, app access & more.
+            </p>
+          </div>
+          <div
+            class="card"
+            style="
+              background: linear-gradient(180deg, #0c1633, #6f8cd8);
+              border: 1px solid hsl(223, 57%, 64%);
+            "
+          >
+            <h1><i class="fa-solid fa-rocket"></i>&nbsp; Performance</h1>
+            <p>
+              Free resources by setting unnecessary background services to
+              manual, removing telemetry & more.
+            </p>
+          </div>
+          <div
+            class="card"
+            style="
+              background: linear-gradient(180deg, #0c1633, #2d5ace);
+              border: 1px solid hsl(223, 64%, 47%);
+            "
+          >
+            <h1><i class="fa-solid fa-download"></i>&nbsp; Apps</h1>
+            <p>
+              Install all your favourite apps simultaneously in one click
+              through chocolatey.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- <section>
+        <div class="card-wrapper">
+          <div class="card download">
+            <h1><i class="fa-solid fa-globe"></i>&nbsp; Online</h1>
+            <p>
+              Build your Windows 10/11 script from scratch online and download
+              it as a .bat file.
+            </p>
+            <a href="https://winscript.pages.dev" class="cta"
+              ><span>Get Started -></span></a
+            >
+          </div>
+          <div class="card download">
+            <h1><i class="fa-solid fa-floppy-disk"></i>&nbsp; Offline</h1>
+            <p>
+              Build your Windows 10/11 script from scratch offline and run it
+              automatically.
+            </p>
+            <a href="https://winscript.pages.dev" class="cta"
+              ><span>Download -></span></a
+            >
+          </div>
+        </div>
+      </section> -->
     </main>
   </body>
 </html>

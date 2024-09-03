@@ -4,37 +4,10 @@ function responsiveNav() {
 
   if (!navbar.classList.contains("responsive")) {
     navbar.classList.add("responsive");
-    adjustMargin(mainElement);
   } else {
     navbar.classList.remove("responsive");
     mainElement.style.marginTop = "0";
   }
-}
-
-function adjustMargin(mainElement) {
-  const screenHeight = window.innerHeight;
-  let marginTop = "0";
-
-  const marginValues = [
-    { max: 700, value: "125px" },
-    { max: 800, value: "100px" },
-    { max: 850, value: "75px" },
-    { max: 950, value: "50px" },
-    { max: 1000, value: "75px" },
-    { max: 1100, value: "50px" },
-    { max: 1150, value: "25px" },
-    { max: 1200, value: "10px" },
-  ];
-
-  for (const { max, value } of marginValues) {
-    if (screenHeight <= max) {
-      marginTop = value;
-      break;
-    }
-  }
-
-  mainElement.style.marginTop = marginTop;
-  // mainElement.style.marginTop = "25px";
 }
 
 // window.addEventListener("resize", () => responsiveNav());
