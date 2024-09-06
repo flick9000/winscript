@@ -20,6 +20,22 @@ html {
   background: #050c1f;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #242b42;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #576b75;
+  height: 10px;
+}
+
 body {
   min-height: 100vh;
   color: var(--text);
@@ -96,7 +112,7 @@ section {
 
 .nav-items.right {
   gap: 1.5rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .fa-solid.fa-bars-staggered {
