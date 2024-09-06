@@ -157,7 +157,8 @@ section {
   display: flex;
   flex-direction: column;
   flex-flow: 1;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   background: rgba(12, 15, 36, 0.5);
   text-wrap: pretty;
   font-size: var(--step-md);
@@ -256,6 +257,7 @@ main {
 }
 
 .banner > a > img {
+  user-select: none;
   position: absolute;
   z-index: -1;
   top: 70%;
@@ -389,8 +391,8 @@ hr {
     align-items: flex-start;
     justify-content: center;
     background-color: rgba(5, 12, 31, 0.8);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     width: 100%;
     height: 100%;
     top: 0;
