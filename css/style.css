@@ -11,7 +11,7 @@
   --step-text: clamp(0.9rem, 0.2cqi + 0.9rem, 1.1rem);
   --step-md: clamp(1rem, 0.2cqi + 1rem, 1.5rem);
   --step-lg: clamp(1.4rem, 0.4cqi + 1.3rem, 1.8rem);
-  --step-hero: clamp(30px, 7vw, 80px);
+  --step-hero: clamp(30px, 6.5vw, 80px);
   --step-xxxxl: clamp(2.5rem, 4.7vw, 8rem);
 }
 
@@ -64,21 +64,11 @@ section {
 
 /* Navbar Styles */
 
-.sticky {
-  position: sticky;
-  top: 20px;
-  z-index: 100;
-}
-
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(12, 15, 36, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 7px;
-  backdrop-filter: blur(10px);
-  height: 80px;
+  height: 120px;
   padding: 0 2.5%;
   margin: 0 12.5%;
 }
@@ -122,29 +112,29 @@ section {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  /* background-color: rgba(0, 0, 0, 0.5); */
+  overflow-y: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
   flex-flow: 1;
-  justify-content: flex-start;
-  background: rgba(12, 15, 36, 0.7);
   backdrop-filter: blur(10px);
-
+  background: rgba(12, 15, 36, 0.5);
+  text-wrap: pretty;
   font-size: var(--step-md);
-  font-weight: 500;
   gap: 1rem;
-  margin: 15% auto;
-  padding: 1rem;
+  margin: auto;
+  padding: 0.5rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 7px;
-  width: 35%;
+  width: clamp(300px, 50vw, 600px);
+  height: 300px;
   a {
     text-decoration: underline;
-    text-underline-offset: 8px;
+    font-weight: 500;
+    text-underline-offset: 0.5rem;
   }
 }
 
@@ -241,6 +231,14 @@ main {
   object-fit: cover;
 }
 
+.banner.small {
+  margin-top: 1rem;
+  position: relative;
+  margin-inline: auto;
+  display: none;
+  width: clamp(300px, 75vw, 1200px);
+}
+
 .card-title {
   font-size: var(--step-hero);
   line-height: 1;
@@ -305,7 +303,21 @@ hr {
   }
 }
 
+@media screen and (max-width: 900px) {
+  .banner > a > img {
+    top: 75%;
+  }
+}
+
 @media screen and (max-width: 800px) {
+  .banner {
+    display: none;
+  }
+
+  .banner.small {
+    display: block;
+  }
+
   .fa-solid.fa-bars-staggered {
     display: flex;
     flex-grow: 1;
@@ -338,18 +350,12 @@ hr {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .modal-content {
-    width: 50%;
-    height: 30%;
-  }
-}
-
 @media screen and (max-width: 600px) {
   .modal-content {
     width: 80%;
     height: 40%;
   }
+
   .hero-description {
     display: none;
   }
