@@ -3,7 +3,7 @@
 /* General Styles */
 
 :root {
-  --background: #0c0f24;
+  --background: #050c1f;
   --background-light: #0d112b;
   --text: #fff;
   --cta: #006cd0;
@@ -110,12 +110,32 @@ section {
   }
 }
 
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .nav-items.right {
   gap: 1.5rem;
   font-size: 1.5rem;
 }
 
-.fa-solid.fa-bars-staggered {
+.fa-solid.fa-bars-staggered,
+.fa-solid.fa-xmark {
+  flex-grow: 1;
+  justify-content: flex-end;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 2;
+  display: none;
+}
+
+.fa-solid.fa-xmark {
+  font-size: 2rem;
+}
+
+#nav-item-icon {
   display: none;
 }
 
@@ -232,6 +252,7 @@ main {
   border-radius: 7px;
   box-shadow: 0 10px 10px rgba(5, 6, 15, 0.2);
   min-width: fit-content;
+  transition: all 0.3s ease;
 }
 
 .banner > a > img {
@@ -330,17 +351,11 @@ hr {
   .banner {
     display: none;
   }
-
   .banner.small {
     display: block;
   }
-
   .fa-solid.fa-bars-staggered {
     display: flex;
-    flex-grow: 1;
-    justify-content: flex-end;
-    cursor: pointer;
-    font-size: 1.5rem;
   }
   .nav-items {
     display: none;
@@ -348,22 +363,37 @@ hr {
   .navbar.responsive {
     position: relative;
   }
+  #nav-item-icon {
+    display: block;
+  }
+  .navbar.responsive > i.fa-solid.fa-bars-staggered {
+    display: none;
+  }
+  .navbar.responsive > i.fa-solid.fa-xmark {
+    display: flex;
+  }
+  .navbar.responsive > #nav-item-icon {
+    display: block;
+  }
   .navbar.responsive > .nav-items.right {
     display: none;
   }
   .navbar.responsive > .nav-items {
+    position: fixed;
     display: flex;
+    flex-direction: column;
+    padding: 0 4.5rem;
+    font-size: var(--step-xxxxl);
+    z-index: 2;
+    gap: 1rem;
+    align-items: flex-start;
     justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    position: absolute;
-    font-size: var(--step-md);
-    margin-inline: auto;
-    top: 100px;
+    background-color: rgba(5, 12, 31, 0.8);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    top: 0;
     left: 0;
-    right: 0;
-    gap: 1.5rem;
-    border-radius: 15px;
   }
 }
 

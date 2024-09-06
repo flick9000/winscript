@@ -4,9 +4,10 @@ function responsiveNav() {
 
   if (!navbar.classList.contains("responsive")) {
     navbar.classList.add("responsive");
+    document.body.style.overflow = "hidden";
   } else {
     navbar.classList.remove("responsive");
-    mainElement.style.marginTop = "0";
+    document.body.style.overflow = "visible";
   }
 }
 
@@ -19,6 +20,10 @@ let spanClose = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 privacyItem.onclick = function () {
+  const navbar = document.getElementById("navbar");
+  if (navbar.classList.contains("responsive")) {
+    navbar.classList.remove("responsive");
+  }
   modal.style.display = "flex";
 };
 
