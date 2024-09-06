@@ -389,7 +389,8 @@ hr {
     align-items: flex-start;
     justify-content: center;
     background-color: rgba(5, 12, 31, 0.8);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     width: 100%;
     height: 100%;
     top: 0;
