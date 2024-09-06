@@ -230,7 +230,7 @@ main {
   font-size: 1rem;
   padding: 0.5rem 2rem;
   border-radius: 7px;
-  box-shadow: 0 10px 10px rgba(5, 6, 15, 0.452);
+  box-shadow: 0 10px 10px rgba(5, 6, 15, 0.2);
   min-width: fit-content;
 }
 
