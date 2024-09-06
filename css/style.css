@@ -12,6 +12,7 @@
   --step-md: clamp(1rem, 0.2cqi + 1rem, 1.5rem);
   --step-lg: clamp(1.4rem, 0.4cqi + 1.3rem, 1.8rem);
   --step-hero: clamp(30px, 6.5vw, 80px);
+  --step-card-title: clamp(3rem, 3vw, 4rem);
   --step-xxxxl: clamp(2.5rem, 4.7vw, 8rem);
 }
 
@@ -240,7 +241,7 @@ main {
 }
 
 .card-title {
-  font-size: var(--step-hero);
+  font-size: var(--step-card-title);
   line-height: 1;
   margin-block: 3rem;
   font-weight: 500;
