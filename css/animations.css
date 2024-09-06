@@ -7,6 +7,18 @@
   }
 }
 
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .nav-items a {
   opacity: 0.95;
   transition: opacity 0.3s ease;

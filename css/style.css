@@ -213,8 +213,6 @@ main {
   text-align: center;
   min-height: 70vh;
   gap: 1rem;
-  /* max-width: 64ch; */
-  /* gap: 1rem; */
 }
 
 .hero-title {
@@ -256,6 +254,10 @@ main {
   transition: all 0.3s ease;
 }
 
+.cta:hover {
+  box-shadow: 0 5px 25px 1px rgba(0, 111, 214, 0.2);
+}
+
 .banner > a > img {
   user-select: none;
   position: absolute;
@@ -264,11 +266,15 @@ main {
   left: 0;
   right: 0;
   margin-inline: auto;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 7px;
   width: clamp(300px, 75vw, 1200px);
   aspect-ratio: 4 / 2;
   object-fit: cover;
+  border: 1px solid #0000;
+  border-radius: 12px;
+  background: linear-gradient(#131219, #131219) padding-box,
+    linear-gradient(var(--angle), #070707, #006fd6) border-box;
+  animation: 4s rotate linear infinite;
 }
 
 .banner.small {
@@ -282,7 +288,7 @@ main {
 .card-title {
   font-size: var(--step-card-title);
   line-height: 1;
-  margin-block: 3rem;
+  margin-block: 4rem;
   font-weight: 500;
 }
 
@@ -401,6 +407,9 @@ hr {
 }
 
 @media screen and (max-width: 600px) {
+  .hero-wrapper {
+    top: 25vh;
+  }
   .modal-content {
     width: 80%;
     height: 40%;
