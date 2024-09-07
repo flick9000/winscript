@@ -21,7 +21,7 @@ body::before {
 
 body {
   font-family: Arial, sans-serif;
-  background-image: url(../icons/flux.svg);
+  background-image: url(../icons/gradient.png);
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;

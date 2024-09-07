@@ -16,7 +16,8 @@
 }
 
 .tooltip::before {
-  max-width: 32ch;
+  max-width: 24ch;
+  text-wrap: balance;
 }
 
 /* Header Styling */
