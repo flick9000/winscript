@@ -25,6 +25,7 @@ privacyItem.onclick = function () {
     navbar.classList.remove("responsive");
   }
   modal.style.display = "flex";
+  document.body.style.overflow = "visible";
 };
 
 // When the user clicks on <span> (x), close the modal
