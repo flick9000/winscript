@@ -72,7 +72,6 @@ const scripts = {
   copilot: [
     "echo -- Disabling Copilot",
     'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot" /v "TurnOffWindowsCopilot" /t "REG_DWORD" /d "1" /f',
-    'reg add "HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot" /v "TurnOffWindowsCopilot" /t "REG_DWORD" /d "0" /f',
     'reg add "HKCU\\Software\\Microsoft\\Windows\\Shell\\Copilot\\BingChat" /v "IsUserEligible" /t "REG_DWORD" /d "0" /f',
   ],
   widgets: [

@@ -4,9 +4,9 @@
 
 :root {
   --background: #050c1f;
-  --background-light: #0d112b;
+  --background-light: #0c1531;
   --text: #fff;
-  --cta: #006cd0;
+  --cta: #1a90ff;
   /* Font Sizes */
   --step-text: clamp(0.9rem, 0.2cqi + 0.9rem, 1.05rem);
   --step-md: clamp(1rem, 0.2cqi + 1rem, 1.5rem);
