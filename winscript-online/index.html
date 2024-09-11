@@ -161,6 +161,14 @@
               <summary><span>Disable Windows Features</span></summary>
               <div class="collapsable-content">
                 <label class="checkbox-wrap">
+                  <input
+                    id="consumerfeatures"
+                    type="checkbox"
+                    class="checkbox"
+                  />
+                  <span>Disable Consumer Features</span>
+                </label>
+                <label class="checkbox-wrap">
                   <input id="iexplorer" type="checkbox" class="checkbox" />
                   <span>Disable Internet Explorer</span>
                 </label>
@@ -225,6 +233,10 @@
             <label class="checkbox-wrap">
               <input id="widgets" type="checkbox" class="checkbox" />
               <span>Remove Widgets</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="homegroup" type="checkbox" class="checkbox" />
+              <span>Disable Homegroup</span>
             </label>
           </div>
           <div class="card privacy">
@@ -532,6 +544,10 @@
                   <input id="emptyrecycle" type="checkbox" class="checkbox" />
                   <span>Empty Recycle Bin</span>
                 </label>
+                <label class="checkbox-wrap">
+                  <input id="cleanmgr" type="checkbox" class="checkbox" />
+                  <span>Run Disk Clean-up</span>
+                </label>
               </div>
             </details>
             <details>
@@ -548,6 +564,10 @@
                 <label class="checkbox-wrap">
                   <input id="stickykeys" type="checkbox" class="checkbox" />
                   <span>Disable Sticky Keys</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="mouseacc" type="checkbox" class="checkbox" />
+                  <span>Disable Mouse Acceleration</span>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="taskbarwidgets" type="checkbox" class="checkbox" />
@@ -580,6 +600,10 @@
             <label class="checkbox-wrap">
               <input id="manualservices" type="checkbox" class="checkbox" />
               <span>Set Services to Manual</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input id="storagesense" type="checkbox" class="checkbox" />
+              <span>Disable Storage Sense</span>
             </label>
             <label class="checkbox-wrap">
               <input id="disablehibernation" type="checkbox" class="checkbox" />

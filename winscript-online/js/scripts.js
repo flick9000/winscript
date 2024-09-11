@@ -80,6 +80,12 @@ const scripts = {
     'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage \\"MicrosoftWindows.Client.WebExperience\\" | Remove-AppxPackage"',
     'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Appx\\AppxAllUserStore\\Deprovisioned\\MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy" /f',
   ],
+  homegroup: [
+    "echo -- Disabling Home Group",
+    'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\HomeGroup" /v "DisableHomeGroup" /d "1" /t REG_DWORD /f',
+    "sc config HomeGroupListener start=demand",
+    "sc config HomeGroupProvider start=demand",
+  ],
   thirdparty: [
     "echo -- Uninstalling third-party apps",
     'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage \\"king.com.CandyCrushSaga\\" | Remove-AppxPackage"',
@@ -151,6 +157,10 @@ const scripts = {
     'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxIdentityProvider" | Remove-AppxPackage"',
     'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage"',
   ],
+  consumerfeatures: [
+    "echo -- Disabling Consumer Features",
+    'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableWindowsConsumerFeatures" /t "REG_DWORD" /d "1" /f',
+  ],
   iexplorer: [
     "echo -- Disabling Internet Explorer",
     'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-amd64" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-amd64." } catch { Write-Output "Feature not found." }"',
@@ -199,6 +209,11 @@ const scripts = {
     'reg add "HKLM\\Software\\Microsoft\\Windows\\Windows Error Reporting\\Consent" /v "DefaultOverrideBehavior" /t REG_DWORD /d "1" /f',
     'reg add "HKLM\\Software\\Microsoft\\Windows\\Windows Error Reporting" /v "DontSendAdditionalData" /t REG_DWORD /d "1" /f',
     'reg add "HKLM\\Software\\Microsoft\\Windows\\Windows Error Reporting" /v "LoggingDisabled" /t REG_DWORD /d "1" /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "ContentDeliveryAllowed" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /d "0" /t REG_DWORD /f',
   ],
   wupdate: [
     "echo -- Disabling Windows Update Telemetry",
@@ -329,6 +344,10 @@ const scripts = {
     'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /d "0" /t REG_DWORD /f',
     'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /d "0" /t REG_DWORD /f',
     'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-353698Enabled" /d "0" /t REG_DWORD /f',
   ],
   privacyonsent: [
     "echo -- Opting out of data collection",
@@ -564,6 +583,10 @@ const scripts = {
     "del /s /f /q c:\\windows\\temp\\*.*",
     "del /s /f /q C:\\WINDOWS\\Prefetch",
     "del /s /f /q %temp%\\*.*",
+  ],
+  cleanmgr: [
+    "echo -- Running Disk Clean-up",
+    "cleanmgr.exe /d C: /VERYLOWDISK",
   ],
   emptyrecycle: [
     "echo -- Emptying Recycle Bin",
@@ -802,6 +825,10 @@ const scripts = {
     "sc config wuauserv start=demand",
     "sc config wudfsvc start=demand",
   ],
+  storagesense: [
+    "echo -- Disabling Storage Sense",
+    'powershell -command "Set-ItemProperty -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy" -Name "01" -Value 0 -Type Dword -Force"',
+  ],
   disablehibernation: [
     "echo -- Disabling Hibernation",
     "powercfg.exe /hibernate off",
@@ -820,6 +847,12 @@ const scripts = {
   filextensions: [
     "echo -- Showing File Extensions",
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f',
+  ],
+  mouseacc: [
+    "echo -- Disabling Mouse Acceleration",
+    'reg add "HKCU\\Control Panel\\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f',
+    'reg add "HKCU\\Control Panel\\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f',
+    'reg add "HKCU\\Control Panel\\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f',
   ],
   stickykeys: [
     "echo -- Disabling Sticky Keys",
@@ -863,6 +896,7 @@ const checkboxItems = [
   { id: "extensions", type: "extensions" },
   { id: "msapps", type: "msapps" },
   { id: "xbox", type: "xbox" },
+  { id: "consumerfeatures", type: "consumerfeatures" },
   { id: "iexplorer", type: "iexplorer" },
   { id: "hyperv", type: "hyperv" },
   { id: "faxscan", type: "faxscan" },
@@ -906,6 +940,7 @@ const checkboxItems = [
   { id: "wifisense", type: "wifisense" },
   { id: "cloudsync", type: "cloudsync" },
   { id: "activityfeed", type: "activityfeed" },
+  { id: "homegroup", type: "homegroup" },
   { id: "screenrecording", type: "screenrecording" },
   { id: "automap", type: "automap" },
   { id: "lockscreencamera", type: "lockscreencamera" },
@@ -917,15 +952,18 @@ const checkboxItems = [
   { id: "opendns", type: "opendns" },
 
   { id: "cleantemp", type: "cleantemp" },
+  { id: "cleanmgr", type: "cleanmgr" },
   { id: "emptyrecycle", type: "emptyrecycle" },
 
   { id: "ultimateperformance", type: "ultimateperformance" },
   { id: "manualservices", type: "manualservices" },
+  { id: "storagesense", type: "storagesense" },
   { id: "disablehibernation", type: "disablehibernation" },
   { id: "disableprefetch", type: "disableprefetch" },
 
   { id: "darkmode", type: "darkmode" },
   { id: "filextensions", type: "filextensions" },
+  { id: "mouseacc", type: "mouseacc" },
   { id: "stickykeys", type: "stickykeys" },
   { id: "taskbarwidgets", type: "taskbarwidgets" },
   { id: "numlockstartup", type: "numlockstartup" },
