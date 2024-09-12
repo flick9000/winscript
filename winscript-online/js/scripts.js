@@ -49,11 +49,15 @@ const scripts = {
     'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "*Microsoft.WindowsStore*" | Remove-AppxPackage"',
   ],
   onedrive: [
-    "echo -- Uninstalling OneDrive",
+    "echo -- Killing OneDrive Process",
     "taskkill /f /im OneDrive.exe",
     "echo -- Uninstalling OneDrive through the installers",
-    "start %systemroot%\\SysWOW64\\OneDriveSetup.exe /uninstall",
-    "start %programfiles(x86)%\\Microsoft Office\\root\\Integration\\Addons\\OneDriveSetup.exe /uninstall",
+    'if exist "%SystemRoot%System32OneDriveSetup.exe" (',
+    '    "%SystemRoot%System32OneDriveSetup.exe" /uninstall',
+    ")",
+    'if exist "%SystemRoot%SysWOW64OneDriveSetup.exe" (',
+    '    "%SystemRoot%SysWOW64OneDriveSetup.exe" /uninstall',
+    ")",
     "echo -- Removing OneDrive registry keys",
     'reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
     'reg delete "HKEY_CLASSES_ROOT\\CLSID{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
@@ -70,14 +74,18 @@ const scripts = {
     'Powershell -ExecutionPolicy Unrestricted -Command "$installer = (Get-ChildItem \\"$($env:ProgramFiles)*\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe\\"); if (!$installer) { Write-Host \\"Installer not found. Microsoft Edge may already be uninstalled.\\"; } else { $installer | ForEach-Object { $uninstallerPath = $_.FullName; $installerArguments = @(\\"--uninstall\\", \\"--system-level\\", \\"--verbose-logging\\", \\"--force-uninstall\\"); Write-Output \\"Uninstalling through uninstaller: $uninstallerPath\\"; $process = Start-Process -FilePath \\"$uninstallerPath\\" -ArgumentList $installerArguments -Wait -PassThru; if ($process.ExitCode -eq 0 -or $process.ExitCode -eq 19) { Write-Host \\"Successfully uninstalled Edge.\\"; } else { Write-Error \\"Failed to uninstall, uninstaller failed with exit code $($process.ExitCode).\\"; }; }; }"',
   ],
   copilot: [
-    "echo -- Disabling Copilot",
+    "echo -- Removing Copilot",
     'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot" /v "TurnOffWindowsCopilot" /t "REG_DWORD" /d "1" /f',
+    'reg add "HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot" /v "TurnOffWindowsCopilot" /t "REG_DWORD" /d "1" /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings" /v "AutoOpenCopilotLargeScreens" /t "REG_DWORD" /d "0" /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "ShowCopilotButton" /t "REG_DWORD" /d "0"/f',
     'reg add "HKCU\\Software\\Microsoft\\Windows\\Shell\\Copilot\\BingChat" /v "IsUserEligible" /t "REG_DWORD" /d "0" /f',
+    'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "HubsSidebarEnabled" /t "REG_DWORD" /d "0" /f',
   ],
   widgets: [
-    "echo -- Disabling Widgets",
-    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "TaskbarDa" /t "REG_DWORD" /d "0" /f',
-    'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage \\"MicrosoftWindows.Client.WebExperience\\" | Remove-AppxPackage"',
+    "echo -- Uninstalling Widgets",
+    'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh" /v "AllowNewsAndInterests" /t "REG_DWORD" /d "0" /f',
+    'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage *WebExperience* | Remove-AppxPackage"',
     'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Appx\\AppxAllUserStore\\Deprovisioned\\MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy" /f',
   ],
   homegroup: [
@@ -537,6 +545,11 @@ const scripts = {
     "echo -- Disabling Activity Feed",
     'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System" /v "EnableActivityFeed" /d "0" /t REG_DWORD /f',
   ],
+  notificationtray: [
+    "echo -- Disabling Notification Tray",
+    'reg add "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer" /v "DisableNotificationCenter" /d "1" /t REG_DWORD /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications" /v "ToastEnabled" /d "0" /t REG_DWORD /f',
+  ],
   screenrecording: [
     "echo -- Disabling Xbox Screen Recording",
     'reg add "HKCU\\System\\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d 0 /f',
@@ -854,6 +867,11 @@ const scripts = {
     'reg add "HKCU\\Control Panel\\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f',
     'reg add "HKCU\\Control Panel\\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f',
   ],
+  classicmenu: [
+    "echo -- Setting Classic Right-Click Menu",
+    'reg add "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32" /f /ve',
+    'reg add "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32" /ve /t "REG_SZ" /d "" /f"',
+  ],
   stickykeys: [
     "echo -- Disabling Sticky Keys",
     'reg add "HKCU\\Control Panel\\Accessibility\\StickyKeys" /v "Flags" /t REG_SZ /d "58" /f',
@@ -861,6 +879,8 @@ const scripts = {
   taskbarwidgets: [
     "echo -- Disabling Taskbar Widgets",
     'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "TaskbarDa" /t REG_DWORD /d 0 /f',
+    'reg add "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\NewsAndInterests\\AllowNewsAndInterests" /v "value" /t REG_DWORD /d 0 /f',
+    'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds" /v "EnableFeeds" /t REG_DWORD /d 0 /f',
   ],
   numlockstartup: [
     "echo -- Disabling Num Lock on Startup",
@@ -939,6 +959,7 @@ const checkboxItems = [
   { id: "radioaccess", type: "radioaccess" },
   { id: "wifisense", type: "wifisense" },
   { id: "cloudsync", type: "cloudsync" },
+  { id: "notificationtray", type: "notificationtray" },
   { id: "activityfeed", type: "activityfeed" },
   { id: "homegroup", type: "homegroup" },
   { id: "screenrecording", type: "screenrecording" },
@@ -963,6 +984,7 @@ const checkboxItems = [
 
   { id: "darkmode", type: "darkmode" },
   { id: "filextensions", type: "filextensions" },
+  { id: "classicmenu", type: "classicmenu" },
   { id: "mouseacc", type: "mouseacc" },
   { id: "stickykeys", type: "stickykeys" },
   { id: "taskbarwidgets", type: "taskbarwidgets" },
