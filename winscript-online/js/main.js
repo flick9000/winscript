@@ -63,6 +63,7 @@ document.getElementById("uncheckAll").addEventListener("click", function () {
 // Presets
 let basicIds = [
   "thirdparty",
+  "consumerfeatures",
   "copilot",
   "faxscan",
   "iexplorer",
@@ -93,14 +94,17 @@ let basicIds = [
   "radioaccess",
   "systemaccess",
   "cleantemp",
+  "cleanmgr",
   "ultimateperformance",
   "filextensions",
   "stickykeys",
   "taskbarwidgets",
+  "widgets",
 ];
 let strictIds = [
   "thirdparty",
   "copilot",
+  "consumerfeatures",
   "faxscan",
   "iexplorer",
   "wtelemetry",
@@ -130,6 +134,7 @@ let strictIds = [
   "radioaccess",
   "systemaccess",
   "cleantemp",
+  "cleanmgr",
   "ultimateperformance",
   "xbox",
   "onedrive",
@@ -149,7 +154,6 @@ let strictIds = [
   "phoneaccess",
   "lockscreencamera",
   "manualservices",
-  "disablehibernation",
   "filextensions",
   "stickykeys",
   "taskbarwidgets",

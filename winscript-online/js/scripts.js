@@ -171,9 +171,7 @@ const scripts = {
   ],
   iexplorer: [
     "echo -- Disabling Internet Explorer",
-    'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-amd64" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-amd64." } catch { Write-Output "Feature not found." }"',
-    'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x86" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x86." } catch { Write-Output "Feature not found." }"',
-    'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-x64" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature Internet-Explorer-Optional-x64." } catch { Write-Output "Feature not found." }"',
+    "dism /online /Remove-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.0.",
   ],
   hyperv: [
     "echo -- Disabling Hyper-V",
@@ -182,6 +180,7 @@ const scripts = {
   faxscan: [
     "echo -- Disabling Fax and Scan",
     'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "FaxServicesClientPackage" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature FaxServicesClientPackage." } catch { Write-Output "Feature not found." }"',
+    'PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name "Print.Fax.Scan*"" | Remove-WindowsCapability -Online"',
   ],
   mediaplayer: [
     "echo -- Disabling Windows Media Player",
@@ -599,7 +598,7 @@ const scripts = {
   ],
   cleanmgr: [
     "echo -- Running Disk Clean-up",
-    "cleanmgr.exe /d C: /VERYLOWDISK",
+    "cleanmgr /verylowdisk /sagerun:5",
   ],
   emptyrecycle: [
     "echo -- Emptying Recycle Bin",
@@ -840,7 +839,7 @@ const scripts = {
   ],
   storagesense: [
     "echo -- Disabling Storage Sense",
-    'powershell -command "Set-ItemProperty -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy" -Name "01" -Value 0 -Type Dword -Force"',
+    'powershell -command "Set-ItemProperty -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy" -Name "01" -Value 0 -Force"',
   ],
   disablehibernation: [
     "echo -- Disabling Hibernation",
@@ -961,7 +960,6 @@ const checkboxItems = [
   { id: "cloudsync", type: "cloudsync" },
   { id: "notificationtray", type: "notificationtray" },
   { id: "activityfeed", type: "activityfeed" },
-  { id: "homegroup", type: "homegroup" },
   { id: "screenrecording", type: "screenrecording" },
   { id: "automap", type: "automap" },
   { id: "lockscreencamera", type: "lockscreencamera" },
