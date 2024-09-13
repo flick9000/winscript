@@ -180,7 +180,6 @@ const scripts = {
   faxscan: [
     "echo -- Disabling Fax and Scan",
     'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "FaxServicesClientPackage" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature FaxServicesClientPackage." } catch { Write-Output "Feature not found." }"',
-    'PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name "Print.Fax.Scan*"" | Remove-WindowsCapability -Online"',
   ],
   mediaplayer: [
     "echo -- Disabling Windows Media Player",
@@ -195,6 +194,12 @@ const scripts = {
     'schtasks /change /TN "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator" /DISABLE > NUL 2>&1',
     'schtasks /change /TN "\\Microsoft\\Windows\\Customer Experience Improvement Program\\KernelCeipTask" /DISABLE > NUL 2>&1',
     'schtasks /change /TN "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip" /DISABLE > NUL 2>&1',
+    'schtasks /change /TN "\\Microsoft\\Windows\\Autochk\\Proxy" /DISABLE > NUL 2>&1',
+    'schtasks /change /TN "\\Microsoft\\Windows\\DiskDiagnostic\\Microsoft-Windows-DiskDiagnosticDataCollector" /DISABLE > NUL 2>&1',
+    'schtasks /change /TN "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient" /DISABLE > NUL 2>&1',
+    'schtasks /change /TN "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClientOnScenarioDownload" /DISABLE > NUL 2>&1',
+    'schtasks /change /TN "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting" /DISABLE > NUL 2>&1',
+    'schtasks /change /TN "\\Microsoft\\Windows\\Maps\\MapsUpdateTask" /DISABLE > NUL 2>&1',
     "sc config diagnosticshub.standardcollector.service start=demand",
     "sc config diagsvc start=demand",
     "sc config WerSvc start=demand",
@@ -221,6 +226,7 @@ const scripts = {
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /d "0" /t REG_DWORD /f',
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /d "0" /t REG_DWORD /f',
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /d "0" /t REG_DWORD /f',
   ],
   wupdate: [
     "echo -- Disabling Windows Update Telemetry",
@@ -346,6 +352,7 @@ const scripts = {
     'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableSoftLanding" /t REG_DWORD /d "1" /f',
     'reg add "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableWindowsSpotlightFeatures" /t "REG_DWORD" /d "1" /f',
     'reg add "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableWindowsConsumerFeatures" /t "REG_DWORD" /d "1" /f',
+    'reg add "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableTailoredExperiencesWithDiagnosticData" /t "REG_DWORD" /d "1" /f',
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f',
     'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d "1" /f',
     'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /d "0" /t REG_DWORD /f',
@@ -878,6 +885,7 @@ const scripts = {
   taskbarwidgets: [
     "echo -- Disabling Taskbar Widgets",
     'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "TaskbarDa" /t REG_DWORD /d 0 /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d 0 /f',
     'reg add "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\NewsAndInterests\\AllowNewsAndInterests" /v "value" /t REG_DWORD /d 0 /f',
     'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds" /v "EnableFeeds" /t REG_DWORD /d 0 /f',
   ],
