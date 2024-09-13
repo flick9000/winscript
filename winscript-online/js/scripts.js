@@ -602,6 +602,11 @@ const scripts = {
     'netsh interface ip set dns name="Ethernet" static 208.67.222.222',
     'netsh interface ip add dns name="Ethernet" 208.67.220.220 index=2',
   ],
+  adguard: [
+    "echo -- Setting OpenDNS DNS",
+    'netsh interface ip set dns name="Ethernet" static 94.140.14.14',
+    'netsh interface ip add dns name="Ethernet" 94.140.15.15 index=2',
+  ],
 
   cleantemp: [
     "echo -- Deleting Temp files",
@@ -903,6 +908,10 @@ const scripts = {
     "echo -- Disabling Snap Assist Flyout",
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d 0 /f',
   ],
+  installmas: [
+    "echo -- Running MAS",
+    'powershell -command "irm https://get.activated.win | iex"',
+  ],
 };
 
 // Functions to handle checking and unchecking of checkboxes
@@ -983,6 +992,7 @@ const checkboxItems = [
   { id: "cloudflaredns", type: "cloudflaredns" },
   { id: "quad9dns", type: "quad9dns" },
   { id: "opendns", type: "opendns" },
+  { id: "adguard", type: "adguard" },
 
   { id: "cleantemp", type: "cleantemp" },
   { id: "cleanmgr", type: "cleanmgr" },
