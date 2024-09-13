@@ -114,7 +114,8 @@
   margin-left: 1rem;
 }
 
-.restore-container {
+.restore-container,
+.mas-container {
   display: none;
 }
 

@@ -70,6 +70,7 @@ document.getElementById("uncheckAll").addEventListener("click", function () {
 // Presets
 let basicIds = [
   "thirdparty",
+  "consumerfeatures",
   "copilot",
   "faxscan",
   "iexplorer",
@@ -100,14 +101,17 @@ let basicIds = [
   "radioaccess",
   "systemaccess",
   "cleantemp",
+  "cleanmgr",
   "ultimateperformance",
   "filextensions",
   "stickykeys",
   "taskbarwidgets",
+  "widgets",
 ];
 let strictIds = [
   "thirdparty",
   "copilot",
+  "consumerfeatures",
   "faxscan",
   "iexplorer",
   "wtelemetry",
@@ -137,6 +141,7 @@ let strictIds = [
   "radioaccess",
   "systemaccess",
   "cleantemp",
+  "cleanmgr",
   "ultimateperformance",
   "xbox",
   "onedrive",
@@ -229,3 +234,18 @@ document.getElementById("copyBtn").addEventListener("click", function () {
     }
   );
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const checkboxes = document.querySelectorAll("[js-target=mas]");
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", test);
+  });
+});
+
+function test() {
+  if (document.getElementById("installmas").checked) {
+    document.querySelector(".mas-container").style.display = "block";
+  } else {
+    document.querySelector(".mas-container").style.display = "none";
+  }
+}
