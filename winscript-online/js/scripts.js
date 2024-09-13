@@ -227,6 +227,11 @@ const scripts = {
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /d "0" /t REG_DWORD /f',
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /d "0" /t REG_DWORD /f',
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /d "0" /t REG_DWORD /f',
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\SystemSettingsAccountNotifications" /v "EnableAccountNotifications" /t REG_DWORD /d "0" /f',
+    'reg add "HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI" /v "DisableMFUTracking" /t REG_DWORD /d "1" /f',
+    'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\EdgeUI" /v "DisableMFUTracking" /t REG_DWORD /d "1" /f',
+    'reg add "HKCU\\Control Panel\\International\\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f',
+    'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System" /v "PublishUserActivities" /t REG_DWORD /d "0" /f',
   ],
   wupdate: [
     "echo -- Disabling Windows Update Telemetry",
