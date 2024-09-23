@@ -889,6 +889,10 @@ const scripts = {
     'reg add "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32" /f /ve',
     'reg add "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32" /ve /t "REG_SZ" /d "" /f"',
   ],
+  endtask: [
+    "echo -- Adding End Task to Right-Click",
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" /v "TaskbarEndTask" /t REG_DWORD /d "1" /f',
+  ],
   stickykeys: [
     "echo -- Disabling Sticky Keys",
     'reg add "HKCU\\Control Panel\\Accessibility\\StickyKeys" /v "Flags" /t REG_SZ /d "58" /f',
@@ -1008,6 +1012,7 @@ const checkboxItems = [
   { id: "filextensions", type: "filextensions" },
   { id: "classicmenu", type: "classicmenu" },
   { id: "mouseacc", type: "mouseacc" },
+  { id: "endtask", type: "endtask" },
   { id: "stickykeys", type: "stickykeys" },
   { id: "taskbarwidgets", type: "taskbarwidgets" },
   { id: "numlockstartup", type: "numlockstartup" },
