@@ -82,10 +82,10 @@
               <span>Privacy</span>
             </div>
             <div onclick="showPerformance()" class="box">
-              <span>Performance</span>
+              <span>Tweaks</span>
             </div>
             <div onclick="showInstall()" class="box">
-              <span>Install Apps</span>
+              <span>Install</span>
             </div>
           </div>
           <div class="card debloat">
@@ -557,7 +557,7 @@
               </div>
             </details>
             <details>
-              <summary><span>Misc Options</span></summary>
+              <summary><span>UI Settings</span></summary>
               <div class="collapsable-content">
                 <label class="checkbox-wrap">
                   <input id="darkmode" type="checkbox" class="checkbox" />
@@ -566,6 +566,19 @@
                 <label class="checkbox-wrap">
                   <input id="filextensions" type="checkbox" class="checkbox" />
                   <span>Show File Extensions</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input id="snapflyout" type="checkbox" class="checkbox" />
+                  <span>Disable Snap Flyout</span>
+                </label>
+              </div>
+            </details>
+            <details>
+              <summary><span>Misc Options</span></summary>
+              <div class="collapsable-content">
+                <label class="checkbox-wrap">
+                  <input id="endtask" type="checkbox" class="checkbox" />
+                  <span>Add End Task to Right-Click</span>
                 </label>
                 <label class="checkbox-wrap">
                   <input id="stickykeys" type="checkbox" class="checkbox" />
@@ -582,10 +595,6 @@
                 <label class="checkbox-wrap">
                   <input id="numlockstartup" type="checkbox" class="checkbox" />
                   <span>Disable Numlock on Startup</span>
-                </label>
-                <label class="checkbox-wrap">
-                  <input id="snapflyout" type="checkbox" class="checkbox" />
-                  <span>Disable Snap Flyout</span>
                 </label>
               </div>
             </details>
@@ -677,6 +686,15 @@
                     id="Vivaldi"
                   />
                   <span>Vivaldi</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="ZenBrowser"
+                  />
+                  <span>Zen Browser</span>
                 </label>
                 <label class="checkbox-wrap">
                   <input
@@ -804,6 +822,15 @@
                     id="Minecraft"
                   />
                   <span>Minecraft</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="FaceIT"
+                  />
+                  <span>FaceIT</span>
                 </label>
                 <label class="checkbox-wrap">
                   <input
@@ -1063,6 +1090,15 @@
                     type="checkbox"
                     js-target="install"
                     class="checkbox"
+                    id="ProtonVPN"
+                  />
+                  <span>Proton VPN</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
                     id="MullvadVPN"
                   />
                   <span>Mullvad VPN</span>
@@ -1265,6 +1301,15 @@
                     id="Spotify"
                   />
                   <span>Spotify</span>
+                </label>
+                <label class="checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    js-target="install"
+                    class="checkbox"
+                    id="Spicetify"
+                  />
+                  <span>Spicetify</span>
                 </label>
                 <label class="checkbox-wrap">
                   <input
@@ -1706,7 +1751,7 @@
               class="btn btn-outline btn-secondary btn-xs"
               id="restoreBtn"
             >
-              On/Off Restore Point
+              Toggle Restore Point
             </button>
             <button
               style="margin-left: 4px; margin-bottom: 8px"
