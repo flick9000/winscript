@@ -3,6 +3,10 @@ function appsInstall() {
   const baseChoco = "choco install ";
   // Define the list of apps
   const appList = [
+    // Drivers
+    { id: "Intel", url: "intel-dsa" },
+    { id: "Ryzen", url: "amd-ryzen-chipset" },
+    { id: "NVIDIA", url: "nvidia-display-driver" },
     // Browsers
     { id: "Chrome", url: "googlechrome" },
     { id: "Firefox", url: "firefox" },
@@ -22,6 +26,7 @@ function appsInstall() {
     { id: "NanaZip", url: "nanazip" },
     // Gaming
     { id: "Steam", url: "steam" },
+    { id: "LGHub", url: "lghub" },
     { id: "EpicGames", url: "epicgameslauncher" },
     { id: "EAApp", url: "ea-app" },
     { id: "Minecraft", url: "minecraft-launcher" },
@@ -35,6 +40,7 @@ function appsInstall() {
     { id: "Everything", url: "everything" },
     { id: "QuickLook", url: "quicklook" },
     { id: "Shell", url: "nilesoft-shell" },
+    { id: "WindHawk", url: "windhawk" },
     { id: "FlowLauncher", url: "flow-launcher" },
     { id: "CCleaner", url: "ccleaner" },
     { id: "Revo", url: "revo-uninstaller" },
