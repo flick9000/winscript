@@ -187,7 +187,7 @@ const scripts = {
   ],
   wsearch: [
     "echo -- Disabling Windows Search",
-    'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "SearchEngine-Client-Package" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature SearchEngine-Client-Package." } catch { Write-Output "Feature not found." }"',
+    'sc stop "wsearch" && sc config "wsearch" start=disabled'
   ],
   wtelemetry: [
     "echo -- Disabling Windows Telemetry",
@@ -855,6 +855,10 @@ const scripts = {
     "sc config wuauserv start=demand",
     "sc config wudfsvc start=demand",
   ],
+  hags : [
+    "echo -- Disabling HAGS",
+    'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d 1 /f',
+  ],
   storagesense: [
     "echo -- Disabling Storage Sense",
     'powershell -command "Set-ItemProperty -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy" -Name "01" -Value 0 -Force"',
@@ -863,12 +867,15 @@ const scripts = {
     "echo -- Disabling Hibernation",
     "powercfg.exe /hibernate off",
   ],
+  coreisolation: [
+    "echo -- Disabling Core Isolation",
+    'reg add "HKLM\\SOFTWARE\\CurrentControlSet\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f',
+  ],
   disableprefetch: [
     "echo -- Disabling Prefetch",
     "sc stop sysmain",
     "sc config sysmain start=disabled",
   ],
-
   darkmode: [
     "echo -- Enabling Dark Mode",
     'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 0 /f',
@@ -884,6 +891,19 @@ const scripts = {
     'reg add "HKCU\\Control Panel\\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f',
     'reg add "HKCU\\Control Panel\\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f',
   ],
+  gamemode: [
+    "echo -- Disabling Game Mode",
+    'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR" /v "AutoGameModeEnabled" /t REG_DWORD /d 0 /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d 0 /f',
+  ],
+  gamebar: [
+    "echo -- Disabling Game Bar",
+    'reg add "HKLM\\SOFTWARE\\Polices\\Microsoft\\Windows\\GameDVR" /v "AllowGameDVR" /t REG_DWORD /d 0 /f',
+    'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d 0 /f',
+    'reg add "HKCU\\SOFTWARE\\Microsoft\\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d 0 /f',
+  ],
+
   classicmenu: [
     "echo -- Setting Classic Right-Click Menu",
     'reg add "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32" /f /ve',
@@ -1004,14 +1024,21 @@ const checkboxItems = [
 
   { id: "ultimateperformance", type: "ultimateperformance" },
   { id: "manualservices", type: "manualservices" },
+  { id: "hags", type: "hags" },
   { id: "storagesense", type: "storagesense" },
   { id: "disablehibernation", type: "disablehibernation" },
+  { id: "coreisolation", type: "coreisolation" },
   { id: "disableprefetch", type: "disableprefetch" },
+
+
+  { id: "mouseacc", type: "mouseacc" },
+  { id: "gamemode", type: "gamemode" },
+  { id: "gamebar", type: "gamebar" },
+
 
   { id: "darkmode", type: "darkmode" },
   { id: "filextensions", type: "filextensions" },
   { id: "classicmenu", type: "classicmenu" },
-  { id: "mouseacc", type: "mouseacc" },
   { id: "endtask", type: "endtask" },
   { id: "stickykeys", type: "stickykeys" },
   { id: "taskbarwidgets", type: "taskbarwidgets" },
