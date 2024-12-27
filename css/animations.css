@@ -7,6 +7,16 @@
   }
 }
 
+@keyframes blur-in {
+  from {
+    backdrop-filter: blur(0px);
+  }
+  to {
+    backdrop-filter: blur(25px);
+  }
+}
+
+
 @keyframes rotate {
   to {
     --angle: 360deg;
@@ -20,7 +30,7 @@
 }
 
 .nav-items a {
-  opacity: 0.95;
+  opacity: 0.9;
   transition: opacity 0.3s ease;
 }
 
@@ -45,21 +55,4 @@
 
 .navbar.responsive > .nav-items {
   animation: fade-in 0.5s ease;
-}
-
-.button-download,
-.online-button,
-.button-download.sm {
-  scale: 0.95;
-  transition: scale 0.2s;
-}
-
-.button-download:hover,
-.online-button:hover,
-.button-download.sm:hover {
-  scale: 1;
-}
-
-.modal {
-  animation: fade-in 0.3s ease;
 }

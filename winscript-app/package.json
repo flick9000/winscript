@@ -1,0 +1,45 @@
+{
+  "name": "winscript",
+  "productName": "WinScript",
+  "version": "1.0.5",
+  "description": "WinScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "repository": "",
+  "keywords": [
+    "WinScript"
+  ],
+  "author": "flick",
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-reloader": "^1.2.3",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "fix-esm": "^1.0.1",
+    "mica-electron": "^1.5.10",
+    "systeminformation": "^5.23.5",
+    "username": "^7.0.0"
+  },
+  "build": {
+    "appId": "com.flick.winscript",
+    "productName": "WinScript",
+    "directories": {
+      "buildResources": "resources",
+      "output": "build"
+    },
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "icons\\favicon.ico"
+    },
+    "portable": {
+      "artifactName": "WinScript.exe"
+    }
+}
+}

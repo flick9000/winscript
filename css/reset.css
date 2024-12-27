@@ -32,3 +32,6 @@
   ul, li, ol {
     list-style: none;
   }
+  button {
+    border: transparent;
+  }

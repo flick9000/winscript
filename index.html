@@ -19,57 +19,38 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/icons/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/icons/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/icons/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/icons/site.webmanifest" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="msapplication-config" content="/icons/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="icon" href="/icons/favicon.png" />
+    <link rel="icon" href="/icons/favicon.ico" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <script defer src="js/main.js"></script>
-    <script defer src="js/fontawesome.js"></script>
+    <script defer src="main.js"></script>
+
+    <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
+
     <title>WinScript | Make Windows Yours.</title>
   </head>
   <body>
     <nav id="navbar" class="navbar">
-      <a href="https://winscript.pages.dev"
-        ><img src="img/logo.svg" width="48px" alt=""
+      <a href="index.html"
+        ><img src="icons/logo.svg" width="40px" alt=""
       /></a>
       <div class="nav-items center">
         <div class="nav-item">
-          <i id="nav-item-icon" class="fa-solid fa-up-right-from-square"></i>
+          <iconify-icon id="nav-item-icon" icon="fa6-solid:up-right-from-square" width="32" height="32"></iconify-icon>
           <a href="https://winscript.pages.dev">Home</a>
         </div>
         <div class="nav-item">
-          <i id="nav-item-icon" class="fa-solid fa-up-right-from-square"></i>
-          <a id="privacy-item">Privacy</a>
+          <iconify-icon id="nav-item-icon" icon="fa6-solid:up-right-from-square" width="32" height="32"></iconify-icon>
+          <a id="openPrivacyDialog">Privacy</a>
         </div>
         <div class="nav-item">
-          <i id="nav-item-icon" class="fa-solid fa-up-right-from-square"></i>
+          <iconify-icon id="nav-item-icon" icon="fa6-solid:up-right-from-square" width="32" height="32"></iconify-icon>
           <a href="https://github.com/flick9000/winscript" target="_blank"
             >GitHub</a
           >
         </div>
         <div class="nav-item">
-          <i id="nav-item-icon" class="fa-solid fa-up-right-from-square"></i>
+          <iconify-icon id="nav-item-icon" icon="fa6-solid:up-right-from-square" width="32" height="32"></iconify-icon>
           <a
             href="https://docs-winscript.pages.dev"
             class="support-button sm"
@@ -81,23 +62,26 @@
       </div>
       <div class="nav-items right">
         <a href="https://ko-fi.com/flick9000" target="_blank" class="icon">
-          <i class="fa-solid fa-mug-hot"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21v-2h18v2zM20 8V5h-2v3zm0-5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V3zm-4 2H6v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2z"/></svg>
         </a>
         <a href="https://github.com/flick9000/winscript" target="_blank">
-          <i class="fa-brands fa-github"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>
         </a>
       </div>
-      <i onclick="responsiveNav()" class="fa-solid fa-bars-staggered"></i>
-      <i onclick="responsiveNav()" class="fa-solid fa-xmark"></i>
+      <iconify-icon onclick="responsiveNav()" class="fa-solid fa-bars-staggered" icon="fa6-solid:bars-staggered" width="24" height="24"></iconify-icon>
+      <iconify-icon onclick="responsiveNav()" class="fa-solid fa-xmark" icon="fa6-solid:xmark" width="24" height="24"></iconify-icon>
     </nav>
     <div class="radial-wrapper">
       <div class="radial-bg"></div>
     </div>
     <main>
       <section class="hero">
-        <div id="privacy-modal" class="modal">
+        <dialog id="privacyDialog">
           <div class="modal-content">
-            <span class="close">&times;</span>
+            <div class="modal-header">
+              <h1>Privacy</h1>
+              <iconify-icon id="closePrivacyDialog" class="fa-solid fa-xmark" icon="fa6-solid:xmark" width="24" height="24"></iconify-icon>
+            </div>
             <p>
               🤖 Website automatically deployed from
               <a href="https://github.com/flick9000/winscript" target="_blank"
@@ -107,7 +91,20 @@
             <p>👁️ We do not log IP Address.</p>
             <p>🍪 We do not use cookies.</p>
           </div>
-        </div>
+        </dialog>
+        <dialog id="startDialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1>Get Started</h1>
+              <iconify-icon id="closeStartDialog" class="fa-solid fa-xmark" icon="fa6-solid:xmark" width="24" height="24"></iconify-icon>
+            </div>
+            <p>Start by downloading the desktop version (or using the online version). Explore and choose different tweaks based on your needs and after you can download or copy to run your custom script.</p>
+            <div class="modal-buttons">
+              <a href="https://github.com/flick9000/winscript/releases">Desktop Version -></a>
+              <a href="./online/index.html">Online Version -></a>
+            </div>
+          </div>
+        </dialog>
         <div class="hero-wrapper">
           <h1 class="hero-title">Make Windows Yours.</h1>
           <p class="hero-description lg">
@@ -119,10 +116,59 @@
             Open-source tool to build your <br />
             Windows 10/11 script from scratch.
           </p>
-          <p class="version">The latest version is: 2024.06.14</p>
-          <a href="https://winscript.pages.dev/winscript-online/" class="cta">
-            <span>Get Started -></span>
+          <p class="version">Latest update: <span id="commit-date"></span></p>
+
+          <script>
+            async function fetchLatestCommitDate() {
+                const owner = 'flick9000'; // Replace with your GitHub username
+                const repo = 'winscript';     // Replace with your repository name
+                const storageKey = 'latestCommitDate';
+                const cacheDuration = 1 * 60 * 60 * 1000; // 24 hours in milliseconds
+    
+                // Check localStorage for a cached date
+                const cachedData = localStorage.getItem(storageKey);
+                if (cachedData) {
+                    const { date, timestamp } = JSON.parse(cachedData);
+                    const now = new Date().getTime();
+    
+                    // Use cached data if it's still valid
+                    if (now - timestamp < cacheDuration) {
+                        document.getElementById('commit-date').textContent = date;
+                        return;
+                    }
+                }
+    
+                // Fetch the latest commit date from the API
+                try {
+                    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits`);
+                    if (!response.ok) {
+                        throw new Error(`Error fetching commits: ${response.statusText}`);
+                    }
+                    const commits = await response.json();
+                    const latestCommit = commits[0];
+                    const commitDate = new Date(latestCommit.commit.committer.date).toLocaleString();
+    
+                    // Save the result in localStorage
+                    localStorage.setItem(storageKey, JSON.stringify({
+                        date: commitDate,
+                        timestamp: new Date().getTime(),
+                    }));
+    
+                    document.getElementById('commit-date').textContent = commitDate;
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById('commit-date').textContent = 'Error fetching commit date.';
+                }
+            }
+    
+            // Call the function when the page loads
+            fetchLatestCommitDate();
+        </script>
+
+          <a id="openStartDialog" class="cta">
+            <span >Get Started -></span>
           </a>
+
           <div class="banner small">
             <a href="https://winscript.pages.dev" target="_blank">
               <img src="img/winscript.png" alt="WinScript" />
@@ -138,8 +184,8 @@
       <section class="privacy">
         <div class="even-columns">
           <h1>
-            <span style="opacity: 0.5">Your Computer</span> <br /><span
-              style="color: #1a90ff"
+            <span style="opacity: 0.7">Your Computer</span> <br /><span
+              style="color: #6040bf"
               >Your Privacy</span
             >
           </h1>
@@ -158,11 +204,11 @@
           <div
             class="card"
             style="
-              background: linear-gradient(180deg, #0c1633, #2d5ace);
-              border: 1px solid hsl(223, 64%, 47%);
+              background: linear-gradient(180deg, #17122b, #705f81);
+              border: 1px solid #6b5b7b;
             "
           >
-            <h1><i class="fa-solid fa-shield-halved"></i>&nbsp; Privacy</h1>
+            <h1><iconify-icon icon="fa6-solid:shield-halved" width="32" height="32"></iconify-icon>&nbsp; Privacy</h1>
             <p>
               Disable Windows and 3rd party telemetry & data collection,
               tracking, app access & more.
@@ -171,11 +217,11 @@
           <div
             class="card"
             style="
-              background: linear-gradient(180deg, #0c1633, #6f8cd8);
-              border: 1px solid hsl(223, 57%, 64%);
+              background: linear-gradient(180deg, #17122b, #968ca1);
+              border: 1px solid #94899f;
             "
           >
-            <h1><i class="fa-solid fa-rocket"></i>&nbsp; Performance</h1>
+            <h1><iconify-icon icon="fa6-solid:rocket" width="32" height="32"></iconify-icon>&nbsp; Performance</h1>
             <p>
               Free resources by setting unnecessary background services to
               manual, removing telemetry & more.
@@ -184,11 +230,11 @@
           <div
             class="card"
             style="
-              background: linear-gradient(180deg, #0c1633, #2d5ace);
-              border: 1px solid hsl(223, 64%, 47%);
+              background: linear-gradient(180deg, #17122b, #705f81);
+              border: 1px solid #6b5b7b;
             "
           >
-            <h1><i class="fa-solid fa-download"></i>&nbsp; Apps</h1>
+            <h1><iconify-icon icon="fa6-solid:download" width="32" height="32"></iconify-icon>&nbsp; Apps</h1>
             <p>
               Install all your favourite apps simultaneously in one click
               through chocolatey.
@@ -199,8 +245,8 @@
       <section class="debloat">
         <div class="even-columns">
           <h1>
-            <span style="opacity: 0.5">Remove</span><br />Windows<br /><span
-              style="color: #1a90ff"
+            <span style="opacity: 0.7">Remove</span><br />Windows<br /><span
+              style="color: #6040bf"
               >Bulls**t</span
             >
           </h1>
@@ -210,8 +256,8 @@
       <section class="telemetry">
         <div class="even-columns">
           <h1>
-            <span style="opacity: 0.5">Block</span><br />Windows<br /><span
-              style="color: #1a90ff"
+            <span style="opacity: 0.7">Block</span><br />Windows<br /><span
+              style="color: #6040bf"
               >Spying</span
             >
           </h1>
@@ -221,8 +267,8 @@
       <section class="performance">
         <div class="even-columns">
           <h1>
-            <span style="opacity: 0.5">Boost</span><br />Windows<br /><span
-              style="color: #1a90ff"
+            <span style="opacity: 0.7">Boost</span><br />Windows<br /><span
+              style="color: #6040bf"
               >Performance</span
             >
           </h1>
@@ -232,8 +278,8 @@
       <section class="install">
         <div class="even-columns">
           <h1>
-            <span style="opacity: 0.5">Install All</span><br />Your Apps<br /><span
-              style="color: #1a90ff"
+            <span style="opacity: 0.7">Install All</span><br />Your Apps<br /><span
+              style="color: #6040bf"
               >In One Click</span
             >
           </h1>
@@ -242,7 +288,7 @@
       </section>
       <section class="opensource">
         <div class="opensource-wrapper">
-          <h1>Open Source</h1>
+          <h1 style="color: #6040bf">Open Source</h1>
           <p>
             WinScript is an open-source project licensed under GPL-3.0. It's
             completely free to use and transparent. If you want to contribute,
@@ -252,7 +298,7 @@
               >contributing guide</a
             >.
           </p>
-          <img class="opensource" src="img/opensource3.png" alt="Open Source" />
+          <img class="opensource" src="img/opensource.png" alt="Open Source" />
         </div>
       </section>
     </main>
@@ -264,22 +310,17 @@
           completely free to use and transparent.
         </p>
         <div class="icons">
-          <a
-            href="https://github.com/flick9000/winscript"
-            target="_blank"
-            class="icon"
-          >
-            <i class="fa-brands fa-github"></i>
+          <a href="https://ko-fi.com/flick9000" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M2 21v-2h18v2zM20 8V5h-2v3zm0-5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V3zm-4 2H6v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2z"/></svg>
           </a>
-          <a href="https://ko-fi.com/flick9000" target="_blank" class="icon">
-            <i class="fa-solid fa-mug-hot"></i>
+          <a href="https://github.com/flick9000/winscript" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>
           </a>
           <a
             href="https://github.com/flick9000/winscript/releases"
-            target="_blank"
-            class="icon"
-            ><i class="fa-solid fa-download"></i
-          ></a>
+            target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="currentColor" d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v242.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352zm368 56a24 24 0 1 1 0 48a24 24 0 1 1 0-48"/></svg>
+          </a>
         </div>
       </div>
       <div class="right">
@@ -287,7 +328,7 @@
           <h2>Links</h2>
           <ul>
             <li>
-              <a href="https://winscript.pages.dev/winscript-online"
+              <a href="./winscript-online/index.html"
                 >Get Started</a
               >
             </li>
