@@ -13,7 +13,8 @@
 - ⬇️ **Install Apps**: Install all your favourite apps simultaneously in one click through chocolatey.
 
 ## Usage
-**WinScript must be run as Administrator to work properly.**\
+**WinScript must be run as Administrator to work properly.**
+*The desktop app may be flagged as a threat by Windows Defender, this is a false positive, because depending on the script you build it will change system settings. WinScript is safe, transparent and open-source.*
 -  🌍 Online: [Website](https://winscript.pages.dev)
 -  💻 Offline: [Releases](https://github.com/flick9000/winscript/releases)
 
