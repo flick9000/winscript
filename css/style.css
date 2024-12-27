@@ -187,7 +187,7 @@ dialog {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 7px;
   width: clamp(300px, 50vw, 600px);
-  min-height: 300px;
+  min-height: fit-content;
 
   a {
     text-decoration: underline;
@@ -441,6 +441,7 @@ section.privacy {
 
 section.features {
   min-height: 50vh;
+  margin-top: 7.5vh;
   margin-bottom: 7.5vh;
 }
 
