@@ -239,6 +239,10 @@ button:hover {
   color: var(--muted);
 }
 
+details summary::-webkit-details-marker {
+  display:none;
+}
+
 details > div.content-entry img {
   max-width: 14px;
 }
@@ -374,6 +378,7 @@ input:checked + .slider:before {
     display: flex;
     background-color: hsla(253, 50%, 7%, 0.4);
     backdrop-filter: blur(75px);
+    -webkit-backdrop-filter: blur(75px);
     width: 100%;
     height: 100%;
     top: 0;
