@@ -383,7 +383,7 @@ input:checked + .slider:before {
     height: 100%;
     top: 0;
     margin: 0;
-    padding-top: 3.1rem;
+    padding-top: 3rem;
     padding-inline: 1.5rem;
     z-index: 2;
   }
