@@ -621,6 +621,10 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Emptying Recycle Bin",
       'PowerShell -ExecutionPolicy Unrestricted -Command "$bin = (New-Object -ComObject Shell.Application).NameSpace(10); $bin.items() | ForEach {; Write-Host "^""Deleting $($_.Name) from Recycle Bin"^""; Remove-Item $_.Path -Recurse -Force; }"',
     ],
+    sfc: [
+      "echo -- Running SFC",
+      "sfc /scannow",
+    ],
     ultimateperformance: [
       "echo -- Activating Ultimate Performance Mode",
       "powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61",
@@ -989,6 +993,8 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "cleantemp", type: "cleantemp" },
     { id: "cleanmgr", type: "cleanmgr" },
     { id: "emptyrecycle", type: "emptyrecycle" },
+    { id: "sfc", type: "sfc" },
+
   
     { id: "ultimateperformance", type: "ultimateperformance" },
     { id: "manualservices", type: "manualservices" },
