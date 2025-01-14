@@ -17,6 +17,78 @@ html {
   font-size: 14px;
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #fff;
+    --text: #000;
+    --muted: #555;
+  }
+
+  .sidebar-entry.active {
+    background-color: hsl(from var(--text) h s l / 0.035) !important;
+  }
+
+  .sidebar-entry:hover {
+    background-color: hsl(from var(--text) h s l / 0.025) !important;
+  }
+
+  .content-entry {
+    background-color: hsl(from var(--background) h s l / 0.7) !important;
+    border: 1px solid hsl(from var(--text) h s l / 0.1) !important;
+  }
+  
+  .content-entry:hover {
+    background-color: hsl(from var(--background) h s l / 0.25) !important;
+  }
+
+  .content-entry:has(button):hover {
+    background-color: hsl(from var(--background) h s l / 0.7) !important;
+  }
+
+  .content-entry img {
+    filter: invert(1);
+  }
+
+  .mockup-code {
+    background-color: hsl(from var(--background) h s l / 0.7) !important;
+  }
+
+  .slider {
+    background-color: #f5f5f5 !important;
+  }
+  
+  .slider:before {
+    background-color: #5d5d5d !important;
+  }
+
+  input:checked + .slider {
+    background-color: #6040bf !important;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #6040bf !important;
+  }
+
+  input:checked + .slider:before {
+    background-color: white !important;
+  }
+
+  button {
+    background-color: hsl(from var(--background) h s l / 0.8) !important;
+    border: 1px solid hsl(from var(--text) h s l / 0.05) !important;
+    border-bottom: 1px solid hsl(from var(--text) h s l / 0.2) !important;
+  }
+  
+  button:hover {
+    background-color: hsl(from var(--background) h s l / 0.4) !important;
+  }
+
+  .content-entry:has(button):hover {
+  background-color: hsl(from var(--text) h s l / .05);
+}
+
+}
+
 body {
   font-family: system-ui, sans-serif;
   background-repeat: no-repeat;
@@ -47,6 +119,7 @@ button {
   border-radius: 5px;
   border: none;
   background-color: hsl(from var(--text) h s l / .055);
+  border: 1px solid hsl(from var(--text) h s l / 0.02);
   cursor: pointer;
   z-index: 1;
 }
@@ -163,6 +236,7 @@ button:hover {
   justify-content: space-between;
   width: 100%;
   background-color: hsl(from var(--text) h s l / .05);
+  border: 1px solid hsla(0,0%,0%, 0.3);
   padding-inline: 12px;
   border-radius: 5px;
   min-height: 64px;

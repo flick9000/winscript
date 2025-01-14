@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Append the new script to the container
     newDiv.appendChild(codeElement);
     parentDiv.appendChild(newDiv);
-
     hljs.highlightAll();
   }
 

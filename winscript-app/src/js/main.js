@@ -1,3 +1,42 @@
+import { writeTextFile, mkdir, BaseDirectory } from '@tauri-apps/plugin-fs';
+import { tempDir, appDataDir, join } from '@tauri-apps/api/path';
+import { Command } from '@tauri-apps/plugin-shell';
+
+import { version } from '@tauri-apps/plugin-os';
+import { getCurrentWindow } from "@tauri-apps/api/window";
+
+import { hostname } from '@tauri-apps/plugin-os';
+
+hostname().then(nameHost => {
+  document.getElementById("hostname").textContent = nameHost;
+}).catch(error => {
+  console.error("Failed to get hostname:", error);
+  document.getElementById("hostname").textContent = "github.com/flick9000";
+});
+
+// Prevent context menu
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault()
+  })
+})
+
+// Check if the OS is Windows 11
+const osVersion = version();
+const buildNumber = osVersion.split('.')[2];
+console.log('Build Number:', buildNumber);
+
+function isWindows11() {
+  return buildNumber >= 22000;
+}
+
+// Set Mica if the OS is Windows 11
+if (isWindows11()) {
+  getCurrentWindow().setEffects({ effects: ["mica"] });
+} else {
+  document.body.style.backgroundColor = "var(--background)";
+}
+
 function responsiveNav() {
   const navbar = document.getElementById("sidebar");
   const menuIcon = document.querySelector(".fa-solid.fa-bars-staggered");
@@ -75,19 +114,13 @@ restoreCheckbox.addEventListener('change', () => {
 
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
+  console.log("ciao");
   // Get the text content from the div
   var textContent = document.getElementById("code").innerText;
   // Copy the text content to the clipboard
   navigator.clipboard.writeText(textContent);
 });
 
-// Run script button
-document.getElementById("runBtn").addEventListener("click", function () {
-  // Get the text content from the div
-  var textContent = document.getElementById("code").innerText;
-  // Run the text content as a script
-  eval(textContent);
-});
 
 // Update the indicator text when the checkbox is changed
 document.querySelectorAll('.checkbox-wrapper').forEach(wrapper => {
@@ -97,4 +130,32 @@ document.querySelectorAll('.checkbox-wrapper').forEach(wrapper => {
   checkbox.addEventListener('change', () => {
     indicator.textContent = checkbox.checked ? 'On' : 'Off';
   });
+});
+
+
+document.getElementById("runBtn").addEventListener("click", async function () {
+  let textContent = document.getElementById("code").innerText;
+
+  try {
+      // Get the TEMP directory path (Tauri-specific app directory)
+      const tmpDir = await tempDir();
+      const dirPath = await join(tmpDir, 'winscript');
+      const filePath = await join(dirPath, 'winscript.bat');
+
+      // Create the directory if it doesn't exist
+      await mkdir(dirPath, { recursive: true });
+
+    
+      // Write the file
+      await writeTextFile(filePath, textContent);
+
+
+      // Open the file (Execute the script)
+      const command = new Command('cmd', ['/c', 'start', 'cmd', '/k', filePath]);
+      command.spawn()
+          .then(() => console.log('Script executed successfully'))
+          .catch(error => console.error('Error executing script:', error));
+  } catch (error) {
+      console.error('Error:', error);
+  }
 });

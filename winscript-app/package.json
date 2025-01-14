@@ -1,45 +1,23 @@
 {
   "name": "winscript",
-  "productName": "WinScript",
-  "version": "1.0.5",
-  "description": "WinScript",
-  "main": "index.js",
+  "private": true,
+  "version": "1.0.7",
+  "type": "module",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
   },
-  "repository": "",
-  "keywords": [
-    "WinScript"
-  ],
-  "author": "flick",
-  "license": "GPL-3.0-only",
   "devDependencies": {
-    "electron": "^33.2.1",
-    "electron-reloader": "^1.2.3",
-    "electron-builder": "^25.1.8"
+    "@tauri-apps/cli": "^2.2.4",
+    "vite": "^6.0.5"
   },
   "dependencies": {
-    "fix-esm": "^1.0.1",
-    "mica-electron": "^1.5.10",
-    "systeminformation": "^5.23.5",
-    "username": "^7.0.0"
-  },
-  "build": {
-    "appId": "com.flick.winscript",
-    "productName": "WinScript",
-    "directories": {
-      "buildResources": "resources",
-      "output": "build"
-    },
-    "win": {
-      "target": [
-        "portable"
-      ],
-      "icon": "icons\\favicon.ico"
-    },
-    "portable": {
-      "artifactName": "WinScript.exe"
-    }
-}
+    "@tauri-apps/api": "^2.2.0",
+    "@tauri-apps/plugin-fs": "^2.2.0",
+    "@tauri-apps/plugin-os": "^2.2.0",
+    "@tauri-apps/plugin-shell": "^2.2.0",
+    "systeminformation": "^5.25.11"
+  }
 }
