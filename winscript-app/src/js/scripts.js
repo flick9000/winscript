@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Append the new script to the container
     newDiv.appendChild(codeElement);
     parentDiv.appendChild(newDiv);
+
     hljs.highlightAll();
   }
 
@@ -65,6 +66,25 @@ document.addEventListener("DOMContentLoaded", function() {
       'rd "%LocalAppData%\\Microsoft\\OneDrive" /Q /S',
       'rd "%ProgramData%\\Microsoft\\OneDrive" /Q /S',
       'rd "C:\\OneDriveTemp" /Q /S',
+    ],
+    debloatedge: [
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "HideFirstRunExperience" /t REG_DWORD /d 1 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "UserFeedbackAllowed" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "ConfigureDoNotTrack" /t REG_DWORD /d 1 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "AlternateErrorPagesEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "EdgeCollectionsEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "EdgeFollowEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "DiagnosticData" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "EdgeAssetDeliveryServiceEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "CryptoWalletEnabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "WalletDonationEnabled" /t REG_DWORD /d 0 /f',
     ],
     edge: [
       "echo -- Uninstalling Edge",
@@ -924,6 +944,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const checkboxItems = [
     { id: "microsoftstore", type: "microsoftstore" },
     { id: "onedrive", type: "onedrive" },
+    { id: "debloatedge", type: "debloatedge" },
     { id: "edge", type: "edge" },
     { id: "copilot", type: "copilot" },
     { id: "widgets", type: "widgets" },
