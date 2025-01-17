@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "WinScript",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "identifier": "flick.winscript.dev",
   "build": {
     "devUrl": "http://localhost:5173/src/",
@@ -33,6 +33,8 @@
     "active": true,
     "windows": {
       "nsis": {
+        "installerIcon": "icons/favicon.ico",
+        "sidebarImage": "icons/sidebar.bmp",
         "installMode": "both"
       }
     },

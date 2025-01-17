@@ -392,6 +392,20 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Opting out of data collection",
       'reg add "HKCU\\SOFTWARE\\Microsoft\\Personalization\\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d 0 /f',
     ],
+    adobetelemetry: [
+      "echo -- Disabling Adobe Telemetry",
+      'set "hostspath=%windir%\\System32\\drivers\\etc\\hosts"',
+      'set "downloadedlist=%temp%\\list.txt"',
+      'echo -- Downloading the list of host entries',
+      'curl -s -o "%downloadedlist%" "https://a.dove.isdumb.one/list.txt"',
+      'if not exist "%downloadedlist%" (',
+      '    echo Failed to download the list from the specified URL.',
+      '    exit /b 1',
+      ')',
+      'echo -- Adobe block entries successfully added to hosts file',
+      'type "%downloadedlist%" >> "%hostspath%"',
+      'del "%downloadedlist%"',
+    ],
     nvidiatelemetry: [
       "echo -- Disabling NVIDIA telemetry",
       'reg add "HKLM\\SOFTWARE\\NVIDIA Corporation\\NvControlPanel2\\Client" /v "OptInOrOutPreference" /t REG_DWORD /d 0 /f',
@@ -881,6 +895,10 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Showing File Extensions",
       'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f',
     ],
+    fullscreenoptimizations: [
+      "echo -- Disabling Fullscreen Optimizations",
+      'reg add "HKCU\\System\\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d 1 /f'
+    ],
     mouseacc: [
       "echo -- Disabling Mouse Acceleration",
       'reg add "HKCU\\Control Panel\\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f',
@@ -970,6 +988,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "targetads", type: "targetads" },
     { id: "privacyconsent", type: "privacyconsent" },
     
+    { id: "adobetelemetry", type: "adobetelemetry" },
     { id: "nvidiatelemetry", type: "nvidiatelemetry" },
     { id: "vscodetelemetry", type: "vscodetelemetry" },
     { id: "mediatelemetry", type: "mediatelemetry" },
@@ -977,6 +996,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "ccleanertelemetry", type: "ccleanertelemetry" },
     { id: "googleupdates", type: "googleupdates" },
     { id: "adobeupdates", type: "adobeupdates" },
+
     { id: "locationaccess", type: "locationaccess" },
     { id: "cameraccess", type: "cameraccess" },
     { id: "microphoneaccess", type: "microphoneaccess" },
@@ -1025,6 +1045,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "disableprefetch", type: "disableprefetch" },
   
   
+    { id: "fullscreenoptimizations", type: "fullscreenoptimizations" },
     { id: "mouseacc", type: "mouseacc" },
     { id: "gamemode", type: "gamemode" },
     { id: "gamebar", type: "gamebar" },

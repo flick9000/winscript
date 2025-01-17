@@ -1142,6 +1142,21 @@
             <div class="content-entry">
               <div>
                 <div>
+                  <h1>Block Adobe Network</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+              <span class="indicator" id="indicator">Off</span>
+              <label class="switch">
+                <input id="adobetelemetry" type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
                   <h1>Disable Nvidia Telemetry</h1>
                 </div>
               </div>
@@ -1248,6 +1263,22 @@
 
         </div>
         <div id="gaming-tab" class="tab-content">
+          <div class="content-entry">
+            <div>
+              <img src="icons/gaming/fullscreen.png" alt="">
+              <div>
+                <h1>Disable Fullscreen Optimizations</h1>
+              </div>
+            </div>
+            <div class="checkbox-wrapper">
+              <span class="indicator" id="indicator">Off</span>
+              <label class="switch">
+                <input id="fullscreenoptimizations" type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>    
+
           <div class="content-entry">
             <div>
               <img src="icons/gaming/mouse.png" alt="">
@@ -3530,7 +3561,23 @@
               <div>
                 <pre><code>@echo off</code></pre>
               </div>
+
               <div>
+                <pre><code></code></pre>
+                <pre><code>:: Check if the script is running as admin</code></pre>
+                <pre><code>openfiles >nul 2>&1</code></pre>
+                <pre><code>if %errorlevel% neq 0 (</code></pre>
+                <pre><code>    color 4</code></pre>
+                <pre><code>    echo This script requires administrator privileges.</code></pre>
+                <pre><code>    echo Please run WinScript as an administrator.</code></pre>
+                <pre><code>    pause</code></pre>
+                <pre><code>    exit /b 1</code></pre>
+                <pre><code>)</code></pre>
+                <pre><code></code></pre>
+              </div>
+
+              <div>
+                <pre><code>:: Admin privileges confirmed, continue execution</code></pre>
                 <pre><code>setlocal EnableExtensions DisableDelayedExpansion</code></pre>
               </div>
               <div class="restore-container">
