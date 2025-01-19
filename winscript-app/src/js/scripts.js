@@ -189,6 +189,10 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Disabling Consumer Features",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableWindowsConsumerFeatures" /t "REG_DWORD" /d "1" /f',
     ],
+    recall: [
+      'echo -- Disabling Recall',
+      'DISM /Online /Disable-Feature /FeatureName:Recall'
+    ],
     iexplorer: [
       "echo -- Disabling Internet Explorer",
       "dism /online /Remove-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.0.",
@@ -972,6 +976,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "msapps", type: "msapps" },
     { id: "xbox", type: "xbox" },
     { id: "consumerfeatures", type: "consumerfeatures" },
+    { id: "recall", type: "recall" },
     { id: "iexplorer", type: "iexplorer" },
     { id: "hyperv", type: "hyperv" },
     { id: "faxscan", type: "faxscan" },

@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "WinScript",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "identifier": "flick.winscript.dev",
   "build": {
     "devUrl": "http://localhost:5173/src/",
@@ -18,6 +18,7 @@
         "minWidth": 1024,
         "minHeight": 776,
         "resizable": true,
+        "visible": false,
         "center": true,
         "shadow": false,
         "transparent": true,
@@ -30,6 +31,8 @@
     }
   },
   "bundle": {
+    "publisher": "flick9000",
+    "license": "GPL-3.0",
     "active": true,
     "windows": {
       "nsis": {

@@ -7,6 +7,8 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 
 import { hostname } from '@tauri-apps/plugin-os';
 
+getCurrentWindow().show();
+
 hostname().then(nameHost => {
   document.getElementById("hostname").textContent = nameHost;
 }).catch(error => {
