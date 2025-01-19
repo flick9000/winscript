@@ -14,7 +14,7 @@
 
 ## Usage
 **WinScript must be run as Administrator to work properly.** <br>
-*The desktop app may be flagged as a threat by Windows Defender, this is a false positive, because depending on the script you build it will change system settings. WinScript is safe, transparent and open-source.*
+*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*
 -  🌍 Online: [Website](https://winscript.cc)
 -  💻 Offline: [Releases](https://github.com/flick9000/winscript/releases)
 
