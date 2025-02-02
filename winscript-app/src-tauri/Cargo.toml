@@ -1,6 +1,6 @@
 [package]
 name = "WinScript"
-version = "1.1.0"
+version = "1.1.1"
 description = ""
 authors = ["flick9000"]
 license = "GPL V3"

@@ -10,7 +10,7 @@ export default defineConfig(async () => ({
         strictPort: true,
         // if the host Tauri is expecting is set, use it
         host: host || false,
-        port: 5173,
+        port: 5174,
       },
     build: {
         outDir: '../dist', // Change outDir to dist

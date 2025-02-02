@@ -658,9 +658,26 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Emptying Recycle Bin",
       'PowerShell -ExecutionPolicy Unrestricted -Command "$bin = (New-Object -ComObject Shell.Application).NameSpace(10); $bin.items() | ForEach {; Write-Host "^""Deleting $($_.Name) from Recycle Bin"^""; Remove-Item $_.Path -Recurse -Force; }"',
     ],
+    browserhistory: [
+      'echo Clearing Browser History',
+      'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\History"',
+      'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Cache\\*.*"',
+      'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Cookies"',
+      'del /q /s "%LocalAppData%\\Microsoft\\Edge\\User Data\\Default\\History"',
+      'del /q /s "%LocalAppData%\\Microsoft\\Edge\\User Data\\Default\\Cache\\*.*"',
+      'del /q /s "%LocalAppData%\\Microsoft\\Edge\\User Data\\Default\\Cookies"',
+      'del /q /s "%APPDATA%\\Mozilla\\Firefox\\Profiles\\*.default\\places.sqlite"',
+      'del /q /s "%APPDATA%\\Mozilla\\Firefox\\Profiles\\*.default\\cache2\\entries\\*.*"',
+    ],
     sfc: [
       "echo -- Running SFC",
       "sfc /scannow",
+    ],
+    resetnetwork: [
+      "echo -- Resetting Network",
+      "ipconfig /flushdns",
+      "ipconfig /release",
+      "ipconfig /renew",
     ],
     ultimateperformance: [
       "echo -- Activating Ultimate Performance Mode",
@@ -1038,7 +1055,10 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "cleantemp", type: "cleantemp" },
     { id: "cleanmgr", type: "cleanmgr" },
     { id: "emptyrecycle", type: "emptyrecycle" },
+    { id: "browserhistory", type: "browserhistory" },
     { id: "sfc", type: "sfc" },
+    { id: "resetnetwork", type: "resetnetwork" },
+    
 
   
     { id: "ultimateperformance", type: "ultimateperformance" },

@@ -4,6 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 :root {
+  /* interpolate-size: allow-keywords; */
   --background: #0d091b;
   --elevated: #18132b;
   --text: #fff;
@@ -13,6 +14,24 @@
 
 * {
   user-select: none;
+}
+
+@keyframes sidebar-border-fade {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: #6040bf;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    transform: translateY(10rem);
+  }
+  to {
+    transform: translateY(0px);
+  }
 }
 
 html {
@@ -145,7 +164,7 @@ button:hover {
 
 .sidebar-entry.active {
   background-color: hsl(from var(--text) h s l / .08);
-  border-left: 4px solid #6040bf;
+  animation:  sidebar-border-fade 0.3s ease forwards;
 }
 
 .sidebar-entry > img {
@@ -186,6 +205,7 @@ button:hover {
   gap: 4px;
   overflow-y: auto;
   max-height: 625px;
+  animation: pop-in 0.3s ease;
 }
 
 .content-entry {
@@ -255,7 +275,7 @@ details > div.content-entry {
 
 details::details-content {
   block-size: 0;
-  transition: block-size 0.2s ease-in-out;
+  transition: block-size 0.3s ease;
 }
 
 details[open]::details-content {
@@ -333,6 +353,10 @@ input:checked + .slider:before {
   bottom: 4px;
   transform: translateX(20px);
   background-color: black;
+}
+
+.indicator {
+  margin-left: 1rem;
 }
 
 .mockup-code {
