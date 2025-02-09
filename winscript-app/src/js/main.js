@@ -5,6 +5,8 @@ import { Command } from '@tauri-apps/plugin-shell';
 import { version } from '@tauri-apps/plugin-os';
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
+import { ask } from '@tauri-apps/plugin-dialog';
+
 import { hostname } from '@tauri-apps/plugin-os';
 
 getCurrentWindow().show();
@@ -26,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Check if the OS is Windows 11
 const osVersion = version();
 const buildNumber = osVersion.split('.')[2];
-console.log('Build Number:', buildNumber);
 
 function isWindows11() {
   return buildNumber >= 22000;
@@ -116,7 +117,6 @@ restoreCheckbox.addEventListener('change', () => {
 
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
-  console.log("ciao");
   // Get the text content from the div
   var textContent = document.getElementById("code").innerText;
   // Copy the text content to the clipboard
@@ -136,6 +136,17 @@ document.querySelectorAll('.checkbox-wrapper').forEach(wrapper => {
 
 
 document.getElementById("runBtn").addEventListener("click", async function () {
+
+  // Ask for restore point
+  let restoreAsk = await ask("Do you want to create a restore point?", { title: 'Restore Point' });
+  console.log("Restore Point: " + restoreAsk);
+
+  if (restoreAsk === true) {
+    document.querySelector('.restore-container').style.display = 'block';
+  } else {
+    document.querySelector('.restore-container').style.display = 'none';
+  }
+
   let textContent = document.getElementById("code").innerText;
 
   try {

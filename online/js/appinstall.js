@@ -151,7 +151,7 @@ function appsInstall() {
       ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "' +
         baseChoco +
         finalURL +
-        ' -y"'
+        ' -y --force --ignorepackageexitcodes"'
       : "";
 
   // Display the final URL in the div
