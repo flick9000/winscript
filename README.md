@@ -37,8 +37,7 @@ Contributions are welcome! Fork the repository and create a pull request with yo
 
 ### ☕ Donate
 
-If you find this project helpful, consider supporting it by buying me a coffee!  
-[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/flick9000)
+If you find this project helpful, consider supporting it by [buying me a coffee!](https://ko-fi.com/flick9000)
 
 ## License
 
