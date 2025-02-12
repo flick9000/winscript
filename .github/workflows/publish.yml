@@ -54,5 +54,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ./winscript-app/src-tauri/target/release/winscript.exe
+          tag_name: v__VERSION__
+          draft: true
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
