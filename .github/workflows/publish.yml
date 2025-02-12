@@ -40,7 +40,7 @@ jobs:
 
       - uses: tauri-apps/tauri-action@v0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
           projectPath: ./winscript-app
           tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
