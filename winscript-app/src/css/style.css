@@ -285,6 +285,14 @@ button:hover {
   gap: 16px;
 }
 
+.content-entry .presets {
+  gap: 8px;
+}
+
+.content-entry .presets button {
+  min-width: 90px;
+}
+
 .content-entry > summary {
   display: flex;
   align-items: center;
@@ -328,18 +336,6 @@ details[open]::details-content {
 details[open] .chevron {
   transform: rotate(180deg);
   transition: transform 0.2s ease-out;
-}
-
-#system-tab .content-entry {
-  justify-content: inherit;
-}
-
-#system-tab .content-entry > div {
-  min-width: 192px;
-}
-
-#system-tab .content-entry > .pcinfo {
-  color: var(--muted);
 }
 
 .content-entry > div > div {

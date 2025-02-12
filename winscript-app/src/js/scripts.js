@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     newDiv.appendChild(codeElement);
     parentDiv.appendChild(newDiv);
 
-    hljs.highlightAll();
+    hljs.highlightElement(codeElement);
   }
 
   // Function to remove scripts by class
@@ -1115,3 +1115,127 @@ function uncheckAll() {
 }
 
 document.getElementById("uncheckAll").addEventListener("click", uncheckAll);
+
+// Presets
+let basicIds = [
+  "thirdparty",
+  "consumerfeatures",
+  "copilot",
+  "faxscan",
+  "iexplorer",
+  "wtelemetry",
+  "wsearchtelemetry",
+  "blockhosts",
+  "officetelemetry",
+  "appexperience",
+  "wfeedback",
+  "handwriting",
+  "clipboard",
+  "targetads",
+  "privacyconsent",
+  "cloudsync",
+  "wifisense",
+  "screenrecording",
+  "automap",
+  "activityfeed",
+  "voiceactivationaccess",
+  "locationaccess",
+  "accinfoaccess",
+  "motionaccess",
+  "trustedaccess",
+  "contactsaccess",
+  "calendaraccess",
+  "emailaccess",
+  "tasksaccess",
+  "radioaccess",
+  "systemaccess",
+  "cleantemp",
+  "cleanmgr",
+  "ultimateperformance",
+  "filextensions",
+  "stickykeys",
+  "taskbarwidgets",
+  "widgets",
+];
+let strictIds = [
+  "thirdparty",
+  "recall",
+  "debloatedge",
+  "copilot",
+  "consumerfeatures",
+  "faxscan",
+  "iexplorer",
+  "wtelemetry",
+  "wsearchtelemetry",
+  "blockhosts",
+  "officetelemetry",
+  "appexperience",
+  "wfeedback",
+  "handwriting",
+  "targetads",
+  "privacyconsent",
+  "cloudsync",
+  "wifisense",
+  "screenrecording",
+  "automap",
+  "activityfeed",
+  "voiceactivationaccess",
+  "locationaccess",
+  "accinfoaccess",
+  "callhistoryaccess",
+  "motionaccess",
+  "trustedaccess",
+  "contactsaccess",
+  "calendaraccess",
+  "emailaccess",
+  "tasksaccess",
+  "radioaccess",
+  "systemaccess",
+  "cleantemp",
+  "cleanmgr",
+  "ultimateperformance",
+  "xbox",
+  "onedrive",
+  "widgets",
+  "wupdate",
+  "clipboard",
+  "adobetelemetry",
+  "nvidiatelemetry",
+  "vscodetelemetry",
+  "mediatelemetry",
+  "powershelltelemetry",
+  "ccleanertelemetry",
+  "googleupdates",
+  "adobeupdates",
+  "messagingaccess",
+  "notificationaccess",
+  "diagaccess",
+  "phoneaccess",
+  "lockscreencamera",
+  "manualservices",
+  "filextensions",
+  "stickykeys",
+  "taskbarwidgets",
+];
+
+document.getElementById("basicPreset").addEventListener("click", () => {
+  uncheckAll();
+  basicIds.forEach((id) => {
+    const checkbox = document.getElementById(id);
+    if (checkbox) {
+      checkbox.checked = true;
+      checkbox.dispatchEvent(new Event("change"));
+    }
+  });
+});
+
+document.getElementById("strictPreset").addEventListener("click", () => {
+  uncheckAll();
+  strictIds.forEach((id) => {
+    const checkbox = document.getElementById(id);
+    if (checkbox) {
+      checkbox.checked = true;  
+      checkbox.dispatchEvent(new Event("change"));
+    }
+  });
+});

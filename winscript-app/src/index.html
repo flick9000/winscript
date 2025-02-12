@@ -40,10 +40,6 @@
         </div>
         <button id="uncheckAll">Uncheck All</button>
        <div class="sidebar-content">
-        <!-- <div data-tab="system-tab" class="sidebar-entry active">
-          <img src="icons/sidebar/system.ico" alt="">
-          <h1>System</h1>
-        </div> -->
         <div data-tab="tools-tab" class="sidebar-entry">
           <img src="icons/sidebar/tools.png" alt="">
           <h1>Tools</h1>
@@ -89,53 +85,23 @@
             <h1 id="content-header">WinScript</h1>
             <iconify-icon onclick="responsiveNav()" class="fa-solid fa-bars-staggered" icon="fa6-solid:bars-staggered" width="24" height="24"></iconify-icon>
             <iconify-icon onclick="responsiveNav()" class="fa-solid fa-xmark" icon="fa6-solid:xmark" width="24" height="24"></iconify-icon>
-      </div>
+         </div>
       <div class="content-body">
-        <!-- <div id="system-tab" class="tab-content active">
-          <div class="content-entry">
-            <div>
-              <img src="icons/system/os.png" alt="">
-              <h1>System</h1>
-            </div>
-            <span id="pc-os" class="pcinfo"></span>
-          </div>
-          <div class="content-entry">
-            <div>
-              <img src="icons/system/desktop.png" alt="">
-              <h1>Motherboard</h1>
-            </div>
-            <span id="pc-mobo" class="pcinfo"></span>
-          </div>
-          <div class="content-entry">
-            <div>
-              <img src="icons/system/cpu.png" alt="">
-              <h1>Processor</h1>
-            </div>
-            <span id="pc-cpu" class="pcinfo"></span>
-          </div>
-          <div class="content-entry">
-            <div>
-              <img src="icons/system/gpu.png" alt="">
-              <h1>GPU</h1>
-            </div>
-            <span id="pc-gpu" class="pcinfo"></span>
-          </div>
-          <div class="content-entry">
-            <div>
-              <img src="icons/system/hdd.png" alt="">
-              <h1>Storage</h1>
-            </div>
-            <span id="pc-storage" class="pcinfo"></span>
-          </div>
-          <div class="content-entry">
-            <div>
-              <img src="icons/system/ram.png" alt="">
-              <h1>RAM</h1>
-            </div>
-            <span id="pc-ram" class="pcinfo"></span>
-          </div>
-        </div> -->
         <div id="tools-tab" class="tab-content">
+
+          <div class="content-entry">
+            <div>
+              <img src="icons/tools/preset.png" alt="">
+              <div>
+                <h1>Choose a preset</h1>
+                <p>Choose a preset of tweaks to apply.</p>
+              </div>
+            </div>
+            <div class="presets">
+              <button id="basicPreset">Basic</button>
+              <button id="strictPreset">Strict</button>
+            </div>
+          </div>
 
           <details>
             <summary class="content-entry">
