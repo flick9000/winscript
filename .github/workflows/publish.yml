@@ -45,7 +45,14 @@ jobs:
           projectPath: ./winscript-app
           tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
           releaseName: "v__VERSION__"
-          releaseBody: "See the assets to download this version and install."
+          releaseBody: "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*"
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+
+      - name: Upload Portable Executable to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./winscript-app/src-tauri/target/release/winscript.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
