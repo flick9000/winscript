@@ -1,4 +1,4 @@
-name: Submit Nushell package to Windows Package Manager Community Repository 
+name: Submit WinScript package to Windows Package Manager Community Repository 
 
 on:
   workflow_dispatch:
