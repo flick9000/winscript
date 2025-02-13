@@ -1,4 +1,4 @@
-name: Publish to WinGet
+name: Submit Nushell package to Windows Package Manager Community Repository 
 
 on:
   workflow_dispatch:
@@ -6,14 +6,15 @@ on:
     workflows: ["publish"]
     types: [completed]
   
-
 jobs:
-  publish:
+
+  winget:
+    name: Publish winget package
     runs-on: windows-latest
     steps:
-      - uses: vedantmgoyal9/winget-releaser@main
-        with:
-          identifier: flick9000.WinScript
-          max-versions-to-keep: 3 # keep only latest 5 versions
-          installers-regex: '\.exe$' # Only .exe files
-          token: ${{ secrets.WINGET_TOKEN }}
+      - name: Submit package to Windows Package Manager Community Repository
+        run: |
+          iwr https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
+          $github = Get-Content '${{ github.event_path }}' | ConvertFrom-Json
+          $installerUrl = $github.release.assets | Where-Object -Property name -match 'winscript-installer.exe' | Select -ExpandProperty browser_download_url -First 1
+          .\wingetcreate.exe update flick9000.WinScript -s -v $github.release.tag_name -u $installerUrl -t ${{ secrets.NUSHELL_PAT }}
