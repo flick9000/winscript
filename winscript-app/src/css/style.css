@@ -106,6 +106,12 @@ html {
   background-color: hsl(from var(--text) h s l / .05);
 }
 
+.app-search {
+  background-color: hsl(from var(--background) h s l / 0.8) !important;
+  border: 1px solid hsl(from var(--text) h s l / 0.05) !important;
+  border-bottom: 1px solid hsl(from var(--text) h s l / 0.2) !important;
+}
+
 }
 
 body {
@@ -408,6 +414,26 @@ input:checked + .slider:before {
 
 .indicator {
   margin-left: 1rem;
+}
+
+.app-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid hsl(from var(--text) h s l / 0.05);
+  border-bottom: 1px solid hsl(from var(--text) h s l / 0.5);
+  padding-inline: 12px;
+  border-radius: 5px;
+  min-height: 32px;
+  width: 100%;
+  max-width: 300px;
+  background-color: hsl(from var(--text) h s l / .05);
+  margin-bottom: 1rem;
+}
+
+.app-search:focus {
+  outline: none;
 }
 
 .mockup-code {

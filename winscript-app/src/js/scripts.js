@@ -898,6 +898,10 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Disabling Hibernation",
       "powercfg.exe /hibernate off",
     ],
+    limitdefender: [
+      "echo -- Limiting Windows Defender Usage",
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan" /v "AvgCPULoadFactor" /t REG_DWORD /d "25" /f',
+    ],
     coreisolation: [
       "echo -- Disabling Core Isolation",
       'reg add "HKLM\\SOFTWARE\\CurrentControlSet\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f',
@@ -938,7 +942,6 @@ document.addEventListener("DOMContentLoaded", function() {
       'reg add "HKCU\\SOFTWARE\\Microsoft\\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d 0 /f',
       'reg add "HKCU\\SOFTWARE\\Microsoft\\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d 0 /f',
     ],
-  
     classicmenu: [
       "echo -- Setting Classic Right-Click Menu",
       'reg add "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32" /f /ve',
@@ -1066,6 +1069,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "hags", type: "hags" },
     { id: "storagesense", type: "storagesense" },
     { id: "disablehibernation", type: "disablehibernation" },
+    { id: "limitdefender", type: "limitdefender" },
     { id: "coreisolation", type: "coreisolation" },
     { id: "disableprefetch", type: "disableprefetch" },
   

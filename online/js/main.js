@@ -73,6 +73,36 @@ restoreCheckbox.addEventListener('change', () => {
   }
 });
 
+// App Search Bar
+document.getElementById('searchBar').addEventListener('input', () => {
+    const searchValue = document.getElementById('searchBar').value.toLowerCase();
+    const detailsElements = document.querySelectorAll('#install-tab details');
+
+    detailsElements.forEach(details => {
+        const entries = [...details.querySelectorAll('.content-entry')];
+        const summary = details.querySelector('summary');
+
+        let hasMatch = false;
+
+        entries.forEach(entry => {
+            if (!entry.isSameNode(summary)) {
+                const isMatch = entry.textContent.toLowerCase().includes(searchValue);
+                entry.style.display = isMatch ? '' : 'none';
+                hasMatch ||= isMatch;
+            }
+        });
+
+        if (!searchValue) {
+            details.style.display = '';
+            details.open = false;
+            entries.forEach(entry => (entry.style.display = ''));
+        } else {
+            details.style.display = hasMatch ? '' : 'none';
+            details.open = hasMatch;
+        }
+    });
+});
+
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
   // Get the text content from the div
