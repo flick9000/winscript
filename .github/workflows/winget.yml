@@ -1,20 +1,38 @@
-name: Submit WinScript package to Windows Package Manager Community Repository 
-
+name: Submit flick9000.WinScript
 on:
   workflow_dispatch:
   workflow_run:
     workflows: ["publish"]
     types: [completed]
-  
+
 jobs:
+  sync-repo:
+    name: Sync winget-pkgs repo
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh repo sync flick9000/winget-pkgs -b master
+        env:
+          GH_TOKEN: ${{ secrets.WINGET_TOKEN }}
 
   winget:
     name: Publish winget package
+    needs: sync-repo
     runs-on: windows-latest
     steps:
       - name: Submit package to Windows Package Manager Community Repository
         run: |
-          iwr https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
-          $github = Get-Content '${{ github.event_path }}' | ConvertFrom-Json
-          $installerUrl = $github.release.assets | Where-Object -Property name -match 'winscript-installer.exe' | Select -ExpandProperty browser_download_url -First 1
-          .\wingetcreate.exe update flick9000.WinScript -s -v $github.release.tag_name -u $installerUrl -t ${{ secrets.WINGET_TOKEN }}
+          $packageId = "flick9000.WinScript"
+          $gitToken = "${{ secrets.WINGET_TOKEN }}"
+          
+          # Fetching latest release from GitHub
+          $github = Invoke-RestMethod -uri "https://api.github.com/repos/flick9000/winscript/releases/latest"
+          $packageVersion = $github.tag_name.Trim("v")
+          
+          # Get the download URL for winscript-installer.exe
+          $installerUrl = $github.assets | 
+            Where-Object { $_.name -eq "winscript-installer.exe" } | 
+            Select-Object -ExpandProperty browser_download_url
+          
+          # Update package using wingetcreate
+          Invoke-WebRequest https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
+          .\wingetcreate.exe update $packageId --version $packageVersion --urls "$installerUrl" --submit --token $gitToken
