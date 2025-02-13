@@ -33,6 +33,6 @@ jobs:
             Where-Object { $_.name -eq "winscript-installer.exe" } | 
             Select-Object -ExpandProperty browser_download_url
           
-          # Update package using wingetcreate
+          # Update package using wingetcreate with architecture specified
           Invoke-WebRequest https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
-          .\wingetcreate.exe update $packageId --version $packageVersion --urls "$installerUrl" --submit --token $gitToken
+          .\wingetcreate.exe update $packageId --version $packageVersion --urls "$installerUrl" --arch x64 --submit --token $gitToken
