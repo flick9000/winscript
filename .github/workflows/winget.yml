@@ -17,4 +17,4 @@ jobs:
           iwr https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
           $github = Get-Content '${{ github.event_path }}' | ConvertFrom-Json
           $installerUrl = $github.release.assets | Where-Object -Property name -match 'winscript-installer.exe' | Select -ExpandProperty browser_download_url -First 1
-          .\wingetcreate.exe update flick9000.WinScript -s -v $github.release.tag_name -u $installerUrl -t ${{ secrets.NUSHELL_PAT }}
+          .\wingetcreate.exe update flick9000.WinScript -s -v $github.release.tag_name -u $installerUrl -t ${{ secrets.WINGET_TOKEN }}
