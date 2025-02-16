@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/daisyui.css" />
     <link rel="stylesheet" href="css/style.css" class="stylesheet" />
-    <link rel="stylesheet" href="css/theme.css" />
   </head>
   <body>
     <div class="main-container">
@@ -1708,7 +1707,12 @@
         </div>
         <div id="install-tab" class="tab-content">
           <input type="text" class="app-search" id="searchBar" placeholder="Search an app">
-          
+          <div class="manual-input" >
+            <input id="manualInput" class="app-search" type="text" placeholder="Enter package">
+            <button id="addApp">Add App</button>
+          </div>
+          <div id="manualList"></div>
+
           <details>
             <summary class="content-entry">
               <div>
@@ -2029,6 +2033,21 @@
                 </label>
               </div>
             </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Ubisoft Connect</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="UbisoftConnect" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
  
             <div class="content-entry">
               <div>
@@ -2189,6 +2208,66 @@
                 <span class="indicator" id="indicator">Off</span>
                 <label class="switch">
                   <input js-target="install" id="Everything" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install JDownloader</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="JDownloader" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install KeePass</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="KeePass" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install TotalCommander</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="TotalCommander" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install VirtualBox</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="VirtualBox" type="checkbox">
                   <span class="slider"></span>
                 </label>
               </div>
@@ -2820,6 +2899,66 @@
                 </label>
               </div>
             </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Plex</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="Plex" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Jellyfin</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="Jellyfin" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install MuseScore</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="MuseScore" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Stremio</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="Stremio" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
  
             <div class="content-entry">
               <div>
@@ -3418,6 +3557,48 @@
             <div class="content-entry">
               <div>
                 <div>
+                  <h1>Install Clink</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="Clink" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Cursor</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="Cursor" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Docker Desktop</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="Docker" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="content-entry">
+              <div>
+                <div>
                   <h1>Install Git</h1>
                 </div>
               </div>
@@ -3470,6 +3651,21 @@
                 <span class="indicator" id="indicator">Off</span>
                 <label class="switch">
                   <input js-target="install" id="Python3" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Rust</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="Rust" type="checkbox">
                   <span class="slider"></span>
                 </label>
               </div>
@@ -3564,6 +3760,21 @@
                 </label>
               </div>
             </div>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Install Oh My Posh</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input js-target="install" id="OhMyPosh" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
  
             <div class="content-entry">
               <div>
@@ -3603,7 +3814,7 @@
                 <pre><code>    echo This script requires administrator privileges.</code></pre>
                 <pre><code>    echo Please run WinScript as an administrator.</code></pre>
                 <pre><code>    pause</code></pre>
-                <pre><code>    exit /b 1</code></pre>
+                <pre><code>    exit</code></pre>
                 <pre><code>)</code></pre>
                 <pre><code></code></pre>
               </div>
@@ -3634,7 +3845,6 @@
               <div class="div-install">
                 <pre><code>echo -- Refresh environment: </code></pre>
                 <pre><code>call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"</code></pre>
-                <pre><code>call RefreshEnv.cmd</code></pre>
                 <pre><code>echo -- Installing these apps: </code></pre>
                 <pre><code>echo -- </code><span class="installingApps"></span></pre>
                 <pre><code class="commandDisplay"></code></pre>

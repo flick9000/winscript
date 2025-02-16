@@ -1104,6 +1104,9 @@ function uncheckAll() {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   const indicator = document.querySelectorAll(".indicator");
 
+  window.manualURLs = [];
+  document.getElementById("manualList").innerHTML = "";
+
   checkboxes.forEach((checkbox) => {
     if (checkbox.checked) { // Only trigger change if checkbox was checked
       checkbox.checked = false;

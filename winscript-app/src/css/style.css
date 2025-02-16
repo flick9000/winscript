@@ -436,6 +436,23 @@ input:checked + .slider:before {
   outline: none;
 }
 
+.manual-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.manual-input input {
+  margin-bottom: 0;
+  max-width: 160px;
+}
+
+#manualList {
+  margin-left: 4px;
+  margin-block: 8px;
+  color: var(--muted);
+}
+
 .mockup-code {
   overflow: auto;
   max-width: 100%;

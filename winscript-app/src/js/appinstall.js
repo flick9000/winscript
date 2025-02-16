@@ -1,7 +1,5 @@
 function appsInstall() {
-  // Define the base choco command
-  const baseChoco = "choco install ";
-  // Define the list of apps
+  // List of apps
   const appList = [
     // Drivers
     { id: "Intel", url: "intel-dsa" },
@@ -135,59 +133,80 @@ function appsInstall() {
     { id: "Neovim", url: "neovim" },
     { id: "VSCode", url: "vscode" },
   ];
+  
+  // Create manualURL array
+  if (!window.manualURLs) {
+    window.manualURLs = [];
+  }
 
   // Get the checked checkboxes
-  const urls = appList
-    .filter((app) => {
-      const element = document.getElementById(app.id);
-      return element && element.checked;
-    })
-    .map((app) => app.url);
+  function getCheckedUrls() {
+    return appList
+      .filter((app) => {
+        const element = document.getElementById(app.id);
+        return element && element.checked;
+      })
+      .map((app) => app.url);
+  }
 
-  // Create the final URL
-  const finalURL = urls.join(" ");
-  const command =
-    urls.length > 0
+  // Function to update the command display
+  function updateCommandDisplay() {
+    const checkedUrls = getCheckedUrls();
+    const allUrls = [...checkedUrls, ...window.manualURLs];
+    const finalURL = allUrls.join(" ");
+    
+    const command = allUrls.length > 0
       ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "' +
-        baseChoco +
+        "choco install " +
         finalURL +
         ' -y --force --ignorepackageexitcodes"'
       : "";
 
-  // Display the final URL in the div
-  document.querySelector(".div-install").style.display =
-    urls.length > 0 ? "block" : "none";
-  document.querySelector(".chocolatey-container").style.display =
-    urls.length > 0 ? "block" : "none";
-  const commandDisplay = document.querySelector(".commandDisplay");
-  commandDisplay.textContent = command;
-  const installingApps = document.querySelector(".installingApps");
-  installingApps.textContent = finalURL;
+    // Display the final URL in the div
+    document.querySelector(".div-install").style.display =
+      allUrls.length > 0 ? "block" : "none";
+    document.querySelector(".chocolatey-container").style.display =
+      allUrls.length > 0 ? "block" : "none";
+    
+    const commandDisplay = document.querySelector(".commandDisplay");
+    commandDisplay.textContent = command;
+    
+    const installingApps = document.querySelector(".installingApps");
+    installingApps.textContent = finalURL;
 
-  console.log(finalURL);
+    const manualList = document.getElementById("manualList");
+    if (window.manualURLs.length > 0) {
+      manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
+    }
+  }
 
+  // Add addButton click listener
+  const addButton = document.getElementById("addApp");
+    addButton.addEventListener("click", () => {
+      const manualInput = document.getElementById("manualInput").value.trim();
+      if (manualInput) {
+        window.manualURLs.push(manualInput);
+        document.getElementById("manualInput").value = ""; // Clear input
+        updateCommandDisplay();
+      }
+    });
+
+  updateCommandDisplay();
 }
 
-
-
-// Call the function
+// Call the function on load
 appsInstall();
 
+// Set up checkbox event listeners
 document.addEventListener("DOMContentLoaded", () => {
-  // Select all checkboxes with the js-target attribute
   const checkboxes = document.querySelectorAll("[js-target=install]");
-  
-  // Add the event listener to each checkbox
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      appsInstall(); // Call the function on checkbox state change
-    });
+    checkbox.addEventListener("change", appsInstall);
   });
 
-  // Optional: Handle dynamically added checkboxes by using a delegated event listener
   document.body.addEventListener("change", (event) => {
     if (event.target.matches("[js-target=install]")) {
-      appsInstall(); // Call the function if the target matches
+      appsInstall();
     }
   });
 });
