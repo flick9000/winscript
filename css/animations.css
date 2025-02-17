@@ -18,6 +18,18 @@
   }
 }
 
+@keyframes hero-pop-in {
+  from {
+    top: 30vh;
+  }
+}
+
+@keyframes banner-pop-in {
+  from {
+    top: 70%;
+  }
+}
+
 @keyframes rotate {
   to {
     --angle: 360deg;
@@ -28,6 +40,24 @@
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
+
+
+.hero-wrapper {
+  animation: hero-pop-in 1s ease forwards;
+}
+
+.banner.lg img {
+  animation: banner-pop-in 1s ease forwards;
 }
 
 .nav-items a {
