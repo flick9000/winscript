@@ -1,9 +1,10 @@
 name: "publish"
 
 on:
+  workflow_dispatch:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   publish-tauri:
@@ -32,7 +33,7 @@ jobs:
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
-          workspaces: './winscript-app/src-tauri -> target'
+          workspaces: "./winscript-app/src-tauri -> target"
 
       - name: install frontend dependencies
         working-directory: ./winscript-app
@@ -51,10 +52,8 @@ jobs:
           args: ${{ matrix.args }}
 
       - name: Upload Portable Executable to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ./winscript-app/src-tauri/target/release/winscript.exe
-          tag_name: ${{ github.ref_name }}
-          draft: true
+        run: |
+          gh release upload ${{ github.ref_name }} ./winscript-app/src-tauri/target/release/winscript.exe --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
