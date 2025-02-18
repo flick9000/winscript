@@ -51,6 +51,10 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
 
+      - name: Wait for release
+        run: |
+          sleep 10
+
       - name: Upload Portable Executable to Release
         run: |
           gh release upload ${{ github.ref_name }} ./winscript-app/src-tauri/target/release/winscript.exe --clobber
