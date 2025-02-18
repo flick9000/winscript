@@ -44,8 +44,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
           projectPath: ./winscript-app
-          tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
-          releaseName: "v__VERSION__"
+          tagName: ${{ github.ref_name }}
+          releaseName: ${{ github.ref_name }}
           releaseBody: "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*"
           releaseDraft: true
           prerelease: false
@@ -53,7 +53,7 @@ jobs:
 
       - name: Wait for release
         run: |
-          sleep 10
+          sleep 5
 
       - name: Upload Portable Executable to Release
         run: |
