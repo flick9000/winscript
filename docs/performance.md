@@ -1,5 +1,3 @@
-#
-
 # Set As DNS
 
 Each command sets the primary DNS server for the specified interface, and the index=2 commands add a secondary DNS server.
@@ -32,7 +30,6 @@ netsh interface ip set dns name="Ethernet" static 9.9.9.9
 netsh interface ip add dns name="Ethernet" 149.112.112.112 index=2
 ```
 
-
 ## Add Ultimate Performance
 
 > This script only creates the power scheme, you need to acticate it manually from the Control Panel.
@@ -46,7 +43,6 @@ powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 ## Set Services to Manual
 
 Sets these services to a specific start instruction.
-
 
 ```
 sc config AJRouter start=disabled
@@ -290,6 +286,14 @@ Core isolation provides added protection against malware and other attacks by is
 
 ```
 reg add "HKLM\\SOFTWARE\\CurrentControlSet\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f
+```
+
+## Limit Windows Defender Usage
+
+Limits Defender CPU maximum usage to 25% instead of default 50%.
+
+```
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Scan" /v "AvgCPULoadFactor" /t REG_DWORD /d "25" /f
 ```
 
 ## Disable Search

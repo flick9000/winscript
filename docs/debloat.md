@@ -1,5 +1,3 @@
-#
-
 # Remove Windows Apps
 
 ## Remove 3rd-party apps
@@ -157,6 +155,22 @@ PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Xb
 
 # Disable Windows Features
 
+## Consumer Features
+
+This command disables the "Consumer Features" feature, can automatically install unwanted apps.
+
+```
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t "REG_DWORD" /d "1" /f
+```
+
+## Recall
+
+This command disables the "Recall" feature.
+
+```
+DISM /Online /Disable-Feature /FeatureName:Recall
+```
+
 ## Internet Explorer
 
 These commands are used to disable different versions of Internet Explorer if they are present on the system. The -NoRestart flag means the system will not restart automatically after the feature is disabled. The try-catch block ensures that if the feature is not found, a user-friendly message is displayed instead of an error.
@@ -193,17 +207,6 @@ This PowerShell command is used to disable the Windows Media Player feature on a
 powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName 'WindowsMediaPlayer' -Online -NoRestart -ErrorAction Stop; Write-Output 'Successfully disabled the feature WindowsMediaPlayer.' } catch { Write-Output 'Feature not found.' }"
 ```
 
-## Windows Search
-
-> Indexing and search will not work after disabling this feature
-
-This PowerShell command disables the Search Engine Client feature on a Windows system. The -NoRestart flag ensures the system does not restart automatically after the operation. The try-catch block provides error handling by displaying a message if the feature is not found.
-
-```
-powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "SearchEngine-Client-Package" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature SearchEngine-Client-Package." } catch { Write-Output "Feature not found." }"
-
-```
-
 # Remove Microsoft Store
 
 > Once uninstalled you will not be able to install store apps anymore.
@@ -236,6 +239,30 @@ rd "%UserProfile%\\OneDrive" /Q /S
 rd "%LocalAppData%\\Microsoft\\OneDrive" /Q /S
 rd "%ProgramData%\\Microsoft\\OneDrive" /Q /S
 rd "C:\\OneDriveTemp" /Q /S
+```
+
+# Debloat Edge
+
+This will disable various annoyances in Edge.
+
+```
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "HideFirstRunExperience" /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "UserFeedbackAllowed" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "ConfigureDoNotTrack" /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "AlternateErrorPagesEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "EdgeCollectionsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "EdgeFollowEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "EdgeAssetDeliveryServiceEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "CryptoWalletEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "WalletDonationEnabled" /t REG_DWORD /d 0 /f
 ```
 
 # Remove Edge

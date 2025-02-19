@@ -1,5 +1,3 @@
-#
-
 # Disable app access
 
 These scripts disable apps access to certain part of the system, list below.

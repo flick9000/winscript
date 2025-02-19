@@ -34,7 +34,7 @@
         <div class="sidebar-header">
           <img src="icons/sidebar/user.png" width="64px" alt="">
           <div class="sidebar-user">
-            <h1 id="username">WinScript</h1>
+            <h1 id="username">WinScript <span id="version"></span></h1>
             <p id="hostname">Hostname</p>
           </div>
         </div>
@@ -72,10 +72,10 @@
           <img src="icons/sidebar/app.png" alt="">
           <h1>Browse Apps</h1>
         </div>
-
+        <hr>
         <div data-tab="script-tab" class="sidebar-entry">
           <img src="icons/sidebar/code.png" alt="">
-          <h1>View Script</h1>
+          <h1>Run Script</h1>
         </div>
        </div>
 
@@ -88,20 +88,6 @@
          </div>
       <div class="content-body">
         <div id="tools-tab" class="tab-content">
-
-          <div class="content-entry">
-            <div>
-              <img src="icons/tools/preset.png" alt="">
-              <div>
-                <h1>Choose a preset</h1>
-                <p>Choose a preset of tweaks to apply.</p>
-              </div>
-            </div>
-            <div class="presets">
-              <button id="basicPreset">Basic</button>
-              <button id="strictPreset">Strict</button>
-            </div>
-          </div>
 
           <details>
             <summary class="content-entry">
@@ -3999,6 +3985,74 @@
             <button id="copyBtn">Copy</button>
           </div>
 
+          <details>
+            <summary class="content-entry">
+              <div>
+                <img src="icons/script/preset.png" alt="">
+                <div>
+                  <h1>Presets</h1>
+                  <p></p>
+                </div>
+              </div>
+              <img class="chevron" src="icons/chevron-down.png" alt="">
+            </summary>
+          
+            <div class="content-entry about">
+              <div>
+                <div>
+                  <p>
+                    <b>Review the scripts one by one before executing it.</b>
+                    <br /> <br />
+                    Choosing a preset will override your current settings.
+                    <br /> <br />
+                    <b>Basic Preset</b>:
+                    Reccomended, good balance beetween privacy/performance and functionality.
+                    <br /> <br />
+                    <b>Strict Preset</b>:
+                    Heavy focus on privacy and performance although it disables some non-essential features, review all the
+                    scripts
+                    one by one before executing it.
+                    <br /> <br />
+                    <b>Extreme Preset</b>:
+                    Not reccomended, use only if you know what you're doing.
+                    <br /> <br />
+                    You can find a table comparing the presets <a style="text-decoration: underline;" href="#">here.</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Basic Preset</h1>
+                  <p>Reccomended, good balance beetween privacy/performance and functionality.</p>
+                </div>
+              </div>
+              <button id="basicPreset">Apply</button>
+            </div>
+          
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Strict Preset</h1>
+                  <p>Heavy focus on privacy and performance, it disables some non-essential features.</p>
+                </div>
+              </div>
+              <button id="strictPreset">Apply</button>
+            </div>
+          
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>Extreme Preset</h1>
+                  <p>Not reccomended, use only if you know what you're doing.</p>
+                </div>
+              </div>
+              <button id="extremePreset">Apply</button>
+            </div>
+          
+          </details>
         </div>
       </div>
     </div>

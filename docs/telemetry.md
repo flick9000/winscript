@@ -1,5 +1,3 @@
-#
-
 # Disable Telemetry & Data Collection
 
 ## Disable Windows Telemetry & Data Collection
@@ -331,6 +329,25 @@ reg add "HKCU\SOFTWARE\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPo
 ```
 
 # Disable 3rd-party apps Telemetry
+
+## Block Adobe Network
+
+Blocks Adobe products from sending telemetry data to Adobe servers.
+
+```
+echo -- Disabling Adobe Telemetry
+set "hostspath=%windir%\System32\drivers\etc\hosts"
+set "downloadedlist=%temp%\list.txt"
+echo -- Downloading the list of host entries
+curl -s -o "%downloadedlist%" "https://a.dove.isdumb.one/list.txt"
+if not exist "%downloadedlist%" (
+    echo Failed to download the list from the specified URL.
+    exit /b 1
+)
+echo -- Adobe block entries successfully added to hosts file
+type "%downloadedlist%" >> "%hostspath%"
+del "%downloadedlist%"
+```
 
 ## Disable NVIDIA Telemetry
 

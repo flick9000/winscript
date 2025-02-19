@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'rd "C:\\OneDriveTemp" /Q /S',
     ],
     debloatedge: [
+      "echo -- Debloating Edge",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d 0 /f',
@@ -1224,6 +1225,76 @@ let strictIds = [
   "stickykeys",
   "taskbarwidgets",
 ];
+let extremeIds = [
+  "browserhistory",
+  "msapps",
+  "thirdparty",
+  "recall",
+  "hyperv",
+  "debloatedge",
+  "copilot",
+  "consumerfeatures",
+  "faxscan",
+  "iexplorer",
+  "wtelemetry",
+  "wsearchtelemetry",
+  "blockhosts",
+  "officetelemetry",
+  "appexperience",
+  "wfeedback",
+  "handwriting",
+  "targetads",
+  "privacyconsent",
+  "cloudsync",
+  "wifisense",
+  "screenrecording",
+  "automap",
+  "activityfeed",
+  "notificationtray",
+  "biometrics",
+  "voiceactivationaccess",
+  "locationaccess",
+  "accinfoaccess",
+  "callhistoryaccess",
+  "motionaccess",
+  "trustedaccess",
+  "contactsaccess",
+  "calendaraccess",
+  "emailaccess",
+  "tasksaccess",
+  "radioaccess",
+  "systemaccess",
+  "cleantemp",
+  "cleanmgr",
+  "ultimateperformance",
+  "limitdefender",
+  "coreisolation",
+  "wsearch",
+  "disablehibernation",
+  "xbox",
+  "microsoftstore",
+  "onedrive",
+  "widgets",
+  "wupdate",
+  "clipboard",
+  "adobetelemetry",
+  "nvidiatelemetry",
+  "vscodetelemetry",
+  "mediatelemetry",
+  "powershelltelemetry",
+  "ccleanertelemetry",
+  "googleupdates",
+  "adobeupdates",
+  "messagingaccess",
+  "notificationaccess",
+  "diagaccess",
+  "phoneaccess",
+  "lockscreencamera",
+  "manualservices",
+  "filextensions",
+  "stickykeys",
+  "taskbarwidgets",
+];
 
 document.getElementById("basicPreset").addEventListener("click", () => {
   uncheckAll();
@@ -1239,6 +1310,17 @@ document.getElementById("basicPreset").addEventListener("click", () => {
 document.getElementById("strictPreset").addEventListener("click", () => {
   uncheckAll();
   strictIds.forEach((id) => {
+    const checkbox = document.getElementById(id);
+    if (checkbox) {
+      checkbox.checked = true;  
+      checkbox.dispatchEvent(new Event("change"));
+    }
+  });
+});
+
+document.getElementById("extremePreset").addEventListener("click", () => {
+  uncheckAll();
+  extremeIds.forEach((id) => {
     const checkbox = document.getElementById(id);
     if (checkbox) {
       checkbox.checked = true;  

@@ -2,6 +2,8 @@ import { writeTextFile, mkdir, BaseDirectory } from '@tauri-apps/plugin-fs';
 import { tempDir, appDataDir, join } from '@tauri-apps/api/path';
 import { Command } from '@tauri-apps/plugin-shell';
 
+import { app } from '@tauri-apps/api'
+
 import { version } from '@tauri-apps/plugin-os';
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
@@ -39,6 +41,19 @@ if (isWindows11()) {
 } else {
   document.body.style.backgroundColor = "var(--background)";
 }
+
+// Display app version
+async function displayVersion() {
+  try {
+      const version = await app.getVersion();
+      document.getElementById('version').textContent = `${version}`;
+  } catch (error) {
+      document.getElementById('version').textContent = ``;
+      console.error("Failed to get app version:", error);
+  }
+}
+
+displayVersion();
 
 function responsiveNav() {
   const navbar = document.getElementById("sidebar");

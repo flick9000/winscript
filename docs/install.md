@@ -1,5 +1,3 @@
-#
-
 # Install Process
 
 ## Chocolatey Install
@@ -16,13 +14,12 @@ Refreshes terminal environment to make chocolatey work without opening another t
 
 ```
 call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"
-call RefreshEnv.cmd
 ```
 
 ## Installing Apps
 
-Refreshes Windows Explorer to avoid any chocolatey bugs/errors. and then proceeds to install the apps via `choco install`, with `-y` chocolatey argument.
+Refreshes Windows Explorer to avoid any chocolatey bugs/errors. and then proceeds to install the apps via `choco install`, with `-y --force --ignorepackageexitcodes` chocolatey argument.
 
 ```
-taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "choco install list-of-apps -y"
+taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "choco install list-of-apps -y --force --ignorepackageexitcodes"
 ```

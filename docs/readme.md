@@ -1,18 +1,53 @@
-<h1 style="color: var(--cta);">WinScript Docs</h1>
+<h1 style="color: var(--cta);">WinScript</h1>
 
-> Open-source tool to build your Windows 10/11 script from scratch.
+> WinScript is an open-source tool built to help you build custom scripts for Windows 10 and 11. It includes debloat, privacy, performance scripts & more, along with the ability to install all your favourite apps in one click.</p>
 
-<img width="1000px" src="./winscript.png">
+![App Screenshot](winscript.png)
 
-## What is it?
+## Features
 
-WinScript is an open-source tool to build your Windows 10/11 script from scratch.
-It features debloat, privacy, performance & app installing scripts.
+- 🧹 **Debloat**: Remove Windows bloatware, CoPilot, Edge, OneDrive & pre-installed features.
+- 🔏 **Privacy**: Disable Windows and 3rd party telemetry & data collection, tracking, app access & more.
+- 🚀 **Performance**: Set background services to manual to free resources, set your preferred DNS, clean temp files & more.
+- ⬇️ **Install Apps**: Install all your favourite apps simultaneously in one click through chocolatey.
 
-## Why should i use it?
+## Usage
 
-Windows collects extensive user data through telemetry, including location, browsing history, and app usage, often without clear consent, raising privacy concerns. You can improve your privacy by using WinScript, which allows you to disable telemetry and data collection. But it's not just about privacy. <br> Windows has become more and more bloated each update, with Microsoft forcing you to use Edge, CoPilot, seeing ads in the OS and other anti-user practices. With WinScript you can safely debloat your system, apply performance tweaks and more, but the best thing about WinScript that separates it from other Windows scripts is that you review each line of the script before executing it, so that you know exactly what is being done to your PC.
+**WinScript must be run as Administrator to function properly.**  
+_The desktop app may be flagged as a threat by Windows Defender due to its ability to modify system settings. This is a false positive—WinScript is safe, transparent, and open-source._
 
-## Is it Open-Source?
+🖥️ **Via Winget** (Recommended):
 
-WinScript is an open-source project licensed under GPL-3.0. It's completely free to use and transparent. If you want to contribute, please check the contributing guide.
+```
+winget install winscript
+```
+
+📦 **Portable App**:
+[Latest Release](https://github.com/flick9000/winscript/releases/latest)
+
+🌍 **Online Version**:
+[Website Link](https://winscript.cc/online)
+
+## Support
+
+### ⭐ Star
+
+Feel free to leave a star and help the project reach more people!
+
+### 👷 Contributing
+
+Contributions are welcome! Fork the repository and create a pull request with your changes.
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+### ☕ Donate
+
+If you find this project helpful, consider supporting it by [buying me a coffee!](https://ko-fi.com/flick9000)
+
+## License
+
+📒 This project is licensed under the GPL v3 License. See the [LICENSE](LICENSE) file for more details.

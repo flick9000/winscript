@@ -1,5 +1,3 @@
-#
-
 ## Clean Temporary Files
 
 Deletes files from Windows Prefetch, User Temp and Windows Temp folders.
@@ -33,6 +31,39 @@ Creates a restore point before applying the scripts.
 
 ```
 powershell -command "Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS""
+```
+
+## Verify System Integrity
+
+Checks if the system integrity is correct, and if not, fixes the corrupted files.
+
+```
+sfc /scannow
+```
+
+## Clear Browser History
+
+Clears Chrome, Edge and Firefox history.
+
+```
+del /q /s "%LocalAppData%\Google\Chrome\User Data\Default\History"
+del /q /s "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*.*"
+del /q /s "%LocalAppData%\Google\Chrome\User Data\Default\Cookies"
+del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\History"
+del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*.*"
+del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\Cookies"
+del /q /s "%APPDATA%\Mozilla\Firefox\Profiles\*.default\places.sqlite"
+del /q /s "%APPDATA%\Mozilla\Firefox\Profiles\*.default\cache2\entries\*.*"
+```
+
+## Reset Network
+
+Resets the network by flushing the DNS cache, releasing the IP address and renewing the IP address.
+
+```
+ipconfig /flushdns
+ipconfig /release
+ipconfig /renew
 ```
 
 ## Run MAS

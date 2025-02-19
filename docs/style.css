@@ -39,6 +39,11 @@ p {
   color: var(--text) !important;
 }
 
+strong,
+em {
+  color: var(--text) !important;
+}
+
 /* docs\style.css */
 
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono|Source+Sans+Pro:300,400,600");
