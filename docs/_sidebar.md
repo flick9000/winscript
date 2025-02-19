@@ -11,3 +11,4 @@
   - [Performance](performance.md)
   - [Miscellanous](misc.md)
   - [Install](install.md)
+  - [Presets](presets.md)

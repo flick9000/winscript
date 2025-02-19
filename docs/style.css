@@ -44,6 +44,10 @@ em {
   color: var(--text) !important;
 }
 
+.markdown-section tr:nth-child(2n) {
+  background-color: var(--background-light) !important;
+}
+
 /* docs\style.css */
 
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono|Source+Sans+Pro:300,400,600");
