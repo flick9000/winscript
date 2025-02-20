@@ -188,6 +188,15 @@ button:hover {
   font-weight: 500;
 }
 
+.sidebar-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.sidebar-buttons button {
+  width: 100%;
+}
+
 .sidebar-user > p {
   font-size: 12px;
   color: var(--muted);

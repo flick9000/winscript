@@ -103,6 +103,66 @@ document.getElementById('searchBar').addEventListener('input', () => {
     });
 });
 
+const importBtn = document.getElementById('importBtn');
+const exportBtn = document.getElementById('exportBtn');
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+exportBtn.addEventListener('click', () => {
+  let settings = {};
+  checkboxes.forEach((checkbox) => {
+    settings[checkbox.id] = checkbox.checked;
+  });
+
+  // Write the settings to the file
+  const fileContent = JSON.stringify(settings, null, 2);
+  
+  // Create blob and download link
+  const blob = new Blob([fileContent], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const downloadLink = document.createElement('a');
+  downloadLink.href = url;
+  downloadLink.download = 'settings.json';
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  
+  // Cleanup
+  document.body.removeChild(downloadLink);
+  URL.revokeObjectURL(url);
+  
+  console.log('File saved successfully');
+});
+
+importBtn.addEventListener('click', () => {
+  // Create file input
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = '.json';
+  
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      // Read settings from file
+      try {
+        const settings = JSON.parse(e.target.result);
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = settings[checkbox.id];
+          checkbox.dispatchEvent(new Event('change'));
+        });
+      } catch (error) {
+        console.error('Error parsing settings:', error);
+      }
+    };
+    
+    reader.readAsText(file);
+  });
+
+  // Trigger file selection
+  fileInput.click();
+});
+
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
   // Get the text content from the div

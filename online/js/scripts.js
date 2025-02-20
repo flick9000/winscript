@@ -972,6 +972,14 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Disabling Snap Assist Flyout",
       'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d 0 /f',
     ],
+    detailedbsod: [
+      "echo -- Enabling Detailed BSOD",
+      'reg add "HKLM\\System\\CurrentControlSet\\Control\\CrashControl" /v "DisplayParameters" /t REG_DWORD /d 1 /f',
+    ],
+    verboselogon: [
+      "echo -- Enabling Verbose Logon",
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" /v "VerboseStatus" /t REG_DWORD /d 1 /f',
+    ]
   };
 
   // Handlers for checking and unchecking checkboxes
@@ -1088,6 +1096,8 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "stickykeys", type: "stickykeys" },
     { id: "numlockstartup", type: "numlockstartup" },
     { id: "snapflyout", type: "snapflyout" },
+    { id: "detailedbsod", type: "detailedbsod" },
+    { id: "verboselogon", type: "verboselogon" },
   ];
 
   // Attach event listeners to checkboxes

@@ -39,6 +39,10 @@
           </div>
         </div>
         <button id="uncheckAll">Uncheck All</button>
+        <div class="sidebar-buttons">
+          <button id="importBtn">Import</button>
+          <button id="exportBtn">Export</button>
+        </div>
        <div class="sidebar-content">
         <div data-tab="tools-tab" class="sidebar-entry">
           <img src="icons/sidebar/tools.png" alt="">
@@ -1694,6 +1698,40 @@
               </label>
             </div>
           </div>
+
+          <div class="content-entry">
+            <div>
+              <img src="icons/misc/bsod.png" alt="">
+              <div>
+                <h1>Enable Detailed BSOD</h1>
+              </div>
+            </div>
+            <div class="checkbox-wrapper">
+              <span class="indicator" id="indicator">Off</span>
+              <label class="switch">
+                <input id="detailedbsod" type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="content-entry">
+            <div>
+              <img src="icons/misc/verbose.png" alt="">
+              <div>
+                <h1>Enable Verbose Logon</h1>
+              </div>
+            </div>
+            <div class="checkbox-wrapper">
+              <span class="indicator" id="indicator">Off</span>
+              <label class="switch">
+                <input id="verboselogon" type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+
         </div>
         <div id="install-tab" class="tab-content">
           <input type="text" class="app-search" id="searchBar" placeholder="Search an app">

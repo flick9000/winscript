@@ -57,7 +57,22 @@ jobs:
 
       - name: Upload Portable Executable to Release
         run: |
-          gh release upload ${{ github.ref_name }} ./winscript-app/src-tauri/target/release/winscript.exe --clobber
+          ren ./winscript-app/src-tauri/target/release/winscript.exe winscript-portable.exe
+          gh release upload ${{ github.ref_name }} ./winscript-app/src-tauri/target/release/winscript-portable.exe --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: Rename installer file in releases (Windows)
+        shell: pwsh
+        run: |
+          $VERSION = "${{ github.ref_name }}" -replace "^v", ""
+
+          gh release download "${{ github.ref_name }}" -p "WinScript_${VERSION}_x64-setup.exe"
+          Rename-Item "WinScript_${VERSION}_x64-setup.exe" "winscript-installer.exe"
+
+          gh release upload "${{ github.ref_name }}" "winscript-installer.exe" --clobber
+          gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe"
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}

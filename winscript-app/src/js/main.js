@@ -1,14 +1,10 @@
-import { writeTextFile, mkdir, BaseDirectory } from '@tauri-apps/plugin-fs';
-import { tempDir, appDataDir, join } from '@tauri-apps/api/path';
+import { writeTextFile, readTextFile, mkdir } from '@tauri-apps/plugin-fs';
+import { tempDir, join } from '@tauri-apps/api/path';
 import { Command } from '@tauri-apps/plugin-shell';
-
 import { app } from '@tauri-apps/api'
-
 import { version } from '@tauri-apps/plugin-os';
 import { getCurrentWindow } from "@tauri-apps/api/window";
-
-import { ask } from '@tauri-apps/plugin-dialog';
-
+import { ask, save, open } from '@tauri-apps/plugin-dialog';
 import { hostname } from '@tauri-apps/plugin-os';
 
 getCurrentWindow().show();
@@ -108,6 +104,64 @@ tabs.forEach((tab, index) => {
     // Update the header text to match the clicked tab
     title.textContent = tab.textContent;
   });
+});
+
+// Import & Export
+const importBtn = document.getElementById('importBtn');
+const exportBtn = document.getElementById('exportBtn');
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+exportBtn.addEventListener('click', async () => {
+  let settings = {};
+  checkboxes.forEach((checkbox) => {
+    settings[checkbox.id] = checkbox.checked;
+  })
+
+  // Open file dialog
+  try {
+    const filePath = await save({
+    filters: [
+      {
+        name: 'JSON',
+        extensions: ['json'],
+      },
+    ],
+  });
+
+  // Write the settings to the file
+  if (filePath) {
+    await writeTextFile(filePath, JSON.stringify(settings, null, 2));
+    console.log('File saved successfully');
+  }
+  } catch (error) {
+    console.error('Error saving file:', error);
+  }
+});
+
+
+importBtn.addEventListener('click', async () => {
+  // Open file dialog
+  try {
+    const filePath = await open({
+      filters: [{
+        name: 'JSON',
+        extensions: ['json']
+      }]
+    });
+    
+    // Read settings from file
+    if (filePath) {
+      const contents = await readTextFile(filePath);
+      
+      const settings = JSON.parse(contents);
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = settings[checkbox.id];
+        checkbox.dispatchEvent(new Event("change"));
+      });
+    }
+  } catch (error) {
+    console.error('Error importing settings:', error);
+  }
 });
 
 // MAS Checkbox
