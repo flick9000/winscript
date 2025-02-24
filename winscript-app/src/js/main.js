@@ -6,15 +6,10 @@ import { version } from '@tauri-apps/plugin-os';
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { ask, save, open } from '@tauri-apps/plugin-dialog';
 import { hostname } from '@tauri-apps/plugin-os';
+import { check } from '@tauri-apps/plugin-updater';
+import { relaunch } from '@tauri-apps/plugin-process';
 
 getCurrentWindow().show();
-
-hostname().then(nameHost => {
-  document.getElementById("hostname").textContent = nameHost;
-}).catch(error => {
-  console.error("Failed to get hostname:", error);
-  document.getElementById("hostname").textContent = "github.com/flick9000";
-});
 
 // Prevent context menu
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
   })
 })
+
+hostname().then(nameHost => {
+  document.getElementById("hostname").textContent = nameHost;
+}).catch(error => {
+  console.error("Failed to get hostname:", error);
+  document.getElementById("hostname").textContent = "github.com/flick9000";
+});
 
 // Check if the OS is Windows 11
 const osVersion = version();
@@ -37,6 +39,33 @@ if (isWindows11()) {
 } else {
   document.body.style.backgroundColor = "var(--background)";
 }
+
+// Check for updates
+async function checkForUpdates() {
+  const update = await check();
+  if (!update.available) {
+    console.log('No update available');
+  }
+  if (update.available) {
+    console.log(`found update ${update.version} from ${update.date} with notes ${update.body}`);
+
+    const updateAsk = await ask("A new update is available. Do you want to update?", { 
+      title: 'Update Available', 
+      kind: 'info',
+      okLabel: 'Update',
+      cancelLabel: 'Later'
+    });
+
+    if (updateAsk === true) {
+      await update.downloadAndInstall();
+      await relaunch();
+    } else {
+      console.log('Update skipped');
+    }
+  }
+}
+
+checkForUpdates();
 
 // Display app version
 async function displayVersion() {

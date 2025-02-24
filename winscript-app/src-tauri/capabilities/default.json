@@ -7,6 +7,10 @@
   ],
   "permissions": [
     "core:default",
+    "updater:default",
+    "updater:allow-check",
+    "updater:allow-download",
+    "updater:allow-download-and-install",
     "fs:default",
     "fs:allow-temp-write",
     "fs:allow-temp-read",
@@ -30,6 +34,8 @@
       ]
     },
     "os:default",
-    "dialog:default"
+    "dialog:default",
+    "dialog:allow-ask",
+    "dialog:allow-message"
   ]
 }
