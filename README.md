@@ -16,7 +16,13 @@
 **WinScript must be run as Administrator to function properly.**  
 _The desktop app may be flagged as a threat by Windows Defender due to its ability to modify system settings. This is a false positive—WinScript is safe, transparent, and open-source._
 
-🖥️ **Via Winget** (Recommended):
+🖥️ **Launch Command**:
+
+```
+irm "https://winscript.cc/irm" | iex
+```
+
+🖥️ **Via Winget**:
 
 ```
 winget install winscript
