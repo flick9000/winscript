@@ -84,7 +84,7 @@ jobs:
         shell: powershell
         run: |
           # Download the latest.json that was just uploaded
-          Invoke-WebRequest -Uri "https://github.com/flick9000/winscript/releases/download/${{ github.ref_name }}/latest.json" -OutFile "latest.json"
+          gh release download "${{ github.ref_name }}" -p "latest.json"
 
           # Read the content of the file
           $content = Get-Content -Path "latest.json" -Raw
