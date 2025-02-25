@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
       'reg delete "HKEY_CLASSES_ROOT\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
       "echo -- Removing OneDrive folders",
-      'rd "%UserProfile%\\OneDrive" /Q /S',
+      'rd "%UserProfile%\\OneDrive" /Q',
       'rd "%LocalAppData%\\Microsoft\\OneDrive" /Q /S',
       'rd "%ProgramData%\\Microsoft\\OneDrive" /Q /S',
       'rd "C:\\OneDriveTemp" /Q /S',
