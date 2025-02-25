@@ -175,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage"',
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage"',
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.GroupMe10" | Remove-AppxPackage"',
+      'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "MSTeams" | Remove-AppxPackage"',
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Todos" | Remove-AppxPackage"',
     ],
     xbox: [
@@ -185,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage"',
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxIdentityProvider" | Remove-AppxPackage"',
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage"',
+      'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.GamingApp" | Remove-AppxPackage"',
     ],
     consumerfeatures: [
       "echo -- Disabling Consumer Features",
@@ -730,7 +732,6 @@ document.addEventListener("DOMContentLoaded", function() {
       "sc config GraphicsPerfSvc start=demand",
       "sc config HvHost start=demand",
       "sc config IEEtwCollectorService start=demand",
-      "sc config IKEEXT start=demand",
       "sc config InstallService start=demand",
       "sc config InventorySvc start=demand",
       "sc config IpxlatCfgSvc start=demand",
@@ -806,7 +807,6 @@ document.addEventListener("DOMContentLoaded", function() {
       "sc config UsoSvc start=demand",
       "sc config VSS start=demand",
       "sc config VacSvc start=demand",
-      "sc config W32Time start=demand",
       "sc config WEPHOSTSVC start=demand",
       "sc config WFDSConMgrSvc start=demand",
       "sc config WMPNetworkSvc start=demand",
@@ -1305,6 +1305,7 @@ let extremeIds = [
   "filextensions",
   "stickykeys",
   "taskbarwidgets",
+  "gamebar",
 ];
 
 document.getElementById("basicPreset").addEventListener("click", () => {

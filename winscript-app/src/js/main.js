@@ -9,6 +9,25 @@ import { hostname } from '@tauri-apps/plugin-os';
 import { check } from '@tauri-apps/plugin-updater';
 import { relaunch } from '@tauri-apps/plugin-process';
 
+// Apply Mica if OS = Windows 11
+function applyMica() {
+  const osVersion = version();
+  const buildNumber = osVersion.split('.')[2];
+
+  function isWindows11() {
+    return buildNumber >= 22000;
+  }
+
+  if (isWindows11()) {
+    getCurrentWindow().setEffects({ effects: ["mica"] });
+  } else {
+    document.body.style.backgroundColor = "var(--background)";
+  }
+}
+
+applyMica();
+
+// Show window manually on startup (remove this when mica bug at startup is fixed)
 getCurrentWindow().show();
 
 // Prevent context menu
@@ -18,35 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
+// Display hostname
 hostname().then(nameHost => {
   document.getElementById("hostname").textContent = nameHost;
 }).catch(error => {
-  console.error("Failed to get hostname:", error);
   document.getElementById("hostname").textContent = "github.com/flick9000";
 });
-
-// Check if the OS is Windows 11
-const osVersion = version();
-const buildNumber = osVersion.split('.')[2];
-
-function isWindows11() {
-  return buildNumber >= 22000;
-}
-
-// Set Mica if the OS is Windows 11
-if (isWindows11()) {
-  getCurrentWindow().setEffects({ effects: ["mica"] });
-} else {
-  document.body.style.backgroundColor = "var(--background)";
-}
 
 // Check for updates
 async function checkForUpdates() {
   const update = await check();
-  if (!update.available) {
+  if (!update) {
     console.log('No update available');
   }
-  if (update.available) {
+  if (update) {
     console.log(`found update ${update.version} from ${update.date} with notes ${update.body}`);
 
     const updateAsk = await ask("A new update is available. Do you want to update?", { 
@@ -82,30 +86,22 @@ displayVersion();
 
 function responsiveNav() {
   const navbar = document.getElementById("sidebar");
-  const menuIcon = document.querySelector(".fa-solid.fa-bars-staggered");
-  const markIcon = document.querySelector(".fa-solid.fa-xmark");
 
   if (!navbar.classList.contains("responsive")) {
     navbar.classList.add("responsive");
-    menuIcon.style.display = "none";
-    markIcon.style.display = "flex";
-
     document.body.style.overflow = "hidden";
   } else {
     navbar.classList.remove("responsive");
-    menuIcon.style.display = "flex";
-    markIcon.style.display = "none";
-    
     document.body.style.overflow = "visible";
   }
+  
 }
 
-// Select all tab buttons and content elements
 const tabs = document.querySelectorAll(".sidebar-entry");
 const contents = document.querySelectorAll(".tab-content");
 const title = document.getElementById("content-header"); // Select the header element for updating
 
-// Initialize: Set only the first tab and its corresponding content as active
+// Set only the first tab and its corresponding content as active
 if (tabs.length > 0 && contents.length > 0) {
   tabs[0].classList.add("active");
   contents[0].classList.add("active");
@@ -122,15 +118,12 @@ contents.forEach((content, index) => {
 // Add click event to each tab button
 tabs.forEach((tab, index) => {
   tab.addEventListener("click", () => {
-    // Remove 'active' class from all tabs and contents
     tabs.forEach(t => t.classList.remove("active"));
     contents.forEach(c => c.classList.remove("active"));
 
-    // Add 'active' class to clicked tab and corresponding content
     tab.classList.add("active");
     contents[index].classList.add("active");
 
-    // Update the header text to match the clicked tab
     title.textContent = tab.textContent;
   });
 });
@@ -203,6 +196,34 @@ masCheckbox.addEventListener('change', () => {
   }
 });
 
+// OneDrive Checkbox
+const onedriveCheckbox = document.getElementById('onedrive');
+let onedriveChanging = false
+
+onedriveCheckbox.addEventListener('click', async (e) => {
+  if (onedriveChanging) {
+    onedriveChanging = false
+    return
+  };
+  
+  onedriveCheckbox.checked = false
+
+  if (!onedriveChanging)  {
+    const onedriveAsk = await ask("Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?", { 
+      title: 'Uninstall OneDrive',
+      type: 'question',
+      });
+
+    if (onedriveAsk) {
+      onedriveChanging = true
+      onedriveCheckbox.checked = true
+      onedriveCheckbox.dispatchEvent(new Event('change'))
+    }
+  }
+
+});
+
+
 // Restore Point Checkbox
 const restoreCheckbox = document.getElementById('restorepoint');
 restoreCheckbox.addEventListener('change', () => {
@@ -245,9 +266,7 @@ document.getElementById('searchBar').addEventListener('input', () => {
 
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
-  // Get the text content from the div
   var textContent = document.getElementById("code").innerText;
-  // Copy the text content to the clipboard
   navigator.clipboard.writeText(textContent);
 });
 
@@ -265,32 +284,32 @@ document.querySelectorAll('.checkbox-wrapper').forEach(wrapper => {
 document.getElementById("runBtn").addEventListener("click", async function () {
 
   // Ask for restore point
-  let restoreAsk = await ask("Do you want to create a restore point?", { title: 'Restore Point' });
-  console.log("Restore Point: " + restoreAsk);
-
-  if (restoreAsk === true) {
-    document.querySelector('.restore-container').style.display = 'block';
-  } else {
-    document.querySelector('.restore-container').style.display = 'none';
+  if (!restoreCheckbox.checked) {
+      let restoreAsk = await ask("Do you want to create a restore point?", { title: 'Restore Point' });
+      console.log("Restore Point: " + restoreAsk);
+      
+      if (restoreAsk === true) {
+        document.querySelector('.restore-container').style.display = 'block';
+      } else {
+        document.querySelector('.restore-container').style.display = 'none';
+      }
   }
 
   let textContent = document.getElementById("code").innerText;
 
   try {
-      // Get the TEMP directory path (Tauri-specific app directory)
+      // Get the TEMP directory path
       const tmpDir = await tempDir();
       const dirPath = await join(tmpDir, 'winscript');
       const filePath = await join(dirPath, 'winscript.bat');
 
-      // Create the directory if it doesn't exist
+      // Create the directory
       await mkdir(dirPath, { recursive: true });
 
-    
-      // Write the file
+      // Write the script
       await writeTextFile(filePath, textContent);
 
-
-      // Open the file (Execute the script)
+      // Execute the script
       const command = new Command('cmd', ['/c', 'start', 'cmd', '/k', filePath]);
       command.spawn()
           .then(() => console.log('Script executed successfully'))
