@@ -1,9 +1,10 @@
 name: Submit flick9000.WinScript
 on:
   workflow_dispatch:
-  release:
-    types: [published]
-
+  workflow_run:
+    workflows: ["publish"]
+    types:
+      - completed
 jobs:
   sync-repo:
     name: Sync winget-pkgs repo
