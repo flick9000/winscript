@@ -204,7 +204,6 @@ dialog {
     cursor: pointer;
     display: flex !important;
   }
-
 }
 
 .modal-buttons {
@@ -219,7 +218,7 @@ dialog {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    width: 100%; 
+    width: 100%;
     line-height: 1.25;
     font-size: 1rem;
     padding: 0.5rem 2rem;
@@ -233,14 +232,18 @@ dialog {
     outline: transparent;
   }
   a:nth-child(1) {
-    background: linear-gradient(180deg, hsl(255, 50%, 37%) 0% 40%, hsl(255, 50%, 39%), hsl(263, 50%, 42%));
+    background: linear-gradient(
+      180deg,
+      hsl(255, 50%, 37%) 0% 40%,
+      hsl(255, 50%, 39%),
+      hsl(263, 50%, 42%)
+    );
     border-top: 1px solid var(--cta);
   }
   a:nth-child(2) {
     background-color: #18132b;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
 }
 
 #start-modal .modal-content {
@@ -297,7 +300,12 @@ main {
   display: flex;
   align-items: center;
   cursor: pointer;
-  background: linear-gradient(180deg, hsl(255, 50%, 37%) 0% 40%, hsl(255, 50%, 39%), hsl(263, 50%, 42%));
+  background: linear-gradient(
+    180deg,
+    hsl(255, 50%, 37%) 0% 40%,
+    hsl(255, 50%, 39%),
+    hsl(263, 50%, 42%)
+  );
   border-top: 1px solid var(--cta);
   line-height: 1.25;
   font-size: 1rem;

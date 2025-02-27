@@ -154,7 +154,7 @@ function appsInstall() {
     { id: "Neovim", url: "neovim" },
     { id: "VSCode", url: "vscode" },
   ];
-  
+
   // Create manualURL array
   if (!window.manualURLs) {
     window.manualURLs = [];
@@ -175,42 +175,44 @@ function appsInstall() {
     const checkedUrls = getCheckedUrls();
     const allUrls = [...checkedUrls, ...window.manualURLs];
     const finalURL = allUrls.join(" ");
-    
-    const command = allUrls.length > 0
-      ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "' +
-        "choco install " +
-        finalURL +
-        ' -y --force --ignorepackageexitcodes"'
-      : "";
+
+    const command =
+      allUrls.length > 0
+        ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "' +
+          "choco install " +
+          finalURL +
+          ' -y --force --ignorepackageexitcodes"'
+        : "";
 
     // Display the final URL in the div
     document.querySelector(".div-install").style.display =
       allUrls.length > 0 ? "block" : "none";
     document.querySelector(".chocolatey-container").style.display =
       allUrls.length > 0 ? "block" : "none";
-    
+
     const commandDisplay = document.querySelector(".commandDisplay");
     commandDisplay.textContent = command;
-    
+
     const installingApps = document.querySelector(".installingApps");
     installingApps.textContent = finalURL;
 
     const manualList = document.getElementById("manualList");
     if (window.manualURLs.length > 0) {
-      manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
+      manualList.innerHTML =
+        "Manual packages added: " + window.manualURLs.join(" | ");
     }
   }
 
   // Add addButton click listener
   const addButton = document.getElementById("addApp");
-    addButton.addEventListener("click", () => {
-      const manualInput = document.getElementById("manualInput").value.trim();
-      if (manualInput) {
-        window.manualURLs.push(manualInput);
-        document.getElementById("manualInput").value = ""; // Clear input
-        updateCommandDisplay();
-      }
-    });
+  addButton.addEventListener("click", () => {
+    const manualInput = document.getElementById("manualInput").value.trim();
+    if (manualInput) {
+      window.manualURLs.push(manualInput);
+      document.getElementById("manualInput").value = ""; // Clear input
+      updateCommandDisplay();
+    }
+  });
 
   updateCommandDisplay();
 }

@@ -13,7 +13,7 @@ function responsiveNav() {
     navbar.classList.remove("responsive");
     menuIcon.style.display = "flex";
     markIcon.style.display = "none";
-    
+
     document.body.style.overflow = "visible";
   }
 }
@@ -41,8 +41,8 @@ contents.forEach((content, index) => {
 tabs.forEach((tab, index) => {
   tab.addEventListener("click", () => {
     // Remove 'active' class from all tabs and contents
-    tabs.forEach(t => t.classList.remove("active"));
-    contents.forEach(c => c.classList.remove("active"));
+    tabs.forEach((t) => t.classList.remove("active"));
+    contents.forEach((c) => c.classList.remove("active"));
 
     // Add 'active' class to clicked tab and corresponding content
     tab.classList.add("active");
@@ -54,60 +54,60 @@ tabs.forEach((tab, index) => {
 });
 
 // MAS Checkbox
-const masCheckbox = document.getElementById('installmas');
-masCheckbox.addEventListener('change', () => {
+const masCheckbox = document.getElementById("installmas");
+masCheckbox.addEventListener("change", () => {
   if (masCheckbox.checked) {
-    document.querySelector('.mas-container').style.display = 'block';
+    document.querySelector(".mas-container").style.display = "block";
   } else {
-    document.querySelector('.mas-container').style.display = 'none';
+    document.querySelector(".mas-container").style.display = "none";
   }
 });
 
 // Restore Point Checkbox
-const restoreCheckbox = document.getElementById('restorepoint');
-restoreCheckbox.addEventListener('change', () => {
+const restoreCheckbox = document.getElementById("restorepoint");
+restoreCheckbox.addEventListener("change", () => {
   if (restoreCheckbox.checked) {
-    document.querySelector('.restore-container').style.display = 'block';
+    document.querySelector(".restore-container").style.display = "block";
   } else {
-    document.querySelector('.restore-container').style.display = 'none';
+    document.querySelector(".restore-container").style.display = "none";
   }
 });
 
 // App Search Bar
-document.getElementById('searchBar').addEventListener('input', () => {
-    const searchValue = document.getElementById('searchBar').value.toLowerCase();
-    const detailsElements = document.querySelectorAll('#install-tab details');
+document.getElementById("searchBar").addEventListener("input", () => {
+  const searchValue = document.getElementById("searchBar").value.toLowerCase();
+  const detailsElements = document.querySelectorAll("#install-tab details");
 
-    detailsElements.forEach(details => {
-        const entries = [...details.querySelectorAll('.content-entry')];
-        const summary = details.querySelector('summary');
+  detailsElements.forEach((details) => {
+    const entries = [...details.querySelectorAll(".content-entry")];
+    const summary = details.querySelector("summary");
 
-        let hasMatch = false;
+    let hasMatch = false;
 
-        entries.forEach(entry => {
-            if (!entry.isSameNode(summary)) {
-                const isMatch = entry.textContent.toLowerCase().includes(searchValue);
-                entry.style.display = isMatch ? '' : 'none';
-                hasMatch ||= isMatch;
-            }
-        });
-
-        if (!searchValue) {
-            details.style.display = '';
-            details.open = false;
-            entries.forEach(entry => (entry.style.display = ''));
-        } else {
-            details.style.display = hasMatch ? '' : 'none';
-            details.open = hasMatch;
-        }
+    entries.forEach((entry) => {
+      if (!entry.isSameNode(summary)) {
+        const isMatch = entry.textContent.toLowerCase().includes(searchValue);
+        entry.style.display = isMatch ? "" : "none";
+        hasMatch ||= isMatch;
+      }
     });
+
+    if (!searchValue) {
+      details.style.display = "";
+      details.open = false;
+      entries.forEach((entry) => (entry.style.display = ""));
+    } else {
+      details.style.display = hasMatch ? "" : "none";
+      details.open = hasMatch;
+    }
+  });
 });
 
-const importBtn = document.getElementById('importBtn');
-const exportBtn = document.getElementById('exportBtn');
+const importBtn = document.getElementById("importBtn");
+const exportBtn = document.getElementById("exportBtn");
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-exportBtn.addEventListener('click', () => {
+exportBtn.addEventListener("click", () => {
   let settings = {};
   checkboxes.forEach((checkbox) => {
     settings[checkbox.id] = checkbox.checked;
@@ -115,33 +115,33 @@ exportBtn.addEventListener('click', () => {
 
   // Write the settings to the file
   const fileContent = JSON.stringify(settings, null, 2);
-  
+
   // Create blob and download link
-  const blob = new Blob([fileContent], { type: 'application/json' });
+  const blob = new Blob([fileContent], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const downloadLink = document.createElement('a');
+  const downloadLink = document.createElement("a");
   downloadLink.href = url;
-  downloadLink.download = 'settings.json';
+  downloadLink.download = "settings.json";
   document.body.appendChild(downloadLink);
   downloadLink.click();
-  
+
   // Cleanup
   document.body.removeChild(downloadLink);
   URL.revokeObjectURL(url);
-  
-  console.log('File saved successfully');
+
+  console.log("File saved successfully");
 });
 
-importBtn.addEventListener('click', () => {
+importBtn.addEventListener("click", () => {
   // Create file input
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = '.json';
-  
-  fileInput.addEventListener('change', (event) => {
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = ".json";
+
+  fileInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (!file) return;
-    
+
     const reader = new FileReader();
     reader.onload = (e) => {
       // Read settings from file
@@ -149,13 +149,13 @@ importBtn.addEventListener('click', () => {
         const settings = JSON.parse(e.target.result);
         checkboxes.forEach((checkbox) => {
           checkbox.checked = settings[checkbox.id];
-          checkbox.dispatchEvent(new Event('change'));
+          checkbox.dispatchEvent(new Event("change"));
         });
       } catch (error) {
-        console.error('Error parsing settings:', error);
+        console.error("Error parsing settings:", error);
       }
     };
-    
+
     reader.readAsText(file);
   });
 
@@ -172,15 +172,14 @@ document.getElementById("copyBtn").addEventListener("click", function () {
 });
 
 // Update the indicator text when the checkbox is changed
-document.querySelectorAll('.checkbox-wrapper').forEach(wrapper => {
+document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   const checkbox = wrapper.querySelector('input[type="checkbox"]');
-  const indicator = wrapper.querySelector('.indicator');
+  const indicator = wrapper.querySelector(".indicator");
 
-  checkbox.addEventListener('change', () => {
-    indicator.textContent = checkbox.checked ? 'On' : 'Off';
+  checkbox.addEventListener("change", () => {
+    indicator.textContent = checkbox.checked ? "On" : "Off";
   });
 });
-
 
 document.getElementById("downloadBtn").addEventListener("click", function () {
   // Get the text content from the div

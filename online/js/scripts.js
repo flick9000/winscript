@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Function to add a script block dynamically
   function addScript(className, scriptContent) {
     const parentDiv = document.querySelector(".allScripts");
-    
+
     // Create a new container for the script
     const newDiv = document.createElement("div");
     newDiv.className = className; // Use className to identify the script type
-    
+
     // Add the script content
     const codeElement = document.createElement("code");
     codeElement.textContent = scriptContent;
-    
+
     // Append the new script to the container
     newDiv.appendChild(codeElement);
     parentDiv.appendChild(newDiv);
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Check if the checkbox exists
     if (checkbox) {
-      checkbox.addEventListener("change", function() {
+      checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
           addHandler(); // Add scripts if checked
         } else {
@@ -89,8 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ],
     edge: [
       "echo -- Uninstalling Edge",
-      'reg add "HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\EdgeUpdateDev" /v "AllowUninstall" /t REG_DWORD /d "1" /f',
-      'Powershell -ExecutionPolicy Unrestricted -Command "$installer = (Get-ChildItem \\"$($env:ProgramFiles)*\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe\\"); if (!$installer) { Write-Host \\"Installer not found. Microsoft Edge may already be uninstalled.\\"; } else { $installer | ForEach-Object { $uninstallerPath = $_.FullName; $installerArguments = @(\\"--uninstall\\", \\"--system-level\\", \\"--verbose-logging\\", \\"--force-uninstall\\"); Write-Output \\"Uninstalling through uninstaller: $uninstallerPath\\"; $process = Start-Process -FilePath \\"$uninstallerPath\\" -ArgumentList $installerArguments -Wait -PassThru; if ($process.ExitCode -eq 0 -or $process.ExitCode -eq 19) { Write-Host \\"Successfully uninstalled Edge.\\"; } else { Write-Error \\"Failed to uninstall, uninstaller failed with exit code $($process.ExitCode).\\"; }; }; }"',
+      `powershell -NoProfile -ExecutionPolicy Bypass -Command "$script = (New-Object Net.WebClient).DownloadString('https://cdn.jsdelivr.net/gh/he3als/EdgeRemover@main/get.ps1'); $script = [ScriptBlock]::Create($script); & $script -UninstallEdge"`,
     ],
     copilot: [
       "echo -- Removing Copilot",
@@ -193,8 +192,8 @@ document.addEventListener("DOMContentLoaded", function() {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableWindowsConsumerFeatures" /t "REG_DWORD" /d "1" /f',
     ],
     recall: [
-      'echo -- Disabling Recall',
-      'DISM /Online /Disable-Feature /FeatureName:Recall'
+      "echo -- Disabling Recall",
+      "DISM /Online /Disable-Feature /FeatureName:Recall",
     ],
     iexplorer: [
       "echo -- Disabling Internet Explorer",
@@ -214,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ],
     wsearch: [
       "echo -- Disabling Windows Search",
-      'sc stop "wsearch" && sc config "wsearch" start=disabled'
+      'sc stop "wsearch" && sc config "wsearch" start=disabled',
     ],
     wtelemetry: [
       "echo -- Disabling Windows Telemetry",
@@ -373,10 +372,6 @@ document.addEventListener("DOMContentLoaded", function() {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\TabletPC" /v "PreventHandwritingDataSharing" /t REG_DWORD /d 1 /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d 0 /f',
       'reg add "HKCU\\SOFTWARE\\Microsoft\\InputPersonalization\\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d 0 /f',
-      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System" /v "AllowCrossDeviceClipboard" /t "REG_DWORD" /d "0" /f',
-      'reg add "HKCU\\Software\\Microsoft\\Clipboard" /v "CloudClipboardAutomaticUpload" /t "REG_DWORD" /d "0" /f',
-      'reg add "HKCU\\Software\\Microsoft\\Clipboard" /v "EnableClipboardHistory" /t REG_DWORD /d 0 /f',
-      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System" /v "AllowClipboardHistory" /t "REG_DWORD" /d "0" /f',
     ],
     targetads: [
       "echo -- Disabling Targeted Ads and Data Collection",
@@ -403,13 +398,13 @@ document.addEventListener("DOMContentLoaded", function() {
       "echo -- Disabling Adobe Telemetry",
       'set "hostspath=%windir%\\System32\\drivers\\etc\\hosts"',
       'set "downloadedlist=%temp%\\list.txt"',
-      'echo -- Downloading the list of host entries',
+      "echo -- Downloading the list of host entries",
       'curl -s -o "%downloadedlist%" "https://a.dove.isdumb.one/list.txt"',
       'if not exist "%downloadedlist%" (',
-      '    echo Failed to download the list from the specified URL.',
-      '    exit /b 1',
-      ')',
-      'echo -- Adobe block entries successfully added to hosts file',
+      "    echo Failed to download the list from the specified URL.",
+      "    exit /b 1",
+      ")",
+      "echo -- Adobe block entries successfully added to hosts file",
       'type "%downloadedlist%" >> "%hostspath%"',
       'del "%downloadedlist%"',
     ],
@@ -621,7 +616,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics" /v "Enabled" /t REG_DWORD /d "0" /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider" /v "Enabled" /t "REG_DWORD" /d "0" /f',
     ],
-  
+
     googledns: [
       "echo -- Setting Google DNS",
       'netsh interface ip set dns name="Ethernet" static 8.8.8.8',
@@ -647,7 +642,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'netsh interface ip set dns name="Ethernet" static 94.140.14.14',
       'netsh interface ip add dns name="Ethernet" 94.140.15.15 index=2',
     ],
-  
+
     cleantemp: [
       "echo -- Deleting Temp files",
       "del /s /f /q c:\\windows\\temp\\*.*",
@@ -662,7 +657,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'PowerShell -ExecutionPolicy Unrestricted -Command "$bin = (New-Object -ComObject Shell.Application).NameSpace(10); $bin.items() | ForEach {; Write-Host "^""Deleting $($_.Name) from Recycle Bin"^""; Remove-Item $_.Path -Recurse -Force; }"',
     ],
     browserhistory: [
-      'echo Clearing Browser History',
+      "echo Clearing Browser History",
       'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\History"',
       'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Cache\\*.*"',
       'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Cookies"',
@@ -672,10 +667,7 @@ document.addEventListener("DOMContentLoaded", function() {
       'del /q /s "%APPDATA%\\Mozilla\\Firefox\\Profiles\\*.default\\places.sqlite"',
       'del /q /s "%APPDATA%\\Mozilla\\Firefox\\Profiles\\*.default\\cache2\\entries\\*.*"',
     ],
-    sfc: [
-      "echo -- Running SFC",
-      "sfc /scannow",
-    ],
+    sfc: ["echo -- Running SFC", "sfc /scannow"],
     resetnetwork: [
       "echo -- Resetting Network",
       "ipconfig /flushdns",
@@ -888,7 +880,7 @@ document.addEventListener("DOMContentLoaded", function() {
       "sc config wuauserv start=demand",
       "sc config wudfsvc start=demand",
     ],
-    hags : [
+    hags: [
       "echo -- Disabling HAGS",
       'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d 1 /f',
     ],
@@ -924,7 +916,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ],
     fullscreenoptimizations: [
       "echo -- Disabling Fullscreen Optimizations",
-      'reg add "HKCU\\System\\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d 1 /f'
+      'reg add "HKCU\\System\\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d 1 /f',
     ],
     mouseacc: [
       "echo -- Disabling Mouse Acceleration",
@@ -980,7 +972,7 @@ document.addEventListener("DOMContentLoaded", function() {
     verboselogon: [
       "echo -- Enabling Verbose Logon",
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" /v "VerboseStatus" /t REG_DWORD /d 1 /f',
-    ]
+    ],
   };
 
   // Handlers for checking and unchecking checkboxes
@@ -1022,7 +1014,7 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "clipboard", type: "clipboard" },
     { id: "targetads", type: "targetads" },
     { id: "privacyconsent", type: "privacyconsent" },
-    
+
     { id: "adobetelemetry", type: "adobetelemetry" },
     { id: "nvidiatelemetry", type: "nvidiatelemetry" },
     { id: "vscodetelemetry", type: "vscodetelemetry" },
@@ -1058,22 +1050,20 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "automap", type: "automap" },
     { id: "lockscreencamera", type: "lockscreencamera" },
     { id: "biometrics", type: "biometrics" },
-  
+
     { id: "googledns", type: "googledns" },
     { id: "cloudflaredns", type: "cloudflaredns" },
     { id: "quad9dns", type: "quad9dns" },
     { id: "opendns", type: "opendns" },
     { id: "adguardns", type: "adguard" },
-  
+
     { id: "cleantemp", type: "cleantemp" },
     { id: "cleanmgr", type: "cleanmgr" },
     { id: "emptyrecycle", type: "emptyrecycle" },
     { id: "browserhistory", type: "browserhistory" },
     { id: "sfc", type: "sfc" },
     { id: "resetnetwork", type: "resetnetwork" },
-    
 
-  
     { id: "ultimateperformance", type: "ultimateperformance" },
     { id: "manualservices", type: "manualservices" },
     { id: "hags", type: "hags" },
@@ -1082,14 +1072,12 @@ document.addEventListener("DOMContentLoaded", function() {
     { id: "limitdefender", type: "limitdefender" },
     { id: "coreisolation", type: "coreisolation" },
     { id: "disableprefetch", type: "disableprefetch" },
-  
-  
+
     { id: "fullscreenoptimizations", type: "fullscreenoptimizations" },
     { id: "mouseacc", type: "mouseacc" },
     { id: "gamemode", type: "gamemode" },
     { id: "gamebar", type: "gamebar" },
-  
-  
+
     { id: "darkmode", type: "darkmode" },
     { id: "filextensions", type: "filextensions" },
     { id: "classicmenu", type: "classicmenu" },
@@ -1105,11 +1093,10 @@ document.addEventListener("DOMContentLoaded", function() {
   checkboxItems.forEach((item) => {
     handleCheckboxChange(
       item.id,
-      () => handleChecked(item.type),   // Handler for checked state
+      () => handleChecked(item.type), // Handler for checked state
       () => handleUnchecked(item.type) // Handler for unchecked state
     );
   });
-
 });
 
 function uncheckAll() {
@@ -1120,7 +1107,8 @@ function uncheckAll() {
   document.getElementById("manualList").innerHTML = "";
 
   checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) { // Only trigger change if checkbox was checked
+    if (checkbox.checked) {
+      // Only trigger change if checkbox was checked
       checkbox.checked = false;
 
       // Manually trigger the change event
@@ -1324,7 +1312,7 @@ document.getElementById("strictPreset").addEventListener("click", () => {
   strictIds.forEach((id) => {
     const checkbox = document.getElementById(id);
     if (checkbox) {
-      checkbox.checked = true;  
+      checkbox.checked = true;
       checkbox.dispatchEvent(new Event("change"));
     }
   });
@@ -1335,7 +1323,7 @@ document.getElementById("extremePreset").addEventListener("click", () => {
   extremeIds.forEach((id) => {
     const checkbox = document.getElementById(id);
     if (checkbox) {
-      checkbox.checked = true;  
+      checkbox.checked = true;
       checkbox.dispatchEvent(new Event("change"));
     }
   });
