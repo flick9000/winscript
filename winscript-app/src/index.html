@@ -14,8 +14,6 @@
 
     <link rel="icon" href="icons/favicon.ico" />
 
-    <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
-
     <link
     id="highlight-theme"
     rel="stylesheet"
@@ -86,9 +84,8 @@
       </div>
       <div class="content">
         <div class="content-header">
+          <img class="nav-icon" width="16" src="icons/nav.png" alt="">
             <h1 id="content-header">WinScript</h1>
-            <iconify-icon onclick="responsiveNav()" class="fa-solid fa-bars-staggered" icon="fa6-solid:bars-staggered" width="24" height="24"></iconify-icon>
-            <iconify-icon onclick="responsiveNav()" class="fa-solid fa-xmark" icon="fa6-solid:xmark" width="24" height="24"></iconify-icon>
          </div>
       <div class="content-body">
         <div id="tools-tab" class="tab-content">
@@ -174,7 +171,7 @@
               <img src="icons/tools/sfc.png" alt="">
               <div>
                 <h1>Verify System Integrity</h1>
-                <p>Runs the 'sfc /scannow' command to verify the system files integrity.</p>
+                <p>Verifies the system files integrity and fixes corrupt files.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -208,7 +205,7 @@
               <img src="icons/tools/network.png" alt="">
               <div>
                 <h1>Reset Network</h1>
-                <p>Runs ipconfig commands to reset network IP address and cache.</p>
+                <p>Resets network IP address and cache.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -225,7 +222,7 @@
               <img src="icons/tools/key.png" alt="">
               <div>
                 <h1>Run MAS</h1>
-                <p>Activates Windows by running Microsoft Activation Scripts.</p>
+                <p>Runs Microsoft Activation Scripts.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -426,7 +423,7 @@
               <img src="icons/debloat/store.png" alt="">
               <div>
                 <h1>Remove MS Store</h1>
-                <p>You will not be able to install apps from Microsoft Store after uninstalling it.</p>
+                <p>You can't install apps from Microsoft Store after uninstalling it.</p>
               </div>
             </div>
             
@@ -444,7 +441,7 @@
               <img src="icons/debloat/onedrive.png" alt="">
               <div>
                 <h1>Remove OneDrive</h1>
-                <p>Be sure to backup your files if you're using OneDrive before removing it.</p>
+                <p>Be sure to backup your files before removing it.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -478,7 +475,7 @@
               <img src="icons/debloat/edge.png" alt="">
               <div>
                 <h1>Remove Edge</h1>
-                <p>This script might not work anymore as Microsoft tries to get around it every update.</p>
+                <p>Uninstalls the Edge Chromium browser.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -495,7 +492,7 @@
               <img src="icons/debloat/copilot.png" alt="">
               <div>
                 <h1>Remove Copilot</h1>
-                <p>This will remove the Copilot AI package completely.</p>
+                <p>Removes the Copilot AI package completely.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -512,7 +509,7 @@
               <img src="icons/debloat/widgets.png" alt="">
               <div>
                 <h1>Remove Widgets</h1>
-                <p>This will remove the Web Experience package completely.</p>
+                <p>Removes the Web Experience package completely.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -832,27 +829,10 @@
 
           <div class="content-entry">
             <div>
-              <img src="icons/privacy/wifi.png" alt="">
-              <div>
-                <h1>Disable Wifi Sense</h1>
-                <p>Wifi Sense is a service that phones home all nearby scanned wifi networks and your location.</p>
-              </div>
-            </div>
-            <div class="checkbox-wrapper">
-              <span class="indicator" id="indicator">Off</span>
-              <label class="switch">
-                <input id="wifisense" type="checkbox">
-                <span class="slider"></span>
-              </label>
-            </div>
-          </div>
-
-          <div class="content-entry">
-            <div>
               <img src="icons/privacy/cloud.png" alt="">
               <div>
                 <h1>Disable Cloud Sync</h1>
-                <p>Feature to sync settings such as themes, passwords, and preferences across Windows devices.</p>
+                <p>Syncs settings, themes, passwords across Windows devices.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -920,7 +900,7 @@
               <img src="icons/privacy/map.png" alt="">
               <div>
                 <h1>Disable Automatic Map Downloads</h1>
-                <p>Stops Windows from automatically downloading maps in background.</p>
+                <p>Stops automatic map downloads in background.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -1341,7 +1321,7 @@
                 <img src="icons/performance/dns.png" alt="">
                 <div>
                   <h1>Set as DNS</h1>
-                  <p>Set your preferred DNS. You can only choose one, if you choose more, the last one will be applied.</p>
+                  <p>You can only choose one, if you choose more, the last one will be applied.</p>
                 </div>
               </div>
               <img class="chevron" src="icons/chevron-down.png" alt="">
@@ -1429,7 +1409,7 @@
               <img src="icons/performance/ultimate.png" alt="">
               <div>
                 <h1>Add Ultimate Performance</h1>
-                <p>This will add the Ultimate Performance power plan, to enable it go to the power options.</p>
+                <p>This will add and enable the Ultimate Performance power plan.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -1463,7 +1443,7 @@
               <img src="icons/performance/hags.png" alt="">
               <div>
                 <h1>Disable HAGS</h1>
-                <p>Disables Hardware-Accelerated GPU Scheduling, which may improve performance.</p>
+                <p>Disables Hardware-Accelerated GPU Scheduling.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -1480,7 +1460,7 @@
               <img src="icons/performance/limit.png" alt="">
               <div>
                 <h1>Limit Defender CPU Usage</h1>
-                <p>Limits Defender CPU maximum usage at 25% instead of default 50%.</p>
+                <p>Limits Defender maximum CPU usage at 25% instead of default 50%.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -1497,7 +1477,7 @@
               <img src="icons/performance/vbs.png" alt="">
               <div>
                 <h1>Disable Core Isolation</h1>
-                <p>Disables Core Isolation, it will improve performance at the cost of one layer of security.</p>
+                <p>Disables Core Isolation, may improve performance at the cost of security.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -1514,7 +1494,7 @@
               <img src="icons/performance/superfetch.png" alt="">
               <div>
                 <h1>Disable Superfetch</h1>
-                <p>Disables Superfetch/Prefetch, it can improve performance.</p>
+                <p>Disables Superfetch/Prefetch, it may improve performance.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -1533,7 +1513,7 @@
               <img src="icons/performance/storage.png" alt="">
               <div>
                 <h1>Disable Storage Sense</h1>
-                <p>Runs in the background and automatically deletes temporary files.</p>
+                <p>Background services that automatically deletes temporary files.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">
@@ -1551,7 +1531,7 @@
 
               <div>
                 <h1>Disable Search</h1>
-                <p>Disables Windows Search, drive indexing will stop working.</p>
+                <p>Drive indexing will stop working.</p>
               </div>
             </div>
             <div class="checkbox-wrapper">

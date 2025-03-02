@@ -30,6 +30,24 @@
   }
 }
 
+@keyframes slide-in {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-150%);
+  }
+}
+
 html {
   scroll-behavior: smooth;
   user-select: none;
@@ -120,7 +138,7 @@ body {
   position: relative;
   min-height: 100vh;
   color: var(--text);
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 ::-webkit-scrollbar {
@@ -135,6 +153,7 @@ body {
 
 h1 {
   line-height: 1.5;
+  text-wrap: balance;
 }
 
 button {
@@ -241,18 +260,15 @@ button:hover {
 .content-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
   font-size: 28px;
   font-weight: 500;
   margin-bottom: 1rem;
 }
 
-.fa-solid.fa-xmark,
-.fa-solid.fa-bars-staggered {
+.nav-icon {
   display: none;
-  font-size: 24px;
   cursor: pointer;
-  z-index: 2;
 }
 
 .tab-content {
@@ -266,6 +282,7 @@ button:hover {
   overflow-y: auto;
   max-height: 625px;
   animation: pop-in 0.3s ease;
+  transition: padding-bottom 0.3s ease;
 }
 
 .content-entry {
@@ -484,4 +501,60 @@ input:checked + .slider:before {
 
 .content {
   overflow: hidden !important;
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    margin-left: 1.5rem !important;
+    transition: margin-left 0.3s ease;
+    width: 100%;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .nav-icon {
+    display: flex;
+  }
+
+  .sidebar.responsive {
+    display: flex;
+  }
+
+  .content.responsive {
+    margin-left: 342px !important;
+  }
+}
+
+@media (min-width: 800px) {
+  .content-entry > div > div p {
+    display: block !important;
+  }
+  .sidebar {
+    animation: slide-in 0.3s ease forwards;
+  }
+}
+
+@media (max-height: 700px) {
+  .tab-content.active {
+    padding-bottom: 10vh;
+  }
+}
+
+@media (max-height: 650px) {
+  .tab-content.active {
+    padding-bottom: 15vh;
+  }
+
+  .mockup-code {
+    min-height: 300px;
+    max-height: 300px;
+  }
+}
+
+@media (max-height: 625px) {
+  .tab-content.active {
+    padding-bottom: 20vh;
+  }
 }

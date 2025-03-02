@@ -1,4 +1,4 @@
-import { writeTextFile, readTextFile, mkdir } from "@tauri-apps/plugin-fs";
+import { writeTextFile, readTextFile, mkdir, remove } from "@tauri-apps/plugin-fs";
 import { tempDir, join } from "@tauri-apps/api/path";
 import { Command } from "@tauri-apps/plugin-shell";
 import { app } from "@tauri-apps/api";
@@ -7,6 +7,69 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
+
+async function checkForUpdates() {
+  const update = await check();
+  if (update) {
+    console.log(`Found update ${update.version}`);
+
+    const updateAsk = await ask("A new update is available. Do you want to update?", {
+      title: "Update Available",
+      kind: "info",
+      okLabel: "Update",
+      cancelLabel: "Later",
+    });
+
+    if (updateAsk === true) {
+      await update.downloadAndInstall();
+      await relaunch();
+    } else {
+      return;
+    }
+  } else {
+    console.log("No update available");
+  }
+}
+
+async function isInstalled() {
+  const tmpDir = await tempDir();
+
+  async function checkRegistry() {
+    const registryCheck = `(Test-Path -path "HKCU:\\Software\\flick9000\\WinScript").ToString().ToLower() | Set-Content -Path $env:TEMP\\isInstalled.txt;`;
+    const registryShell = new Command("cmd", ["/c", "powershell", `${registryCheck}`, "pause"]);
+    await registryShell.execute();
+  }
+
+  async function checkProcess() {
+    const processCheck = `([bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)).ToString().ToLower() | Set-Content -Path $env:TEMP\\isPortable.txt;`;
+    const processShell = new Command("cmd", ["/c", "powershell", `${processCheck}`, "pause"]);
+    await processShell.execute();
+  }
+
+  function cleanFiles() {
+    remove(tmpDir + "isInstalled.txt");
+    remove(tmpDir + "isPortable.txt");
+  }
+
+  await checkRegistry();
+  await checkProcess();
+
+  // Reads from text files and converts to boolean
+  const isInstalledBool = (await readTextFile(tmpDir + "isInstalled.txt")).trim() === "true";
+  const isPortableBool = (await readTextFile(tmpDir + "isPortable.txt")).trim() === "true";
+
+  if (isPortableBool) {
+    cleanFiles();
+    return;
+  }
+
+  if (isInstalledBool) {
+    cleanFiles();
+    checkForUpdates();
+  }
+}
+
+isInstalled();
 
 // Apply Mica if OS = Windows 11
 function applyMica() {
@@ -45,38 +108,6 @@ hostname()
     document.getElementById("hostname").textContent = "github.com/flick9000";
   });
 
-// Check for updates
-async function checkForUpdates() {
-  const update = await check();
-  if (!update) {
-    console.log("No update available");
-  }
-  if (update) {
-    console.log(
-      `found update ${update.version} from ${update.date} with notes ${update.body}`
-    );
-
-    const updateAsk = await ask(
-      "A new update is available. Do you want to update?",
-      {
-        title: "Update Available",
-        kind: "info",
-        okLabel: "Update",
-        cancelLabel: "Later",
-      }
-    );
-
-    if (updateAsk === true) {
-      await update.downloadAndInstall();
-      await relaunch();
-    } else {
-      console.log("Update skipped");
-    }
-  }
-}
-
-checkForUpdates();
-
 // Display app version
 async function displayVersion() {
   try {
@@ -90,17 +121,30 @@ async function displayVersion() {
 
 displayVersion();
 
-function responsiveNav() {
+document.querySelector(".nav-icon").addEventListener("click", () => {
   const navbar = document.getElementById("sidebar");
+  const content = document.querySelector(".content");
+  const paragraphs = document.querySelectorAll(".content-entry:not(.about) p");
 
   if (!navbar.classList.contains("responsive")) {
     navbar.classList.add("responsive");
-    document.body.style.overflow = "hidden";
+    content.classList.add("responsive");
+    navbar.style.animation = "slide-in 0.3s ease forwards";
+    paragraphs.forEach((p) => {
+      p.style.display = "none";
+    });
   } else {
-    navbar.classList.remove("responsive");
-    document.body.style.overflow = "visible";
+    navbar.style.animation = "slide-out 0.3s ease forwards";
+    content.classList.remove("responsive");
+    paragraphs.forEach((p) => {
+      p.style.display = "block";
+    });
+    setTimeout(() => {
+      navbar.classList.remove("responsive");
+      navbar.style.animation = "";
+    }, 300);
   }
-}
+});
 
 const tabs = document.querySelectorAll(".sidebar-entry");
 const contents = document.querySelectorAll(".tab-content");

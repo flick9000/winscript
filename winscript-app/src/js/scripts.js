@@ -191,10 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "echo -- Disabling Consumer Features",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableWindowsConsumerFeatures" /t "REG_DWORD" /d "1" /f',
     ],
-    recall: [
-      "echo -- Disabling Recall",
-      "DISM /Online /Disable-Feature /FeatureName:Recall",
-    ],
+    recall: ["echo -- Disabling Recall", "DISM /Online /Disable-Feature /FeatureName:Recall"],
     iexplorer: [
       "echo -- Disabling Internet Explorer",
       "dism /online /Remove-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.0.",
@@ -555,12 +552,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "echo -- Disabling Radio access",
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\radios" /v "Value" /d "Deny" /t REG_SZ /f',
     ],
-    wifisense: [
-      "echo -- Disabling WiFi Sense",
-      'reg add "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\WiFi\\AllowWiFiHotSpotReporting" /v "value" /t REG_DWORD /d 0 /f',
-      'reg add "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\WiFi\\AllowAutoConnectToWiFiSenseHotspots" /v "value" /t REG_DWORD /d 0 /f',
-      'reg add "HKLM\\SOFTWARE\\Microsoft\\WcmSvc\\wifinetworkmanager\\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d 0 /f',
-    ],
     cloudsync: [
       "echo -- Disabling Cloud Sync",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync" /v "DisableSettingSync" /t REG_DWORD /d 2 /f',
@@ -648,16 +639,13 @@ document.addEventListener("DOMContentLoaded", function () {
       "del /s /f /q c:\\windows\\temp\\*.*",
       "del /s /f /q C:\\WINDOWS\\Prefetch",
     ],
-    cleanmgr: [
-      "echo -- Running Disk Clean-up",
-      "cleanmgr /verylowdisk /sagerun:5",
-    ],
+    cleanmgr: ["echo -- Running Disk Clean-up", "cleanmgr /verylowdisk /sagerun:5"],
     emptyrecycle: [
       "echo -- Emptying Recycle Bin",
       'PowerShell -ExecutionPolicy Unrestricted -Command "$bin = (New-Object -ComObject Shell.Application).NameSpace(10); $bin.items() | ForEach {; Write-Host "^""Deleting $($_.Name) from Recycle Bin"^""; Remove-Item $_.Path -Recurse -Force; }"',
     ],
     browserhistory: [
-      "echo Clearing Browser History",
+      "echo -- Clearing Browser History",
       'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\History"',
       'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Cache\\*.*"',
       'del /q /s "%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Cookies"',
@@ -888,10 +876,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "echo -- Disabling Storage Sense",
       'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy" /v "01" /t REG_DWORD /d 0 /f',
     ],
-    disablehibernation: [
-      "echo -- Disabling Hibernation",
-      "powercfg.exe /hibernate off",
-    ],
+    disablehibernation: ["echo -- Disabling Hibernation", "powercfg.exe /hibernate off"],
     limitdefender: [
       "echo -- Limiting Windows Defender Usage",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan" /v "AvgCPULoadFactor" /t REG_DWORD /d "25" /f',
@@ -1042,7 +1027,6 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "calendaraccess", type: "calendaraccess" },
     { id: "motionaccess", type: "motionaccess" },
     { id: "radioaccess", type: "radioaccess" },
-    { id: "wifisense", type: "wifisense" },
     { id: "cloudsync", type: "cloudsync" },
     { id: "notificationtray", type: "notificationtray" },
     { id: "activityfeed", type: "activityfeed" },
@@ -1141,7 +1125,6 @@ let basicIds = [
   "targetads",
   "privacyconsent",
   "cloudsync",
-  "wifisense",
   "screenrecording",
   "automap",
   "activityfeed",
@@ -1182,7 +1165,6 @@ let strictIds = [
   "targetads",
   "privacyconsent",
   "cloudsync",
-  "wifisense",
   "screenrecording",
   "automap",
   "activityfeed",
@@ -1245,7 +1227,6 @@ let extremeIds = [
   "targetads",
   "privacyconsent",
   "cloudsync",
-  "wifisense",
   "screenrecording",
   "automap",
   "activityfeed",

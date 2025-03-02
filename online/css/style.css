@@ -34,6 +34,24 @@
   }
 }
 
+@keyframes slide-in {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-150%);
+  }
+}
+
 html {
   scroll-behavior: smooth;
   user-select: none;
@@ -48,7 +66,7 @@ body {
   min-height: 100vh;
   color: var(--text);
   background-color: hsl(from var(--background) h s l / 0);
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 ::-webkit-scrollbar {
@@ -63,6 +81,7 @@ body {
 
 h1 {
   line-height: 1.5;
+  text-wrap: balance;
 }
 
 button {
@@ -113,8 +132,7 @@ button:hover {
   backdrop-filter: blur(500px);
   background-color: hsla(253, 50%, 7%, 0.75);
   overflow-y: auto;
-  box-shadow: 0px 25.6px 57.6px rgb(0 0 0 / 14%),
-    0px 0px 16.4px rgb(0 0 0 / 12%);
+  box-shadow: 0px 25.6px 57.6px rgb(0 0 0 / 14%), 0px 0px 16.4px rgb(0 0 0 / 12%);
 }
 
 .sidebar {
@@ -221,6 +239,7 @@ button:hover {
   overflow-y: auto;
   max-height: 625px;
   animation: pop-in 0.3s ease;
+  transition: padding-bottom 0.3s ease;
 }
 
 .content-entry {
@@ -445,6 +464,7 @@ input:checked + .slider:before {
   .content {
     margin-left: 1.5rem !important;
     margin-right: 1.5rem;
+    transition: margin-left 0.3s ease;
     width: 100%;
   }
 
@@ -476,6 +496,32 @@ input:checked + .slider:before {
   .fa-solid.fa-xmark,
   .fa-solid.fa-bars-staggered {
     display: none !important;
+  }
+  .sidebar {
+    animation: slide-in 0.3s ease forwards;
+  }
+}
+
+@media (max-height: 725px) {
+  .tab-content.active {
+    padding-bottom: 10vh;
+  }
+}
+
+@media (max-height: 650px) {
+  .tab-content.active {
+    padding-bottom: 15vh;
+  }
+
+  .mockup-code {
+    min-height: 300px;
+    max-height: 300px;
+  }
+}
+
+@media (max-height: 625px) {
+  .tab-content.active {
+    padding-bottom: 20vh;
   }
 }
 
