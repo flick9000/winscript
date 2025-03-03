@@ -28,12 +28,6 @@ irm "https://winscript.cc/irm" | iex
 winget install winscript
 ```
 
-📦 **Portable App**:
-[Latest Release](https://github.com/flick9000/winscript/releases/latest)
-
-🌍 **Online Version**:
-[Website Link](https://winscript.cc/online)
-
 ## Support
 
 ### ⭐ Star
