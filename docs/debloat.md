@@ -112,6 +112,7 @@ PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Yo
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Getstarted" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.549981C3F5F10" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.MixedReality.Portal" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage"
@@ -128,7 +129,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Mi
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.GroupMe10" | Remove-AppxPackage"
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Todos" | Remove-AppxPackage"####
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "MSTeams" | Remove-AppxPackage"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Todos" | Remove-AppxPackage"
 ```
 
 ## Remove Xbox apps
@@ -151,6 +153,8 @@ PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.Xb
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxIdentityProvider" | Remove-AppxPackage"
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "Microsoft.GamingApp" | Remove-AppxPackage"
+
 ```
 
 # Disable Windows Features
@@ -235,7 +239,7 @@ echo -- Removing OneDrive registry keys
 reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
 reg delete "HKEY_CLASSES_ROOT\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
 echo -- Removing OneDrive folders
-rd "%UserProfile%\\OneDrive" /Q /S
+rd "%UserProfile%\\OneDrive" /Q
 rd "%LocalAppData%\\Microsoft\\OneDrive" /Q /S
 rd "%ProgramData%\\Microsoft\\OneDrive" /Q /S
 rd "C:\\OneDriveTemp" /Q /S
@@ -270,8 +274,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "WalletDonationEnabled" /t RE
 These commands are used to completely uninstall Microsoft Edge. First, a registry key is added to enable the uninstallation process. The PowerShell script then searches for the Edge installer and runs it with specific arguments to remove Edge from the system. It provides feedback on whether the uninstallation was successful or if there were issues.
 
 ```
-reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev" /v "AllowUninstall" /t REG_DWORD /d "1" /f
-Powershell -ExecutionPolicy Unrestricted -Command "$installer = (Get-ChildItem \"$($env:ProgramFiles)*\Microsoft\Edge\Application\*\Installer\setup.exe\"); if (!$installer) { Write-Host \"Installer not found. Microsoft Edge may already be uninstalled.\"; } else { $installer | ForEach-Object { $uninstallerPath = $_.FullName; $installerArguments = @(\"--uninstall\", \"--system-level\", \"--verbose-logging\", \"--force-uninstall\"); Write-Output \"Uninstalling through uninstaller: $uninstallerPath\"; $process = Start-Process -FilePath \"$uninstallerPath\" -ArgumentList $installerArguments -Wait -PassThru; if ($process.ExitCode -eq 0 -or $process.ExitCode -eq 19) { Write-Host \"Successfully uninstalled Edge.\"; } else { Write-Error \"Failed to uninstall, uninstaller failed with exit code $($process.ExitCode).\"; }; }; }"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$script = (New-Object Net.WebClient).DownloadString('https://cdn.jsdelivr.net/gh/he3als/EdgeRemover@main/get.ps1'); $script = [ScriptBlock]::Create($script); & $script -UninstallEdge"
 ```
 
 # Remove CoPilot

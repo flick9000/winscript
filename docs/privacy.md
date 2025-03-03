@@ -79,26 +79,6 @@ These scripts disable apps access to certain part of the system, list below.
 - Radio Access: Disabled
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios` set to `Deny`
 
-# Disable Wifi Sense
-
-- WiFi Hotspot Reporting: Disabled
-
-  - `HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting` set to `0`
-
-- Auto Connect to WiFi Sense Hotspots: Disabled
-
-  - `HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots` set to `0`
-
-- Auto Connect Allowed by OEM: Disabled
-  - `HKLM\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config\AutoConnectAllowedOEM` set to `0`
-
-```
-reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v "value" /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v "value" /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d 0 /f
-
-```
-
 # Disable Cloud Sync
 
 - Disable Setting Sync:

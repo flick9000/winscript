@@ -52,3 +52,19 @@ Disables Snap Assist Flyout
 ```
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d 0 /f
 ```
+
+## Verbose Logon
+
+Enables Verbose Logon.
+
+```
+reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" /v "VerboseStatus" /t REG_DWORD /d 1 /f
+```
+
+## Detailed BSOD
+
+Enables Detailed BSOD.
+
+```
+reg add "HKLM\\System\\CurrentControlSet\\Control\\CrashControl" /v "DisplayParameters" /t REG_DWORD /d 1 /f
+```

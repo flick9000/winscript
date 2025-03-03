@@ -264,14 +264,6 @@ reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" /v "Harv
     - `HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization`
   - Disable harvesting contacts:
     - `HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore`
-- Configure Clipboard Settings:
-  - Disable cross-device clipboard:
-    - `HKLM\SOFTWARE\Policies\Microsoft\Windows\System`
-  - Disable cloud clipboard automatic upload:
-    - `HKCU\Software\Microsoft\Clipboard`
-  - Disable clipboard history:
-    - `HKCU\Software\Microsoft\Clipboard`
-    - `HKLM\SOFTWARE\Policies\Microsoft\Windows\System`
 
 ```
 reg add "HKCU\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d 1 /f
@@ -284,10 +276,6 @@ reg add "HKCU\Software\Policies\Microsoft\Windows\TabletPC" /v "PreventHandwriti
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\TabletPC" /v "PreventHandwritingDataSharing" /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d 0 /f
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "AllowCrossDeviceClipboard" /t "REG_DWORD" /d "0" /f
-reg add "HKCU\Software\Microsoft\Clipboard" /v "CloudClipboardAutomaticUpload" /t "REG_DWORD" /d "0" /f
-reg add "HKCU\Software\Microsoft\Clipboard" /v "EnableClipboardHistory" /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "AllowClipboardHistory" /t "REG_DWORD" /d "0" /f
 ```
 
 ## Disable Targeted Ads
