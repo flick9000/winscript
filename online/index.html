@@ -147,6 +147,50 @@
           </div>
 
           </details>
+
+          <details>
+            <summary class="content-entry">
+              <div>
+                <img src="icons/tools/sfc.png" alt="">
+                <div>
+                  <h1>Verify System Integrity</h1>
+                  <p>Verifies the system files integrity and fixes corrupt files.</p>
+                </div>
+              </div>
+              <img class="chevron" src="icons/chevron-down.png" alt="">
+            </summary>
+
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>DISM (Deployment Image Servicing Manager)</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input id="dism" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="content-entry">
+              <div>
+                <div>
+                  <h1>SFC (System File Checker)</h1>
+                </div>
+              </div>
+              <div class="checkbox-wrapper">
+                <span class="indicator" id="indicator">Off</span>
+                <label class="switch">
+                  <input id="sfc" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            
+          </details>
               
           <div class="content-entry">
             <div>
@@ -160,23 +204,6 @@
               <span class="indicator" id="indicator">Off</span>
               <label class="switch">
                 <input id="restorepoint" type="checkbox">
-                <span class="slider"></span>
-              </label>
-            </div>
-          </div>
-
-          <div class="content-entry">
-            <div>
-              <img src="icons/tools/sfc.png" alt="">
-              <div>
-                <h1>Verify System Integrity</h1>
-                <p>Verifies the system files integrity and fixes corrupt files.</p>
-              </div>
-            </div>
-            <div class="checkbox-wrapper">
-              <span class="indicator" id="indicator">Off</span>
-              <label class="switch">
-                <input id="sfc" type="checkbox">
                 <span class="slider"></span>
               </label>
             </div>
@@ -4019,7 +4046,7 @@
                 <div>
                   <p>
                     <b>1) Important</b> <br>
-                    <i>Review the scripts one by one before executing it.</i>
+                    <i>Review [ALL] the scripts one by one before executing it.</i>
                     <br /> <br />
                     <b>2) Table</b> <br>
                     <i>You can find a table comparing the presets <a style="text-decoration: underline;" target="_blank" href="https://docs.winscript.cc/#/presets">here.</a></i>
@@ -4031,9 +4058,7 @@
                     Reccomended, good balance beetween privacy/performance and functionality.
                     <br /> <br />
                     <b>Strict Preset</b>:
-                    Heavy focus on privacy and performance although it disables some non-essential features, review all the
-                    scripts
-                    one by one before executing it.
+                    Heavy focus on privacy and performance although it disables some non-essential features.
                     <br /> <br />
                     <b>Extreme Preset</b>:
                     Not reccomended, use only if you know what you're doing.

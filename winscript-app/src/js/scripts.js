@@ -654,8 +654,12 @@ document.addEventListener("DOMContentLoaded", function () {
       'del /q /s "%LocalAppData%\\Microsoft\\Edge\\User Data\\Default\\Cookies"',
       'del /q /s "%APPDATA%\\Mozilla\\Firefox\\Profiles\\*.default\\places.sqlite"',
       'del /q /s "%APPDATA%\\Mozilla\\Firefox\\Profiles\\*.default\\cache2\\entries\\*.*"',
+      'del /q /s "%LocalAppData%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\History"',
+      'del /q /s "%LocalAppData%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cache\\*.*"',
+      'del /q /s "%LocalAppData%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cookies"',
     ],
     sfc: ["echo -- Running SFC", "sfc /scannow"],
+    dism: ["echo -- Running DISM", "DISM /Online /Cleanup-Image /RestoreHealth"],
     resetnetwork: [
       "echo -- Resetting Network",
       "ipconfig /flushdns",
@@ -1046,6 +1050,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "emptyrecycle", type: "emptyrecycle" },
     { id: "browserhistory", type: "browserhistory" },
     { id: "sfc", type: "sfc" },
+    { id: "dism", type: "dism" },
     { id: "resetnetwork", type: "resetnetwork" },
 
     { id: "ultimateperformance", type: "ultimateperformance" },

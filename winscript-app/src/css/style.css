@@ -17,7 +17,7 @@
     border-color: transparent;
   }
   to {
-    border-color: #6040bf;
+    border-color: var(--text);
   }
 }
 
