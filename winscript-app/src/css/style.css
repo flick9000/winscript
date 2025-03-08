@@ -469,9 +469,12 @@ input:checked + .slider:before {
   gap: 8px;
 }
 
-.manual-input input {
+#manualInput {
   margin-bottom: 0;
   max-width: 160px;
+  &::placeholder {
+    font-size: 12px;
+  }
 }
 
 #manualList {
