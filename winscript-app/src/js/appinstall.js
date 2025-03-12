@@ -107,7 +107,6 @@ function appsInstall() {
     { id: "ImageGlass", url: "imageglass" },
     { id: "iTunes", url: "itunes" },
     { id: "Jellyfin", url: "jellyfin" },
-    { id: "Kdenlive", url: "kdenlive" },
     { id: "KLite", url: "k-litecodecpackbasic" },
     { id: "MediaMonkey", url: "mediamonkey" },
     { id: "MuseScore", url: "musescore" },
