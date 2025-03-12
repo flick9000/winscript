@@ -102,3 +102,10 @@ jobs:
           gh release upload "${{ github.ref_name }}" "latest.json" --clobber
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: Remove signature file
+        run: |
+          gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe.sig"
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
