@@ -1,7 +1,5 @@
 # Downloads the latest version, runs it, and cleans up afterward
 
-Write-Host "Downloading the latest WinScript portable version..." -ForegroundColor Green
-
 # GitHub API URL for latest release
 $apiUrl = "https://api.github.com/repos/flick9000/winscript/releases/latest"
 
