@@ -33,10 +33,10 @@ jobs:
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
-          workspaces: "./winscript-app/src-tauri -> target"
+          workspaces: "./app/src-tauri -> target"
 
       - name: install frontend dependencies
-        working-directory: ./winscript-app
+        working-directory: ./app
         run: npm install
 
       - uses: tauri-apps/tauri-action@v0
@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         with:
-          projectPath: ./winscript-app
+          projectPath: ./app
           tagName: ${{ github.ref_name }}
           releaseName: ${{ github.ref_name }}
           releaseBody: "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*"
@@ -60,8 +60,8 @@ jobs:
 
       - name: Upload Portable Executable to Release
         run: |
-          ren ./winscript-app/src-tauri/target/release/winscript.exe winscript-portable.exe
-          gh release upload ${{ github.ref_name }} ./winscript-app/src-tauri/target/release/winscript-portable.exe --clobber
+          ren ./app/src-tauri/target/release/winscript.exe winscript-portable.exe
+          gh release upload ${{ github.ref_name }} ./app/src-tauri/target/release/winscript-portable.exe --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}

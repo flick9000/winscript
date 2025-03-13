@@ -12,7 +12,7 @@
 
 html,
 body {
-  background-color: var(--background);
+  background-color: var(--background) !important;
   font-family: "Inter", system-ui, sans-serif !important;
 }
 
@@ -84,8 +84,7 @@ span.emoji {
   vertical-align: middle;
 }
 span.emoji {
-  font-family: Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
-    Noto Color Emoji;
+  font-family: Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-size: 1.2em;
 }
 .progress {
