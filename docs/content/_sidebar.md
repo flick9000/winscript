@@ -1,0 +1,12 @@
+- Getting Started
+  - [WinScript](/)
+- Scripts
+  - [Tools](content/tools.md)
+  - [Debloat](content/debloat.md)
+  - [Privacy](content/privacy.md)
+  - [Telemetry](content/telemetry.md)
+  - [Gaming](content/gaming.md)
+  - [Performance](content/performance.md)
+  - [Miscellanous](content/misc.md)
+  - [Install](content/install.md)
+  - [Presets](content/presets.md)
