@@ -105,6 +105,7 @@ jobs:
 
       - name: Remove signature file
         run: |
+          $VERSION = "${{ github.ref_name }}" -replace "^v", ""
           gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe.sig"
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
