@@ -8,17 +8,39 @@ import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
 
+async function getChangelog() {
+  const response = await fetch("https://api.github.com/repos/flick9000/winscript/releases/latest");
+  if (!response.ok) {
+    return null;
+  } else {
+    const data = await response.json();
+    return data.body.replace(
+      "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
+      ""
+    );
+  }
+}
+
+const changelog = await getChangelog();
+
 async function checkForUpdates() {
   const update = await check();
   if (update) {
-    console.log(`Found update ${update.version}`);
-
-    const updateAsk = await ask("A new update is available. Do you want to update?", {
-      title: "Update Available",
-      kind: "info",
-      okLabel: "Update",
-      cancelLabel: "Later",
-    });
+    if (changelog) {
+      const updateAsk = await ask(changelog, {
+        title: "Update Available",
+        kind: "info",
+        okLabel: "Update",
+        cancelLabel: "Later",
+      });
+    } else {
+      const updateAsk = await ask("An update is available. Do you want to update?", {
+        title: "Update Available",
+        kind: "info",
+        okLabel: "Update",
+        cancelLabel: "Later",
+      });
+    }
 
     if (updateAsk === true) {
       await update.downloadAndInstall();
@@ -27,7 +49,7 @@ async function checkForUpdates() {
       return;
     }
   } else {
-    console.log("No update available");
+    return;
   }
 }
 
