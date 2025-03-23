@@ -21,7 +21,7 @@ async function getChangelog() {
   }
 }
 
-const changelog = await getChangelog();
+const changelog = getChangelog();
 
 async function checkForUpdates() {
   const update = await check();

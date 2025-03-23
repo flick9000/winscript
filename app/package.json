@@ -1,7 +1,7 @@
 {
   "name": "winscript",
   "private": true,
-  "version": "1.2.5",
+  "version": "1.2.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
