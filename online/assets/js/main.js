@@ -182,18 +182,17 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 });
 
 document.getElementById("downloadBtn").addEventListener("click", function () {
-  // Get the text content from the div
   var textContent = document.getElementById("code").innerText;
-  // Create a Blob with the text content
+
+  // Replace newlines with CRLF
+  textContent = textContent.replace(/\n/g, "\r\n");
+
   var blob = new Blob([textContent], { type: "text/plain" });
-  // Create a download link
   var link = document.createElement("a");
   link.href = window.URL.createObjectURL(blob);
   link.download = "winscript.bat";
-  // Append the link to the body
+
   document.body.appendChild(link);
-  // Programmatically click the download link
   link.click();
-  // Remove the link from the document
   document.body.removeChild(link);
 });
