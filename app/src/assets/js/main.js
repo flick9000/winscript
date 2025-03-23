@@ -21,20 +21,22 @@ async function getChangelog() {
   }
 }
 
-const changelog = getChangelog();
-
 async function checkForUpdates() {
+  const changelog = await getChangelog();
   const update = await check();
+
   if (update) {
+    let updateAsk;
+
     if (changelog) {
-      const updateAsk = await ask(changelog, {
+      updateAsk = await ask(changelog, {
         title: "Update Available",
         kind: "info",
         okLabel: "Update",
         cancelLabel: "Later",
       });
     } else {
-      const updateAsk = await ask("An update is available. Do you want to update?", {
+      updateAsk = await ask("An update is available. Do you want to update?", {
         title: "Update Available",
         kind: "info",
         okLabel: "Update",
