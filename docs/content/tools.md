@@ -54,6 +54,9 @@ del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*.*"
 del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\Cookies"
 del /q /s "%APPDATA%\Mozilla\Firefox\Profiles\*.default\places.sqlite"
 del /q /s "%APPDATA%\Mozilla\Firefox\Profiles\*.default\cache2\entries\*.*"
+del /q /s "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\History"
+del /q /s "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cache\*.*"
+del /q /s "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cookies"
 ```
 
 ## Reset Network
