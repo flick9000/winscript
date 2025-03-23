@@ -372,6 +372,9 @@ document.getElementById("runBtn").addEventListener("click", async function () {
 
   let textContent = document.getElementById("code").innerText;
 
+  // Convert LF to CRLF
+  textContent = textContent.replace(/\n/g, "\r\n");
+
   try {
     // Get the TEMP directory path
     const tmpDir = await tempDir();
