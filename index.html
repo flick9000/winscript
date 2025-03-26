@@ -22,9 +22,14 @@
     <link rel="stylesheet" href="assets/styles/reset.css" />
     <link rel="stylesheet" href="assets/styles/animations.css" />
     <link rel="stylesheet" href="assets/styles/style.css" />
+
     <script defer src="assets/main.js"></script>
 
     <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
+
+    <!-- Lenis -->
+    <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.2.3/dist/lenis.css" />
 
     <title>WinScript | Make Windows Yours.</title>
   </head>
@@ -71,10 +76,12 @@
       </div>
       <div class="nav-items right">
         <a href="https://ko-fi.com/flick9000" target="_blank" class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14">
             <path
               fill="currentColor"
-              d="M2 21v-2h18v2zM20 8V5h-2v3zm0-5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V3zm-4 2H6v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2z"
+              fill-rule="evenodd"
+              d="m7 .464l.377-.27a.464.464 0 0 0-.754 0zm0 0l-.377-.27l-.002.002l-.005.006L6.6.226a16 16 0 0 0-.276.4a24 24 0 0 0-.652 1.027a12 12 0 0 0-.664 1.25c-.176.395-.33.831-.33 1.198c0 .631.24 1.24.673 1.691s1.027.71 1.649.71s1.215-.258 1.649-.71s.673-1.06.673-1.69c0-.368-.154-.804-.33-1.2a12 12 0 0 0-.664-1.25A23 23 0 0 0 7.4.227L7.384.202L7.379.196L7.378.195L7 .465ZM0 5.112v4.726a2 2 0 0 0 .586 1.414l2.191 2.191V14H6.11v-2.874a2.22 2.22 0 0 0-.65-1.57L4.022 8.118l-.004-.004a.8.8 0 0 0-1.076 1.182l.92.92a.5.5 0 1 1-.707.707l-.92-.92a1.8 1.8 0 0 1-.014-2.53V5.111a1.11 1.11 0 1 0-2.222 0Zm14 4.726V5.112a1.11 1.11 0 0 0-2.222 0v2.361a1.8 1.8 0 0 1-.014 2.532l-.92.919a.5.5 0 0 1-.707-.707l.92-.92A.8.8 0 0 0 9.98 8.115l-.004.004L8.54 9.555a2.22 2.22 0 0 0-.65 1.571V14h3.332v-.556l2.191-2.192A2 2 0 0 0 14 9.838"
+              clip-rule="evenodd"
             />
           </svg>
         </a>
@@ -141,8 +148,8 @@
             </div>
             <p>
               Start by downloading the desktop version (or using the online version). Explore and
-              choose different tweaks based on your needs and after you can download or copy to run
-              your custom script.
+              choose different tweaks based on your needs and after you can run or download your
+              custom script.
             </p>
             <div class="modal-buttons">
               <a href="https://github.com/flick9000/winscript/releases">Desktop Version -></a>
@@ -162,58 +169,6 @@
             Windows script from scratch.
           </p>
           <p class="version">Latest update: <span id="commit-date"></span></p>
-
-          <script>
-            async function fetchLatestCommitDate() {
-              const owner = "flick9000"; // Replace with your GitHub username
-              const repo = "winscript"; // Replace with your repository name
-              const storageKey = "latestCommitDate";
-              const cacheDuration = 1 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-              // Check localStorage for a cached date
-              const cachedData = localStorage.getItem(storageKey);
-              if (cachedData) {
-                const { date, timestamp } = JSON.parse(cachedData);
-                const now = new Date().getTime();
-
-                // Use cached data if it's still valid
-                if (now - timestamp < cacheDuration) {
-                  document.getElementById("commit-date").textContent = date;
-                  return;
-                }
-              }
-
-              // Fetch the latest commit date from the API
-              try {
-                const response = await fetch(
-                  `https://api.github.com/repos/${owner}/${repo}/commits`
-                );
-                if (!response.ok) {
-                  throw new Error(`Error fetching commits: ${response.statusText}`);
-                }
-                const commits = await response.json();
-                const latestCommit = commits[0];
-                const commitDate = new Date(latestCommit.commit.committer.date).toLocaleString();
-
-                // Save the result in localStorage
-                localStorage.setItem(
-                  storageKey,
-                  JSON.stringify({
-                    date: commitDate,
-                    timestamp: new Date().getTime(),
-                  })
-                );
-
-                document.getElementById("commit-date").textContent = commitDate;
-              } catch (error) {
-                console.error(error);
-                document.getElementById("commit-date").textContent = "Error fetching commit date.";
-              }
-            }
-
-            // Call the function when the page loads
-            fetchLatestCommitDate();
-          </script>
 
           <a id="openStartDialog" class="cta">
             <span>Get Started -></span>
@@ -338,7 +293,12 @@
               >contributing guide</a
             >.
           </p>
-          <img class="opensource" src="assets/img/opensource.png" alt="Open Source" />
+          <a class="stars" href="https://github.com/flick9000/winscript"
+            ><span>⭐ Join the </span><span id="star-count"></span> <span>stargazers</span>
+            <span style="opacity: 0.7; color: inherit">on</span>
+            GitHub.</a
+          >
+          <img class="opensource" src="assets/img/opensource.webp" alt="Open Source" />
         </div>
       </section>
     </main>
@@ -351,10 +311,12 @@
         </p>
         <div class="icons">
           <a href="https://ko-fi.com/flick9000" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14">
               <path
                 fill="currentColor"
-                d="M2 21v-2h18v2zM20 8V5h-2v3zm0-5a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V3zm-4 2H6v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2z"
+                fill-rule="evenodd"
+                d="m7 .464l.377-.27a.464.464 0 0 0-.754 0zm0 0l-.377-.27l-.002.002l-.005.006L6.6.226a16 16 0 0 0-.276.4a24 24 0 0 0-.652 1.027a12 12 0 0 0-.664 1.25c-.176.395-.33.831-.33 1.198c0 .631.24 1.24.673 1.691s1.027.71 1.649.71s1.215-.258 1.649-.71s.673-1.06.673-1.69c0-.368-.154-.804-.33-1.2a12 12 0 0 0-.664-1.25A23 23 0 0 0 7.4.227L7.384.202L7.379.196L7.378.195L7 .465ZM0 5.112v4.726a2 2 0 0 0 .586 1.414l2.191 2.191V14H6.11v-2.874a2.22 2.22 0 0 0-.65-1.57L4.022 8.118l-.004-.004a.8.8 0 0 0-1.076 1.182l.92.92a.5.5 0 1 1-.707.707l-.92-.92a1.8 1.8 0 0 1-.014-2.53V5.111a1.11 1.11 0 1 0-2.222 0Zm14 4.726V5.112a1.11 1.11 0 0 0-2.222 0v2.361a1.8 1.8 0 0 1-.014 2.532l-.92.919a.5.5 0 0 1-.707-.707l.92-.92A.8.8 0 0 0 9.98 8.115l-.004.004L8.54 9.555a2.22 2.22 0 0 0-.65 1.571V14h3.332v-.556l2.191-2.192A2 2 0 0 0 14 9.838"
+                clip-rule="evenodd"
               />
             </svg>
           </a>
@@ -367,7 +329,7 @@
             </svg>
           </a>
           <a href="https://github.com/flick9000/winscript/releases" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 512 512">
               <path
                 fill="currentColor"
                 d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v242.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352zm368 56a24 24 0 1 1 0 48a24 24 0 1 1 0-48"
@@ -392,7 +354,7 @@
           </ul>
         </div>
         <div class="donations">
-          <h2>Donations</h2>
+          <h2>Donate</h2>
           <a href="https://ko-fi.com/flick9000" target="_blank" class="support-button">Ko-fi</a>
         </div>
       </div>

@@ -38,6 +38,7 @@ body {
 
 img {
   border-radius: 7px;
+  pointer-events: none;
 }
 
 .radial-wrapper {
@@ -331,10 +332,11 @@ main {
   width: clamp(300px, 75vw, 1200px);
   aspect-ratio: 4 / 2;
   object-fit: cover;
-  border: 1px solid #0000;
+  border: 1px solid transparent;
   border-radius: 14px;
-  background: linear-gradient(#131219, #131219) padding-box,
-    linear-gradient(var(--angle), hsl(255, 50%, 15%), var(--cta)) border-box;
+  background: linear-gradient(hsla(249, 16%, 8%, 0.75), hsla(249, 16%, 8%, 0.75)) padding-box,
+    linear-gradient(var(--angle), hsla(255, 50%, 15%, 0.75), hsl(from var(--cta) h s l / 0.75))
+      border-box;
   animation: 4s rotate linear infinite;
 }
 
@@ -445,8 +447,8 @@ section.install > .even-columns h1 {
 
 section.telemetry > .even-columns img,
 section.install > .even-columns img {
-  background: linear-gradient(#131219, #131219) padding-box,
-    linear-gradient(var(--angle), #070707, #93899f) border-box;
+  background: linear-gradient(hsla(249, 16%, 8%, 0.75), hsla(249, 16%, 8%, 0.75)) padding-box,
+    linear-gradient(var(--angle), hsla(0, 0%, 3%, 0.75), hsla(267, 10%, 58%, 0.75)) border-box;
 }
 
 .opensource-wrapper {
@@ -471,12 +473,21 @@ section.install > .even-columns img {
   opacity: 0.9;
 }
 
+.stars {
+  margin-block: -0.25rem;
+  text-wrap: balance;
+}
+
+.stars span {
+  color: #e0bc38;
+}
+
 img.opensource {
   width: clamp(300px, 75vw, 1000px);
   border: 1px solid #0000;
   border-radius: 14px;
-  background: linear-gradient(#131219, #131219) padding-box,
-    linear-gradient(var(--angle), hsl(255, 50%, 25%), var(--cta)) border-box;
+  background: linear-gradient(hsla(249, 16%, 8%, 0.75), hsla(249, 16%, 8%, 0.75)) padding-box,
+    linear-gradient(var(--angle), hsla(255, 50%, 25%, 0.75), hsl(from var(--cta) h s l / 0.75));
   animation: 4s rotate linear infinite;
 }
 
@@ -505,6 +516,7 @@ footer > .left > h1 {
 
 footer > .left > p {
   font-size: 0.96rem;
+  opacity: 0.9;
   max-width: 420px;
 }
 
