@@ -96,7 +96,7 @@ async function fetchLatestStarCount() {
       })
     );
 
-    document.getElementById("star-count").textContent = "⭐ " + starCount + " stargazers on GitHub";
+    document.getElementById("star-count").textContent = starCount + " stargazers on GitHub";
   } catch (error) {
     console.error(error);
   }
