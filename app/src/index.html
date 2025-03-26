@@ -1627,6 +1627,22 @@
 
           <div class="content-entry">
             <div>
+              <img src="assets/icons/misc/taskbarleft.png" alt="">
+              <div>
+                <h1>Move Taskbar Icons to Left</h1>
+              </div>
+            </div>
+            <div class="checkbox-wrapper">
+              <span class="indicator" id="indicator">Off</span>
+              <label class="switch">
+                <input id="taskbarleft" type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="content-entry">
+            <div>
               <img src="assets/icons/misc/numlock.png" alt="">
               <div>
                 <h1>Disable Numlock on Startup</h1>
@@ -4349,74 +4365,74 @@
           <div class="mockup-code">
             <div id="code" class="code">
               <div>
-                <pre><code>:: WinScript </code></pre>
+                <pre><code class="language-dos">:: WinScript </code></pre>
               </div>
               <div>
-                <pre><code>@echo off</code></pre>
-              </div>
-
-              <div>
-                <pre><code></code></pre>
-                <pre><code>:: Check if the script is running as admin</code></pre>
-                <pre><code>openfiles >nul 2>&1</code></pre>
-                <pre><code>if %errorlevel% neq 0 (</code></pre>
-                <pre><code>    color 4</code></pre>
-                <pre><code>    echo This script requires administrator privileges.</code></pre>
-                <pre><code>    echo Please run WinScript as an administrator.</code></pre>
-                <pre><code>    pause</code></pre>
-                <pre><code>    exit</code></pre>
-                <pre><code>)</code></pre>
-                <pre><code></code></pre>
+                <pre><code class="language-dos">@echo off</code></pre>
               </div>
 
               <div>
-                <pre><code>:: Admin privileges confirmed, continue execution</code></pre>
-                <pre><code>setlocal EnableExtensions DisableDelayedExpansion</code></pre>
+                <pre><code class="language-dos"></code></pre>
+                <pre><code class="language-dos">:: Check if the script is running as admin</code></pre>
+                <pre><code class="language-dos">openfiles >nul 2>&1</code></pre>
+                <pre><code class="language-dos">if %errorlevel% neq 0 (</code></pre>
+                <pre><code class="language-dos">    color 4</code></pre>
+                <pre><code class="language-dos">    echo This script requires administrator privileges.</code></pre>
+                <pre><code class="language-dos">    echo Please run WinScript as an administrator.</code></pre>
+                <pre><code class="language-dos">    pause</code></pre>
+                <pre><code class="language-dos">    exit</code></pre>
+                <pre><code class="language-dos">)</code></pre>
+                <pre><code class="language-dos"></code></pre>
+              </div>
+
+              <div>
+                <pre><code class="language-dos">:: Admin privileges confirmed, continue execution</code></pre>
+                <pre><code class="language-dos">setlocal EnableExtensions DisableDelayedExpansion</code></pre>
               </div>
               <div class="restore-container">
-                <pre><code></code></pre>
-                <pre><code>echo -- Creating a restore point:</code></pre>
-                <pre><code>powershell -command "Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS""</code></pre>
+                <pre><code class="language-dos"></code></pre>
+                <pre><code class="language-dos">echo -- Creating a restore point:</code></pre>
+                <pre><code class="language-dos">powershell -command "Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS""</code></pre>
               </div>
               <div class="chocolatey-container">
-                <pre><code></code></pre>
-                <pre><code>echo -- Installing Chocolatey:</code></pre>
-                <pre><code>powershell -command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"</code></pre>
+                <pre><code class="language-dos"></code></pre>
+                <pre><code class="language-dos">echo -- Installing Chocolatey:</code></pre>
+                <pre><code class="language-dos">powershell -command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"</code></pre>
               </div>
               <div class="scripts-container">
                 <pre><code class="allScripts"></code></pre>
-                <pre><code></code></pre>
+                <pre><code class="language-dos"></code></pre>
               </div>
               <div class="mas-container">
-                <pre><code>echo -- Running MAS</code></pre>
-                <pre><code>powershell -command "irm https://get.activated.win | iex"</code></pre>
-                <pre><code></code></pre>
+                <pre><code class="language-dos">echo -- Running MAS</code></pre>
+                <pre><code class="language-dos">powershell -command "irm https://get.activated.win | iex"</code></pre>
+                <pre><code class="language-dos"></code></pre>
               </div>
               <div class="div-install">
-                <pre><code>echo -- Refresh environment: </code></pre>
-                <pre><code>call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"</code></pre>
-                <pre><code>echo -- Installing these apps: </code></pre>
-                <pre><code>echo -- </code><span class="installingApps"></span></pre>
+                <pre><code class="language-dos">echo -- Refresh environment: </code></pre>
+                <pre><code class="language-dos">call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"</code></pre>
+                <pre><code class="language-dos">echo -- Installing these apps: </code></pre>
+                <pre><code class="language-dos">echo -- </code><span class="installingApps"></span></pre>
                 <pre><code class="commandDisplay"></code></pre>
-                <pre><code></code></pre>
+                <pre><code class="language-dos"></code></pre>
               </div>
               <div>
-                <pre><code>:: Pause the script</code></pre>
+                <pre><code class="language-dos">:: Pause the script</code></pre>
               </div>
               <div>
-                <pre><code>pause</code></pre>
+                <pre><code class="language-dos">pause</code></pre>
               </div>
               <div>
-                <pre><code>:: Restore previous environment</code></pre>
+                <pre><code class="language-dos">:: Restore previous environment</code></pre>
               </div>
               <div>
-                <pre><code>endlocal</code></pre>
+                <pre><code class="language-dos">endlocal</code></pre>
               </div>
               <div>
-                <pre><code>:: Exit the script</code></pre>
+                <pre><code class="language-dos">:: Exit the script</code></pre>
               </div>
               <div>
-                <pre><code>taskkill /f /im explorer.exe & start explorer & exit /b 0</code></pre>
+                <pre><code class="language-dos">taskkill /f /im explorer.exe & start explorer & exit /b 0</code></pre>
               </div>
             </div>
           </div>
@@ -4520,6 +4536,7 @@
   <script type="module" src="assets/js/scripts.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/powershell.min.js" integrity="sha512-11LPpbaLhyzPhkgG9zmj9HnlvzExOrKùkNyOjhsA0D1joEpH9SVZ17k8NyYKYsVb244cMBjVNtRs1qc5teREMcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/dos.min.js" integrity="sha512-11LPpbaLhyzPhkgG9zmj9HnlvzExOrKùkNyOjhsA0D1joEpH9SVZ17k8NyYKYsVb244cMBjVNtRs1qc5teREMcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>hljs.highlightAll();</script>
 </html>

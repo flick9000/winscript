@@ -1,17 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Function to add a script block dynamically
   function addScript(className, scriptContent) {
     const parentDiv = document.querySelector(".allScripts");
-
-    // Create a new container for the script
     const newDiv = document.createElement("div");
-    newDiv.className = className; // Use className to identify the script type
-
-    // Add the script content
     const codeElement = document.createElement("code");
-    codeElement.textContent = scriptContent;
 
-    // Append the new script to the container
+    newDiv.className = className;
+
+    // Specify language for highlight.js
+    codeElement.classList.add("language-powershell");
+
+    codeElement.textContent = scriptContent;
     newDiv.appendChild(codeElement);
     parentDiv.appendChild(newDiv);
 
@@ -58,15 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
       'if exist "%SystemRoot%\\SysWOW64\\OneDriveSetup.exe" (',
       '    "%SystemRoot%\\SysWOW64\\OneDriveSetup.exe" /uninstall',
       ")",
+      "echo -- Copy OneDrive files to local folders",
+      'robocopy "%USERPROFILE%\\OneDrive" "%USERPROFILE%" /mov /e /xj /ndl /nfl /njh /njs /nc /ns /np',
       "echo -- Remove OneDrive from explorer sidebar",
       'reg delete "HKEY_CLASSES_ROOT\\WOW6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
       'reg delete "HKEY_CLASSES_ROOT\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f',
       "echo -- Removing shortcut entry",
       'del "%appdata%\\Microsoft\\Windows\\Start Menu\\Programs\\OneDrive.lnk"',
       "echo -- Removing scheduled task",
-      'powershell -Command "Get-ScheduledTask -TaskPath "\\" -TaskName "OneDrive*" -ErrorAction SilentlyContinue | Unregister-ScheduledTask"',
+      `powershell -Command "Get-ScheduledTask -TaskPath '\\' -TaskName 'OneDrive*' -ErrorAction SilentlyContinue | Unregister-ScheduledTask -Confirm:$false"`,
       "echo -- Removing OneDrive leftovers",
-      'rd "%UserProfile%\\OneDrive" /Q',
+      'rd "%UserProfile%\\OneDrive" /Q /S',
       'rd "%LocalAppData%\\OneDrive" /Q /S',
       'rd "%LocalAppData%\\Microsoft\\OneDrive" /Q /S',
       'rd "%ProgramData%\\Microsoft OneDrive" /Q /S',
@@ -963,6 +963,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "echo -- Adding End Task to Right-Click",
       'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" /v "TaskbarEndTask" /t REG_DWORD /d "1" /f',
     ],
+    taskbarleft: [
+      "echo -- Moving Taskbar Icons to the left",
+      'reg add "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f',
+    ],
     stickykeys: [
       "echo -- Disabling Sticky Keys",
       'reg add "HKCU\\Control Panel\\Accessibility\\StickyKeys" /v "Flags" /t REG_SZ /d "58" /f',
@@ -1100,6 +1104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "filextensions", type: "filextensions" },
     { id: "classicmenu", type: "classicmenu" },
     { id: "endtask", type: "endtask" },
+    { id: "taskbarleft", type: "taskbarleft" },
     { id: "stickykeys", type: "stickykeys" },
     { id: "numlockstartup", type: "numlockstartup" },
     { id: "snapflyout", type: "snapflyout" },

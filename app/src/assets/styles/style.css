@@ -343,6 +343,20 @@ button:hover {
   padding-block: 16px;
 }
 
+details {
+  interpolate-size: allow-keywords;
+  &::details-content {
+    opacity: 0.3;
+    block-size: 0;
+    overflow-y: clip;
+    transition: content-visibility 0.2s allow-discrete, opacity 0.2s, block-size 0.2s ease-in-out;
+  }
+  &[open]::details-content {
+    opacity: 1;
+    block-size: auto;
+  }
+}
+
 details summary::-webkit-details-marker {
   display: none;
 }
@@ -355,15 +369,6 @@ details > div.content-entry {
   margin-top: 4px;
   padding-left: 48px;
   height: 56px;
-}
-
-details::details-content {
-  block-size: 0;
-  transition: block-size 0.3s ease;
-}
-
-details[open]::details-content {
-  block-size: auto;
 }
 
 details[open] .chevron {
