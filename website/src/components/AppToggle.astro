@@ -1,0 +1,19 @@
+---
+// AppToggle.astro
+const { title, inputId } = Astro.props;
+---
+
+<div class="content-entry">
+  <div>
+    <div>
+      <h1>{title}</h1>
+    </div>
+  </div>
+  <div class="checkbox-wrapper">
+    <span class="indicator" id="indicator">Off</span>
+    <label class="switch">
+      <input js-target="install" id={inputId} type="checkbox" />
+      <span class="slider"></span>
+    </label>
+  </div>
+</div>

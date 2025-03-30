@@ -1,0 +1,31 @@
+---
+// AppGroup.astro
+import AppToggle from "./AppToggle.astro";
+
+interface App {
+  title: string;
+  inputId: string;
+}
+
+interface Props {
+  title: string;
+  icon: string;
+  apps: App[];
+}
+
+const { title, icon, apps } = Astro.props;
+---
+
+<details>
+  <summary class="content-entry">
+    <div>
+      <img src={icon} alt={title} />
+      <div>
+        <h1>{title}</h1>
+      </div>
+    </div>
+    <img class="chevron" src="/icons/chevron-down.png" alt="" />
+  </summary>
+
+  {apps.map((tool) => <AppToggle title={tool.title} inputId={tool.inputId} />)}
+</details>

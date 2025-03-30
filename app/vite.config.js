@@ -10,7 +10,7 @@ export default defineConfig(async () => ({
     strictPort: true,
     // if the host Tauri is expecting is set, use it
     host: host || false,
-    port: 5174,
+    port: 4321,
   },
   build: {
     target: "esnext",

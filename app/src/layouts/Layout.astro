@@ -1,0 +1,39 @@
+---
+import "../assets/styles/reset.css";
+import "../assets/styles/daisyui.css";
+import "../assets/styles/style.css";
+import "../assets/styles/atom-one.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Build your Windows 10/11 script from scratch." />
+    <title>WinScript</title>
+
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <slot />
+  </body>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/appinstall.js"></script>
+
+  <script>
+    // @ts-nocheck
+    import hljs from "highlight.js/lib/core";
+    import dos from "highlight.js/lib/languages/dos";
+    import powershell from "highlight.js/lib/languages/powershell";
+
+    hljs.registerLanguage("powershell", powershell);
+    hljs.registerLanguage("dos", dos);
+
+    window.hljs = hljs;
+
+    hljs.highlightAll();
+  </script>
+</html>

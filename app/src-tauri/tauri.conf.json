@@ -4,8 +4,8 @@
   "version": "1.2.8",
   "identifier": "flick.winscript.dev",
   "build": {
-    "devUrl": "http://localhost:5174/src/",
-    "frontendDist": "../dist/",
+    "devUrl": "http://localhost:4321/",
+    "frontendDist": "../dist",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },

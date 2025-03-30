@@ -1,0 +1,322 @@
+---
+import Landing from "../layouts/Landing.astro";
+---
+
+<Landing>
+  <body>
+    <nav id="navbar" class="navbar">
+      <a href="index.html"><img src="/logo.svg" width="40px" alt="" /></a>
+      <div class="nav-items center">
+        <div class="nav-item">
+          <iconify-icon
+            id="nav-item-icon"
+            icon="fa6-solid:up-right-from-square"
+            width="32"
+            height="32"></iconify-icon>
+          <a href="https://winscript.cc">Home</a>
+        </div>
+        <div class="nav-item">
+          <iconify-icon
+            id="nav-item-icon"
+            icon="fa6-solid:up-right-from-square"
+            width="32"
+            height="32"></iconify-icon>
+          <a id="openPrivacyDialog">Privacy</a>
+        </div>
+        <div class="nav-item">
+          <iconify-icon
+            id="nav-item-icon"
+            icon="fa6-solid:up-right-from-square"
+            width="32"
+            height="32"></iconify-icon>
+          <a href="https://github.com/flick9000/winscript" target="_blank">GitHub</a>
+        </div>
+        <div class="nav-item">
+          <iconify-icon
+            id="nav-item-icon"
+            icon="fa6-solid:up-right-from-square"
+            width="32"
+            height="32"></iconify-icon>
+          <a href="https://docs.winscript.cc" class="support-button sm" target="_blank"> Docs </a>
+        </div>
+      </div>
+      <div class="nav-items right">
+        <a href="https://ko-fi.com/flick9000" target="_blank" class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14">
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="m7 .464l.377-.27a.464.464 0 0 0-.754 0zm0 0l-.377-.27l-.002.002l-.005.006L6.6.226a16 16 0 0 0-.276.4a24 24 0 0 0-.652 1.027a12 12 0 0 0-.664 1.25c-.176.395-.33.831-.33 1.198c0 .631.24 1.24.673 1.691s1.027.71 1.649.71s1.215-.258 1.649-.71s.673-1.06.673-1.69c0-.368-.154-.804-.33-1.2a12 12 0 0 0-.664-1.25A23 23 0 0 0 7.4.227L7.384.202L7.379.196L7.378.195L7 .465ZM0 5.112v4.726a2 2 0 0 0 .586 1.414l2.191 2.191V14H6.11v-2.874a2.22 2.22 0 0 0-.65-1.57L4.022 8.118l-.004-.004a.8.8 0 0 0-1.076 1.182l.92.92a.5.5 0 1 1-.707.707l-.92-.92a1.8 1.8 0 0 1-.014-2.53V5.111a1.11 1.11 0 1 0-2.222 0Zm14 4.726V5.112a1.11 1.11 0 0 0-2.222 0v2.361a1.8 1.8 0 0 1-.014 2.532l-.92.919a.5.5 0 0 1-.707-.707l.92-.92A.8.8 0 0 0 9.98 8.115l-.004.004L8.54 9.555a2.22 2.22 0 0 0-.65 1.571V14h3.332v-.556l2.191-2.192A2 2 0 0 0 14 9.838"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <a href="https://github.com/flick9000/winscript" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
+            ></path>
+          </svg>
+        </a>
+      </div>
+      <iconify-icon
+        onclick="responsiveNav()"
+        class="fa-solid fa-bars-staggered"
+        icon="fa6-solid:bars-staggered"
+        width="24"
+        height="24"></iconify-icon>
+      <iconify-icon
+        onclick="responsiveNav()"
+        class="fa-solid fa-xmark"
+        icon="fa6-solid:xmark"
+        width="24"
+        height="24"></iconify-icon>
+    </nav>
+    <div class="radial-wrapper">
+      <div class="radial-bg"></div>
+    </div>
+    <main>
+      <section class="hero">
+        <dialog id="privacyDialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1>Privacy</h1>
+              <iconify-icon
+                id="closePrivacyDialog"
+                class="fa-solid fa-xmark"
+                icon="fa6-solid:xmark"
+                width="24"
+                height="24"></iconify-icon>
+            </div>
+            <p>
+              🤖 Website automatically deployed from
+              <a href="https://github.com/flick9000/winscript" target="_blank">GitHub</a>.
+            </p>
+            <p>👁️ We do not log IP Address.</p>
+            <p>🍪 We do not use cookies.</p>
+          </div>
+        </dialog>
+        <dialog id="startDialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1>Get Started</h1>
+              <iconify-icon
+                id="closeStartDialog"
+                class="fa-solid fa-xmark"
+                icon="fa6-solid:xmark"
+                width="24"
+                height="24"></iconify-icon>
+            </div>
+            <p>
+              Start by downloading the desktop version (or using the online version). Explore and
+              choose different tweaks based on your needs and after you can run or download your
+              custom script.
+            </p>
+            <div class="modal-buttons">
+              <a href="https://github.com/flick9000/winscript/releases">Desktop Version -></a>
+              <a href="./online/index.html">Online Version -></a>
+            </div>
+          </div>
+        </dialog>
+        <div class="hero-wrapper">
+          <h1 class="hero-title">Make Windows Yours.</h1>
+          <p class="hero-description lg">
+            Open-source tool to build your Windows script from scratch.
+            <br />
+            It features debloat, privacy, performance & app installing scripts.
+          </p>
+          <p class="hero-description sm">
+            Open-source tool to build your <br />
+            Windows script from scratch.
+          </p>
+          <p class="version">Latest update: <span id="commit-date"></span></p>
+
+          <a id="openStartDialog" class="cta">
+            <span>Get Started -></span>
+          </a>
+
+          <div class="banner small">
+            <a href="https://winscript.cc" target="_blank">
+              <img src="img/winscript.webp" alt="WinScript" />
+            </a>
+          </div>
+        </div>
+        <div class="banner lg">
+          <a href="https://winscript.cc" target="_blank">
+            <img src="img/winscript.webp" alt="WinScript" />
+          </a>
+        </div>
+      </section>
+      <section class="privacy fade-in">
+        <div class="even-columns">
+          <h1>
+            <span style="opacity: 0.7">Your Computer</span>
+            <br /><span style="color: #6040bf">Your Privacy</span>
+          </h1>
+          <p>
+            Windows collects extensive user data through telemetry, including location, browsing
+            history, and app usage, often without clear consent, raising privacy concerns. You can
+            improve your privacy by using WinScript, which allows you to disable telemetry and data
+            collection.
+          </p>
+        </div>
+      </section>
+      <section class="features fade-in">
+        <h1 class="card-title">Features</h1>
+        <div class="card-wrapper">
+          <div
+            class="card"
+            style="background: linear-gradient(180deg, #17122b, #705f81); border: 1px solid #6b5b7b"
+          >
+            <h1>
+              <iconify-icon icon="fa6-solid:shield-halved" width="32" height="32"
+              ></iconify-icon>&nbsp; Privacy
+            </h1>
+            <p>
+              Disable Windows and 3rd party telemetry & data collection, tracking, app access &
+              more.
+            </p>
+          </div>
+          <div
+            class="card"
+            style="background: linear-gradient(180deg, #17122b, #968ca1); border: 1px solid #94899f"
+          >
+            <h1>
+              <iconify-icon icon="fa6-solid:rocket" width="32" height="32"></iconify-icon>&nbsp;
+              Performance
+            </h1>
+            <p>
+              Free resources by setting unnecessary background services to manual, removing
+              telemetry & more.
+            </p>
+          </div>
+          <div
+            class="card"
+            style="background: linear-gradient(180deg, #17122b, #705f81); border: 1px solid #6b5b7b"
+          >
+            <h1>
+              <iconify-icon icon="fa6-solid:download" width="32" height="32"></iconify-icon>&nbsp;
+              Apps
+            </h1>
+            <p>Install all your favourite apps simultaneously in one click through chocolatey.</p>
+          </div>
+        </div>
+      </section>
+      <section class="debloat fade-in">
+        <div class="even-columns">
+          <h1>
+            <span style="opacity: 0.7">Remove</span><br />Windows<br /><span style="color: #6040bf"
+              >Bulls**t</span
+            >
+          </h1>
+          <img src="img/debloat.webp" alt="Debloat" />
+        </div>
+      </section>
+      <section class="telemetry fade-in">
+        <div class="even-columns">
+          <h1>
+            <span style="opacity: 0.7">Block</span><br />Windows<br /><span style="color: #6040bf"
+              >Spying</span
+            >
+          </h1>
+          <img src="img/telemetry.webp" alt="Debloat" />
+        </div>
+      </section>
+      <section class="performance fade-in">
+        <div class="even-columns">
+          <h1>
+            <span style="opacity: 0.7">Boost</span><br />Windows<br /><span style="color: #6040bf"
+              >Performance</span
+            >
+          </h1>
+          <img src="img/performance.webp" alt="Debloat" />
+        </div>
+      </section>
+      <section class="install fade-in">
+        <div class="even-columns">
+          <h1>
+            <span style="opacity: 0.7">Install All</span><br />Your Apps<br /><span
+              style="color: #6040bf">In One Click</span
+            >
+          </h1>
+          <img src="img/install.webp" alt="Debloat" />
+        </div>
+      </section>
+      <section class="opensource fade-in">
+        <div class="opensource-wrapper">
+          <h1 style="color: #6040bf">Open Source</h1>
+          <p>
+            WinScript is an open-source project licensed under GPL-3.0. It's completely free to use
+            and transparent. If you want to contribute, please check the
+            <a href="https://github.com/flick9000/winscript/blob/main/CONTRIBUTING.md"
+              >contributing guide</a
+            >.
+          </p>
+          <a class="stars" href="https://github.com/flick9000/winscript"
+            ><span>⭐ Join the </span><span id="star-count"></span>
+            <span>stargazers</span>
+            <span style="opacity: 0.7; color: inherit">on</span>
+            GitHub.</a
+          >
+          <img class="opensource" src="img/opensource.webp" alt="Open Source" />
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="left">
+        <h1>WinScript</h1>
+        <p>
+          WinScript is an open-source project licensed under GPL-3.0. It's completely free to use
+          and transparent.
+        </p>
+        <div class="icons">
+          <a href="https://ko-fi.com/flick9000" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14">
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="m7 .464l.377-.27a.464.464 0 0 0-.754 0zm0 0l-.377-.27l-.002.002l-.005.006L6.6.226a16 16 0 0 0-.276.4a24 24 0 0 0-.652 1.027a12 12 0 0 0-.664 1.25c-.176.395-.33.831-.33 1.198c0 .631.24 1.24.673 1.691s1.027.71 1.649.71s1.215-.258 1.649-.71s.673-1.06.673-1.69c0-.368-.154-.804-.33-1.2a12 12 0 0 0-.664-1.25A23 23 0 0 0 7.4.227L7.384.202L7.379.196L7.378.195L7 .465ZM0 5.112v4.726a2 2 0 0 0 .586 1.414l2.191 2.191V14H6.11v-2.874a2.22 2.22 0 0 0-.65-1.57L4.022 8.118l-.004-.004a.8.8 0 0 0-1.076 1.182l.92.92a.5.5 0 1 1-.707.707l-.92-.92a1.8 1.8 0 0 1-.014-2.53V5.111a1.11 1.11 0 1 0-2.222 0Zm14 4.726V5.112a1.11 1.11 0 0 0-2.222 0v2.361a1.8 1.8 0 0 1-.014 2.532l-.92.919a.5.5 0 0 1-.707-.707l.92-.92A.8.8 0 0 0 9.98 8.115l-.004.004L8.54 9.555a2.22 2.22 0 0 0-.65 1.571V14h3.332v-.556l2.191-2.192A2 2 0 0 0 14 9.838"
+                clip-rule="evenodd"></path>
+            </svg>
+          </a>
+          <a href="https://github.com/flick9000/winscript" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
+              ></path>
+            </svg>
+          </a>
+          <a href="https://github.com/flick9000/winscript/releases" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 512 512">
+              <path
+                fill="currentColor"
+                d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v242.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352zm368 56a24 24 0 1 1 0 48a24 24 0 1 1 0-48"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="right">
+        <div class="links">
+          <h2>Links</h2>
+          <ul>
+            <li>
+              <a href="./online/">Get Started</a>
+            </li>
+            <li>
+              <a href="https://github.com/flick9000/winscript/releases">Download</a>
+            </li>
+            <li>
+              <a href="https://github.com/flick9000/winscript">GitHub</a>
+            </li>
+          </ul>
+        </div>
+        <div class="donations">
+          <h2>Donate</h2>
+          <a href="https://ko-fi.com/flick9000" target="_blank" class="support-button">Ko-fi</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</Landing>

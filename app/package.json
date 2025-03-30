@@ -4,13 +4,17 @@
   "version": "1.2.8",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "tauri": "tauri"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.2.4",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
     "vite": "^6.0.5"
   },
   "dependencies": {
@@ -20,6 +24,14 @@
     "@tauri-apps/plugin-os": "^2.2.0",
     "@tauri-apps/plugin-process": "^2.2.0",
     "@tauri-apps/plugin-shell": "^2.2.0",
-    "@tauri-apps/plugin-updater": "^2.5.1"
+    "@tauri-apps/plugin-updater": "^2.5.1",
+    "astro": "^5.5.5",
+    "highlight.js": "^11.11.1"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-astro"
+    ],
+    "printWidth": 100
   }
 }

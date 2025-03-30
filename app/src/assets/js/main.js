@@ -16,7 +16,7 @@ async function getChangelog() {
     const data = await response.json();
     return data.body.replace(
       "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
-      ""
+      "",
     );
   }
 }
@@ -288,7 +288,7 @@ onedriveCheckbox.addEventListener("click", async (e) => {
       {
         title: "Uninstall OneDrive",
         type: "question",
-      }
+      },
     );
 
     if (onedriveAsk) {

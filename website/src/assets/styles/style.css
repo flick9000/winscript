@@ -1,11 +1,19 @@
 /* Author: @flick9000 */
 /* Global Styling */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 :root {
-  --background: #202020;
+  /* interpolate-size: allow-keywords; */
+  --background: #0d091b;
+  --elevated: #18132b;
   --text: #fff;
   --muted: #ccc;
   --primary: #6040bf;
+}
+
+* {
+  user-select: none;
 }
 
 @keyframes pop-in {
@@ -26,91 +34,6 @@
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #fff;
-    --text: #000;
-    --muted: #555;
-  }
-
-  .sidebar-entry.active {
-    background-color: hsl(from var(--text) h s l / 0.035) !important;
-  }
-
-  .sidebar-entry:hover {
-    background-color: hsl(from var(--text) h s l / 0.025) !important;
-  }
-
-  .nav-icon {
-    filter: invert(1);
-  }
-
-  .content-entry {
-    background-color: hsl(from var(--background) h s l / 0.7) !important;
-    border: 1px solid hsl(from var(--text) h s l / 0.1) !important;
-  }
-
-  .content-entry:hover {
-    background-color: hsl(from var(--background) h s l / 0.25) !important;
-  }
-
-  .content-entry:has(button):hover {
-    background-color: hsl(from var(--background) h s l / 0.7) !important;
-  }
-
-  .content-entry img {
-    filter: invert(1);
-  }
-
-  .mockup-code {
-    background-color: hsl(from var(--background) h s l / 0.7) !important;
-  }
-
-  .slider {
-    background-color: #f5f5f5 !important;
-  }
-
-  .slider:before {
-    background-color: #5d5d5d !important;
-  }
-
-  input:checked + .slider {
-    background-color: #6040bf !important;
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px #6040bf !important;
-  }
-
-  input:checked + .slider:before {
-    background-color: white !important;
-  }
-
-  button {
-    background-color: hsl(from var(--background) h s l / 0.8) !important;
-    border: 1px solid hsl(from var(--text) h s l / 0.05) !important;
-    border-bottom: 1px solid hsl(from var(--text) h s l / 0.2) !important;
-  }
-
-  button:hover {
-    background-color: hsl(from var(--background) h s l / 0.4) !important;
-  }
-
-  .content-entry:has(button):hover {
-    background-color: hsl(from var(--text) h s l / 0.05);
-  }
-
-  .app-search {
-    background-color: hsl(from var(--background) h s l / 0.8) !important;
-    border: 1px solid hsl(from var(--text) h s l / 0.05) !important;
-    border-bottom: 1px solid hsl(from var(--text) h s l / 0.2) !important;
-  }
-}
-
-* {
-  user-select: none;
-}
-
 html {
   scroll-behavior: smooth;
   user-select: none;
@@ -118,12 +41,13 @@ html {
 }
 
 body {
-  font-family: system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   min-height: 100vh;
   color: var(--text);
+  background-color: hsl(from var(--background) h s l / 0);
   overflow: hidden !important;
 }
 
@@ -164,7 +88,7 @@ button:hover {
 
 .main-container {
   display: flex;
-  padding-block: 1.5rem;
+  padding-block: 3rem;
 }
 
 .content {
@@ -176,15 +100,18 @@ button:hover {
 .content-header {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
   font-size: 28px;
   font-weight: 500;
   margin-bottom: 1rem;
 }
 
-.nav-icon {
+.fa-solid.fa-xmark,
+.fa-solid.fa-bars-staggered {
   display: none;
+  font-size: 24px;
   cursor: pointer;
+  z-index: 2;
 }
 
 .content-entry {
@@ -400,21 +327,34 @@ input:checked + .slider:before {
 @media screen and (max-width: 800px) {
   .content {
     margin-left: 1.5rem !important;
+    margin-right: 1.5rem;
     transition: margin-left 0.3s ease;
     width: 100%;
   }
 
-  .nav-icon {
+  .fa-solid.fa-bars-staggered {
     display: flex;
-  }
-
-  .content.responsive {
-    margin-left: 342px !important;
   }
 }
 
-@media (min-width: 800px) {
-  .content-entry > div > div p {
-    display: block !important;
+@media screen and (min-width: 800px) {
+  .fa-solid.fa-xmark,
+  .fa-solid.fa-bars-staggered {
+    display: none !important;
+  }
+}
+
+@media (max-height: 725px) {
+  .tab-content.active {
+    padding-bottom: 10vh;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .content-entry div p {
+    display: none;
+  }
+  .content-entry.about div p {
+    display: block;
   }
 }

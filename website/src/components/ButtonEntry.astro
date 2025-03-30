@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  buttonTitle: string;
+  buttonId: string;
+  icon?: string;
+  description?: string;
+}
+
+const { title, buttonTitle, buttonId, icon, description } = Astro.props;
+---
+
+<div class="content-entry">
+  <div>
+    {icon && <img src={icon} alt={title} />}
+    <div>
+      <h1>{title}</h1>
+      {description && <p>{description}</p>}
+    </div>
+  </div>
+  <button id={buttonId}>{buttonTitle}</button>
+</div>

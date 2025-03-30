@@ -1,0 +1,33 @@
+---
+import ScriptToggle from "./ScriptToggle.astro";
+
+interface Tool {
+  title: string;
+  description?: string;
+  inputId: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  tools: Tool[];
+}
+
+const { title, description, icon, tools } = Astro.props;
+---
+
+<details>
+  <summary class="content-entry">
+    <div>
+      <img src={icon} alt={title} />
+      <div>
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </div>
+    </div>
+    <img class="chevron" src="icons/chevron-down.png" alt="Expand" />
+  </summary>
+
+  {tools.map((tool) => <ScriptToggle title={tool.title} inputId={tool.inputId} />)}
+</details>

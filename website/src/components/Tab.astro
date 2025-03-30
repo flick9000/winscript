@@ -1,0 +1,38 @@
+---
+const { tab } = Astro.props;
+---
+
+<div class="tab-content" id=`${tab}-tab`>
+  <slot />
+</div>
+
+<style>
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    max-height: 625px;
+    animation: pop-in 0.3s ease;
+    transition: padding-bottom 0.3s ease;
+  }
+  @media (max-height: 700px) {
+    .tab-content.active {
+      padding-bottom: 10vh;
+    }
+  }
+  @media (max-height: 650px) {
+    .tab-content.active {
+      padding-bottom: 15vh;
+    }
+  }
+  @media (max-height: 625px) {
+    .tab-content.active {
+      padding-bottom: 20vh;
+    }
+  }
+</style>
