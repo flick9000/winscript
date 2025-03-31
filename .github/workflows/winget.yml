@@ -2,7 +2,7 @@ name: Submit flick9000.WinScript
 on:
   workflow_dispatch:
   release:
-    types: [released, published]
+    types: [published]
 
 jobs:
   sync-repo:
