@@ -3,7 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "prebuild": "cp ../irm.ps1 ./public/irm.ps1",
+    "dev": "npm run prebuild && astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
