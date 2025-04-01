@@ -1,9 +1,14 @@
 # Downloads the latest version, runs it, and cleans up afterward
-
-# GitHub API URL for latest release
 $apiUrl = "https://api.github.com/repos/flick9000/winscript/releases/latest"
+$tempFile = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "winscript-portable.exe")
 
 try {
+    # Remove old file if it exists (may sometimes cause issues)
+    if (Test-Path $tempFile) {
+        Remove-Item -Path $tempFile -Force
+        Write-Host "Old temporary file removed." -ForegroundColor Green
+    }
+    
     # Get latest release info
     $releaseInfo = Invoke-RestMethod -Uri $apiUrl -Headers @{
         "Accept"     = "application/vnd.github.v3+json"
@@ -16,9 +21,6 @@ try {
     if (-not $downloadUrl) {
         throw "Could not find winscript-portable.exe in the latest release"
     }
-    
-    # Create temp file path
-    $tempFile = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "winscript-portable.exe")
 
     if (Test-Path $tempFile) {
         Write-Host "WinScript already downloaded, starting..." -ForegroundColor Green
