@@ -2,7 +2,7 @@
 
 <p align="center">WinScript is an open-source tool built to help you build custom scripts for Windows. It includes debloat, privacy, performance scripts & more, along with the ability to install all your favourite apps in one click.</p>
 
-![App Screenshot](/website/public/img/winscript.webp)
+![App Screenshot](/website/public/winscript.webp)
 
 ## Features
 
