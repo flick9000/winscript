@@ -260,6 +260,29 @@ importBtn.addEventListener("click", async () => {
   }
 });
 
+// Shortcuts
+const windowsSettings = document.getElementById("openSettings");
+const deviceManager = document.getElementById("openDeviceManager");
+const controlPanel = document.getElementById("openControlPanel");
+const visualEffects = document.getElementById("openVisualEffects");
+const msConfig = document.getElementById("openMSConfig");
+
+windowsSettings.addEventListener("click", () => {
+  new Command("cmd", ["/c", "start", "ms-settings:"]).execute();
+});
+deviceManager.addEventListener("click", () => {
+  new Command("cmd", ["/c", "start", "devmgmt.msc"]).execute();
+});
+controlPanel.addEventListener("click", () => {
+  new Command("cmd", ["/c", "start", "control"]).execute();
+});
+visualEffects.addEventListener("click", () => {
+  new Command("cmd", ["/c", "start", "SystemPropertiesPerformance"]).execute();
+});
+msConfig.addEventListener("click", () => {
+  new Command("cmd", ["/c", "start", "msconfig"]).execute();
+});
+
 // MAS Checkbox
 const masCheckbox = document.getElementById("installmas");
 masCheckbox.addEventListener("change", () => {

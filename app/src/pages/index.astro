@@ -19,6 +19,29 @@ import ButtonEntry from "../components/ButtonEntry.astro";
       </div>
       <div class="content-body">
         <Tab tab="tools">
+          <details>
+            <summary class="content-entry">
+              <div>
+                <img src="/icons/tools/shortcuts.png" alt="" />
+                <div>
+                  <h1>Shortcuts</h1>
+                  <p>Shortcuts to various system settings and tools.</p>
+                </div>
+              </div>
+              <img class="chevron" src="/icons/chevron-down.png" alt="" />
+            </summary>
+
+            <ButtonEntry title="Windows Settings" buttonTitle="Open" buttonId="openSettings" />
+
+            <ButtonEntry title="Device Manager" buttonTitle="Open" buttonId="openDeviceManager" />
+
+            <ButtonEntry title="Control Panel" buttonTitle="Open" buttonId="openControlPanel" />
+
+            <ButtonEntry title="Visual Effects" buttonTitle="Open" buttonId="openVisualEffects" />
+
+            <ButtonEntry title="MSConfig" buttonTitle="Open" buttonId="openMSConfig" />
+          </details>
+
           <ScriptGroup
             title="Clean-up"
             description="Free up disk space by cleaning up temporary files."
