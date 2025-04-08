@@ -1,0 +1,267 @@
+---
+// Select.astro - Simplified version
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+export interface Props {
+  options: Option[];
+  name: string;
+  defaultValue?: string;
+  icon?: string;
+}
+
+const { options, name, defaultValue = "", icon = "" } = Astro.props;
+
+const selectedOption = options.find((option) => option.value === defaultValue);
+---
+
+<div class="content-entry">
+  <div>
+    <img src={icon} alt="Select Icon" />
+    <div>
+      <span>{name}</span>
+      <p></p>
+    </div>
+  </div>
+
+  <div class={`custom-select-container`}>
+    <div class="custom-select" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+      <div class="selected-value">
+        {selectedOption?.label || ""}
+      </div>
+      <img class="chevron" src="/icons/chevron-down.png" alt="Dropdown arrow" />
+
+      <input type="hidden" name={name} value={defaultValue} />
+    </div>
+
+    <div class="select-dropdown" role="listbox">
+      {
+        options.map((option) => (
+          <div
+            class={`select-option ${option.value === defaultValue ? "selected" : ""}`}
+            role="option"
+            aria-selected={option.value === defaultValue ? "true" : "false"}
+            data-value={option.value}
+          >
+            <div>
+              <span>{option.label}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-select-container {
+    position: relative;
+    width: 100%;
+    max-width: 130px;
+    font-family: system-ui, sans-serif;
+  }
+
+  .custom-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: hsl(from var(--text) h s l / 0.055);
+    border: 1px solid hsl(from var(--text) h s l / 0.02);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+    height: 32px;
+    width: 100%;
+  }
+
+  .custom-select:hover {
+    background-color: hsl(from var(--text) h s l / 0.07);
+  }
+
+  .custom-select:focus {
+    outline: none;
+    border: 1px solid hsl(from var(--text) h s l / 0.05);
+  }
+
+  .selected-value {
+    margin-right: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text);
+  }
+
+  .selected-value:empty::before {
+    content: attr(data-placeholder);
+    color: var(--muted);
+  }
+
+  .chevron {
+    position: absolute;
+    right: 0;
+    max-width: 12px;
+    transition: transform 0.2s ease-out;
+  }
+
+  .custom-select[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .select-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: var(--background);
+    border: 1px solid hsl(from var(--text) h s l / 0.1);
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.2s ease;
+    visibility: hidden;
+  }
+
+  .select-dropdown.active {
+    max-height: 130px;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .select-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    min-height: 32px;
+    padding: 0 1rem;
+  }
+
+  .select-option > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .select-option p {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .select-option:hover {
+    background-color: hsl(from var(--text) h s l / 0.083);
+  }
+
+  .select-option.selected {
+    background-color: hsl(from var(--text) h s l / 0.1);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .custom-select {
+      background-color: hsl(from var(--background) h s l / 0.8) !important;
+      border: 1px solid hsl(from var(--text) h s l / 0.05) !important;
+      border-bottom: 1px solid hsl(from var(--text) h s l / 0.2) !important;
+    }
+
+    .custom-select:hover {
+      background-color: hsl(from var(--background) h s l / 0.4) !important;
+    }
+
+    .select-dropdown {
+      background-color: hsl(from var(--background) h s l / 0.7) !important;
+      border: 1px solid hsl(from var(--text) h s l / 0.1) !important;
+    }
+
+    .select-option:hover {
+      background-color: hsl(from var(--background) h s l / 0.25) !important;
+    }
+
+    .select-option.selected {
+      background-color: hsl(from var(--text) h s l / 0.05) !important;
+    }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  document.addEventListener("DOMContentLoaded", initCustomSelects);
+
+  function initCustomSelects() {
+    document.querySelectorAll(".custom-select-container").forEach((container) => {
+      const selectElement = container.querySelector(".custom-select");
+      const dropdownElement = container.querySelector(".select-dropdown");
+      const options = container.querySelectorAll(".select-option");
+      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const selectedValue = container.querySelector(".selected-value");
+
+      selectElement.addEventListener("click", () => {
+        const isExpanded = selectElement.getAttribute("aria-expanded") === "true";
+        selectElement.setAttribute("aria-expanded", !isExpanded);
+        dropdownElement.classList.toggle("active");
+      });
+
+      // Handle option selection
+      options.forEach((option) => {
+        option.addEventListener("click", () => {
+          const value = option.getAttribute("data-value");
+          const label = option.querySelector("span").textContent.trim();
+
+          hiddenInput.value = value;
+
+          selectedValue.textContent = label;
+
+          options.forEach((opt) => opt.setAttribute("aria-selected", "false"));
+          option.setAttribute("aria-selected", "true");
+
+          options.forEach((opt) => opt.classList.remove("selected"));
+          option.classList.add("selected");
+
+          selectElement.setAttribute("aria-expanded", "false");
+          dropdownElement.classList.remove("active");
+
+          const event = new Event("change", { bubbles: true });
+          hiddenInput.dispatchEvent(event);
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!container.contains(e.target)) {
+          selectElement.setAttribute("aria-expanded", "false");
+          dropdownElement.classList.remove("active");
+        }
+      });
+
+      // Keyboard navigation
+      selectElement.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          const isExpanded = selectElement.getAttribute("aria-expanded") === "true";
+          selectElement.setAttribute("aria-expanded", !isExpanded);
+          dropdownElement.classList.toggle("active");
+        } else if (e.key === "Escape") {
+          selectElement.setAttribute("aria-expanded", "false");
+          dropdownElement.classList.remove("active");
+        } else if (e.key === "ArrowDown" && dropdownElement.classList.contains("active")) {
+          e.preventDefault();
+          const selected = container.querySelector('.select-option[aria-selected="true"]');
+          const next = selected ? selected.nextElementSibling : options[0];
+          if (next) next.click();
+        } else if (e.key === "ArrowUp" && dropdownElement.classList.contains("active")) {
+          e.preventDefault();
+          const selected = container.querySelector('.select-option[aria-selected="true"]');
+          const prev = selected ? selected.previousElementSibling : options[options.length - 1];
+          if (prev) prev.click();
+        }
+      });
+    });
+  }
+</script>

@@ -7,6 +7,12 @@ import ScriptGroup from "../components/ScriptGroup.astro";
 import AppGroup from "../components/AppGroup.astro";
 import MockupCode from "../components/MockupCode.astro";
 import ButtonEntry from "../components/ButtonEntry.astro";
+import Select from "../components/Select.astro";
+
+const packageManagers = [
+  { value: "chocolatey", label: "Chocolatey" },
+  { value: "winget", label: "Winget" },
+];
 ---
 
 <Layout>
@@ -557,8 +563,15 @@ import ButtonEntry from "../components/ButtonEntry.astro";
             />
             <button id="addApp">Add App</button>
           </div>
+
           <div id="manualList"></div>
 
+          <Select
+            name="Package Manager"
+            options={packageManagers}
+            defaultValue="chocolatey"
+            icon="/icons/install/browser.png"
+          />
           <AppGroup
             title="Drivers"
             icon="/icons/install/drivers.png"
