@@ -141,6 +141,7 @@ button:hover {
 .content-entry .chevron {
   max-width: 12px;
   margin-right: 8px;
+  transition: transform 0.2s ease-out;
 }
 
 .content-entry > div {
