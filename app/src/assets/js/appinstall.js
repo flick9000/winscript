@@ -452,7 +452,7 @@ function appsInstallWinget() {
         ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "' +
           "winget install " +
           finalURL +
-          ' -y --force --ignorepackageexitcodes"'
+          ' --accept-source-agreements --accept-package-agreements --force"'
         : "";
 
     // Display the final URL in the div
