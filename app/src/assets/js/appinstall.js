@@ -217,6 +217,11 @@ function appsInstallChocolatey() {
     const commandDisplay = document.querySelector(".commandDisplay");
     commandDisplay.textContent = command;
 
+    const chocorefresh = document.querySelectorAll(".choco-refresh");
+    chocorefresh.forEach((div) => {
+      div.style.display = "block";
+    });
+
     const installingApps = document.querySelector(".installingApps");
     installingApps.textContent = finalURL;
 
@@ -463,6 +468,11 @@ function appsInstallWinget() {
 
     const commandDisplay = document.querySelector(".commandDisplay");
     commandDisplay.textContent = command;
+
+    const chocorefresh = document.querySelectorAll(".choco-refresh");
+    chocorefresh.forEach((div) => {
+      div.style.display = "none";
+    });
 
     const installingApps = document.querySelector(".installingApps");
     installingApps.textContent = finalURL;
