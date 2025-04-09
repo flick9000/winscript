@@ -9,11 +9,12 @@ interface Option {
 export interface Props {
   options: Option[];
   name: string;
+  id: string;
   defaultValue?: string;
   icon?: string;
 }
 
-const { options, name, defaultValue = "", icon = "" } = Astro.props;
+const { options, id, name, defaultValue = "", icon = "" } = Astro.props;
 
 const selectedOption = options.find((option) => option.value === defaultValue);
 ---
@@ -34,7 +35,7 @@ const selectedOption = options.find((option) => option.value === defaultValue);
       </div>
       <img class="chevron" src="/icons/chevron-down.png" alt="Dropdown arrow" />
 
-      <input type="hidden" name={name} value={defaultValue} />
+      <input type="hidden" id={id} name={name} value={defaultValue} />
     </div>
 
     <div class="select-dropdown" role="listbox">
