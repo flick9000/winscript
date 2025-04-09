@@ -121,7 +121,8 @@ const selectedOption = options.find((option) => option.value === defaultValue);
     max-height: 0;
     overflow: hidden;
     border-radius: 5px;
-    background-color: var(--background);
+    background-color: hsl(from var(--background) h s l / 0.055);
+    backdrop-filter: blur(50px);
     border: 1px solid hsl(from var(--text) h s l / 0.1);
     z-index: 10;
     opacity: 0;
@@ -163,31 +164,6 @@ const selectedOption = options.find((option) => option.value === defaultValue);
 
   .select-option.selected {
     background-color: hsl(from var(--text) h s l / 0.1);
-  }
-
-  @media (prefers-color-scheme: light) {
-    .custom-select {
-      background-color: hsl(from var(--background) h s l / 0.8) !important;
-      border: 1px solid hsl(from var(--text) h s l / 0.05) !important;
-      border-bottom: 1px solid hsl(from var(--text) h s l / 0.2) !important;
-    }
-
-    .custom-select:hover {
-      background-color: hsl(from var(--background) h s l / 0.4) !important;
-    }
-
-    .select-dropdown {
-      background-color: hsl(from var(--background) h s l / 0.7) !important;
-      border: 1px solid hsl(from var(--text) h s l / 0.1) !important;
-    }
-
-    .select-option:hover {
-      background-color: hsl(from var(--background) h s l / 0.25) !important;
-    }
-
-    .select-option.selected {
-      background-color: hsl(from var(--text) h s l / 0.05) !important;
-    }
   }
 </style>
 
