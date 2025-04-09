@@ -1,6 +1,6 @@
-function appsInstall() {
+function appsInstallChocolatey() {
   // List of apps
-  const appList = [
+  const appListChocolatey = [
     // Drivers
     { id: "Intel", url: "intel-dsa" },
     { id: "NVIDIA", url: "nvidia-display-driver" },
@@ -186,7 +186,7 @@ function appsInstall() {
 
   // Get the checked checkboxes
   function getCheckedUrls() {
-    return appList
+    return appListChocolatey
       .filter((app) => {
         const element = document.getElementById(app.id);
         return element && element.checked;
@@ -210,11 +210,17 @@ function appsInstall() {
 
     // Display the final URL in the div
     document.querySelector(".div-install").style.display = allUrls.length > 0 ? "block" : "none";
+    document.querySelector(".winget-container").style.display = "none";
     document.querySelector(".chocolatey-container").style.display =
       allUrls.length > 0 ? "block" : "none";
 
     const commandDisplay = document.querySelector(".commandDisplay");
     commandDisplay.textContent = command;
+
+    const chocorefresh = document.querySelectorAll(".choco-refresh");
+    chocorefresh.forEach((div) => {
+      div.style.display = "block";
+    });
 
     const installingApps = document.querySelector(".installingApps");
     installingApps.textContent = finalURL;
@@ -239,19 +245,293 @@ function appsInstall() {
   updateCommandDisplay();
 }
 
-// Call the function on load
-appsInstall();
+function appsInstallWinget() {
+  // List of apps
+  const appListWinget = [
+    { id: "Intel", url: "Intel.DriverAndSupportAssistant" },
+    { id: "NVIDIA", url: "TechPowerUp.NVCleanstall" },
+    { id: "Ryzen", url: "" }, // missing
+    // Browsers
+    { id: "Brave", url: "Brave.Brave" },
+    { id: "Chrome", url: "Google.Chrome" },
+    { id: "Chromium", url: "Hibbiki.Chromium" },
+    { id: "Firefox", url: "Mozilla.Firefox" },
+    { id: "Floorp", url: "Ablaze.Floorp" },
+    { id: "LibreWolf", url: "LibreWolf.LibreWolf" },
+    { id: "Opera", url: "Opera.Opera" },
+    { id: "Thorium", url: "Alex313031.Thorium" },
+    { id: "Tor", url: "TorProject.TorBrowser" },
+    { id: "Ungoogled", url: "eloston.ungoogled-chromium" },
+    { id: "Vivaldi", url: "Vivaldi.Vivaldi" },
+    { id: "Waterfox", url: "Waterfox.Waterfox" },
+    // Compression
+    { id: "7Zip", url: "7zip.7zip" },
+    { id: "NanaZip", url: "M2Team.NanaZip" },
+    { id: "PeaZip", url: "Giorgiotani.PeaZip" },
+    { id: "WinRAR", url: "RARLab.WinRAR" },
+    // Gaming
+    { id: "BorderlessGaming", url: "Codeusa.BorderlessGaming" },
+    { id: "EAApp", url: "ElectronicArts.EADesktop" },
+    { id: "EpicGames", url: "EpicGames.EpicGamesLauncher" },
+    { id: "FaceIT", url: "FACEITLTD.FACEITClient" },
+    { id: "GOGGalaxy", url: "GOG.Galaxy" },
+    { id: "LGHub", url: "Logitech.GHUB" },
+    { id: "Minecraft", url: "Mojang.MinecraftLauncher" },
+    { id: "PlayNite", url: "Playnite.Playnite" },
+    { id: "PrismLauncher", url: "PrismLauncher.PrismLauncher" },
+    { id: "Steam", url: "Valve.Steam" },
+    { id: "UbisoftConnect", url: "Ubisoft.Connect" },
+    // Utilities
+    { id: "1Password", url: "AgileBits.1Password" },
+    { id: "AnyDesk", url: "AnyDesk.AnyDesk" },
+    { id: "AutoHotkey", url: "AutoHotkey.AutoHotkey" },
+    { id: "BitDefender", url: "Bitdefender.Bitdefender" },
+    { id: "BitWarden", url: "Bitwarden.Bitwarden" },
+    { id: "BulkCrapUninstaller", url: "Klocman.BulkCrapUninstaller" },
+    { id: "BulkRename", url: "TGRMNSoftware.BulkRenameUtility" },
+    { id: "CCleaner", url: "Piriform.CCleaner" },
+    { id: "CPU-Z", url: "CPUID.CPU-Z" },
+    { id: "DDU", url: "Wagnardsoft.DisplayDriverUninstaller" },
+    { id: "Everything", url: "voidtools.Everything" },
+    { id: "FlowLauncher", url: "Flow-Launcher.Flow-Launcher" },
+    { id: "FXSound", url: "FXSound.FXSound" },
+    { id: "GPU-Z", url: "TechPowerUp.GPU-Z" },
+    { id: "HWInfo", url: "REALiX.HWiNFO" },
+    { id: "HWMonitor", url: "CPUID.HWMonitor" },
+    { id: "ImgBurn", url: "LIGHTNINGUK.ImgBurn" },
+    { id: "JDownloader", url: "AppWork.JDownloader" },
+    { id: "KeePass", url: "DominikReichl.KeePass" },
+    { id: "ModernFlyouts", url: "ModernFlyouts.ModernFlyouts" },
+    { id: "Afterburner", url: "Guru3D.Afterburner" },
+    { id: "Shell", url: "Nilesoft.Shell" },
+    { id: "ProtonDrive", url: "Proton.ProtonDrive" },
+    { id: "ProtonMail", url: "Proton.ProtonMailBridge" },
+    { id: "ProtonPass", url: "Proton.ProtonPass" },
+    { id: "qBitTorrent", url: "qBittorrent.qBittorrent" },
+    { id: "QuickLook", url: "QL-Win.QuickLook" },
+    { id: "Rainmeter", url: "Rainmeter.Rainmeter" },
+    { id: "Revo", url: "RevoUninstaller.RevoUninstaller" },
+    { id: "SnappyDriver", url: "samlabs-ws.SnappyDriverInstaller" },
+    { id: "StartAllBack", url: "StartIsBack.StartAllBack" },
+    { id: "TeamViewer", url: "TeamViewer.TeamViewer" },
+    { id: "TotalCommander", url: "Ghisler.TotalCommander" },
+    { id: "TransluscentTB", url: "CharlesMilette.TranslucentTB" },
+    { id: "VirtualBox", url: "Oracle.VirtualBox" },
+    { id: "WindHawk", url: "RamenSoftware.Windhawk" },
+    { id: "WingetUI", url: "marticliment.UniGetUI" },
+    // Pro Tools
+    { id: "AdvancedIpScanner", url: "Famatech.AdvancedIPScanner" },
+    { id: "AngryIpScanner", url: "angryziber.AngryIPScanner" },
+    { id: "MullvadVPN", url: "MullvadVPN.MullvadVPN" },
+    { id: "OpenVPN", url: "OpenVPNTechnologies.OpenVPN" },
+    { id: "ProtonVPN", url: "Proton.ProtonVPN" },
+    { id: "PuTTY", url: "PuTTY.PuTTY" },
+    { id: "SimpleWall", url: "Henry++.Simplewall" },
+    { id: "WireShark", url: "WiresharkFoundation.Wireshark" },
+    { id: "WireGuard", url: "WireGuard.WireGuard" },
+    // Microsoft Tools
+    { id: "Autoruns", url: "Microsoft.Sysinternals.Autoruns" },
+    { id: "Nuget", url: "Microsoft.NuGet" },
+    { id: "OneDrive", url: "Microsoft.OneDrive" },
+    { id: "PowerToys", url: "Microsoft.PowerToys" },
+    { id: "PowerBI", url: "Microsoft.PowerBI" },
+    { id: "ProcessMonitor", url: "Microsoft.Sysinternals.ProcessMonitor" },
+    { id: "vcredist", url: "Microsoft.VCRedist.2015+.x64" },
+    { id: "WinTerminal", url: "Microsoft.WindowsTerminal" },
+
+    // Media
+    { id: "AIMP", url: "AIMP.AIMP" },
+    { id: "Audacity", url: "Audacity.Audacity" },
+    { id: "Clementine", url: "Clementine.Clementine" },
+    { id: "DarkTable", url: "darktable.darktable" },
+    { id: "digiKam", url: "KDE.digiKam" },
+    { id: "EarTrumpet", url: "File-New-Project.EarTrumpet" },
+    { id: "EqualizerAPO", url: "" }, // missing
+    { id: "FFmpeg", url: "Gyan.FFmpeg" },
+    { id: "foobar2000", url: "PeterPawlowski.foobar2000" },
+    { id: "FreeCAD", url: "FreeCAD.FreeCAD" },
+    { id: "HandBrake", url: "HandBrake.HandBrake" },
+    { id: "ImageGlass", url: "DuongDieuPhap.ImageGlass" },
+    { id: "iTunes", url: "Apple.iTunes" },
+    { id: "Jellyfin", url: "Jellyfin.Server" },
+    { id: "KLite", url: "CodecGuide.K-LiteCodecPack.Basic" },
+    { id: "MediaMonkey", url: "Ventis.MediaMonkey.5" },
+    { id: "MuseScore", url: "Musescore.MuseScore" },
+    { id: "OBS", url: "OBSProject.OBSStudio" },
+    { id: "Plex", url: "Plex.Plex" },
+    { id: "Spicetify", url: "Spicetify.Spicetify" },
+    { id: "Spotify", url: "Spotify.Spotify" },
+    { id: "Stremio", url: "Stremio.Stremio" },
+    { id: "VLC", url: "VideoLAN.VLC" },
+    { id: "VoiceMeeter", url: "VB-Audio.VoiceMeeter" },
+
+    // Communication
+    { id: "Discord", url: "Discord.Discord" },
+    { id: "Signal", url: "OpenWhisperSystems.Signal" },
+    { id: "Skype", url: "Microsoft.Skype" },
+    { id: "Slack", url: "SlackTechnologies.Slack" },
+    { id: "Teams", url: "Microsoft.Teams" },
+    { id: "Telegram", url: "Telegram.TelegramDesktop" },
+    { id: "Thunderbird", url: "Mozilla.Thunderbird" },
+    { id: "Whatsapp", url: "WhatsApp.WhatsApp" },
+    { id: "Zoom", url: "Zoom.Zoom" },
+    { id: "Zulip", url: "Zulip.Zulip" },
+
+    // Imaging
+    { id: "Blender", url: "BlenderFoundation.Blender" },
+    { id: "GIMP", url: "GIMP.GIMP.3" },
+    { id: "Greenshot", url: "Greenshot.Greenshot" },
+    { id: "inkScape", url: "Inkscape.Inkscape" },
+    { id: "KdenLive", url: "KDE.Kdenlive" },
+    { id: "Krita", url: "KDE.Krita" },
+    { id: "LightShot", url: "Skillbrains.Lightshot" },
+    { id: "ShareX", url: "ShareX.ShareX" },
+
+    // Documents
+    { id: "AdobeReader", url: "Adobe.Acrobat.Reader.64-bit" },
+    { id: "AFFiNE", url: "Toeverything.AFFiNE" },
+    { id: "FoxItReader", url: "Foxit.FoxitReader" },
+    { id: "Joplin", url: "Joplin.Joplin" },
+    { id: "LibreOffice", url: "TheDocumentFoundation.LibreOffice" },
+    { id: "LogSeq", url: "Logseq.Logseq" },
+    { id: "Obsidian", url: "Obsidian.Obsidian" },
+    { id: "OpenOffice", url: "Apache.OpenOffice" },
+    { id: "PDF24", url: "geeksoftwareGmbH.PDF24Creator" },
+    { id: "simplenote", url: "Automattic.Simplenote" },
+    { id: "SumatraPDF", url: "SumatraPDF.SumatraPDF" },
+
+    // Security
+    { id: "Avast", url: "" }, // missing
+    { id: "AVG", url: "" }, // missing
+    { id: "MalwareBytes", url: "Malwarebytes.Malwarebytes" },
+
+    // For Developers
+    { id: "Clink", url: "chrisant996.clink" },
+    { id: "Cursor", url: "Anysphere.Cursor" },
+    { id: "Docker", url: "Docker.DockerDesktop" },
+    { id: "Git", url: "Git.Git" },
+    { id: "GitHub", url: "GitHub.GitHubDesktop" },
+    { id: "GitHubCLI", url: "GitHub.cli" },
+    { id: "Go", url: "GoLang.Go" },
+    { id: "Godot", url: "GodotEngine.GodotEngine" },
+    { id: "Java", url: "Oracle.JavaRuntimeEnvironment" },
+    { id: "Neovim", url: "Neovim.Neovim" },
+    { id: "NET48", url: "Microsoft.DotNet.Framework.DeveloperPack_4" },
+    { id: "NET8", url: "Microsoft.DotNet.DesktopRuntime.8" },
+    { id: "NodeJS", url: "OpenJS.NodeJS" },
+    { id: "Notepad++", url: "Notepad++.Notepad++" },
+    { id: "OhMyPosh", url: "JanDeDobbeleer.OhMyPosh" },
+    { id: "Python3", url: "Python.Python.3.10" },
+    { id: "Rust", url: "Rustlang.Rustup" },
+    { id: "SublimeText", url: "SublimeHQ.SublimeText.3" },
+    { id: "VSCode", url: "Microsoft.VisualStudioCode" },
+    { id: "VSCodium", url: "VSCodium.VSCodium" },
+    { id: "VS", url: "Microsoft.VisualStudio.2022.Community" },
+    { id: "WSL2", url: "Microsoft.WSL" },
+    { id: "Yarn", url: "Yarn.Yarn" },
+  ];
+
+  // Create manualURL array
+  if (!window.manualURLs) {
+    window.manualURLs = [];
+  }
+
+  // Get the checked checkboxes
+  function getCheckedUrls() {
+    return appListWinget
+      .filter((app) => {
+        const element = document.getElementById(app.id);
+        return element && element.checked;
+      })
+      .map((app) => app.url);
+  }
+
+  // Function to update the command display
+  function updateCommandDisplay() {
+    const checkedUrls = getCheckedUrls();
+    const allUrls = [...checkedUrls, ...window.manualURLs];
+    const finalURL = allUrls.join(" ");
+
+    const command =
+      allUrls.length > 0
+        ? 'taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "' +
+          "winget install " +
+          finalURL +
+          ' --accept-source-agreements --accept-package-agreements --force"'
+        : "";
+
+    // Display the final URL in the div
+    document.querySelector(".div-install").style.display = allUrls.length > 0 ? "block" : "none";
+    document.querySelector(".chocolatey-container").style.display = "none";
+    document.querySelector(".winget-container").style.display =
+      allUrls.length > 0 ? "block" : "none";
+
+    const commandDisplay = document.querySelector(".commandDisplay");
+    commandDisplay.textContent = command;
+
+    const chocorefresh = document.querySelectorAll(".choco-refresh");
+    chocorefresh.forEach((div) => {
+      div.style.display = "none";
+    });
+
+    const installingApps = document.querySelector(".installingApps");
+    installingApps.textContent = finalURL;
+
+    const wingetUpgrade = document.getElementById("wingetUpgrade");
+    wingetUpgrade.textContent = `powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$v = winget -v; if ([version]($v.TrimStart('v')) -lt [version]'1.7.0') { Write-Output 'Old winget version detected, upgrading...'; Set-Location $env:USERPROFILE; Invoke-WebRequest -Uri 'https://aka.ms/getwinget' -OutFile 'winget.msixbundle'; Add-AppPackage -ForceApplicationShutdown .\\winget.msixbundle; Remove-Item .\\winget.msixbundle } else { Write-Output 'Winget is already up to date, skipping upgrade.' }"`;
+
+    const manualList = document.getElementById("manualList");
+    if (window.manualURLs.length > 0) {
+      manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
+    }
+  }
+
+  // Add addButton click listener
+  const addButton = document.getElementById("addApp");
+  addButton.addEventListener("click", () => {
+    const manualInput = document.getElementById("manualInput").value.trim();
+    if (manualInput) {
+      window.manualURLs.push(manualInput);
+      document.getElementById("manualInput").value = ""; // Clear input
+      updateCommandDisplay();
+    }
+  });
+
+  updateCommandDisplay();
+}
+
+appsInstallWinget();
+appsInstallChocolatey();
+
+const selectedPackageManager = document.getElementById("packageManager");
+selectedPackageManager.addEventListener("change", () => {
+  if (selectedPackageManager.value === "chocolatey") {
+    appsInstallChocolatey();
+  } else if (selectedPackageManager.value === "winget") {
+    appsInstallWinget();
+  }
+  console.log("Selected package manager:", selectedPackageManager.value);
+});
 
 // Set up checkbox event listeners
 document.addEventListener("DOMContentLoaded", () => {
   const checkboxes = document.querySelectorAll("[js-target=install]");
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", appsInstall);
-  });
-
+  if (selectedPackageManager.value === "chocolatey") {
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", appsInstallChocolatey);
+    });
+  } else if (selectedPackageManager.value === "winget") {
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", appsInstallWinget);
+    });
+  }
   document.body.addEventListener("change", (event) => {
     if (event.target.matches("[js-target=install]")) {
-      appsInstall();
+      if (selectedPackageManager.value === "chocolatey") {
+        appsInstallChocolatey();
+      } else if (selectedPackageManager.value === "winget") {
+        appsInstallWinget();
+      }
     }
   });
 });
