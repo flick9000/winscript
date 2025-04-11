@@ -7,6 +7,12 @@ import ScriptGroup from "../components/ScriptGroup.astro";
 import AppGroup from "../components/AppGroup.astro";
 import MockupCode from "../components/MockupCode.astro";
 import ButtonEntry from "../components/ButtonEntry.astro";
+import Select from "../components/Select.astro";
+
+const packageManagers = [
+  { value: "chocolatey", label: "Chocolatey" },
+  { value: "winget", label: "Winget" },
+];
 ---
 
 <Layout>
@@ -549,16 +555,19 @@ import ButtonEntry from "../components/ButtonEntry.astro";
         <Tab tab="install">
           <input type="text" class="app-search" id="searchBar" placeholder="Search an app" />
           <div class="manual-input">
-            <input
-              id="manualInput"
-              class="app-search"
-              type="text"
-              placeholder="Enter choco package"
-            />
+            <input id="manualInput" class="app-search" type="text" placeholder="Enter package id" />
             <button id="addApp">Add App</button>
           </div>
+
           <div id="manualList"></div>
 
+          <Select
+            id="packageManager"
+            name="Package Manager"
+            options={packageManagers}
+            defaultValue="chocolatey"
+            icon="/icons/install/packagemanager.png"
+          />
           <AppGroup
             title="Drivers"
             icon="/icons/install/drivers.png"
@@ -573,6 +582,7 @@ import ButtonEntry from "../components/ButtonEntry.astro";
               },
               {
                 title: "Install Ryzen Chipset",
+                desc: "Not available on winget.",
                 inputId: "Ryzen",
               },
             ]}
@@ -882,7 +892,11 @@ import ButtonEntry from "../components/ButtonEntry.astro";
               { title: "Install DarkTable", inputId: "DarkTable" },
               { title: "Install digiKam", inputId: "digiKam" },
               { title: "Install EarTrumpet", inputId: "EarTrumpet" },
-              { title: "Install EqualizerAPO", inputId: "EqualizerAPO" },
+              {
+                title: "Install EqualizerAPO",
+                desc: "Not available on winget.",
+                inputId: "EqualizerAPO",
+              },
               { title: "Install FFmpeg", inputId: "FFmpeg" },
               { title: "Install foobar2000", inputId: "foobar2000" },
               { title: "Install FreeCAD", inputId: "FreeCAD" },
@@ -956,8 +970,8 @@ import ButtonEntry from "../components/ButtonEntry.astro";
             title="Security"
             icon="/icons/install/security.png"
             apps={[
-              { title: "Install Avast", inputId: "Avast" },
-              { title: "Install AVG", inputId: "AVG" },
+              { title: "Install Avast", desc: "Not available on winget.", inputId: "Avast" },
+              { title: "Install AVG", desc: "Not available on winget.", inputId: "AVG" },
               { title: "Install MalwareBytes", inputId: "MalwareBytes" },
             ]}
           />

@@ -35,6 +35,11 @@
       <pre><code class="language-dos">echo -- Installing Chocolatey:</code></pre>
       <pre><code class="language-dos">powershell -command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"</code></pre>
     </div>
+    <div class="winget-container">
+      <pre><code class="language-dos" /></pre>
+      <pre><code class="language-dos">echo -- Update Winget:</code></pre>
+      <pre><code id="wingetUpgrade" class="language-dos" /></pre>
+    </div>
     <div class="scripts-container">
       <pre><code class="allScripts" /></pre>
       <pre><code class="language-dos" /></pre>
@@ -45,8 +50,10 @@
       <pre><code class="language-dos" /></pre>
     </div>
     <div class="div-install">
-      <pre><code class="language-dos">echo -- Refresh environment: </code></pre>
-      <pre><code class="language-dos">call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"</code></pre>
+      <pre
+        class="choco-refresh"><code class="language-dos">echo -- Refresh environment: </code></pre>
+      <pre
+        class="choco-refresh"><code class="language-dos">call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"</code></pre>
       <pre><code class="language-dos">echo -- Installing these apps: </code></pre>
       <pre><code class="language-dos">echo -- </code><span class="installingApps" /></pre>
       <pre><code class="commandDisplay" /></pre>
