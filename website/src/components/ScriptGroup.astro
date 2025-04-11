@@ -26,7 +26,7 @@ const { title, description, icon, tools } = Astro.props;
         <p>{description}</p>
       </div>
     </div>
-    <img class="chevron" src="/icons/chevron-down.png" alt="Expand" />
+    <img class="chevron" src="icons/chevron-down.png" alt="Expand" />
   </summary>
 
   {tools.map((tool) => <ScriptToggle title={tool.title} inputId={tool.inputId} />)}

@@ -1,12 +1,13 @@
 ---
 // AppToggle.astro
-const { title, inputId } = Astro.props;
+const { title, desc, inputId } = Astro.props;
 ---
 
 <div class="content-entry">
   <div>
     <div>
       <h1>{title}</h1>
+      <p>{desc}</p>
     </div>
   </div>
   <div class="checkbox-wrapper">

@@ -4,6 +4,7 @@ import AppToggle from "./AppToggle.astro";
 
 interface App {
   title: string;
+  desc?: string;
   inputId: string;
 }
 
@@ -27,5 +28,5 @@ const { title, icon, apps } = Astro.props;
     <img class="chevron" src="icons/chevron-down.png" alt="" />
   </summary>
 
-  {apps.map((tool) => <AppToggle title={tool.title} inputId={tool.inputId} />)}
+  {apps.map((tool) => <AppToggle title={tool.title} desc={tool.desc} inputId={tool.inputId} />)}
 </details>

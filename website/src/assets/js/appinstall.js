@@ -510,7 +510,6 @@ selectedPackageManager.addEventListener("change", () => {
   } else if (selectedPackageManager.value === "winget") {
     appsInstallWinget();
   }
-  console.log("Selected package manager:", selectedPackageManager.value);
 });
 
 // Set up checkbox event listeners
