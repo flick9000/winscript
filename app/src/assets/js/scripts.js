@@ -231,7 +231,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     faxscan: [
       "echo -- Disabling Fax and Scan",
-      'powershell -Command "try { Disable-WindowsOptionalFeature -FeatureName "FaxServicesClientPackage" -Online -NoRestart -ErrorAction Stop; Write-Output "Successfully disabled the feature FaxServicesClientPackage." } catch { Write-Output "Feature not found." }"',
+      "dism /Online /Disable-Feature /FeatureName:FaxServicesClientPackage",
+      "sc stop Fax",
+      "sc config Fax start=demand",
     ],
     mediaplayer: [
       "echo -- Disabling Windows Media Player",
@@ -739,7 +741,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "sc config EapHost start=demand",
       "sc config EntAppSvc start=demand",
       "sc config FDResPub start=demand",
-      "sc config Fax start=demand",
       "sc config FrameServer start=demand",
       "sc config FrameServerMonitor start=demand",
       "sc config GraphicsPerfSvc start=demand",
