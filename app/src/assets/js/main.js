@@ -265,6 +265,7 @@ const windowsSettings = document.getElementById("openSettings");
 const deviceManager = document.getElementById("openDeviceManager");
 const controlPanel = document.getElementById("openControlPanel");
 const visualEffects = document.getElementById("openVisualEffects");
+const pageFile = document.getElementById("openPageFile");
 const msConfig = document.getElementById("openMSConfig");
 
 windowsSettings.addEventListener("click", () => {
@@ -279,6 +280,10 @@ controlPanel.addEventListener("click", () => {
 visualEffects.addEventListener("click", () => {
   new Command("cmd", ["/c", "start", "SystemPropertiesPerformance"]).execute();
 });
+pageFile.addEventListener("click", () => {
+  new Command("cmd", ["/c", "SystemPropertiesPerformance /pagefile"]).execute();
+});
+
 msConfig.addEventListener("click", () => {
   new Command("cmd", ["/c", "start", "msconfig"]).execute();
 });
