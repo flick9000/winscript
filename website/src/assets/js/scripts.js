@@ -386,6 +386,14 @@ document.addEventListener("DOMContentLoaded", function () {
       'schtasks /change /TN "\\Microsoft\\Windows\\Application Experience\\PcaPatchDbTask" /DISABLE',
       'schtasks /change /TN "\\Microsoft\\Windows\\Application Experience\\MareBackup" /DISABLE',
     ],
+    windowsdrm: [
+      "echo -- Disabling Internet Access to Windows DRM",
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\WMDRM" /v "DisableOnline" /t REG_DWORD /d 1 /f',
+    ],
+    cloudbasedspeech: [
+      "echo -- Disabling cloud based speech recognition",
+      'reg add "HKCU\\Software\\Microsoft\\Speech_OneCore\\Settings\\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d 0 /f',
+    ],
     wfeedback: [
       "echo -- Disabling Windows Feedback Experience telemetry",
       'reg add "HKCU\\SOFTWARE\\Microsoft\\Siuf\\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d 0 /f',
@@ -646,6 +654,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Maps" /v "AllowUntriggeredNetworkTrafficOnSettingsPage" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Maps" /v "AutoDownloadAndUpdateMapData" /t REG_DWORD /d 0 /f',
     ],
+    default0user: ["echo -- Deleting Default0 User", "net user defaultuser0 /delete 2>nul"],
     lockscreencamera: [
       "echo -- Disabling Lock Screen Camera",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization" /v "NoLockScreenCamera" /t REG_DWORD /d 1 /f',
@@ -1045,6 +1054,8 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "wsearchtelemetry", type: "wsearchtelemetry" },
     { id: "officetelemetry", type: "officetelemetry" },
     { id: "appexperience", type: "appexperience" },
+    { id: "windowsdrm", type: "windowsdrm" },
+    { id: "cloudbasedspeech", type: "cloudbasedspeech" },
     { id: "wfeedback", type: "wfeedback" },
     { id: "handwriting", type: "handwriting" },
     { id: "clipboard", type: "clipboard" },
@@ -1083,6 +1094,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "activityfeed", type: "activityfeed" },
     { id: "screenrecording", type: "screenrecording" },
     { id: "automap", type: "automap" },
+    { id: "default0user", type: "default0user" },
     { id: "lockscreencamera", type: "lockscreencamera" },
     { id: "biometrics", type: "biometrics" },
 

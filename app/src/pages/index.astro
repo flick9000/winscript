@@ -310,6 +310,13 @@ const packageManagers = [
           />
 
           <ScriptToggle
+            title="Remove User 'default0'"
+            inputId="default0user"
+            icon="/icons/privacy/default0.png"
+            description="Removes the default0 user created at the OOBE stage."
+          />
+
+          <ScriptToggle
             title="Disable Lockscreen Camera Access"
             inputId="lockscreencamera"
             icon="/icons/privacy/camera.png"
@@ -347,6 +354,14 @@ const packageManagers = [
               {
                 title: "Disable Handwriting Data Collection",
                 inputId: "handwriting",
+              },
+              {
+                title: "Disable Internet Access for Windows DRM",
+                inputId: "windowsdrm",
+              },
+              {
+                title: "Disable Cloud-Based Speech Recognition",
+                inputId: "cloudbasedspeech",
               },
               {
                 title: "Disable Clipboard Data Collection",
