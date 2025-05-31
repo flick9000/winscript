@@ -939,7 +939,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     coreisolation: [
       "echo -- Disabling Core Isolation",
-      'reg add "HKLM\\SOFTWARE\\CurrentControlSet\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\System\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f',
     ],
     disableprefetch: [
       "echo -- Disabling Prefetch",
