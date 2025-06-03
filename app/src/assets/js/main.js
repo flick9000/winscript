@@ -14,10 +14,13 @@ async function getChangelog() {
     return null;
   } else {
     const data = await response.json();
-    return data.body.replace(
+    let body = data.body.replace(
       "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
       "",
     );
+    body = body.trim();
+    console.log(body);
+    return body;
   }
 }
 
