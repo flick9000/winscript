@@ -936,6 +936,7 @@ document.addEventListener("DOMContentLoaded", function () {
     limitdefender: [
       "echo -- Limiting Windows Defender Usage",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan" /v "AvgCPULoadFactor" /t REG_DWORD /d "25" /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan" /v "ScanAvgCPULoadFactor" /t REG_DWORD /d "25" /f',
     ],
     coreisolation: [
       "echo -- Disabling Core Isolation",
