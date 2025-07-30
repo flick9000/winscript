@@ -46,6 +46,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "echo -- Uninstalling Microsoft Store",
       'PowerShell -ExecutionPolicy Unrestricted -Command "Get-AppxPackage "*Microsoft.WindowsStore*" | Remove-AppxPackage"',
     ],
+    msstoreupdates: [
+      "echo -- Disabling Microsoft Store App Updates",
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f',
+    ],
     onedrive: [
       "echo -- Killing OneDrive Process",
       "taskkill /f /im OneDrive.exe",
@@ -1010,6 +1014,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // List of checkboxes to bind
   const checkboxItems = [
     { id: "microsoftstore", type: "microsoftstore" },
+    { id: "msstoreupdates", type: "msstoreupdates" },
     { id: "onedrive", type: "onedrive" },
     { id: "debloatedge", type: "debloatedge" },
     { id: "edge", type: "edge" },
@@ -1296,6 +1301,7 @@ let extremeIds = [
   "disablehibernation",
   "xbox",
   "microsoftstore",
+  "msstoreupdates",
   "onedrive",
   "widgets",
   "wupdate",
