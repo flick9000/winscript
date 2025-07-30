@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "WinScript",
-  "version": "1.3.8",
+  "version": "1.3.9",
   "identifier": "flick.winscript.dev",
   "build": {
     "devUrl": "http://localhost:4321/",
