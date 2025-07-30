@@ -2,7 +2,9 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "enables the default permissions",
-  "windows": ["main"],
+  "windows": [
+    "main"
+  ],
   "permissions": [
     "core:default",
     "updater:default",
@@ -10,6 +12,14 @@
     "updater:allow-download",
     "updater:allow-download-and-install",
     "fs:default",
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        {
+          "path": "**/*"
+        }
+      ]
+    },
     "fs:allow-temp-write",
     "fs:allow-temp-read",
     "fs:allow-temp-write-recursive",
@@ -41,9 +51,30 @@
         }
       ]
     },
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        {
+          "name": "powershell",
+          "cmd": "powershell.exe",
+          "args": true
+        }
+      ]
+    },
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "powershell",
+          "cmd": "powershell.exe",
+          "args": true
+        }
+      ]
+    },
     "os:default",
     "dialog:default",
     "dialog:allow-ask",
-    "dialog:allow-message"
+    "dialog:allow-message",
+    "opener:default"
   ]
 }

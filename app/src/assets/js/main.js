@@ -1,5 +1,5 @@
-import { writeTextFile, readTextFile, mkdir, remove } from "@tauri-apps/plugin-fs";
-import { tempDir, join } from "@tauri-apps/api/path";
+import { writeTextFile, readTextFile, mkdir, remove, exists } from "@tauri-apps/plugin-fs";
+import { tempDir, join, dirname } from "@tauri-apps/api/path";
 import { Command } from "@tauri-apps/plugin-shell";
 import { app } from "@tauri-apps/api";
 import { version, hostname } from "@tauri-apps/plugin-os";
@@ -7,6 +7,7 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
+import { openUrl } from "@tauri-apps/plugin-opener";
 
 async function getChangelog() {
   const response = await fetch("https://api.github.com/repos/flick9000/winscript/releases/latest");
@@ -24,6 +25,7 @@ async function getChangelog() {
   }
 }
 
+// Checks if an update is available and performs it
 async function checkForUpdates() {
   const changelog = await getChangelog();
   const update = await check();
@@ -58,14 +60,42 @@ async function checkForUpdates() {
   }
 }
 
+// Checks if an update is available and does not perform it
+async function alertForUpdates() {
+  const changelog = await getChangelog();
+  const update = await check();
+
+  if (update) {
+    let updateAsk;
+
+    if (changelog) {
+      updateAsk = await ask(changelog, {
+        title: "Update Available",
+        kind: "info",
+        okLabel: "Go to GitHub",
+        cancelLabel: "Later",
+      });
+    } else {
+      updateAsk = await ask("An update is available. Do you want to update?", {
+        title: "Update Available",
+        kind: "info",
+        okLabel: "Go to GitHub",
+        cancelLabel: "Later",
+      });
+    }
+
+    if (updateAsk === true) {
+      await openUrl("https://github.com/flick9000/winscript/releases/latest");
+    } else {
+      return;
+    }
+  } else {
+    return;
+  }
+}
+
 async function isInstalled() {
   const tmpDir = await tempDir();
-
-  async function checkRegistry() {
-    const registryCheck = `(Test-Path -path "HKCU:\\Software\\flick9000\\WinScript").ToString().ToLower() | Set-Content -Path $env:TEMP\\isInstalled.txt;`;
-    const registryShell = new Command("cmd", ["/c", "powershell", `${registryCheck}`, "pause"]);
-    await registryShell.execute();
-  }
 
   async function checkProcess() {
     const processCheck = `([bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)).ToString().ToLower() | Set-Content -Path $env:TEMP\\isPortable.txt;`;
@@ -73,26 +103,39 @@ async function isInstalled() {
     await processShell.execute();
   }
 
-  function cleanFiles() {
-    remove(tmpDir + "isInstalled.txt");
-    remove(tmpDir + "isPortable.txt");
+  async function checkPath() {
+    const pathCheck = `(Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path | Set-Content -Path $env:TEMP\\winscriptPath.txt;`;
+    const pathShell = new Command("powershell", ["-Command", pathCheck]);
+    await pathShell.execute();
   }
 
-  await checkRegistry();
-  await checkProcess();
+  function cleanFiles() {
+    remove(tmpDir + "isPortable.txt");
+    remove(tmpDir + "winscriptPath.txt");
+  }
 
-  // Reads from text files and converts to boolean
-  const isInstalledBool = (await readTextFile(tmpDir + "isInstalled.txt")).trim() === "true";
+  await checkProcess();
+  await checkPath();
+
   const isPortableBool = (await readTextFile(tmpDir + "isPortable.txt")).trim() === "true";
 
   if (isPortableBool) {
     cleanFiles();
+    alertForUpdates();
     return;
   }
 
-  if (isInstalledBool) {
+  const winscriptPath = (await readTextFile(tmpDir + "winscriptPath.txt")).toLowerCase();
+  const winscriptDir = await dirname(winscriptPath);
+  const uninstallPath = await join(winscriptDir, "uninstall.exe");
+  const uninstallExists = await exists(uninstallPath);
+
+  if (uninstallExists) {
     cleanFiles();
     checkForUpdates();
+  } else {
+    cleanFiles();
+    alertForUpdates();
   }
 }
 
