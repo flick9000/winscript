@@ -7,7 +7,6 @@
 
 WinScript is a powerful, simple to use & lightweight open-source tool designed to improve and customize your Windows experience. It offers a range of features, including debloating, privacy enhancement, performance optimization, and streamlined app installation.
 <br>
-Licensed under GPL-3.0, WinScript is completely free to use, fully transparent, and welcomes contributions from the community. If you want to contribute, please check out the contributing guide. 
 
 ![App Screenshot](/website/public/winscript.webp)
 
