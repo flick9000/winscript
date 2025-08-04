@@ -709,6 +709,10 @@ document.addEventListener("DOMContentLoaded", function () {
       `powershell -command "$ultimatePerformance = powercfg -list | Select-String -Pattern 'Ultimate Performance'; if ($ultimatePerformance) { echo '-- - Power plan already exists' } else { echo '-- - Enabling Ultimate Performance'; $output = powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 2>&1; if ($output -match 'Unable to create a new power scheme' -or $output -match 'The power scheme, subgroup or setting specified does not exist') { powercfg -RestoreDefaultSchemes } }"`,
       `powershell -command "$ultimatePlanGUID = (powercfg -list | Select-String -Pattern 'Ultimate Performance').Line.Split()[3]; echo '-- - Activating Ultimate Performance'; powercfg -setactive $ultimatePlanGUID"`,
     ],
+    transparency: [
+      "echo -- Disabling Transparency",
+      'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f',
+    ],
     manualservices: [
       "echo -- Disabling Manual Services",
       "sc config AJRouter start=disabled",
@@ -905,6 +909,11 @@ document.addEventListener("DOMContentLoaded", function () {
       "sc config wuauserv start=demand",
       "sc config wudfsvc start=demand",
     ],
+    mousedelay: [
+      "echo -- Disabling Mouse Delay Times",
+      'reg add "HKCU\\Control Panel\\Desktop" /v "MenuShowDelay" /t REG_SZ /d 0 /f',
+      'reg add "HKCU\\Control Panel\\Mouse" /v "MouseHoverTime" /t REG_SZ /d 0 /f',
+    ],
     hags: [
       "echo -- Disabling HAGS",
       'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d 1 /f',
@@ -1097,6 +1106,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     { id: "ultimateperformance", type: "ultimateperformance" },
     { id: "manualservices", type: "manualservices" },
+    { id: "transparency", type: "transparency" },
+    { id: "mousedelay", type: "mousedelay" },
     { id: "hags", type: "hags" },
     { id: "storagesense", type: "storagesense" },
     { id: "disablehibernation", type: "disablehibernation" },
@@ -1190,6 +1201,7 @@ let basicIds = [
   "cleantemp",
   "cleanmgr",
   "ultimateperformance",
+  "mousedelay",
   "filextensions",
   "stickykeys",
   "taskbarwidgets",
@@ -1231,6 +1243,7 @@ let strictIds = [
   "cleantemp",
   "cleanmgr",
   "ultimateperformance",
+  "mousedelay",
   "xbox",
   "onedrive",
   "widgets",
@@ -1276,6 +1289,7 @@ let extremeIds = [
   "privacyconsent",
   "cloudsync",
   "screenrecording",
+  "default0user",
   "automap",
   "activityfeed",
   "notificationtray",
@@ -1295,6 +1309,7 @@ let extremeIds = [
   "cleantemp",
   "cleanmgr",
   "ultimateperformance",
+  "mousedelay",
   "limitdefender",
   "coreisolation",
   "wsearch",

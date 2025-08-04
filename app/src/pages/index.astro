@@ -62,8 +62,8 @@ const packageManagers = [
           />
 
           <ScriptGroup
-            title="Verify System Integrity"
-            description="Verifies the system files integrity and fixes corrupt files."
+            title="Repair"
+            description="Verify system files integrity and fix corrupt files."
             icon="/icons/tools/sfc.png"
             tools={[
               {
@@ -470,10 +470,24 @@ const packageManagers = [
           />
 
           <ScriptToggle
+            title="Disable Windows Transparency"
+            inputId="transparency"
+            icon="/icons/performance/transparency.png"
+            description="Disables transparency effects, may improve performance at the cost of aesthetics."
+          />
+
+          <ScriptToggle
             title="Disable HAGS"
             inputId="hags"
             icon="/icons/performance/hags.png"
             description="Disables Hardware-Accelerated GPU Scheduling."
+          />
+
+          <ScriptToggle
+            title="Disable Mouse Delay"
+            inputId="mousedelay"
+            icon="/icons/performance/menudelay.png"
+            description="Disables the 400ms menu show and hover delay."
           />
 
           <ScriptToggle
