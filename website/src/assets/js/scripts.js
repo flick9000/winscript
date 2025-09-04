@@ -589,6 +589,11 @@ document.addEventListener("DOMContentLoaded", function () {
       "echo -- Disabling Radio access",
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\radios" /v "Value" /d "Deny" /t REG_SZ /f',
     ],
+    updatepause: [
+      "echo -- Extend Windows Update Pause Limit to 20 years",
+      'echo -- This does not disable updates by itself, user needs to set "pause updates" in Windows Settings.',
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings" /v "FlightSettingsMaxPauseDays" /t REG_DWORD /d 7300 /f',
+    ],
     cloudsync: [
       "echo -- Disabling Cloud Sync",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\SettingSync" /v "DisableSettingSync" /t REG_DWORD /d 2 /f',
@@ -1081,6 +1086,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "calendaraccess", type: "calendaraccess" },
     { id: "motionaccess", type: "motionaccess" },
     { id: "radioaccess", type: "radioaccess" },
+    { id: "updatepause", type: "updatepause" },
     { id: "cloudsync", type: "cloudsync" },
     { id: "notificationtray", type: "notificationtray" },
     { id: "activityfeed", type: "activityfeed" },
