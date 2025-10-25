@@ -589,6 +589,18 @@ document.addEventListener("DOMContentLoaded", function () {
       "echo -- Disabling Radio access",
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\radios" /v "Value" /d "Deny" /t REG_SZ /f',
     ],
+    screenshotborderaccess: [
+      "echo -- Disabling Screenshot Borders access",
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\graphicsCaptureWithoutBorder" /v "Value" /d "Deny" /t REG_SZ /f',
+    ],
+    recordingsaccess: [
+      "echo -- Disabling Recordings access",
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\graphicsCaptureProgrammatic" /v "Value" /d "Deny" /t REG_SZ /f',
+    ],
+    aigenerationaccess: [
+      "echo -- Disabling AI Generation access",
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\systemAIModels" /v "Value" /d "Deny" /t REG_SZ /f',
+    ],
     updatepause: [
       "echo -- Extend Windows Update Pause Limit to 20 years",
       'echo -- This does not disable updates by itself, user needs to set "pause updates" in Windows Settings.',
@@ -1086,6 +1098,9 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "calendaraccess", type: "calendaraccess" },
     { id: "motionaccess", type: "motionaccess" },
     { id: "radioaccess", type: "radioaccess" },
+    { id: "screenshotborderaccess", type: "screenshotborderaccess" },
+    { id: "recordingsaccess", type: "recordingsaccess" },
+    { id: "aigenerationaccess", type: "aigenerationaccess" },
     { id: "updatepause", type: "updatepause" },
     { id: "cloudsync", type: "cloudsync" },
     { id: "notificationtray", type: "notificationtray" },
