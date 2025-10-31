@@ -1,0 +1,168 @@
+<dialog id="supportDialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1>Good to go!</h1>
+      <svg
+        class="close"
+        id="closeSupportDialog"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="-64 0 512 512"
+        ><path
+          fill="currentColor"
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7L86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256L41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256z"
+        ></path></svg
+      >
+    </div>
+    <p>
+      If you enjoy using WinScript, please consider supporting the project!
+      You can star the project on GitHub or donate to help keep development going. Every bit of support helps keep WinScript open-source and improving for everyone.
+    </p>
+    <div class="modal-buttons">
+      <a href="https://github.com/flick9000/winscript/">Star on GitHub -></a>
+      <a href="https://ko-fi.com/flick9000">Buy me a coffee -></a>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  @keyframes blur-in {
+  from {
+    backdrop-filter: blur(0px);
+  }
+  to {
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+  }
+}
+
+  dialog[open] {
+    display: flex;
+    font-size: 16px;
+
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  dialog {
+    display: none;
+    position: fixed;
+    opacity: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: hidden;
+    background: hsla(253, 50%, 1%, 0.5);
+    border: transparent;
+    color: var(--text);
+    transition-property: display opacity;
+    transition-duration: 0.3s;
+    transition-behavior: allow-discrete;
+    animation: blur-in 0.3s forwards;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    flex-flow: 1;
+    margin: auto;
+    background: hsla(253, 50%, 7%, 0.75);
+    text-wrap: pretty;
+    gap: 1.5em;
+    padding: 1.5em;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 7px;
+    width: clamp(300px, 50vw, 600px);
+    min-height: fit-content;
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 0.5em;
+
+      &:focus-visible {
+        outline: transparent;
+      }
+    }
+
+    p {
+      opacity: 0.9;
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    h1 {
+      font-size: revert;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .close {
+      cursor: pointer;
+      display: flex !important;
+    }
+  }
+
+  .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: 100%;
+      line-height: 1.25;
+      font-size: 1em;
+      padding: 0.5em 2em;
+      border-radius: 7px;
+      cursor: pointer;
+      min-width: fit-content;
+      transition: all 0.3s ease;
+      color: var(--text);
+    }
+    a:focus-visible {
+      outline: transparent;
+    }
+    a:nth-child(1) {
+      background: linear-gradient(
+        180deg,
+        hsl(255, 50%, 37%) 0% 40%,
+        hsl(255, 50%, 39%),
+        hsl(263, 50%, 42%)
+      );
+      border-top: 1px solid var(--cta);
+    }
+    a:nth-child(2) {
+      background-color: #18132b;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  #start-modal .modal-content {
+    width: clamp(300px, 75vw, 600px);
+  }
+  @media screen and (max-width: 600px) {
+    .modal-content {
+      width: 80%;
+      height: 40%;
+    }
+  }
+</style>

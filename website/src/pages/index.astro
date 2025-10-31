@@ -9,6 +9,7 @@ import AppGroup from "../components/AppGroup.astro";
 import MockupCode from "../components/MockupCode.astro";
 import ButtonEntry from "../components/ButtonEntry.astro";
 import Select from "../components/Select.astro";
+import Dialogs from "../components/Dialogs.astro";
 
 const packageManagers = [
   { value: "chocolatey", label: "Chocolatey" },
@@ -20,6 +21,7 @@ const packageManagers = [
   <div class="main-container">
     <Background />
     <Sidebar />
+    <Dialogs />
     <div class="content">
       <div class="content-header">
         <h1 id="content-header">WinScript</h1>

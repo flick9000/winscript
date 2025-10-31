@@ -184,6 +184,9 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 });
 
 document.getElementById("downloadBtn").addEventListener("click", function () {
+  const supportDialog = document.getElementById("supportDialog");
+  const closeSupportDialog = document.getElementById("closeSupportDialog");
+
   var textContent = document.getElementById("code").innerText;
 
   // Replace newlines with CRLF
@@ -197,4 +200,10 @@ document.getElementById("downloadBtn").addEventListener("click", function () {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+
+  supportDialog.showModal();
+
+  closeSupportDialog.addEventListener("click", () => {
+    supportDialog.close();
+  });
 });
