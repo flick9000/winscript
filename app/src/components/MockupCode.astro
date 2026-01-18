@@ -27,7 +27,7 @@
     </div>
     <div class="restore-container">
       <pre><code class="language-dos" /></pre>
-      <pre><code class="language-dos">echo -- Creating a restore point:</code></pre>
+      <pre><code class="language-dos">powershell -NoProfile -Command "Write-Host '-- Creating a restore point' -ForegroundColor Green"</code></pre>
       <pre><code class="language-dos">powershell -command "Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS""</code></pre>
     </div>
     <div class="chocolatey-container">
