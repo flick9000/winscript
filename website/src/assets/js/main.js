@@ -20,19 +20,18 @@ document.querySelectorAll(".fa-solid").forEach((icon) => {
   });
 });
 
-// Select all tab buttons and content elements
 const tabs = document.querySelectorAll(".sidebar-entry");
 const contents = document.querySelectorAll(".tab-content");
-const title = document.getElementById("content-header"); // Select the header element for updating
+const title = document.getElementById("content-header");
 
-// Initialize: Set only the first tab and its corresponding content as active
+// Set only the first tab and its corresponding content as active
 if (tabs.length > 0 && contents.length > 0) {
   tabs[0].classList.add("active");
   contents[0].classList.add("active");
   title.textContent = tabs[0].textContent || "WinScript"; // Update header with the first tab's text
 }
 
-// Remove 'active' from all other content divs except the first
+// Remove 'active' from all other content divs
 contents.forEach((content, index) => {
   if (index !== 0) {
     content.classList.remove("active");
@@ -42,15 +41,12 @@ contents.forEach((content, index) => {
 // Add click event to each tab button
 tabs.forEach((tab, index) => {
   tab.addEventListener("click", () => {
-    // Remove 'active' class from all tabs and contents
     tabs.forEach((t) => t.classList.remove("active"));
     contents.forEach((c) => c.classList.remove("active"));
 
-    // Add 'active' class to clicked tab and corresponding content
     tab.classList.add("active");
     contents[index].classList.add("active");
 
-    // Update the header text to match the clicked tab
     title.textContent = tab.textContent;
   });
 });
@@ -115,10 +111,8 @@ exportBtn.addEventListener("click", () => {
     settings[checkbox.id] = checkbox.checked;
   });
 
-  // Write the settings to the file
   const fileContent = JSON.stringify(settings, null, 2);
 
-  // Create blob and download link
   const blob = new Blob([fileContent], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const downloadLink = document.createElement("a");
@@ -127,7 +121,6 @@ exportBtn.addEventListener("click", () => {
   document.body.appendChild(downloadLink);
   downloadLink.click();
 
-  // Cleanup
   document.body.removeChild(downloadLink);
   URL.revokeObjectURL(url);
 
@@ -135,7 +128,6 @@ exportBtn.addEventListener("click", () => {
 });
 
 importBtn.addEventListener("click", () => {
-  // Create file input
   const fileInput = document.createElement("input");
   fileInput.type = "file";
   fileInput.accept = ".json";
@@ -146,7 +138,6 @@ importBtn.addEventListener("click", () => {
 
     const reader = new FileReader();
     reader.onload = (e) => {
-      // Read settings from file
       try {
         const settings = JSON.parse(e.target.result);
         checkboxes.forEach((checkbox) => {
@@ -161,26 +152,41 @@ importBtn.addEventListener("click", () => {
     reader.readAsText(file);
   });
 
-  // Trigger file selection
   fileInput.click();
 });
 
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
-  // Get the text content from the div
   var textContent = document.getElementById("code").innerText;
-  // Copy the text content to the clipboard
   navigator.clipboard.writeText(textContent);
 });
 
-// Update the indicator text when the checkbox is changed
+// Update the indicator text
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   const checkbox = wrapper.querySelector('input[type="checkbox"]');
+  const radio = wrapper.querySelector('input[type="radio"]');
   const indicator = wrapper.querySelector(".indicator");
 
-  checkbox.addEventListener("change", () => {
-    indicator.textContent = checkbox.checked ? "On" : "Off";
-  });
+  if (checkbox) {
+    checkbox.addEventListener("change", () => {
+      indicator.textContent = checkbox.checked ? "On" : "Off";
+    });
+  }
+
+  if (radio) {
+    radio.addEventListener("change", () => {
+      const radioName = radio.getAttribute("name");
+      document.querySelectorAll(`input[type="radio"][name="${radioName}"]`).forEach((r) => {
+        const parentWrapper = r.closest(".checkbox-wrapper");
+        if (parentWrapper) {
+          const ind = parentWrapper.querySelector(".indicator");
+          if (ind) {
+            ind.textContent = r.checked ? "On" : "Off";
+          }
+        }
+      });
+    });
+  }
 });
 
 document.getElementById("downloadBtn").addEventListener("click", function () {
@@ -189,7 +195,7 @@ document.getElementById("downloadBtn").addEventListener("click", function () {
 
   var textContent = document.getElementById("code").innerText;
 
-  // Replace newlines with CRLF
+  // Convert LF to CRLF
   textContent = textContent.replace(/\n/g, "\r\n");
 
   var blob = new Blob([textContent], { type: "text/plain" });

@@ -68,7 +68,7 @@ const packageManagers = [
 
           <ScriptToggle
             title="Clear Browser History"
-            description="Clears Chrome, Edge and Firefox history."
+            description="Clears Chrome, Edge, Brave and Firefox history."
             icon="/icons/tools/browser.png"
             inputId="browserhistory"
           />
@@ -90,23 +90,23 @@ const packageManagers = [
         <Tab tab="debloat">
           <ScriptGroup
             title="Windows Apps"
-            description="Uninstall pre-installed apps"
+            description="Uninstall pre-installed apps."
             icon="/icons/debloat/app.png"
             tools={[
               {
                 title: "Remove Third-Party Apps",
                 inputId: "thirdparty",
-                description: "Uninstalls 3rd-party apps like Shazam, Spotify, Candy Crush etc.",
-              },
-              {
-                title: "Remove Extensions",
-                inputId: "extensions",
-                description: "Uninstalls pre-installed extensions like HEVC, VP9 etc.",
+                description: "Removes 3rd-party apps like Shazam, Spotify etc.",
               },
               {
                 title: "Remove Microsoft Apps",
                 inputId: "msapps",
-                description: "Uninstalls pre-installed Microsoft apps like Clipchamp, People etc.",
+                description: "Removes pre-installed apps like Solitaire, People etc.",
+              },
+              {
+                title: "Remove Extensions",
+                inputId: "extensions",
+                description: "Removes pre-installed extensions like HEVC, VP9 etc.",
               },
               {
                 title: "Remove Xbox",
@@ -118,35 +118,33 @@ const packageManagers = [
 
           <ScriptGroup
             title="Windows Features"
-            description="Disable pre-installed features"
+            description="Disable pre-installed features."
             icon="/icons/debloat/features.png"
             tools={[
               {
                 title: "Disable Consumer Features",
                 inputId: "consumerfeatures",
-                description:
-                  "Provides suggestions and notifications to users, which may include installation of Windows Store apps.",
+                description: "Disables automatic installation of Windows Store apps.",
+              },
+              {
+                title: "Disable Hyper-V",
+                inputId: "hyperv",
+                description: "VMs might not work anymore after disabling this feature.",
               },
               {
                 title: "Disable Recall",
                 inputId: "recall",
-                description: "Saves snapshots of the user's screen and stores them locally.",
               },
               { title: "Disable Internet Explorer", inputId: "iexplorer" },
-              {
-                title: "Disable Hyper-V",
-                inputId: "hyperv",
-                description:
-                  "Virtual machines might not work anymore after disabling this feature.",
-              },
+
               { title: "Disable Fax & Scan", inputId: "faxscan" },
               { title: "Disable Media Player", inputId: "mediaplayer" },
             ]}
           />
 
           <ScriptToggle
-            title="Remove MS Store"
-            description="You can't install apps from Microsoft Store after uninstalling it."
+            title="Remove Microsoft Store"
+            description="You will not be able to uninstall apps from the Microsoft Store."
             inputId="microsoftstore"
             icon="/icons/debloat/store.png"
           />
@@ -167,7 +165,7 @@ const packageManagers = [
 
           <ScriptToggle
             title="Debloat Edge"
-            description="This will disable various telemetry and annoyances in Edge."
+            description="Disables telemetry and annoyances in Edge."
             inputId="debloatedge"
             icon="/icons/debloat/debloat-edge.png"
           />
@@ -181,21 +179,21 @@ const packageManagers = [
 
           <ScriptToggle
             title="Remove Copilot"
-            description="Removes the Copilot AI package completely."
+            description="Removes the Copilot AI package."
             inputId="copilot"
             icon="/icons/debloat/copilot.png"
           />
 
           <ScriptToggle
             title="Remove Widgets"
-            description="Removes the Web Experience package completely."
+            description="Removes the Web Experience package."
             inputId="widgets"
             icon="/icons/debloat/widgets.png"
           />
 
           <ScriptToggle
             title="Remove Taskbar Widgets"
-            description="Disables taskbar widgets such as Task View, Weather, Chat etc."
+            description="Disables taskbar widgets such as Task View, Weather etc."
             inputId="taskbarwidgets"
             icon="/icons/debloat/taskbarwidgets.png"
           />
@@ -289,14 +287,14 @@ const packageManagers = [
             title="Disable Cloud Sync"
             inputId="cloudsync"
             icon="/icons/privacy/cloud.png"
-            description="Syncs settings, themes, passwords across Windows devices."
+            description="Disables sync of settings across Windows devices."
           />
 
           <ScriptToggle
-            title="Disable Activity Feed"
+            title="Disable Activity History"
             inputId="activityfeed"
             icon="/icons/privacy/activity.png"
-            description="Stops Windows from collecting usage data."
+            description="Delets recent clipboard, searches and run history."
           />
 
           <ScriptToggle
@@ -304,13 +302,6 @@ const packageManagers = [
             inputId="notificationtray"
             icon="/icons/privacy/notifications.png"
             description="Disables the notifications center in the taskbar."
-          />
-
-          <ScriptToggle
-            title="Disable Screen Recording"
-            inputId="screenrecording"
-            icon="/icons/privacy/record.png"
-            description="Disables Xbox Game Bar screen recording."
           />
 
           <ScriptToggle
@@ -328,7 +319,7 @@ const packageManagers = [
           />
 
           <ScriptToggle
-            title="Disable Lockscreen Camera Access"
+            title="Disable Lockscreen Camera"
             inputId="lockscreencamera"
             icon="/icons/privacy/camera.png"
             description="Prevents the lockscreen camera from being invoked."
@@ -344,7 +335,7 @@ const packageManagers = [
         <Tab tab="telemetry">
           <ScriptGroup
             title="Disable Telemetry"
-            description="Choose what data is sent to Microsoft"
+            description="Choose what data is sent to Microsoft."
             icon="/icons/telemetry/telemetry.png"
             tools={[
               { title: "Disable Windows Telemetry", inputId: "wtelemetry" },
@@ -388,7 +379,7 @@ const packageManagers = [
 
           <ScriptGroup
             title="Disable 3rd-Party Telemetry"
-            description="Choose what data is sent to 3rd-party software"
+            description="Choose what data is sent to 3rd-party software."
             icon="/icons/telemetry/3rdparty.png"
             tools={[
               { title: "Block Adobe Network", inputId: "adobetelemetry" },
@@ -419,6 +410,29 @@ const packageManagers = [
               },
             ]}
           />
+
+          <ScriptGroup
+            title="Manage Windows Update"
+            description="Delay, disable, or reset updates."
+            icon="/icons/telemetry/update.svg"
+            tools={[
+              {
+                title: "Default Settings",
+                inputId: "defaultupdate",
+                description: "Resets Windows Update settings to default.",
+              },
+              {
+                title: "Security Updates",
+                inputId: "securityupdate",
+                description: "Delays feature updates by 1 year.",
+              },
+              {
+                title: "Disable Updates",
+                inputId: "disableupdate",
+                description: "Disables Windows updates (not recommended).",
+              },
+            ]}
+          />
         </Tab>
         <Tab tab="gaming">
           <ScriptToggle
@@ -434,28 +448,34 @@ const packageManagers = [
           />
 
           <ScriptToggle
+            title="Disable Game Mode"
+            inputId="gamemode"
+            icon="/icons/gaming/gamemode.png"
+          />
+
+          <ScriptToggle
             title="Disable Game Bar"
             inputId="gamebar"
             icon="/icons/gaming/gamebar.png"
           />
 
           <ScriptToggle
-            title="Disable Game Mode"
-            inputId="gamemode"
-            icon="/icons/gaming/gamemode.png"
+            title="Disable Captures"
+            inputId="screenrecording"
+            icon="/icons/privacy/record.png"
           />
         </Tab>
         <Tab tab="performance">
           <ScriptGroup
             title="Set as DNS"
-            description="You can only choose one, if you choose more, the last one will be applied."
+            description=""
             icon="/icons/performance/dns.png"
             tools={[
-              { title: "Google DNS", inputId: "googledns" },
-              { title: "Cloudflare DNS", inputId: "cloudflaredns" },
-              { title: "Quad9 DNS", inputId: "quad9dns" },
-              { title: "OpenDNS", inputId: "opendns" },
-              { title: "AdGuard DNS", inputId: "adguardns" },
+              { title: "Google DNS", inputId: "googledns", radio: true, group: "dns" },
+              { title: "Cloudflare DNS", inputId: "cloudflaredns", radio: true, group: "dns" },
+              { title: "Quad9 DNS", inputId: "quad9dns", radio: true, group: "dns" },
+              { title: "OpenDNS", inputId: "opendns", radio: true, group: "dns" },
+              { title: "AdGuard DNS", inputId: "adguardns", radio: true, group: "dns" },
             ]}
           />
 
@@ -463,21 +483,21 @@ const packageManagers = [
             title="Add Ultimate Performance"
             inputId="ultimateperformance"
             icon="/icons/performance/ultimate.png"
-            description="This will add and enable the Ultimate Performance power plan."
+            description="Activates the Ultimate Performance power plan."
           />
 
           <ScriptToggle
             title="Set Services to Manual"
             inputId="manualservices"
             icon="/icons/performance/manual.png"
-            description="Sets various services startup behavior to manual, so they run only when needed."
+            description="Starts services only when they are needed."
           />
 
           <ScriptToggle
             title="Disable Windows Transparency"
             inputId="transparency"
             icon="/icons/performance/transparency.png"
-            description="Disables transparency effects, may improve performance at the cost of aesthetics."
+            description="May improve performance at the cost of aesthetics."
           />
 
           <ScriptToggle
@@ -498,28 +518,28 @@ const packageManagers = [
             title="Limit Defender CPU Usage"
             inputId="limitdefender"
             icon="/icons/performance/limit.png"
-            description="Limits Defender maximum CPU usage at 25% instead of default 50%."
+            description="Limits Defender maximum CPU usage at 25%."
           />
 
           <ScriptToggle
             title="Disable Core Isolation"
             inputId="coreisolation"
             icon="/icons/performance/vbs.png"
-            description="Disables Core Isolation, may improve performance at the cost of security."
+            description="May improve performance at the cost of security."
           />
 
           <ScriptToggle
             title="Disable Superfetch"
             inputId="disableprefetch"
             icon="/icons/performance/superfetch.png"
-            description="Disables Superfetch/Prefetch, it may improve performance."
+            description="Improves performance at the cost of app startup time."
           />
 
           <ScriptToggle
             title="Disable Storage Sense"
             inputId="storagesense"
             icon="/icons/performance/storage.png"
-            description="Background services that automatically deletes temporary files."
+            description="Automatically deletes temporary files."
           />
 
           <ScriptToggle

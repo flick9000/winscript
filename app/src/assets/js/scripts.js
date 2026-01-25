@@ -489,6 +489,60 @@ document.addEventListener("DOMContentLoaded", function () {
       "sc config AdobeARMservice start=disabled > NUL 2>&1",
       "sc config adobeupdateservice start=disabled > NUL 2>&1",
     ],
+    defaultupdate: [
+      "powershell -NoProfile -Command \"Write-Host '-- Restoring default Windows Update settings' -ForegroundColor Green\"",
+      'reg delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /f >nul 2>&1',
+      'reg delete "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization" /f >nul 2>&1',
+      'reg delete "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings" /f >nul 2>&1',
+      'reg delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Device Metadata" /f >nul 2>&1',
+      'reg delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DriverSearching" /f >nul 2>&1',
+      'reg delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /f >nul 2>&1',
+      "echo -- - Re-enabling WU services",
+      "sc config bits start= demand >nul 2>&1",
+      "sc config wuauserv start= demand >nul 2>&1",
+      "sc config usosvc start= auto >nul 2>&1",
+      "sc config WaaSMedicSvc start= demand >nul 2>&1",
+      "echo -- - Re-enabling WU scheduled tasks",
+      "powershell -NoProfile -ExecutionPolicy Bypass -Command ^",
+      `"$paths = @('\\Microsoft\\Windows\\InstallService\\', '\\Microsoft\\Windows\\UpdateOrchestrator\\', '\\Microsoft\\Windows\\UpdateAssistant\\', '\\Microsoft\\Windows\\WaaSMedic\\', '\\Microsoft\\Windows\\WindowsUpdate\\', '\\Microsoft\\WindowsUpdate\\'); ^`,
+      "foreach ($path in $paths) { ^",
+      '    Get-ScheduledTask -TaskPath \"$path*\" -ErrorAction SilentlyContinue ^| Enable-ScheduledTask -ErrorAction SilentlyContinue ^',
+      '}"',
+      "echo -- - Resetting Windows local security policies to default",
+      'secedit /configure /cfg "%SystemRoot%\\inf\\defltbase.inf" /db defltbase.sdb >nul 2>&1',
+    ],
+    securityupdate: [
+      "powershell -NoProfile -Command \"Write-Host '-- Delaying feature updates by 1 year' -ForegroundColor Green\"",
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings" /f',
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings" /v "BranchReadinessLevel" /t REG_DWORD /d "20" /f',
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings" /v "DeferFeatureUpdatesPeriodInDays" /t REG_DWORD /d "365" /f',
+    ],
+    disableupdate: [
+      "powershell -NoProfile -Command \"Write-Host '-- Disabling Windows Update' -ForegroundColor Green\"",
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v "AUOptions" /t REG_DWORD /d "1" /f',
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config" /f',
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config" /v "DODownloadMode" /t REG_DWORD /d "0" /f',
+
+      "echo -- - Disabling Windows Update Services",
+      "sc stop BITS >nul 2>&1",
+      "sc config BITS start= disabled >nul 2>&1",
+      "sc stop wuauserv >nul 2>&1",
+      "sc config wuauserv start= disabled >nul 2>&1",
+      "sc stop UsoSvc >nul 2>&1",
+      "sc config UsoSvc start= disabled >nul 2>&1",
+      "sc stop WaaSMedicSvc>nul 2>&1",
+      "sc config WaaSMedicSvc start= disabled >nul 2>&1",
+      'rmdir /s /q "C:\\Windows\\SoftwareDistribution" >nul 2>&1',
+
+      "echo -- - Disabling Windows Update Scheduled Tasks",
+      "powershell -NoProfile -ExecutionPolicy Bypass -Command ^",
+      `"$paths = @('\\Microsoft\\Windows\\InstallService\\', '\\Microsoft\\Windows\\UpdateOrchestrator\\', '\\Microsoft\\Windows\\UpdateAssistant\\', '\\Microsoft\\Windows\\WaaSMedic\\', '\\Microsoft\\Windows\\WindowsUpdate\\', '\\Microsoft\\WindowsUpdate\\'); ^`,
+      "foreach ($path in $paths) { ^",
+      '    Get-ScheduledTask -TaskPath \"$path*\" -ErrorAction SilentlyContinue ^| Disable-ScheduledTask -ErrorAction SilentlyContinue ^',
+      '}"',
+    ],
     googleupdates: [
       "powershell -NoProfile -Command \"Write-Host '-- Disabling Google updates' -ForegroundColor Green\"",
       "sc config gupdate start=disabled > NUL 2>&1",
@@ -623,7 +677,6 @@ document.addEventListener("DOMContentLoaded", function () {
     notificationtray: [
       "powershell -NoProfile -Command \"Write-Host '-- Disabling Notification Tray' -ForegroundColor Green\"",
       'reg add "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer" /v "DisableNotificationCenter" /d "1" /t REG_DWORD /f',
-      'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications" /v "ToastEnabled" /d "0" /t REG_DWORD /f',
     ],
     screenrecording: [
       "powershell -NoProfile -Command \"Write-Host '-- Disabling Xbox Screen Recording' -ForegroundColor Green\"",
@@ -1056,6 +1109,9 @@ document.addEventListener("DOMContentLoaded", function () {
     "ccleanertelemetry",
     "googleupdates",
     "adobeupdates",
+    "defaultupdate",
+    "securityupdate",
+    "disableupdate",
 
     "locationaccess",
     "cameraccess",
@@ -1140,11 +1196,27 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
+
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (radio.checked) {
+        const groupName = radio.name;
+
+        document
+          .querySelectorAll(`input[type="radio"][name="${groupName}"]`)
+          .forEach((otherRadio) => {
+            if (otherRadio !== radio) removeScripts(otherRadio.id);
+          });
+      }
+    });
+  });
 });
 
 // Uncheck all
 function uncheckAll() {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const radios = document.querySelectorAll('input[type="radio"]');
   const indicator = document.querySelectorAll(".indicator");
 
   window.manualURLs = [];
@@ -1154,6 +1226,13 @@ function uncheckAll() {
     if (checkbox.checked) {
       checkbox.checked = false;
       checkbox.dispatchEvent(new Event("change"));
+    }
+  });
+
+  radios.forEach((radio) => {
+    if (radio.checked) {
+      radio.checked = false;
+      radio.dispatchEvent(new Event("change"));
     }
   });
 

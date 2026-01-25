@@ -218,6 +218,7 @@ details[open] .chevron {
 .content-entry > div > div p {
   font-size: 12px;
   color: var(--muted);
+  text-wrap: pretty;
 }
 
 .switch {
@@ -242,8 +243,8 @@ details[open] .chevron {
   bottom: 0;
   background-color: #272727;
   border: 1px solid #a0a0a0;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
   border-radius: 34px;
 }
 
@@ -255,8 +256,8 @@ details[open] .chevron {
   left: 4px;
   bottom: 3px;
   background-color: #cecece;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
   border-radius: 50%;
 }
 
@@ -279,6 +280,8 @@ input:checked + .slider:before {
 
 .indicator {
   margin-left: 1rem;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .app-search {

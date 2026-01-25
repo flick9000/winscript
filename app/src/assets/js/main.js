@@ -20,7 +20,6 @@ async function getChangelog() {
       "",
     );
     body = body.trim();
-    console.log(body);
     return body;
   }
 }
@@ -60,7 +59,7 @@ async function checkForUpdates() {
   }
 }
 
-// Checks if an update is available and does not perform it
+// Alert if an update is available (for portable)
 async function alertForUpdates() {
   const changelog = await getChangelog();
   const update = await check();
@@ -169,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Display hostname
+// Display hostname & version
 hostname()
   .then((nameHost) => {
     document.getElementById("hostname").textContent = nameHost;
@@ -178,7 +177,6 @@ hostname()
     document.getElementById("hostname").textContent = "github.com/flick9000";
   });
 
-// Display app version
 async function displayVersion() {
   try {
     const version = await app.getVersion();
@@ -227,7 +225,7 @@ if (tabs.length > 0 && contents.length > 0) {
   title.textContent = tabs[0].textContent || "WinScript"; // Update header with the first tab's text
 }
 
-// Remove 'active' from all other content divs except the first
+// Remove 'active' from all other content divs
 contents.forEach((content, index) => {
   if (index !== 0) {
     content.classList.remove("active");
@@ -258,7 +256,6 @@ exportBtn.addEventListener("click", async () => {
     settings[checkbox.id] = checkbox.checked;
   });
 
-  // Open file dialog
   try {
     const filePath = await save({
       filters: [
@@ -269,7 +266,6 @@ exportBtn.addEventListener("click", async () => {
       ],
     });
 
-    // Write the settings to the file
     if (filePath) {
       await writeTextFile(filePath, JSON.stringify(settings, null, 2));
       console.log("File saved successfully");
@@ -280,7 +276,6 @@ exportBtn.addEventListener("click", async () => {
 });
 
 importBtn.addEventListener("click", async () => {
-  // Open file dialog
   try {
     const filePath = await open({
       filters: [
@@ -291,7 +286,6 @@ importBtn.addEventListener("click", async () => {
       ],
     });
 
-    // Read settings from file
     if (filePath) {
       const contents = await readTextFile(filePath);
 
@@ -419,18 +413,36 @@ document.getElementById("copyBtn").addEventListener("click", function () {
   navigator.clipboard.writeText(textContent);
 });
 
-// Update the indicator text when the checkbox is changed
+// Update the indicator text
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   const checkbox = wrapper.querySelector('input[type="checkbox"]');
+  const radio = wrapper.querySelector('input[type="radio"]');
   const indicator = wrapper.querySelector(".indicator");
 
-  checkbox.addEventListener("change", () => {
-    indicator.textContent = checkbox.checked ? "On" : "Off";
-  });
+  if (checkbox) {
+    checkbox.addEventListener("change", () => {
+      indicator.textContent = checkbox.checked ? "On" : "Off";
+    });
+  }
+
+  if (radio) {
+    radio.addEventListener("change", () => {
+      const radioName = radio.getAttribute("name");
+      document.querySelectorAll(`input[type="radio"][name="${radioName}"]`).forEach((r) => {
+        const parentWrapper = r.closest(".checkbox-wrapper");
+        if (parentWrapper) {
+          const ind = parentWrapper.querySelector(".indicator");
+          if (ind) {
+            ind.textContent = r.checked ? "On" : "Off";
+          }
+        }
+      });
+    });
+  }
 });
 
+// Run Button
 document.getElementById("runBtn").addEventListener("click", async function () {
-  // Ask for restore point
   if (!restoreCheckbox.checked) {
     let restoreAsk = await ask("Do you want to create a restore point?", {
       title: "Restore Point",
@@ -450,18 +462,14 @@ document.getElementById("runBtn").addEventListener("click", async function () {
   textContent = textContent.replace(/\n/g, "\r\n");
 
   try {
-    // Get the TEMP directory path
     const tmpDir = await tempDir();
     const dirPath = await join(tmpDir, "winscript");
     const filePath = await join(dirPath, "winscript.bat");
 
-    // Create the directory
     await mkdir(dirPath, { recursive: true });
 
-    // Write the script
     await writeTextFile(filePath, textContent);
 
-    // Execute the script
     const command = new Command("cmd", ["/c", "start", "cmd", "/k", filePath]);
     command
       .spawn()

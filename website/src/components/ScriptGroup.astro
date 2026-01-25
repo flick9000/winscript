@@ -1,10 +1,13 @@
 ---
 import ScriptToggle from "./ScriptToggle.astro";
+import ScriptRadio from "./ScriptRadio.astro";
 
 interface Tool {
   title: string;
   description?: string;
   inputId: string;
+  radio?: boolean;
+  group?: string;
 }
 
 interface Props {
@@ -29,5 +32,22 @@ const { title, description, icon, tools } = Astro.props;
     <img class="chevron" src="icons/chevron-down.png" alt="Expand" />
   </summary>
 
-  {tools.map((tool) => <ScriptToggle title={tool.title} inputId={tool.inputId} />)}
+  {
+    tools.map((tool) => {
+      if (tool.radio) {
+        return (
+          <ScriptRadio
+            title={tool.title}
+            inputId={tool.inputId}
+            description={tool.description}
+            group={tool.group || "default-group"}
+          />
+        );
+      }
+
+      return (
+        <ScriptToggle title={tool.title} inputId={tool.inputId} description={tool.description} />
+      );
+    })
+  }
 </details>
