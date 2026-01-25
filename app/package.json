@@ -1,7 +1,7 @@
 {
   "name": "winscript",
   "private": true,
-  "version": "1.4.6",
+  "version": "1.4.7",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
