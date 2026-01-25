@@ -730,8 +730,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cleantemp: [
       "powershell -NoProfile -Command \"Write-Host '-- Deleting Temp files' -ForegroundColor Green\"",
-      "del /s /f /q c:\\windows\\temp\\*.* > null 2>&1",
-      "del /s /f /q C:\\WINDOWS\\Prefetch > null 2>&1",
+      "del /s /f /q c:\\windows\\temp\\*.* > nul 2>&1",
+      "del /s /f /q C:\\WINDOWS\\Prefetch > nul 2>&1",
     ],
     cleanmgr: [
       "powershell -NoProfile -Command \"Write-Host '-- Running Disk Clean-up' -ForegroundColor Green\"",
