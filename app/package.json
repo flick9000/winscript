@@ -26,7 +26,7 @@
     "@tauri-apps/plugin-process": "^2.2.0",
     "@tauri-apps/plugin-shell": "^2.2.0",
     "@tauri-apps/plugin-updater": "^2.5.1",
-    "astro": "^5.5.5",
+    "astro": "^5.16.10",
     "highlight.js": "^11.11.1"
   },
   "prettier": {
