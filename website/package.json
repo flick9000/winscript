@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.15.9",
+    "astro": "^5.16.11",
     "highlight.js": "^11.11.1"
   },
   "devDependencies": {
