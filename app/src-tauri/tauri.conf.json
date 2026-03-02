@@ -18,7 +18,7 @@
         "minWidth": 650,
         "minHeight": 600,
         "resizable": true,
-        "visible": false,
+        "visible": true,
         "center": true,
         "shadow": false,
         "transparent": true,
@@ -35,12 +35,16 @@
     "createUpdaterArtifacts": true,
     "active": true,
     "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper",
+        "silent": true
+      },
       "nsis": {
         "installerIcon": "icons/favicon.ico",
         "sidebarImage": "icons/sidebar.bmp",
         "installMode": "both",
-        "languages": ["Russian", "English"],
-        "displayLanguageSelector": true
+        "languages": ["Russian"],
+        "displayLanguageSelector": false
       }
     },
     "targets": ["nsis"],

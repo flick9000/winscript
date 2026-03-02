@@ -160,10 +160,17 @@ function applyMica() {
   }
 }
 
-applyMica();
+try {
+  applyMica();
+} catch (error) {
+  console.error("Failed to apply window effects:", error);
+}
 
-// Show window manually on startup (remove this when mica bug at startup is fixed)
-getCurrentWindow().show();
+try {
+  getCurrentWindow().show();
+} catch (error) {
+  console.error("Failed to show window:", error);
+}
 
 // Prevent context menu
 document.addEventListener("DOMContentLoaded", () => {
