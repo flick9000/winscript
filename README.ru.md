@@ -1,5 +1,7 @@
 # WinScript
 
+English version: [README.md](README.md)
+
 ✅ Перевод интерфейса на русский уже внедрён.
 
 [![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases)

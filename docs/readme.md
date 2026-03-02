@@ -1,5 +1,7 @@
 <h1 style="color: var(--cta);">WinScript</h1>
 
+Russian version: [README.ru.md](../README.ru.md)
+
 > WinScript is an open-source tool built to help you build custom scripts for Windows. It includes debloat, privacy, performance scripts & more, along with the ability to install all your favourite apps in one click.
 
 ![App Screenshot](assets/img/winscript.webp)
