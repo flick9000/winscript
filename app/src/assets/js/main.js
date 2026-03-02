@@ -141,17 +141,21 @@ async function isInstalled() {
 isInstalled();
 
 // Apply Mica if OS = Windows 11
-function applyMica() {
+function isWindows11() {
   const osVersion = version();
-  const buildNumber = osVersion.split(".")[2];
+  const buildNumber = parseInt(osVersion.split(".")[2], 10);
+  return buildNumber >= 22631;
+}
 
-  function isWindows11() {
-    return buildNumber >= 22631;
-  }
-
-  if (isWindows11()) {
-    getCurrentWindow().setEffects({ effects: ["mica"] });
-  } else {
+function applyMica() {
+  try {
+    if (isWindows11()) {
+      getCurrentWindow().setEffects({ effects: ["mica"] });
+    } else {
+      document.body.style.backgroundColor = "var(--background)";
+    }
+  } catch (error) {
+    console.error(error);
     document.body.style.backgroundColor = "var(--background)";
   }
 }
@@ -259,7 +263,6 @@ exportBtn.addEventListener("click", async () => {
 
     if (filePath) {
       await writeTextFile(filePath, JSON.stringify(settings, null, 2));
-      console.log("File saved successfully");
     }
   } catch (error) {
     console.error("Error saving file:", error);
@@ -438,7 +441,6 @@ document.getElementById("runBtn").addEventListener("click", async function () {
     let restoreAsk = await ask("Do you want to create a restore point?", {
       title: "Restore Point",
     });
-    console.log("Restore Point: " + restoreAsk);
 
     if (restoreAsk === true) {
       document.querySelector(".restore-container").style.display = "block";
@@ -461,18 +463,45 @@ document.getElementById("runBtn").addEventListener("click", async function () {
 
     await writeTextFile(filePath, textContent);
 
-    const command = new Command("cmd", [
-      "/c",
-      "start",
-      "wt",
-      "powershell",
-      "-NoProfile",
-      "-NoLogo",
-      "-ExecutionPolicy",
-      "Bypass",
-      "-File",
-      filePath,
-    ]);
+    async function hasWindowsTerminal() {
+      try {
+        const check = new Command("where", ["wt"]);
+        const output = await check.execute();
+        return output.code === 0;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    }
+
+    const hasWt = await hasWindowsTerminal();
+
+    const args = hasWt
+      ? [
+          "/c",
+          "start",
+          "wt",
+          "powershell",
+          "-NoProfile",
+          "-NoLogo",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          filePath,
+        ]
+      : [
+          "/c",
+          "start",
+          "powershell",
+          "-NoProfile",
+          "-NoLogo",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          filePath,
+        ];
+
+    const command = new Command("cmd", args);
 
     command
       .spawn()
