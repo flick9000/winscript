@@ -1,0 +1,68 @@
+name: windows-setup
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-upload-setup:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: ./app/src-tauri -> target
+
+      - name: Install frontend dependencies
+        working-directory: ./app
+        run: npm ci
+
+      - name: Build Windows installer
+        working-directory: ./app
+        run: npm run tauri build
+
+      - name: Upload setup.exe to workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: winscript-setup
+          path: app/src-tauri/target/release/bundle/nsis/*-setup.exe
+          if-no-files-found: error
+
+      - name: Upload setup.exe to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $setup = Get-ChildItem "app/src-tauri/target/release/bundle/nsis/*-setup.exe" | Select-Object -First 1
+
+          if (-not $setup) {
+            Write-Error "setup.exe not found"
+            exit 1
+          }
+
+          gh release view $tag *> $null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $tag --title $tag --notes "Automated Windows installer build"
+          }
+
+          gh release upload $tag $setup.FullName --clobber

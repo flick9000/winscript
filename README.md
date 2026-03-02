@@ -1,6 +1,7 @@
 # WinScript
 
 Русская версия: [README.ru.md](README.ru.md)
+✅ Russian translation added: UI localization + Russian documentation.
 
 [![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases)
 [![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=Latest%20release)](https://github.com/flick9000/winscript/releases/latest)
