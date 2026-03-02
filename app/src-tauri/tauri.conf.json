@@ -34,11 +34,11 @@
     "license": "GPL-3.0",
     "createUpdaterArtifacts": true,
     "active": true,
+    "webviewInstallMode": {
+      "type": "downloadBootstrapper",
+      "silent": true
+    },
     "windows": {
-      "webviewInstallMode": {
-        "type": "downloadBootstrapper",
-        "silent": true
-      },
       "nsis": {
         "installerIcon": "icons/favicon.ico",
         "sidebarImage": "icons/sidebar.bmp",
