@@ -1,5 +1,5 @@
 const STORAGE_KEY = "winscript.lang";
-const DEFAULT_LANG = "en";
+const DEFAULT_LANG = "ru";
 
 const TRANSLATIONS = {
   ru: {

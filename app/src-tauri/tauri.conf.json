@@ -38,7 +38,9 @@
       "nsis": {
         "installerIcon": "icons/favicon.ico",
         "sidebarImage": "icons/sidebar.bmp",
-        "installMode": "both"
+        "installMode": "both",
+        "languages": ["Russian", "English"],
+        "displayLanguageSelector": true
       }
     },
     "targets": ["nsis"],
