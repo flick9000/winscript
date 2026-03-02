@@ -4,6 +4,10 @@ English version: [README.md](README.md)
 
 ✅ Перевод интерфейса на русский уже внедрён.
 
+📥 Скачать релиз: [v2.0.3](https://github.com/sigtrip/winscript/releases/tag/v2.0.3)
+
+⬇️ Прямая ссылка на установщик (setup.exe): [WinScript_2.0.3_x64-setup.exe](https://github.com/sigtrip/winscript/releases/download/v2.0.3/WinScript_2.0.3_x64-setup.exe)
+
 [![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases)
 [![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=Latest%20release)](https://github.com/flick9000/winscript/releases/latest)
 [![Discussions](https://img.shields.io/badge/Join-the%20Discussion-2D9F2D?style=for-the-badge&logo=github&logoColor=white)](https://github.com/flick9000/winscript/discussions)
