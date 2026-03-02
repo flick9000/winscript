@@ -1012,7 +1012,7 @@ function uncheckAll() {
   });
 
   indicator.forEach((indicator) => {
-    indicator.textContent = "Off";
+    indicator.textContent = window.i18n?.t?.("Off") ?? "Off";
   });
 }
 

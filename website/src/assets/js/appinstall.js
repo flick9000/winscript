@@ -265,7 +265,8 @@ function appsInstallChocolatey() {
 
     const manualList = document.getElementById("manualList");
     if (window.manualURLs.length > 0) {
-      manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
+      const label = window.i18n?.t?.("Manual packages added:") ?? "Manual packages added:";
+      manualList.innerHTML = `${label} ${window.manualURLs.join(" | ")}`;
     }
   }
 
@@ -558,7 +559,8 @@ function appsInstallWinget() {
 
     const manualList = document.getElementById("manualList");
     if (window.manualURLs.length > 0) {
-      manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
+      const label = window.i18n?.t?.("Manual packages added:") ?? "Manual packages added:";
+      manualList.innerHTML = `${label} ${window.manualURLs.join(" | ")}`;
     }
   }
 

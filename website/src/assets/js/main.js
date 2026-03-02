@@ -20,6 +20,10 @@ document.querySelectorAll(".fa-solid").forEach((icon) => {
   });
 });
 
+function t(key) {
+  return window.i18n?.t?.(key) ?? key;
+}
+
 const tabs = document.querySelectorAll(".sidebar-entry");
 const contents = document.querySelectorAll(".tab-content");
 const title = document.getElementById("content-header");
@@ -162,6 +166,31 @@ document.getElementById("copyBtn").addEventListener("click", function () {
 });
 
 // Update the indicator text
+function getIndicatorText(isEnabled) {
+  return isEnabled ? t("On") : t("Off");
+}
+
+function updateAllIndicators() {
+  document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
+    const checkbox = wrapper.querySelector('input[type="checkbox"]');
+    const radio = wrapper.querySelector('input[type="radio"]');
+    const indicator = wrapper.querySelector(".indicator");
+
+    if (!indicator) {
+      return;
+    }
+
+    if (checkbox) {
+      indicator.textContent = getIndicatorText(checkbox.checked);
+      return;
+    }
+
+    if (radio) {
+      indicator.textContent = getIndicatorText(radio.checked);
+    }
+  });
+}
+
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   const checkbox = wrapper.querySelector('input[type="checkbox"]');
   const radio = wrapper.querySelector('input[type="radio"]');
@@ -169,7 +198,7 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 
   if (checkbox) {
     checkbox.addEventListener("change", () => {
-      indicator.textContent = checkbox.checked ? "On" : "Off";
+      indicator.textContent = getIndicatorText(checkbox.checked);
     });
   }
 
@@ -181,13 +210,16 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
         if (parentWrapper) {
           const ind = parentWrapper.querySelector(".indicator");
           if (ind) {
-            ind.textContent = r.checked ? "On" : "Off";
+            ind.textContent = getIndicatorText(r.checked);
           }
         }
       });
     });
   }
 });
+
+window.addEventListener("winscript:languagechange", updateAllIndicators);
+updateAllIndicators();
 
 document.getElementById("downloadBtn").addEventListener("click", function () {
   const supportDialog = document.getElementById("supportDialog");

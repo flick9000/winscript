@@ -11,6 +11,13 @@
     <button id="importBtn">Import</button>
     <button id="exportBtn">Export</button>
   </div>
+  <div class="language-picker">
+    <label for="languageSelect">Language</label>
+    <select id="languageSelect" aria-label="Language">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+    </select>
+  </div>
   <div class="sidebar-content">
     <div data-tab="tools-tab" class="sidebar-entry">
       <img src="icons/sidebar/tools.svg" alt="" />
@@ -101,6 +108,28 @@
 
   .sidebar-buttons button {
     width: 100%;
+  }
+
+  .language-picker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .language-picker label {
+    font-size: 13px;
+    color: var(--muted);
+    min-width: fit-content;
+  }
+
+  .language-picker select {
+    width: 100%;
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid hsl(from var(--text) h s l / 0.1);
+    background-color: hsl(from var(--text) h s l / 0.055);
+    color: var(--text);
+    padding: 0 8px;
   }
 
   .sidebar-user > a {

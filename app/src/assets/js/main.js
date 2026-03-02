@@ -9,6 +9,10 @@ import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { openUrl } from "@tauri-apps/plugin-opener";
 
+function t(key) {
+  return window.i18n?.t?.(key) ?? key;
+}
+
 async function getChangelog() {
   const response = await fetch("https://api.github.com/repos/flick9000/winscript/releases/latest");
   if (!response.ok) {
@@ -34,17 +38,17 @@ async function checkForUpdates() {
 
     if (changelog) {
       updateAsk = await ask(changelog, {
-        title: "Update Available",
+        title: t("Update Available"),
         kind: "info",
-        okLabel: "Update",
-        cancelLabel: "Later",
+        okLabel: t("Update"),
+        cancelLabel: t("Later"),
       });
     } else {
-      updateAsk = await ask("An update is available. Do you want to update?", {
-        title: "Update Available",
+      updateAsk = await ask(t("An update is available. Do you want to update?"), {
+        title: t("Update Available"),
         kind: "info",
-        okLabel: "Update",
-        cancelLabel: "Later",
+        okLabel: t("Update"),
+        cancelLabel: t("Later"),
       });
     }
 
@@ -69,17 +73,17 @@ async function alertForUpdates() {
 
     if (changelog) {
       updateAsk = await ask(changelog, {
-        title: "Update Available",
+        title: t("Update Available"),
         kind: "info",
-        okLabel: "Go to GitHub",
-        cancelLabel: "Later",
+        okLabel: t("Go to GitHub"),
+        cancelLabel: t("Later"),
       });
     } else {
-      updateAsk = await ask("An update is available. Do you want to update?", {
-        title: "Update Available",
+      updateAsk = await ask(t("An update is available. Do you want to update?"), {
+        title: t("Update Available"),
         kind: "info",
-        okLabel: "Go to GitHub",
-        cancelLabel: "Later",
+        okLabel: t("Go to GitHub"),
+        cancelLabel: t("Later"),
       });
     }
 
@@ -405,6 +409,31 @@ document.getElementById("copyBtn").addEventListener("click", function () {
 });
 
 // Update the indicator text
+function getIndicatorText(isEnabled) {
+  return isEnabled ? t("On") : t("Off");
+}
+
+function updateAllIndicators() {
+  document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
+    const checkbox = wrapper.querySelector('input[type="checkbox"]');
+    const radio = wrapper.querySelector('input[type="radio"]');
+    const indicator = wrapper.querySelector(".indicator");
+
+    if (!indicator) {
+      return;
+    }
+
+    if (checkbox) {
+      indicator.textContent = getIndicatorText(checkbox.checked);
+      return;
+    }
+
+    if (radio) {
+      indicator.textContent = getIndicatorText(radio.checked);
+    }
+  });
+}
+
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   const checkbox = wrapper.querySelector('input[type="checkbox"]');
   const radio = wrapper.querySelector('input[type="radio"]');
@@ -412,7 +441,7 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 
   if (checkbox) {
     checkbox.addEventListener("change", () => {
-      indicator.textContent = checkbox.checked ? "On" : "Off";
+      indicator.textContent = getIndicatorText(checkbox.checked);
     });
   }
 
@@ -424,7 +453,7 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
         if (parentWrapper) {
           const ind = parentWrapper.querySelector(".indicator");
           if (ind) {
-            ind.textContent = r.checked ? "On" : "Off";
+            ind.textContent = getIndicatorText(r.checked);
           }
         }
       });
@@ -432,11 +461,14 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   }
 });
 
+window.addEventListener("winscript:languagechange", updateAllIndicators);
+updateAllIndicators();
+
 // Run Button
 document.getElementById("runBtn").addEventListener("click", async function () {
   if (!restoreCheckbox.checked) {
-    let restoreAsk = await ask("Do you want to create a restore point?", {
-      title: "Restore Point",
+    let restoreAsk = await ask(t("Do you want to create a restore point?"), {
+      title: t("Restore Point"),
     });
     console.log("Restore Point: " + restoreAsk);
 
