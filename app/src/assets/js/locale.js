@@ -150,10 +150,15 @@ const TRANSLATIONS = {
     "Update Available": "Доступно обновление",
     Update: "Обновить",
     Later: "Позже",
+    Continue: "Продолжить",
+    Cancel: "Отмена",
     "Go to GitHub": "Перейти на GitHub",
     "An update is available. Do you want to update?": "Доступно обновление. Хотите обновить?",
     "Restore Point": "Точка восстановления",
     "Do you want to create a restore point?": "Создать точку восстановления?",
+    "Uninstall OneDrive": "Удалить OneDrive",
+    "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?":
+      "Удаление OneDrive удалит все ваши файлы OneDrive. Перед продолжением обязательно сделайте резервную копию. Продолжить?",
   },
 };
 

@@ -356,10 +356,14 @@ onedriveCheckbox.addEventListener("click", async (e) => {
 
   if (!onedriveChanging) {
     const onedriveAsk = await ask(
-      "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?",
+      t(
+        "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?",
+      ),
       {
-        title: "Uninstall OneDrive",
-        type: "question",
+        title: t("Uninstall OneDrive"),
+        kind: "warning",
+        okLabel: t("Continue"),
+        cancelLabel: t("Cancel"),
       },
     );
 
