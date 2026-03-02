@@ -35,6 +35,23 @@ jobs:
         working-directory: ./app
         run: npm ci
 
+      - name: Disable updater signing requirements for CI build
+        working-directory: ./app/src-tauri
+        shell: pwsh
+        run: |
+          $path = "tauri.conf.json"
+          $json = Get-Content $path -Raw | ConvertFrom-Json
+
+          if ($null -ne $json.bundle) {
+            $json.bundle.createUpdaterArtifacts = $false
+          }
+
+          if ($null -ne $json.plugins -and $null -ne $json.plugins.updater) {
+            $json.plugins.PSObject.Properties.Remove('updater')
+          }
+
+          $json | ConvertTo-Json -Depth 100 | Set-Content $path -Encoding utf8
+
       - name: Build Windows installer
         working-directory: ./app
         run: npm run tauri build
