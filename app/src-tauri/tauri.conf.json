@@ -34,10 +34,6 @@
     "license": "GPL-3.0",
     "createUpdaterArtifacts": true,
     "active": true,
-    "webviewInstallMode": {
-      "type": "downloadBootstrapper",
-      "silent": true
-    },
     "windows": {
       "nsis": {
         "installerIcon": "icons/favicon.ico",
