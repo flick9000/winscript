@@ -1,53 +1,58 @@
+
 # WinScript
 
-Русская версия: [README.ru.md](README.ru.md)
-✅ Russian translation added: UI localization + Russian documentation.
+English version: [README.md](README.md)
+
+✅ Перевод интерфейса на русский уже внедрён.
+
+📥 Скачать релиз: [Последний релиз](https://github.com/flick9000/winscript/releases/latest)
+
+⬇️ Прямая ссылка на установщик (setup.exe): [winscript-installer.exe](https://github.com/flick9000/winscript/releases/latest/download/winscript-installer.exe)
 
 [![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases/latest)
-[![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=Latest%20release)](https://github.com/flick9000/winscript/releases/latest)
+[![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=%D0%9F%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D1%80%D0%B5%D0%BB%D0%B8%D0%B7)](https://github.com/flick9000/winscript/releases/latest)
 [![Discussions](https://img.shields.io/badge/Join-the%20Discussion-2D9F2D?style=for-the-badge&logo=github&logoColor=white)](https://github.com/flick9000/winscript/discussions)
 [![Ko-Fi](https://shields.io/badge/ko--fi-Donate-13c3ff?logo=kofi&style=for-the-badge)](https://ko-fi.com/flick9000)
 
-WinScript is a powerful, simple to use & lightweight open-source tool designed to improve and customize your Windows experience. It offers a range of features, including debloating, privacy enhancement, performance optimization, and streamlined app installation.
+WinScript — это мощный, простой в использовании и лёгкий open-source инструмент для улучшения и настройки Windows. Он включает функции деблота, повышения приватности, оптимизации производительности и быстрой установки приложений.
 <br>
 
 ![App Screenshot](/website/public/winscript.webp)
 
-## Features
+## Возможности
 
 ### 🧹 Debloat
-WinScript allows you to remove any pre-installed bloatware and unnecessary component from Windows. You can uninstall Microsoft Store, OneDrive, CoPilot, debloat or remove Microsoft Edge, disable Widgets & Taskbar Widgets, disable Windows Features such as Recall or Consumer Features & many more.
+WinScript позволяет удалить предустановленный bloatware и ненужные компоненты Windows. Можно удалить Microsoft Store, OneDrive, Copilot, выполнить debloat или удалить Microsoft Edge, отключить Widgets и Taskbar Widgets, отключить функции Windows (например, Recall или Consumer Features) и многое другое.
 
-### 🔒 Privacy
-You can disable app access to sensitive data, prevent background syncing of themes and passwords, and stop usage tracking like activity feeds, screen recording, and location-based services. The Telemetry section allows you to shut down Microsoft’s data collection of Windows, Office, updates, search, and feedback. You can disable 3rd-party apps data collection (Adobe, VS Code, Google, Nvidia etc), disable cloud-based speech recognition, DRM connectivity, and biometric services & much more.
+### 🔒 Приватность
+Можно отключить доступ приложений к чувствительным данным, запретить фоновую синхронизацию тем и паролей, а также отключить отслеживание активности (история действий, запись экрана, геолокационные сервисы). В разделе Telemetry можно отключить сбор данных Microsoft в Windows, Office, обновлениях, поиске и feedback. Также можно отключить сбор данных сторонними приложениями (Adobe, VS Code, Google, Nvidia и др.), облачное распознавание речи, DRM-соединения, биометрию и многое другое.
 
-### ⚡ Performance
-You can enable the Ultimate Performance power plan, set background services to manual startup, reduce mouse input delays, and disable features like Superfetch, HAGS, Storage Sense, Windows Search Indexing, and Hibernation. It also allows you to fine-tune security settings for better performance by limiting Windows Defender’s CPU usage, disabling Core Isolation & more.
+### ⚡ Производительность
+Можно включить план питания Ultimate Performance, перевести фоновые службы в ручной запуск, снизить задержки ввода мыши и отключить функции вроде Superfetch, HAGS, Storage Sense, индексации Windows Search и Hibernation. Также доступны дополнительные настройки безопасности в пользу производительности: ограничение CPU для Windows Defender, отключение Core Isolation и т.д.
 
-### 📦 App Installer
-The Browse Apps section in WinScript makes it easy to bulk install all your essential software in just a few clicks. Choose from a list of popular apps—browsers, utilities, dev tools, media players, and more, and WinScript will generate a script to install them automatically using your preferred package manager: Chocolatey or Winget.
+### 📦 Установщик приложений
+Раздел Browse Apps в WinScript позволяет массово установить нужный набор ПО в несколько кликов. Выберите приложения из списка (браузеры, утилиты, dev-инструменты, медиаплееры и т.д.), и WinScript сгенерирует скрипт установки через выбранный пакетный менеджер: Chocolatey или Winget.
 
-## Usage
+## Использование
 
 > [!Warning]
-> WinScript must be run as Administrator to function properly.
+> WinScript должен запускаться от имени администратора для корректной работы.
 
-
-🖥️ **Launch Command**:
+🖥️ **Команда запуска**:
 
 ```
 irm "https://winscript.cc/irm" | iex
 ```
 
-🖥️ **Via Winget**:
+🖥️ **Установка через Winget**:
 
 ```
 winget install winscript
 ```
 
-## Build
+## Сборка
 
-### 📋 Prerequisites
+### 📋 Требования
 
 - NodeJS (LTS)
 ```
@@ -59,49 +64,52 @@ winget install --id OpenJS.NodeJS.LTS
 winget install --id Rustlang.Rustup
 ```
 
-### 🛠️ How to build
+### 🛠️ Как собрать
 
-- Clone the repository
+- Клонируйте репозиторий
 ```
 git clone https://github.com/flick9000/winscript.git
 cd winscript/app
 ```
 
-- Install dependencies
+- Установите зависимости
 ```
 npm install
 ```
 
-- Build the app
+- Соберите приложение
 ```
 npm run tauri build
 ```
 
-After building, the compiled executable will be available inside the src-tauri/target/release directory.
+После сборки исполняемые файлы будут находиться в каталоге `app/src-tauri/target/release`.
 
-## Support
+## Поддержка
 
 ### 👷 Contributing
 
-Contributions are welcome! Fork the repository and create a pull request with your changes.
+Мы приветствуем вклад сообщества! Независимо от того, исправляете ли вы ошибки, улучшаете документацию или добавляете новые функции, вот как вы можете помочь:
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
+- Нашли ошибку? [Сообщите о проблеме](https://github.com/flick9000/winscript/issues).
+- Есть идея для функционала? [Начните обсуждение](https://github.com/flick9000/winscript/discussions).
+- Хотите внести свой вклад в разработку кода? Ознакомьтесь с нашим руководством в файле [CONTRIBUTING.md](CONTRIBUTING.md).
+- Хотите улучшить документацию? Запросы на изменение документации (PR) всегда приветствуются.
+
+Перед отправкой запроса на слияние, пожалуйста, проверьте существующие проблемы и запросы на слияние, чтобы избежать дубликатов.
+
+Наша цель — оперативно рассматривать все внесённые изменения и предоставлять конструктивную обратную связь, чтобы помочь в их интеграции.
 
 ### ⭐ Star
 
-Feel free to leave a star and help the project reach more people!
+Если проект полезен — поставьте звезду, это помогает ему расти.
 
-### ☕ Donate
+### ☕ Донат
 
-If you find this project helpful, consider supporting it by [buying me a coffee!](https://ko-fi.com/flick9000)
+Если проект вам помог, можете поддержать разработку: [buying me a coffee!](https://ko-fi.com/flick9000)
 
-## License
+## Лицензия
 
-📒 This project is licensed under the GPL v3 License. See the [LICENSE](LICENSE) file for more details.
+📒 Проект распространяется по лицензии GPL v3. Подробности в файле [LICENSE](LICENSE).
 
 
 
