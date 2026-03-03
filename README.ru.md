@@ -9,7 +9,7 @@ English version: [README.md](README.md)
 ⬇️ Прямая ссылка на установщик (setup.exe): [winscript-installer.exe](https://github.com/flick9000/winscript/releases/latest/download/winscript-installer.exe)
 
 [![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases/latest)
-[![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=Latest%20release)](https://github.com/flick9000/winscript/releases/latest)
+[![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=%D0%9F%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D1%80%D0%B5%D0%BB%D0%B8%D0%B7)](https://github.com/flick9000/winscript/releases/latest)
 [![Discussions](https://img.shields.io/badge/Join-the%20Discussion-2D9F2D?style=for-the-badge&logo=github&logoColor=white)](https://github.com/flick9000/winscript/discussions)
 [![Ko-Fi](https://shields.io/badge/ko--fi-Donate-13c3ff?logo=kofi&style=for-the-badge)](https://ko-fi.com/flick9000)
 
@@ -87,13 +87,16 @@ npm run tauri build
 
 ### 👷 Contributing
 
-Вклады приветствуются! Сделайте форк репозитория и откройте pull request со своими изменениями.
+Мы приветствуем вклад сообщества! Независимо от того, исправляете ли вы ошибки, улучшаете документацию или добавляете новые функции, вот как вы можете помочь:
 
-1. Сделайте fork репозитория
-2. Создайте feature-ветку
-3. Закоммитьте изменения
-4. Отправьте изменения в ветку
-5. Создайте Pull Request
+- Нашли ошибку? [Сообщите о проблеме](https://github.com/flick9000/winscript/issues).
+- Есть идея для функционала? [Начните обсуждение](https://github.com/flick9000/winscript/discussions).
+- Хотите внести свой вклад в разработку кода? Ознакомьтесь с нашим руководством в файле [CONTRIBUTING.md](CONTRIBUTING.md).
+- Хотите улучшить документацию? Запросы на изменение документации (PR) всегда приветствуются.
+
+Перед отправкой запроса на слияние, пожалуйста, проверьте существующие проблемы и запросы на слияние, чтобы избежать дубликатов.
+
+Наша цель — оперативно рассматривать все внесённые изменения и предоставлять конструктивную обратную связь, чтобы помочь в их интеграции.
 
 ### ⭐ Star
 
