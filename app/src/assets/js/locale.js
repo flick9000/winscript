@@ -1,5 +1,6 @@
 const STORAGE_KEY = "winscript.lang";
-const DEFAULT_LANG = "ru";
+const DEFAULT_LANG = "en";
+const SUPPORTED_LANGS = ["en", "ru"];
 
 const TRANSLATIONS = {
   ru: {
@@ -225,11 +226,39 @@ function translateFragment(fragment) {
 }
 
 function getStoredLanguage() {
+  const getNormalizedLanguage = (value) => {
+    if (typeof value !== "string") {
+      return null;
+    }
+
+    const normalized = value.toLowerCase().split("-")[0];
+    return SUPPORTED_LANGS.includes(normalized) ? normalized : null;
+  };
+
+  const getPreferredLanguage = () => {
+    if (typeof navigator === "undefined") {
+      return null;
+    }
+
+    const candidates = Array.isArray(navigator.languages) && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language];
+
+    for (const candidate of candidates) {
+      const normalized = getNormalizedLanguage(candidate);
+      if (normalized) {
+        return normalized;
+      }
+    }
+
+    return null;
+  };
+
   try {
     const value = localStorage.getItem(STORAGE_KEY);
-    return value === "ru" || value === "en" ? value : DEFAULT_LANG;
+    return getNormalizedLanguage(value) || getPreferredLanguage() || DEFAULT_LANG;
   } catch {
-    return DEFAULT_LANG;
+    return getPreferredLanguage() || DEFAULT_LANG;
   }
 }
 
@@ -357,7 +386,7 @@ function updateHeaderFromActiveTab() {
 }
 
 function setLanguage(lang) {
-  const safeLang = lang === "ru" ? "ru" : "en";
+  const safeLang = SUPPORTED_LANGS.includes(lang) ? lang : DEFAULT_LANG;
   setStoredLanguage(safeLang);
 
   document.documentElement.setAttribute("lang", safeLang);
