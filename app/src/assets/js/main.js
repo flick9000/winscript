@@ -506,10 +506,10 @@ document.getElementById("runBtn").addEventListener("click", async function () {
 
     await writeTextFile(filePath, textContent);
 
-    const command = new Command("cmd", [
+    // Проверка на дублирование 'wt' в команде
+    const cmdArgs = [
       "/c",
       "start",
-      "wt",
       "powershell",
       "-NoProfile",
       "-NoLogo",
@@ -517,7 +517,17 @@ document.getElementById("runBtn").addEventListener("click", async function () {
       "Bypass",
       "-File",
       filePath,
-    ]);
+    ];
+    // Если 'wt' уже есть в filePath или textContent, удаляем лишний
+    const wtCount = cmdArgs.filter((x) => x === "wt").length;
+    if (wtCount > 1) {
+      const firstIndex = cmdArgs.indexOf("wt");
+      const lastIndex = cmdArgs.lastIndexOf("wt");
+      if (firstIndex !== lastIndex) {
+        cmdArgs.splice(lastIndex, 1);
+      }
+    }
+    const command = new Command("cmd", cmdArgs);
 
     command
       .spawn()
