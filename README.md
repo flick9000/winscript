@@ -1,6 +1,6 @@
 # WinScript
 
-[![Release](https://img.shields.io/github/v/release/sigtrip/winscript?label=release)](https://github.com/sigtrip/winscript/releases/tag/v2.0.15)
+[![Release](https://img.shields.io/github/v/release/sigtrip/winscript?label=release)](https://github.com/sigtrip/winscript/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/sigtrip/winscript/total?label=downloads)](https://github.com/sigtrip/winscript/releases)
 
 ## О проекте
@@ -8,11 +8,11 @@ WinScript — универсальный инструмент для настр�
 
 ## 📦 Установка
 
-- [Скачать последнюю версию (setup.exe)](https://github.com/sigtrip/winscript/releases/download/v2.0.15/WinScript%20Setup.exe)
+- [Скачать последнюю версию (setup.exe)](https://github.com/sigtrip/winscript/releases/latest)
 - [Все релизы](https://github.com/sigtrip/winscript/releases)
 
 ## 🚀 Быстрый старт
-1. Скачайте [setup.exe](https://github.com/sigtrip/winscript/releases/download/v2.0.15/WinScript%20Setup.exe) из раздела Assets последнего релиза.
+1. Скачайте [setup.exe](https://github.com/sigtrip/winscript/releases/latest) из раздела Assets последнего релиза.
 2. Запустите установщик и следуйте инструкциям.
 3. После установки откройте WinScript и настройте систему под себя.
 
