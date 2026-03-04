@@ -5,9 +5,9 @@ English version: [README.md](README.md)
 
 ✅ Перевод интерфейса на русский уже внедрён.
 
-📥 Скачать релиз: [Последний релиз](https://github.com/flick9000/winscript/releases/latest)
+📥 Скачать релиз: [Последний релиз](https://github.com/sigtrip/winscript/releases)
 
-⬇️ Прямая ссылка на установщик (setup.exe): [winscript-installer.exe](https://github.com/flick9000/winscript/releases/latest/download/winscript-installer.exe)
+⬇️ Прямая ссылка на установщик (setup.exe): [winscript-installer.exe](https://github.com/sigtrip/winscript/releases/download/v2.0.12/WinScript_2.0.3_x64-setup.exe)
 
 [![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases/latest)
 [![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=%D0%9F%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D1%80%D0%B5%D0%BB%D0%B8%D0%B7)](https://github.com/flick9000/winscript/releases/latest)
@@ -110,6 +110,7 @@ npm run tauri build
 ## Лицензия
 
 📒 Проект распространяется по лицензии GPL v3. Подробности в файле [LICENSE](LICENSE).
+
 
 
 
