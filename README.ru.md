@@ -1,126 +1,53 @@
 # WinScript
 
-English version: [README.md](README.md)
+[![Release](https://img.shields.io/github/v/release/sigtrip/winscript?label=release)](https://github.com/sigtrip/winscript/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/sigtrip/winscript/total?label=downloads)](https://github.com/sigtrip/winscript/releases)
 
-✅ Перевод интерфейса на русский уже внедрён.
+## О проекте
+WinScript — универсальный инструмент для настройки, оптимизации и автоматизации Windows. Поддерживает установку приложений, твики, приватность, производительность и многое другое.
 
-📥 Скачать релиз: [Последний релиз](https://github.com/sigtrip/winscript/releases/latest)
+## 📦 Установка
 
-⬇️ Прямая ссылка на установщик (setup.exe): [winscript-installer.exe](https://github.com/sigtrip/winscript/releases/latest/download/winscript-installer.exe)
+- [Скачать последнюю версию (setup.exe)](https://github.com/sigtrip/winscript/releases/latest)
+- [Все релизы](https://github.com/sigtrip/winscript/releases)
 
-[![Downloads](https://img.shields.io/github/downloads/sigtrip/winscript/total?style=for-the-badge)](https://github.com/sigtrip/winscript/releases/latest)
-[![Release](https://img.shields.io/github/v/release/sigtrip/winscript?style=for-the-badge&label=Последний%20релиз)](https://github.com/sigtrip/winscript/releases/latest)
-[![Discussions](https://img.shields.io/badge/Join-the%20Discussion-2D9F2D?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sigtrip/winscript/discussions)
-[![Ko-Fi](https://shields.io/badge/ko--fi-Donate-13c3ff?logo=kofi&style=for-the-badge)](https://ko-fi.com/sigtrip)
+## 🚀 Быстрый старт
+1. Скачайте [setup.exe](https://github.com/sigtrip/winscript/releases/latest) из раздела Assets последнего релиза.
+2. Запустите установщик и следуйте инструкциям.
+3. После установки откройте WinScript и настройте систему под себя.
 
-WinScript — это мощный, простой в использовании и лёгкий open-source инструмент для улучшения и настройки Windows. Он включает функции деблота, повышения приватности, оптимизации производительности и быстрой установки приложений.
-<br>
+## 🛠️ Сборка вручную
 
-![App Screenshot](/website/public/winscript.webp)
-
-## Возможности
-
-### 🧹 Debloat
-WinScript позволяет удалить предустановленный bloatware и ненужные компоненты Windows. Можно удалить Microsoft Store, OneDrive, Copilot, выполнить debloat или удалить Microsoft Edge, отключить Widgets и Taskbar Widgets, отключить функции Windows (например, Recall или Consumer Features) и многое другое.
-
-### 🔒 Приватность
-Можно отключить доступ приложений к чувствительным данным, запретить фоновую синхронизацию тем и паролей, а также отключить отслеживание активности (история действий, запись экрана, геолокационные сервисы). В разделе Telemetry можно отключить сбор данных Microsoft в Windows, Office, обновлениях, поиске и feedback. Также можно отключить сбор данных сторонними приложениями (Adobe, VS Code, Google, Nvidia и др.), облачное распознавание речи, DRM-соединения, биометрию и многое другое.
-
-### ⚡ Производительность
-Можно включить план питания Ultimate Performance, перевести фоновые службы в ручной запуск, снизить задержки ввода мыши и отключить функции вроде Superfetch, HAGS, Storage Sense, индексации Windows Search и Hibernation. Также доступны дополнительные настройки безопасности в пользу производительности: ограничение CPU для Windows Defender, отключение Core Isolation и т.д.
-
-### 📦 Установщик приложений
-Раздел Browse Apps в WinScript позволяет массово установить нужный набор ПО в несколько кликов. Выберите приложения из списка (браузеры, утилиты, dev-инструменты, медиаплееры и т.д.), и WinScript сгенерирует скрипт установки через выбранный пакетный менеджер: Chocolatey или Winget.
-
-## Использование
-
-> [!Warning]
-> WinScript должен запускаться от имени администратора для корректной работы.
-
-🖥️ **Команда запуска**:
-
-```
-irm "https://winscript.cc/irm" | iex
-```
-
-🖥️ **Установка через Winget**:
-
-```
-winget install winscript
-```
-
-## Автоматическая установка Chocolatey
-
-Если у вас не установлен Chocolatey, выполните в PowerShell от имени администратора:
-
-```
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-```
-
-После установки закройте и откройте новое окно PowerShell, затем проверьте:
-```
-choco --version
-```
-
-Если команда не работает, добавьте `C:\ProgramData\chocolatey\bin` в переменную среды PATH вручную.
-
-## Сборка
-
-### 📋 Требования
-
+### Требования
+- Windows 10/11
 - NodeJS (LTS)
-```
-winget install --id OpenJS.NodeJS.LTS
-```
-
 - Rust & Cargo
-```
-winget install --id Rustlang.Rustup
-```
+- NSIS (установится автоматически)
 
-### 🛠️ Как собрать
-
-- Клонируйте репозиторий
-```
-git clone https://github.com/flick9000/winscript.git
+### Инструкция
+```sh
+git clone https://github.com/sigtrip/winscript.git
 cd winscript/app
-```
-
-- Установите зависимости
-```
 npm install
-```
-
-- Соберите приложение
-```
 npm run tauri build
 ```
 
-После сборки исполняемые файлы будут находиться в каталоге `app/src-tauri/target/release`.
+После сборки:
+- Бинарник: `app/src-tauri/target/release/WinScript`
+- Установщик: `app/src-tauri/target/release/bundle/nsis/WinScript Setup.exe`
 
-## Поддержка
+## 🤖 Автоматическая сборка и релизы
 
-### 👷 Contributing
+Каждый push с тегом `v*` запускает GitHub Actions ([workflow](https://github.com/sigtrip/winscript/blob/main/.github/workflows/release.yml)), который собирает и публикует новый релиз с актуальным setup.exe.
 
-Мы приветствуем вклад сообщества! Независимо от того, исправляете ли вы ошибки, улучшаете документацию или добавляете новые функции, вот как вы можете помочь:
+## 📄 Документация
+- [Русский README](README.ru.md)
+- [Wiki](https://github.com/sigtrip/winscript/wiki)
 
-- Нашли ошибку? [Сообщите о проблеме](https://github.com/flick9000/winscript/issues).
-- Есть идея для функционала? [Начните обсуждение](https://github.com/flick9000/winscript/discussions).
-- Хотите внести свой вклад в разработку кода? Ознакомьтесь с нашим руководством в файле [CONTRIBUTING.md](CONTRIBUTING.md).
-- Хотите улучшить документацию? Запросы на изменение документации (PR) всегда приветствуются.
+## 💬 Обратная связь
+- [Issues](https://github.com/sigtrip/winscript/issues)
+- [Pull Requests](https://github.com/sigtrip/winscript/pulls)
 
-Перед отправкой запроса на слияние, пожалуйста, проверьте существующие проблемы и запросы на слияние, чтобы избежать дубликатов.
+---
 
-Наша цель — оперативно рассматривать все внесённые изменения и предоставлять конструктивную обратную связь, чтобы помочь в их интеграции.
-
-### ⭐ Star
-
-Если проект полезен — поставьте звезду, это помогает ему расти.
-
-### ☕ Донат
-
-Если проект вам помог, можете поддержать разработку: [buying me a coffee!](https://ko-fi.com/flick9000)
-
-## Лицензия
-
-📒 Проект распространяется по лицензии GPL v3. Подробности в файле [LICENSE](LICENSE).
+**Все ссылки ведут на ваш форк: [sigtrip/winscript](https://github.com/sigtrip/winscript)**
