@@ -13,3 +13,11 @@ choco install nodejs-lts -y
 
 # Установка NSIS
 choco install nsis -y
+
+# Запуск сканирования устройств и установка драйверов
+Write-Host "Запуск сканирования устройств без драйверов..." -ForegroundColor Cyan
+& "$PSScriptRoot/driver-scan.ps1"
+
+# Пример автоматической установки драйверов (требуется INF-файл)
+# $infPath = "C:\path\to\driver.inf"
+# pnputil /add-driver $infPath /install

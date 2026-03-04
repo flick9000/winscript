@@ -32,7 +32,7 @@
   "bundle": {
     "publisher": "flick9000",
     "license": "GPL-3.0",
-    "createUpdaterArtifacts": true,
+    "createUpdaterArtifacts": false,
     "active": true,
     "windows": {
       "nsis": {
