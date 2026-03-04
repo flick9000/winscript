@@ -4,14 +4,14 @@ English version: [README.md](README.md)
 
 ✅ Перевод интерфейса на русский уже внедрён.
 
-📥 Скачать релиз: [Последний релиз](https://github.com/flick9000/winscript/releases/latest)
+📥 Скачать релиз: [Последний релиз](https://github.com/sigtrip/winscript/releases/latest)
 
-⬇️ Прямая ссылка на установщик (setup.exe): [winscript-installer.exe](https://github.com/flick9000/winscript/releases/latest/download/winscript-installer.exe)
+⬇️ Прямая ссылка на установщик (setup.exe): [winscript-installer.exe](https://github.com/sigtrip/winscript/releases/latest/download/winscript-installer.exe)
 
-[![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases/latest)
-[![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=%D0%9F%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D1%80%D0%B5%D0%BB%D0%B8%D0%B7)](https://github.com/flick9000/winscript/releases/latest)
-[![Discussions](https://img.shields.io/badge/Join-the%20Discussion-2D9F2D?style=for-the-badge&logo=github&logoColor=white)](https://github.com/flick9000/winscript/discussions)
-[![Ko-Fi](https://shields.io/badge/ko--fi-Donate-13c3ff?logo=kofi&style=for-the-badge)](https://ko-fi.com/flick9000)
+[![Downloads](https://img.shields.io/github/downloads/sigtrip/winscript/total?style=for-the-badge)](https://github.com/sigtrip/winscript/releases/latest)
+[![Release](https://img.shields.io/github/v/release/sigtrip/winscript?style=for-the-badge&label=Последний%20релиз)](https://github.com/sigtrip/winscript/releases/latest)
+[![Discussions](https://img.shields.io/badge/Join-the%20Discussion-2D9F2D?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sigtrip/winscript/discussions)
+[![Ko-Fi](https://shields.io/badge/ko--fi-Donate-13c3ff?logo=kofi&style=for-the-badge)](https://ko-fi.com/sigtrip)
 
 WinScript — это мощный, простой в использовании и лёгкий open-source инструмент для улучшения и настройки Windows. Он включает функции деблота, повышения приватности, оптимизации производительности и быстрой установки приложений.
 <br>
