@@ -1,0 +1,40 @@
+name: Build and Release WinScript Setup
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install NSIS
+        run: choco install nsis -y
+
+      - name: Install dependencies
+        run: cd app && npm install
+
+      - name: Build Tauri app
+        run: cd app && npm run tauri build
+
+      - name: Upload setup.exe to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: app/src-tauri/target/release/bundle/nsis/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
