@@ -1,0 +1,30 @@
+---
+// Вкладка для автопоиска и установки драйверов
+import DriverTabJS from './DriverTab.js';
+---
+
+<div class="driver-tab">
+  <h2>Драйверы</h2>
+  <p>Автоматический поиск и установка драйверов для устройств Windows.</p>
+  <button id="scan-drivers" class="btn">Автопоиск драйверов</button>
+  <div id="drivers-list"></div>
+  <div id="driver-status"></div>
+  <div id="driver-confirm" style="margin-top:1rem;"></div>
+  <div id="manual-driver" style="margin-top:2rem;">
+    <h3>Ручная установка драйвера</h3>
+    <input type="text" id="driver-path" placeholder="Путь к .inf или ссылка на драйвер" style="width:70%;margin-right:1rem;" />
+    <button id="install-manual-driver" class="btn">Установить выбранный драйвер</button>
+    <div id="manual-status"></div>
+  </div>
+</div>
+
+<DriverTabJS />
+
+<style>
+.driver-tab {
+  padding: 2rem;
+}
+.btn {
+  margin-bottom: 1rem;
+}
+</style>
