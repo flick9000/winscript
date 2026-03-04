@@ -37,13 +37,7 @@
     "windows": {
       "nsis": {
         "installerIcon": "icons/favicon.ico",
-        "sidebarImage": "icons/sidebar.bmp",
-        "installMode": "both",
-        "languages": ["Russian"],
-        "displayLanguageSelector": false,
-        "pre_install_commands": [
-          "powershell -ExecutionPolicy Bypass -File preinstall.ps1"
-        ]
+        "installMode": "both"
       }
     },
     "targets": ["nsis"],
