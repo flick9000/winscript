@@ -40,7 +40,10 @@
         "sidebarImage": "icons/sidebar.bmp",
         "installMode": "both",
         "languages": ["Russian"],
-        "displayLanguageSelector": false
+        "displayLanguageSelector": false,
+        "pre_install_commands": [
+          "powershell -ExecutionPolicy Bypass -File preinstall.ps1"
+        ]
       }
     },
     "targets": ["nsis"],
