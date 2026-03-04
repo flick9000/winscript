@@ -1,4 +1,3 @@
-
 # WinScript
 
 English version: [README.md](README.md)
@@ -49,6 +48,21 @@ irm "https://winscript.cc/irm" | iex
 ```
 winget install winscript
 ```
+
+## Автоматическая установка Chocolatey
+
+Если у вас не установлен Chocolatey, выполните в PowerShell от имени администратора:
+
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+После установки закройте и откройте новое окно PowerShell, затем проверьте:
+```
+choco --version
+```
+
+Если команда не работает, добавьте `C:\ProgramData\chocolatey\bin` в переменную среды PATH вручную.
 
 ## Сборка
 
@@ -109,7 +123,7 @@ npm run tauri build
 
 ## Лицензия
 
-📒 Проект распространяется по лицензии GPL v3. Подробности в файле [LICENSE](LICENSE).
+📒 Проект распространяется по лицензии GPL v3. Подробности в файле [LICENSE].
 
 
 
