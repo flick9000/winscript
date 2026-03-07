@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     thirdparty: [
       "Write-Host '-- Uninstalling third-party apps' -ForegroundColor Green",
-      `@("ShazamEntertainmentLtd.Shazam","ClearChannelRadioDigital.iHeartRadio","SpotifyAB.SpotifyMusic","*EclipseManager*","*ActiproSoftwareLLC*","*AdobeSystemsIncorporated.AdobePhotoshopExpress*","*Duolingo-LearnLanguagesforFree*","*PandoraMediaInc*","*CandyCrush*","*BubbleWitch3Saga*","*Wunderlist*","*Flipboard*","*Twitter*","*Facebook*","*Royal Revolt*","*Sway*","*Speed Test*","*Dolby*","*Viber*","*ACGMediaPlayer*","*Netflix*","*OneCalendar*","*LinkedInForWindows*","*HiddenCityMysteryofShadows*","*Hulu*","*HiddenCity*","*AdobePhotoshopExpress*") | ForEach-Object { $pkg = Get-AppxPackage $_; if ($pkg) { $pkg | Remove-AppxPackage; Write-Host "Removed: $_" } }`,
+      `@("*DropboxOEM*","*BingSearch*","*RandomSaladGamesLLC*","*UserExperienceImprovementProgram*","*McAfee*","ShazamEntertainmentLtd.Shazam","ClearChannelRadioDigital.iHeartRadio","SpotifyAB.SpotifyMusic","*EclipseManager*","*ActiproSoftwareLLC*","*AdobeSystemsIncorporated.AdobePhotoshopExpress*","*Duolingo-LearnLanguagesforFree*","*PandoraMediaInc*","*CandyCrush*","*BubbleWitch3Saga*","*Wunderlist*","*Flipboard*","*Twitter*","*Facebook*","*Royal Revolt*","*Sway*","*Speed Test*","*Dolby*","*Viber*","*ACGMediaPlayer*","*Netflix*","*OneCalendar*","*LinkedInForWindows*","*HiddenCityMysteryofShadows*","*Hulu*","*HiddenCity*","*AdobePhotoshopExpress*") | ForEach-Object { $pkg = Get-AppxPackage $_; if ($pkg) { $pkg | Remove-AppxPackage; Write-Host "Removed: $_" } }`,
     ],
     extensions: [
       "Write-Host '-- Uninstalling extensions' -ForegroundColor Green",
