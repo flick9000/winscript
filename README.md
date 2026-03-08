@@ -42,7 +42,7 @@ irm "https://winscript.cc/irm" | iex
 winget install winscript
 ```
 
-## Usage
+## Build
 
 ### 📋 Prerequisites
 
@@ -99,6 +99,7 @@ If you find this project helpful, consider supporting it by [buying me a coffee!
 ## License
 
 📒 This project is licensed under the GPL v3 License. See the [LICENSE](LICENSE) file for more details.
+
 
 
 
