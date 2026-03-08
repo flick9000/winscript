@@ -1,9 +1,11 @@
-# Downloads the latest version, runs it, and cleans up afterward
 $apiUrl = "https://api.github.com/repos/flick9000/winscript/releases/latest"
 $tempFile = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "winscript-portable.exe")
 
 try {
-    # Remove old file if it exists (may sometimes cause issues)
+    # Check if the script is running as admin
+    if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { Write-Host "This script requires administrator privileges."`n"Please run the terminal as an administrator." -ForegroundColor Red; exit }
+    
+    # Remove old file if it exists
     if (Test-Path $tempFile) {
         Remove-Item -Path $tempFile -Force
         Write-Host "Old temporary file removed." -ForegroundColor Green
@@ -27,16 +29,15 @@ try {
         Start-Process -FilePath $tempFile -Wait
     }
     else {
-        # Download the file
+        # Download & run the file
         Write-Host "Downloading from GitHub..." -ForegroundColor Green
         Invoke-WebRequest -Uri $downloadUrl -OutFile $tempFile
     
-        # Run the executable
         Write-Host "Starting WinScript..." -ForegroundColor Green
         Start-Process -FilePath $tempFile -Wait
     }
     
-    # Clean up after execution
+    # Clean up
     if (Test-Path $tempFile) {
         Remove-Item -Path $tempFile -Force
         Write-Host "Temporary file removed, done!" -ForegroundColor Green
