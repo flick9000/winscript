@@ -1,3 +1,4 @@
+$ProgressPreference = "SilentlyContinue"
 $apiUrl = "https://api.github.com/repos/flick9000/winscript/releases/latest"
 $tempFile = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "winscript-portable.exe")
 
