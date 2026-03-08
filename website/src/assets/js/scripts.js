@@ -627,7 +627,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'netsh interface ip set dns name="Ethernet" static 208.67.222.222 | Out-Null',
       'netsh interface ip add dns name="Ethernet" 208.67.220.220 index=2 | Out-Null',
     ],
-    adguard: [
+    adguardns: [
       "Write-Host '-- Setting AdGuard DNS' -ForegroundColor Green",
       'netsh interface ip set dns name="Ethernet" static 94.140.14.14 | Out-Null',
       'netsh interface ip add dns name="Ethernet" 94.140.15.15 index=2 | Out-Null',
