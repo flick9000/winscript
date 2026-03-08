@@ -24,8 +24,8 @@ try {
     
     # Remove old file if it exists
     if (Test-Path $tempFile) {
-        Remove-Item -Path $tempFile -Force
-        Write-Host "Old temporary file removed." -ForegroundColor Green
+        Remove-Item -Path $tempFile -Force -ErrorAction SilentlyContinue
+        Write-Host "Removed old temporary file." -ForegroundColor Green
     }
     
     # Get latest release info
@@ -57,7 +57,9 @@ try {
     # Clean up
     if (Test-Path $tempFile) {
         Remove-Item -Path $tempFile -Force
-        Write-Host "Temporary file removed, done!" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "Thanks for using WinScript!" -ForegroundColor Green
+        Write-Host ""
     }
     
 }
