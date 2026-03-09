@@ -3,9 +3,8 @@
 Deletes files from Windows Prefetch, User Temp and Windows Temp folders.
 
 ```
-del /s /f /q c:\windows\temp\.
-del /s /f /q C:\WINDOWS\Prefetch
-del /s /f /q %temp%\.
+Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force
+Remove-Item -Path "C:\Windows\Prefetch\*" -Recurse -Force
 ```
 
 ## Run Disk Cleanup
@@ -18,10 +17,10 @@ cleanmgr /verylowdisk /sagerun:5
 
 ## Empty Recycle Bin
 
-This command uses PowerShell to empty the Recycle Bin by iterating through its items and removing them forcefully. It also prints a message indicating which item is being deleted.
+Uses PowerShell to empty the Recycle Bin by iterating through its items and removing them forcefully. It also prints a message indicating which item is being deleted.
 
 ```
-PowerShell -ExecutionPolicy Unrestricted -Command "$bin = (New-Object -ComObject Shell.Application).NameSpace(10); $bin.items() | ForEach {; Write-Host "^""Deleting $($_.Name) from Recycle Bin"^""; Remove-Item $_.Path -Recurse -Force; }"
+$bin = (New-Object -ComObject Shell.Application).NameSpace(10); $bin.items() | ForEach { Write-Host "Deleting $($_.Name) from Recycle Bin"; Remove-Item $_.Path -Recurse -Force }
 
 ```
 
@@ -30,10 +29,18 @@ PowerShell -ExecutionPolicy Unrestricted -Command "$bin = (New-Object -ComObject
 Creates a restore point before applying the scripts.
 
 ```
-powershell -command "Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS""
+Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 ```
 
-## Verify System Integrity
+## DISM Check
+
+Runs DISM to repair system files.
+
+```
+DISM /Online /Cleanup-Image /RestoreHealth
+```
+
+## SFC Check
 
 Checks if the system integrity is correct, and if not, fixes the corrupted files.
 
@@ -46,27 +53,27 @@ sfc /scannow
 Clears Chrome, Edge and Firefox history.
 
 ```
-del /q /s "%LocalAppData%\Google\Chrome\User Data\Default\History"
-del /q /s "%LocalAppData%\Google\Chrome\User Data\Default\Cache\*.*"
-del /q /s "%LocalAppData%\Google\Chrome\User Data\Default\Cookies"
-del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\History"
-del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*.*"
-del /q /s "%LocalAppData%\Microsoft\Edge\User Data\Default\Cookies"
-del /q /s "%APPDATA%\Mozilla\Firefox\Profiles\*.default\places.sqlite"
-del /q /s "%APPDATA%\Mozilla\Firefox\Profiles\*.default\cache2\entries\*.*"
-del /q /s "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\History"
-del /q /s "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cache\*.*"
-del /q /s "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cookies"
+Remove-Item -Path "$env:LocalAppData\Google\Chrome\User Data\Default\History" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\Google\Chrome\User Data\Default\Cookies" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\Microsoft\Edge\User Data\Default\History" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\Microsoft\Edge\User Data\Default\Cookies" -Recurse -Force
+Remove-Item -Path "$env:AppData\Mozilla\Firefox\Profiles\*.default\places.sqlite" -Recurse -Force
+Remove-Item -Path "$env:AppData\Mozilla\Firefox\Profiles\*.default\cache2\entries\*" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\BraveSoftware\Brave-Browser\User Data\Default\History" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\BraveSoftware\Brave-Browser\User Data\Default\Cache\*" -Recurse -Force
+Remove-Item -Path "$env:LocalAppData\BraveSoftware\Brave-Browser\User Data\Default\Cookies" -Recurse -Force
 ```
 
 ## Reset Network
 
-Resets the network by flushing the DNS cache, releasing the IP address and renewing the IP address.
+Resets the network by flushing the DNS cache, releasing and renewing the IP address.
 
 ```
 ipconfig /flushdns
-ipconfig /release
-ipconfig /renew
+ipconfig /release | Out-Null
+ipconfig /renew | Out-Null
 ```
 
 ## Run MAS
@@ -74,5 +81,5 @@ ipconfig /renew
 Runs 'Microsoft Activation Scripts' to activate Windows and Office for free.
 
 ```
-powershell -command "irm https://get.activated.win | iex"
+irm https://get.activated.win | iex
 ```
