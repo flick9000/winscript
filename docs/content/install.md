@@ -1,25 +1,23 @@
-# Install Process
-
 ## Chocolatey Install
 
-This script install chocolatey packet manager needed in order to install all the other apps via terminal.
+Installs Chocolatey needed in order to install all the other apps via terminal.
 
 ```
-powershell -command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 
-## Refreshing Environment
+## Winget Update
 
-Refreshes terminal environment to make chocolatey work without opening another terminal shell.
+If Winget is selected as package manager, this script will update it if it's out of date.
 
 ```
-call "%ProgramData%\chocolatey\bin\RefreshEnv.cmd"
+$v = winget -v; if ([version]($v.TrimStart('v')) -lt [version]'1.7.0') { Write-Output '-- - Old Winget version detected, upgrading.'; Set-Location $env:USERPROFILE; Invoke-WebRequest -Uri 'https://aka.ms/getwinget' -OutFile 'winget.msixbundle'; Add-AppPackage -ForceApplicationShutdown .\winget.msixbundle; Remove-Item .\winget.msixbundle } else { Write-Output 'Winget is already up to date, skipping upgrade.' }
 ```
 
 ## Installing Apps
 
-Refreshes Windows Explorer to avoid any chocolatey bugs/errors. and then proceeds to install the apps via `choco install`, with `-y --force --ignorepackageexitcodes` chocolatey argument.
+Restarts Windows Explorer to avoid any Chocolatey bugs/errors, and proceeds to install the apps via `choco install`, with `-y --force --ignorepackageexitcodes` arguments.
 
 ```
-taskkill /f /im explorer.exe && start explorer.exe && start cmd /k "choco install list-of-apps -y --force --ignorepackageexitcodes"
+Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue | Start-Process explorer.exe | Start-Process cmd.exe -ArgumentList '/k choco install apps -y --force --ignorepackageexitcodes"'
 ```

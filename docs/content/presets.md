@@ -5,72 +5,113 @@
             <th>Strict</th>
             <th>Extreme</th>
         </tr>
-        <tr><td>thirdparty</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>thirdparty</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>consumerfeatures</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>copilot</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>faxscan</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>iexplorer</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>copilot</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>faxscan</td><td></td><td></td><td></td></tr>
+        <tr><td>iexplorer</td><td></td><td></td><td></td></tr>
         <tr><td>wtelemetry</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>wsearchtelemetry</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>blockhosts</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>officetelemetry</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>officetelemetry</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>appexperience</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>wfeedback</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>handwriting</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>wfeedback</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>handwriting</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>clipboard</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>targetads</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>privacyconsent</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>cloudsync</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>cloudsync</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>wifisense</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>screenrecording</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>automap</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>screenrecording</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>automap</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>activityfeed</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>voiceactivationaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>locationaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>accinfoaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>motionaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>trustedaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>contactsaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>calendaraccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>emailaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>tasksaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>radioaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>systemaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>voiceactivationaccess</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>locationaccess</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>accinfoaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>motionaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>trustedaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>contactsaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>calendaraccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>emailaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>tasksaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>radioaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>systemaccess</td><td></td><td></td><td></td></tr>
         <tr><td>cleantemp</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>cleanmgr</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>ultimateperformance</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>filextensions</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>stickykeys</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>filextensions</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>stickykeys</td><td></td><td></td><td>✔</td></tr>
         <tr><td>taskbarwidgets</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>widgets</td><td>✔</td><td>✔</td><td>✔</td></tr>
-        <tr><td>recall</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>debloatedge</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>widgets</td><td></td><td></td><td></td></tr>
+        <tr><td>recall</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>debloatedge</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>callhistoryaccess</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>xbox</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>onedrive</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>wupdate</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>adobetelemetry</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>nvidiatelemetry</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>vscodetelemetry</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>mediatelemetry</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>xbox</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>onedrive</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>wupdate</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>adobetelemetry</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>nvidiatelemetry</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>vscodetelemetry</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>mediatelemetry</td><td></td><td></td><td>✔</td></tr>
         <tr><td>powershelltelemetry</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>ccleanertelemetry</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>googleupdates</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>adobeupdates</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>ccleanertelemetry</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>googleupdates</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>adobeupdates</td><td></td><td></td><td>✔</td></tr>
         <tr><td>messagingaccess</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>notificationaccess</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>diagaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>notificationaccess</td><td></td><td></td><td></td></tr>
+        <tr><td>diagaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
         <tr><td>phoneaccess</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>lockscreencamera</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>manualservices</td><td></td><td>✔</td><td>✔</td></tr>
-        <tr><td>browserhistory</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>lockscreencamera</td><td></td><td></td><td></td></tr>
+        <tr><td>manualservices</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>browserhistory</td><td></td><td></td><td></td></tr>
         <tr><td>msapps</td><td></td><td></td><td>✔</td></tr>
-        <tr><td>hyperv</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>hyperv</td><td></td><td></td><td></td></tr>
         <tr><td>notificationtray</td><td></td><td></td><td>✔</td></tr>
-        <tr><td>biometrics</td><td></td><td></td><td>✔</td></tr>
-        <tr><td>limitdefender</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>biometrics</td><td></td><td></td><td></td></tr>
+        <tr><td>limitdefender</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>coreisolation</td><td></td><td></td><td>✔</td></tr>
         <tr><td>wsearch</td><td></td><td></td><td>✔</td></tr>
-        <tr><td>disablehibernation</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>disablehibernation</td><td></td><td></td><td></td></tr>
         <tr><td>microsoftstore</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>emptyrecycle</td><td></td><td></td><td></td></tr>
+        <tr><td>dism</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>sfc</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>restorepoint</td><td></td><td></td><td></td></tr>
+        <tr><td>resetnetwork</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>installmas</td><td></td><td></td><td></td></tr>
+        <tr><td>extensions</td><td></td><td></td><td></td></tr>
+        <tr><td>mediaplayer</td><td></td><td></td><td></td></tr>
+        <tr><td>hideai</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>aiappxpackages</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>notepadrewrite</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>aifiles</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>msstoreupdates</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>edge</td><td></td><td></td><td></td></tr>
+        <tr><td>cameraccess</td><td></td><td></td><td></td></tr>
+        <tr><td>microphoneaccess</td><td></td><td></td><td></td></tr>
+        <tr><td>recordingsaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>screenshotborderaccess</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>aigenerationaccess</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>updatepause</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>default0user</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>windowsdrm</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>cloudbasedspeech</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>fullscreenoptimizations</td><td></td><td></td><td></td></tr>
+        <tr><td>mouseacc</td><td></td><td></td><td></td></tr>
+        <tr><td>gamemode</td><td></td><td></td><td></td></tr>
+        <tr><td>gamebar</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>transparency</td><td></td><td></td><td></td></tr>
+        <tr><td>hags</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>mousedelay</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>disableprefetch</td><td></td><td>✔</td><td>✔</td></tr>
+        <tr><td>storagesense</td><td></td><td></td><td>✔</td></tr>
+        <tr><td>classicmenu</td><td></td><td></td><td></td></tr>
+        <tr><td>mpo</td><td></td><td></td><td></td></tr>
+        <tr><td>endtask</td><td>✔</td><td>✔</td><td>✔</td></tr>
+        <tr><td>taskbarleft</td><td></td><td></td><td></td></tr>
+        <tr><td>numlockstartup</td><td></td><td></td><td></td></tr>
+        <tr><td>darkmode</td><td></td><td></td><td></td></tr>
+        <tr><td>snapflyout</td><td></td><td></td><td></td></tr>
+        <tr><td>detailedbsod</td><td></td><td></td><td></td></tr>
+        <tr><td>verboselogon</td><td></td><td></td><td></td></tr>
 </table>
