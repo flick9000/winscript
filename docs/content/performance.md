@@ -102,6 +102,7 @@ Limits Defender CPU maximum usage to 25% instead of default 50%.
 
 ```
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Scan" /v "AvgCPULoadFactor" /t REG_DWORD /d "25" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Scan" /v "ScanAvgCPULoadFactor" /t REG_DWORD /d "25" /f
 ```
 
 ## Disable Core Isolation
@@ -109,7 +110,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Scan" /v "AvgCPULoadF
 Disables Windows Core Isolation.
 
 ```
-reg add "HKLM\\SOFTWARE\\CurrentControlSet\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f
 ```
 
 ## Disable Storage Sense
@@ -117,7 +118,7 @@ reg add "HKLM\\SOFTWARE\\CurrentControlSet\\CurrentControlSet\\Control\\DeviceGu
 Disables Storage Sense, a Windows feature running in the background that automatically deletes temporary files.
 
 ```
-reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Parameters\\StoragePolicy" /v "01" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" /v "01" /t REG_DWORD /d 0 /f
 ```
 
 ## Disable Prefetch
@@ -125,8 +126,8 @@ reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\StorageSense\\Param
 Disables sysmain service, prefetch will stop working.
 
 ```
-sc stop sysmain
-sc config sysmain start=disabled
+Stop-Service -Name "sysmain"
+Set-Service -Name "sysmain" -StartupType Disabled
 ```
 
 ## Disable Search
@@ -134,7 +135,8 @@ sc config sysmain start=disabled
 Disables Windows Search, indexing will stop working.
 
 ```
-sc stop "wsearch" && sc config "wsearch" start=disabled
+Stop-Service -Name "wsearch"
+Set-Service -Name "wsearch" -StartupType Disabled
 ```
 
 ## Disable Hibernation
@@ -142,5 +144,5 @@ sc stop "wsearch" && sc config "wsearch" start=disabled
 Disables hibernation, not recommended on laptops.
 
 ```
-powercfg.exe /hibernate off
+powercfg /h off
 ```
