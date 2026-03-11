@@ -90,7 +90,7 @@ const packageManagers = [
 
           <ScriptToggle
             title="Reset Network"
-            description="Resets network IP address and cache."
+            description="Flushes the  DNS and renews the IP address."
             icon="/icons/tools/network.png"
             inputId="resetnetwork"
           />
@@ -126,7 +126,7 @@ const packageManagers = [
               {
                 title: "Remove Xbox",
                 inputId: "xbox",
-                description: "Uninstalls pre-installed Xbox apps.",
+                description: "Uninstalls pre-installed Xbox apps and components.",
               },
             ]}
           />
@@ -144,7 +144,7 @@ const packageManagers = [
               {
                 title: "Disable Hyper-V",
                 inputId: "hyperv",
-                description: "VMs might not work anymore after disabling this feature.",
+                description: "VMs might stop working after disabling this feature.",
               },
               { title: "Disable Internet Explorer", inputId: "iexplorer" },
 
@@ -155,7 +155,7 @@ const packageManagers = [
 
           <ScriptGroup
             title="Windows AI"
-            description="Disable Windows AI features."
+            description="Remove AI features from Windows."
             icon="/icons/debloat/copilot.png"
             tools={[
               {
@@ -194,7 +194,7 @@ const packageManagers = [
 
           <ScriptToggle
             title="Disable Automatic App Updates"
-            description="Disables automatic updates for Microsoft Store apps."
+            description="Stops automatic Microsoft Store apps updates."
             inputId="msstoreupdates"
             icon="/icons/debloat/appupdates.png"
           />
@@ -208,7 +208,7 @@ const packageManagers = [
 
           <ScriptToggle
             title="Debloat Edge"
-            description="Disables telemetry and annoyances in Edge."
+            description="Disables Edge bloatware, telemetry, and promotional features."
             inputId="debloatedge"
             icon="/icons/debloat/debloat-edge.png"
           />
@@ -323,14 +323,14 @@ const packageManagers = [
             title="Disable Cloud Sync"
             inputId="cloudsync"
             icon="/icons/privacy/cloud.png"
-            description="Disables sync of settings across Windows devices."
+            description="Disables cloud syncing of settings, themes, and passwords."
           />
 
           <ScriptToggle
             title="Disable Activity History"
             inputId="activityfeed"
             icon="/icons/privacy/activity.png"
-            description="Delets recent clipboard, searches and run history."
+            description="Disables the Activity Feed and timeline history."
           />
 
           <ScriptToggle
@@ -344,7 +344,7 @@ const packageManagers = [
             title="Disable Automatic Map Downloads"
             inputId="automap"
             icon="/icons/privacy/map.png"
-            description="Stops automatic map downloads in background."
+            description="Disables automatic offline map downloads and updates."
           />
 
           <ScriptToggle
@@ -358,14 +358,14 @@ const packageManagers = [
             title="Disable Lockscreen Camera"
             inputId="lockscreencamera"
             icon="/icons/privacy/camera.png"
-            description="Prevents the lockscreen camera from being invoked."
+            description="Disables camera access from the lock screen."
           />
 
           <ScriptToggle
             title="Disable Biometrics"
             inputId="biometrics"
             icon="/icons/privacy/biometrics.png"
-            description="Enabling this will break Windows Hello biometrics authentication."
+            description="Disables biometrics, breaks Windows Hello and fingerprint."
           />
         </Tab>
         <Tab tab="telemetry">
@@ -441,7 +441,7 @@ const packageManagers = [
 
           <ScriptGroup
             title="Manage Windows Update"
-            description="Delay, disable, or reset updates."
+            description="Delay, disable, or reset Windows Update."
             icon="/icons/telemetry/update.svg"
             tools={[
               { title: "Default Settings", inputId: "defaultupdate", radio: true, group: "updates" },
@@ -527,7 +527,7 @@ const packageManagers = [
             title="Disable Windows Transparency"
             inputId="transparency"
             icon="/icons/performance/transparency.png"
-            description="May improve performance at the cost of aesthetics."
+            description="Disables transparency, may improve system performance."
           />
 
           <ScriptToggle
@@ -569,14 +569,14 @@ const packageManagers = [
             title="Disable Storage Sense"
             inputId="storagesense"
             icon="/icons/performance/storage.png"
-            description="Automatically deletes temporary files."
+            description="Disables Storage Sense, stops automatic disk cleanup."
           />
 
           <ScriptToggle
             title="Disable Search"
             inputId="wsearch"
             icon="/icons/performance/search.png"
-            description="Drive indexing will stop working."
+            description="Disables Windows Search, disables drive indexing."
           />
 
           <ScriptToggle
@@ -654,7 +654,7 @@ const packageManagers = [
         <Tab tab="install">
           <input type="text" class="app-search" id="searchBar" placeholder="Search an app" />
           <div class="manual-input">
-            <input id="manualInput" class="app-search" type="text" placeholder="Enter package id" />
+            <input id="manualInput" class="app-search" type="text" placeholder="Enter package ID" />
             <button id="addApp">Add App</button>
           </div>
 
@@ -1214,17 +1214,6 @@ const packageManagers = [
                     <b>3) Select</b>
                     <br />
                     <i>Selecting a preset will override your current settings.</i>
-                    <br />
-                    <br />
-                    <b>Basic Preset</b>: Reccomended, good balance beetween privacy/performance and
-                    functionality.
-                    <br />
-                    <br />
-                    <b>Strict Preset</b>: Heavy focus on privacy and performance although it
-                    disables some non-essential features.
-                    <br />
-                    <br />
-                    <b>Extreme Preset</b>: Not reccomended, use only if you know what you're doing.
                   </p>
                 </div>
               </div>
@@ -1248,7 +1237,7 @@ const packageManagers = [
               title="Extreme Preset"
               buttonTitle="Apply"
               buttonId="extremePreset"
-              description="Not reccomended, use only if you know what you're doing."
+              description="Not reccomended, breaks some features, use only if you know what you're doing."
             />
           </details>
         </Tab>
