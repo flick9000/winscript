@@ -56,7 +56,6 @@
     "cli": {
       "args": [
         {
-          "short": "c",
           "name": "cfg",
           "takesValue": true,
           "description": "path to config file"

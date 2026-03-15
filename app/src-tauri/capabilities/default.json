@@ -22,6 +22,7 @@
     "fs:allow-temp-read",
     "fs:allow-temp-write-recursive",
     "fs:allow-temp-read-recursive",
+    "fs:allow-read-text-file",
     "shell:allow-execute",
     "shell:allow-spawn",
     "shell:allow-open",
@@ -29,6 +30,14 @@
     "core:window:allow-show",
     "os:allow-hostname",
     "core:window:allow-set-effects",
+    {
+      "identifier": "fs:allow-read-text-file",
+      "allow": [
+        {
+          "path": "**/*"
+        }
+      ]
+    },
     {
       "identifier": "shell:allow-spawn",
       "allow": [

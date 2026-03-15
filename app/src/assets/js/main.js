@@ -8,6 +8,27 @@ import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { openUrl } from "@tauri-apps/plugin-opener";
+import { getMatches } from "@tauri-apps/plugin-cli";
+
+async function isCLI() {
+  const matches = await getMatches();
+  if (matches.args.cfg) {
+    const path = matches.args.cfg.value;
+
+    try {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const contents = await readTextFile(path);
+      const settings = JSON.parse(contents);
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = settings[checkbox.id];
+        checkbox.dispatchEvent(new Event("change"));
+      });
+    } catch (error) {
+      console.error("Error importing settings:", error);
+    }
+  }
+}
 
 async function getChangelog() {
   const response = await fetch("https://api.github.com/repos/flick9000/winscript/releases/latest");
