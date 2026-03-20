@@ -142,6 +142,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: #a0a0a0;
+  border-radius: 8px;
 }
 
 h1 {
