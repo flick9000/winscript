@@ -981,6 +981,10 @@ function uncheckAll() {
   indicator.forEach((indicator) => {
     indicator.textContent = "Off";
   });
+
+  document.querySelector(".chocolatey-container").style.display = "none";
+  document.querySelector(".winget-container").style.display = "none";
+  document.querySelector(".div-install").style.display = "none";
 }
 
 document.getElementById("uncheckAll").addEventListener("click", uncheckAll);
