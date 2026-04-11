@@ -82,6 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "HubsSidebarEnabled" /t "REG_DWORD" /d "0" /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge" /v "CopilotPageAction" /t "REG_DWORD" /d "0" /f',
     ],
+    debloatbrave: [
+      "Write-Host '-- Debloating Brave' -ForegroundColor Green",
+      'reg add "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave" /v "BraveRewardsDisabled" /t "REG_DWORD" /d "1" /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave" /v "BraveWalletDisabled" /t "REG_DWORD" /d "1" /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave" /v "BraveAIChatEnabled" /t "REG_DWORD" /d "0" /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave" /v "BraveStatsPingEnabled" /t "REG_DWORD" /d "0" /f',
+    ],
     edge: [
       "Write-Host '-- Uninstalling Edge' -ForegroundColor Green",
       '$Path = (Get-ChildItem "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe")[0].FullName',
@@ -810,6 +817,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "msstoreupdates",
     "onedrive",
     "debloatedge",
+    "debloatbrave",
     "edge",
     "copilot",
     "widgets",
