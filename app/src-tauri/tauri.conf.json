@@ -52,6 +52,15 @@
       },
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDg2ODczMDgxREQ1QkY4QTQKUldTaytGdmRnVENIaGdaUkxqMW5rYkJzNDdrTXFZRU9OcmgvL0xIQVJXRnBRbEwxOEVuaUxYWjgK",
       "endpoints": ["https://github.com/flick9000/winscript/releases/latest/download/latest.json"]
+    },
+    "cli": {
+      "args": [
+        {
+          "short": "i",
+          "name": "import",
+          "description": "Imports config file"
+        }
+      ]
     }
   }
 }
