@@ -9,15 +9,13 @@ fn main() {
 
     if let Some(pos) = args.iter().position(|arg| arg == "-path") {
         if let Some(custom_path) = args.get(pos + 1) {
-            
             let path = Path::new(custom_path);
-            
+
             if !custom_path.is_empty() {
                 env::set_var("WEBVIEW2_USER_DATA_FOLDER", custom_path);
-
             }
         }
     }
-    
+
     app_lib::run();
 }
