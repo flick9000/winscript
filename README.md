@@ -13,22 +13,25 @@ WinScript is a powerful, simple to use & lightweight open-source tool designed t
 ## Features
 
 ### 🧹 Debloat
+
 WinScript allows you to remove any pre-installed bloatware and unnecessary component from Windows. You can uninstall Microsoft Store, OneDrive, CoPilot, debloat or remove Microsoft Edge, disable Widgets & Taskbar Widgets, disable Windows Features such as Recall or Consumer Features & many more.
 
 ### 🔒 Privacy
+
 You can disable app access to sensitive data, prevent background syncing of themes and passwords, and stop usage tracking like activity feeds, screen recording, and location-based services. The Telemetry section allows you to shut down Microsoft’s data collection of Windows, Office, updates, search, and feedback. You can disable 3rd-party apps data collection (Adobe, VS Code, Google, Nvidia etc), disable cloud-based speech recognition, DRM connectivity, and biometric services & much more.
 
 ### ⚡ Performance
+
 You can enable the Ultimate Performance power plan, set background services to manual startup, reduce mouse input delays, and disable features like Superfetch, HAGS, Storage Sense, Windows Search Indexing, and Hibernation. It also allows you to fine-tune security settings for better performance by limiting Windows Defender’s CPU usage, disabling Core Isolation & more.
 
 ### 📦 App Installer
+
 The Browse Apps section in WinScript makes it easy to bulk install all your essential software in just a few clicks. Choose from a list of popular apps—browsers, utilities, dev tools, media players, and more, and WinScript will generate a script to install them automatically using your preferred package manager: Chocolatey or Winget.
 
 ## Usage
 
 > [!Warning]
 > WinScript must be run as Administrator to function properly.
-
 
 🖥️ **Launch Command**:
 
@@ -42,16 +45,26 @@ irm "https://winscript.cc/irm" | iex
 winget install winscript
 ```
 
+⚙️ **Import Configuration**:
+
+Use the -i flag to import a configuration file when launching the app.
+
+```ps1
+.\winscript.exe -i "C:\path\to\config.json"
+```
+
 ## Build
 
 ### 📋 Prerequisites
 
 - NodeJS (LTS)
+
 ```
 winget install --id OpenJS.NodeJS.LTS
 ```
 
 - Rust & Cargo
+
 ```
 winget install --id Rustlang.Rustup
 ```
@@ -59,17 +72,20 @@ winget install --id Rustlang.Rustup
 ### 🛠️ How to build
 
 - Clone the repository
+
 ```
 git clone https://github.com/flick9000/winscript.git
 cd winscript/app
 ```
 
 - Install dependencies
+
 ```
 npm install
 ```
 
 - Build the app
+
 ```
 npm run tauri build
 ```
@@ -99,7 +115,3 @@ If you find this project helpful, consider supporting it by [buying me a coffee!
 ## License
 
 📒 This project is licensed under the GPL v3 License. See the [LICENSE](LICENSE) file for more details.
-
-
-
-
