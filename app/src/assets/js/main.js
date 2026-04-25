@@ -8,6 +8,27 @@ import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { openUrl } from "@tauri-apps/plugin-opener";
+import { getMatches } from "@tauri-apps/plugin-cli";
+
+async function loadConfig() {
+  const matches = await getMatches();
+  if (matches.args.import) {
+    const path = matches.args.import.value;
+
+    try {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const contents = await readTextFile(path);
+      const settings = JSON.parse(contents);
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = settings[checkbox.id];
+        checkbox.dispatchEvent(new Event("change"));
+      });
+    } catch (error) {
+      console.error("Error loading config:", error);
+    }
+  }
+}
 
 async function getChangelog() {
   const response = await fetch("https://api.github.com/repos/flick9000/winscript/releases/latest");
@@ -511,3 +532,5 @@ document.getElementById("runBtn").addEventListener("click", async function () {
     console.error("Error:", error);
   }
 });
+
+await loadConfig();
