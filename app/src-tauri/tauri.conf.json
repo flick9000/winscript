@@ -58,7 +58,8 @@
         {
           "short": "i",
           "name": "import",
-          "description": "Imports config file"
+          "description": "Imports config file",
+          "takesValue": true
         }
       ]
     }
