@@ -30,18 +30,15 @@ The Browse Apps section in WinScript makes it easy to bulk install all your esse
 
 ## Usage
 
-> [!Warning]
-> WinScript must be run as Administrator to function properly.
-
 🖥️ **Launch Command**:
 
-```
+```ps1
 irm "https://winscript.cc/irm" | iex
 ```
 
 🖥️ **Via Winget**:
 
-```
+```ps1
 winget install winscript
 ```
 
@@ -59,13 +56,13 @@ Use the -i flag to import a configuration file when launching the app.
 
 - NodeJS (LTS)
 
-```
+```ps1
 winget install --id OpenJS.NodeJS.LTS
 ```
 
 - Rust & Cargo
 
-```
+```ps1
 winget install --id Rustlang.Rustup
 ```
 
@@ -73,20 +70,20 @@ winget install --id Rustlang.Rustup
 
 - Clone the repository
 
-```
+```ps1
 git clone https://github.com/flick9000/winscript.git
 cd winscript/app
 ```
 
 - Install dependencies
 
-```
+```ps1
 npm install
 ```
 
 - Build the app
 
-```
+```ps1
 npm run tauri build
 ```
 
@@ -97,12 +94,6 @@ After building, the compiled executable will be available inside the src-tauri/t
 ### 👷 Contributing
 
 Contributions are welcome! Fork the repository and create a pull request with your changes.
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
 
 ### ⭐ Star
 
