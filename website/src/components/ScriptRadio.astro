@@ -5,9 +5,11 @@ interface Props {
   group: string;
   icon?: string;
   description?: string;
+  offText?: string;
+  onText?: string;
 }
 
-const { title, inputId, group, icon, description } = Astro.props;
+const { title, inputId, group, icon, description, offText = "Off", onText = "On" } = Astro.props;
 ---
 
 <div class="content-entry">
@@ -20,7 +22,7 @@ const { title, inputId, group, icon, description } = Astro.props;
   </div>
 
   <div class="checkbox-wrapper">
-    <span class="indicator" id={`indicator-${inputId}`}>Off</span>
+    <span class="indicator" id={`indicator-${inputId}`} data-on={onText} data-off={offText}>{offText}</span>
     <label class="radio">
       <input id={inputId} type="radio" name={group} />
       <span class="dot"></span>
