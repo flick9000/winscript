@@ -1,23 +1,25 @@
 ---
 import MainPage from "@/components/MainPage.astro";
+import { withFallback } from "@/i18n/utils";
 
 export async function getStaticPaths() {
   const localeFiles = import.meta.glob<{ default: Record<string, string> }>(
-    "@/i18n/locales/*.json", 
-    { eager: true }
+    "@/i18n/locales/*.json",
+    { eager: true },
   );
 
   return Object.entries(localeFiles).map(([path, module]) => {
     const locale = path.split("/").pop()?.replace(".json", "");
-    
+
     return {
       params: { locale },
-      props: { t: module.default },
+      props: { t: withFallback(module.default) },
     };
   });
 }
 
 const { locale } = Astro.params;
-const { t } = Astro.props; 
+const { t } = Astro.props;
 ---
+
 <MainPage t={t} locale={locale} />
