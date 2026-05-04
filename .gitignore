@@ -10,6 +10,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+bun.lock
 
 .vscode
 !.vscode/extensions.json
