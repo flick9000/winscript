@@ -1,15 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import AppGroup from "./AppGroup.astro";
-import Background from "./Background.astro";
-import ButtonEntry from "./ButtonEntry.astro";
-import Dialogs from "./Dialogs.astro";
-import MockupCode from "./MockupCode.astro";
-import ScriptGroup from "./ScriptGroup.astro";
-import ScriptToggle from "./ScriptToggle.astro";
-import Select from "./Select.astro";
 import Sidebar from "./Sidebar.astro";
 import Tab from "./Tab.astro";
+import ScriptToggle from "./ScriptToggle.astro";
+import ScriptGroup from "./ScriptGroup.astro";
+import AppGroup from "./AppGroup.astro";
+import MockupCode from "./MockupCode.astro";
+import ButtonEntry from "./ButtonEntry.astro";
+import Select from "./Select.astro";
 
 interface Props {
   t: Record<string, string>;
@@ -41,22 +39,39 @@ const languages = [
 
 <Layout locale={locale}>
   <div class="main-container">
-    <Background />
     <Sidebar t={t} />
-    <Dialogs />
     <div class="content">
       <div class="content-header">
+        <img class="nav-icon" width="16" src="/icons/nav.png" alt="" />
         <h1 id="content-header">WinScript</h1>
-        <iconify-icon
-          class="fa-solid fa-bars-staggered"
-          icon="fa6-solid:bars-staggered"
-          width="24"
-          height="24"></iconify-icon>
-        <iconify-icon class="fa-solid fa-xmark" icon="fa6-solid:xmark" width="24" height="24"
-        ></iconify-icon>
       </div>
       <div class="content-body">
         <Tab tab="tools">
+          <details>
+            <summary class="content-entry">
+              <div>
+                <img src="/icons/tools/shortcuts.png" alt="" />
+                <div>
+                  <h1>Shortcuts</h1>
+                  <p>Shortcuts to various system settings and tools.</p>
+                </div>
+              </div>
+              <img class="chevron" src="/icons/chevron-down.png" alt="" />
+            </summary>
+
+            <ButtonEntry title="Windows Settings" buttonTitle="Open" buttonId="openSettings" />
+
+            <ButtonEntry title="Device Manager" buttonTitle="Open" buttonId="openDeviceManager" />
+
+            <ButtonEntry title="Control Panel" buttonTitle="Open" buttonId="openControlPanel" />
+
+            <ButtonEntry title="Virtual Memory" buttonTitle="Open" buttonId="openPageFile" />
+
+            <ButtonEntry title="Visual Effects" buttonTitle="Open" buttonId="openVisualEffects" />
+
+            <ButtonEntry title="MSConfig" buttonTitle="Open" buttonId="openMSConfig" />
+          </details>
+
           <ScriptGroup
             title={t["tools.cleanup.title"]}
             description={t["tools.cleanup.desc"]}
@@ -1402,9 +1417,9 @@ const languages = [
           <MockupCode />
 
           <ButtonEntry
-            title={t["script.download.title"]}
-            buttonTitle={t["script.download.btn"]}
-            buttonId="downloadBtn"
+            title="Run Script"
+            buttonTitle="Run"
+            buttonId="runBtn"
             icon="/icons/script/run.png"
           />
 

@@ -30,5 +30,15 @@ const { title, icon, apps, offText, onText } = Astro.props;
     <img class="chevron" src="icons/chevron-down.png" alt="" />
   </summary>
 
-  {apps.map((tool) => <AppToggle title={tool.title} desc={tool.desc} inputId={tool.inputId} offText={offText} onText={onText} />)}
+  {
+    apps.map((tool) => (
+      <AppToggle
+        title={tool.title}
+        desc={tool.desc}
+        inputId={tool.inputId}
+        offText={offText}
+        onText={onText}
+      />
+    ))
+  }
 </details>

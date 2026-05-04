@@ -169,7 +169,9 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 
   if (checkbox) {
     checkbox.addEventListener("change", () => {
-      indicator.textContent = checkbox.checked ? (indicator.getAttribute("data-on") || "On") : (indicator.getAttribute("data-off") || "Off");
+      indicator.textContent = checkbox.checked
+        ? indicator.getAttribute("data-on") || "On"
+        : indicator.getAttribute("data-off") || "Off";
     });
   }
 
@@ -181,7 +183,9 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
         if (parentWrapper) {
           const ind = parentWrapper.querySelector(".indicator");
           if (ind) {
-            ind.textContent = r.checked ? (ind.getAttribute("data-on") || "On") : (ind.getAttribute("data-off") || "Off");
+            ind.textContent = r.checked
+              ? ind.getAttribute("data-on") || "On"
+              : ind.getAttribute("data-off") || "Off";
           }
         }
       });

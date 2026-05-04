@@ -20,7 +20,9 @@ const { title, inputId, icon, description, offText = "Off", onText = "On" } = As
     </div>
   </div>
   <div class="checkbox-wrapper">
-    <span class="indicator" id={`indicator-${inputId}`} data-on={onText} data-off={offText}>{offText}</span>
+    <span class="indicator" id={`indicator-${inputId}`} data-on={onText} data-off={offText}
+      >{offText}</span
+    >
     <label class="switch">
       <input id={inputId} type="checkbox" />
       <span class="slider"></span>

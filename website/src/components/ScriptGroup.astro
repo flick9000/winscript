@@ -50,7 +50,13 @@ const { title, description, icon, tools, offText, onText } = Astro.props;
       }
 
       return (
-        <ScriptToggle title={tool.title} inputId={tool.inputId} description={tool.description} offText={offText} onText={onText} />
+        <ScriptToggle
+          title={tool.title}
+          inputId={tool.inputId}
+          description={tool.description}
+          offText={offText}
+          onText={onText}
+        />
       );
     })
   }

@@ -22,7 +22,9 @@ const { title, inputId, group, icon, description, offText = "Off", onText = "On"
   </div>
 
   <div class="checkbox-wrapper">
-    <span class="indicator" id={`indicator-${inputId}`} data-on={onText} data-off={offText}>{offText}</span>
+    <span class="indicator" id={`indicator-${inputId}`} data-on={onText} data-off={offText}
+      >{offText}</span
+    >
     <label class="radio">
       <input id={inputId} type="radio" name={group} />
       <span class="dot"></span>
