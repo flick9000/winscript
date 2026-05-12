@@ -15,6 +15,10 @@ async function loadConfig() {
   if (matches.args.import) {
     const path = matches.args.import.value;
 
+    if (!path) {
+      return;
+    }
+
     try {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       const contents = await readTextFile(path);
