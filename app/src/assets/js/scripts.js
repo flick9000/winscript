@@ -992,7 +992,7 @@ function uncheckAll() {
   });
 
   indicator.forEach((indicator) => {
-    indicator.textContent = "Off";
+    indicator.textContent = indicator.getAttribute("data-off") || "Off";
   });
 
   document.querySelector(".chocolatey-container").style.display = "none";
