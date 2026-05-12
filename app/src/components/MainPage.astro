@@ -1417,8 +1417,8 @@ const languages = [
           <MockupCode />
 
           <ButtonEntry
-            title="Run Script"
-            buttonTitle="Run"
+            title={t["script.run.title"]}
+            buttonTitle={t["script.run.btn"]}
             buttonId="runBtn"
             icon="/icons/script/run.png"
           />
@@ -1533,55 +1533,7 @@ const languages = [
 </Layout>
 
 <style>
-  .localization-entry {
-    cursor: default;
-    transition: all 0.2s ease-in-out;
-    margin-bottom: 8px;
-  }
-
   .localization-entry img {
-    max-width: 24px !important;
-    width: 24px;
-    height: 24px;
-  }
-
-  .translator-info {
-    font-size: 13px !important;
-    color: var(--muted);
-    margin-top: 4px;
-    animation: fadeIn 0.3s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .use-lang-btn {
-    background-color: var(--primary) !important;
-    color: white !important;
-    font-weight: 500;
-    width: fit-content;
-    padding-inline: 16px;
-    height: 32px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-
-  .use-lang-btn:hover {
-    opacity: 0.8;
-  }
-
-  .localization-entry h1 {
-    font-size: 16px;
-    font-weight: 500;
+    max-width: 24px;
   }
 </style>

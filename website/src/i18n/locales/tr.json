@@ -206,6 +206,8 @@
   "install.developers": "Geliştiriciler İçin",
   "script.download.title": "Betiği İndir",
   "script.download.btn": "İndir",
+  "script.run.title": "Betiği Çalıştır",
+  "script.run.btn": "Çalıştır",
   "script.copy.title": "Panoya Kopyala",
   "script.copy.btn": "Kopyala",
   "script.presets.title": "Hazır Ayarlar",

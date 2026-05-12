@@ -1,15 +1,15 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import AppGroup from "./AppGroup.astro";
-import Background from "./Background.astro";
-import ButtonEntry from "./ButtonEntry.astro";
-import Dialogs from "./Dialogs.astro";
-import MockupCode from "./MockupCode.astro";
-import ScriptGroup from "./ScriptGroup.astro";
-import ScriptToggle from "./ScriptToggle.astro";
-import Select from "./Select.astro";
 import Sidebar from "./Sidebar.astro";
 import Tab from "./Tab.astro";
+import ScriptToggle from "./ScriptToggle.astro";
+import ScriptGroup from "./ScriptGroup.astro";
+import AppGroup from "./AppGroup.astro";
+import MockupCode from "./MockupCode.astro";
+import ButtonEntry from "./ButtonEntry.astro";
+import Select from "./Select.astro";
+import Background from "./Background.astro";
+import Dialogs from "./Dialogs.astro";
 
 interface Props {
   t: Record<string, string>;
@@ -1518,55 +1518,10 @@ const languages = [
 </Layout>
 
 <style>
-  .localization-entry {
-    cursor: default;
-    transition: all 0.2s ease-in-out;
-    margin-bottom: 8px;
-  }
-
   .localization-entry img {
-    max-width: 24px !important;
-    width: 24px;
-    height: 24px;
+    max-width: 24px;
   }
-
-  .translator-info {
-    font-size: 13px !important;
-    color: var(--muted);
-    margin-top: 4px;
-    animation: fadeIn 0.3s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .use-lang-btn {
-    background-color: var(--primary) !important;
-    color: white !important;
-    font-weight: 500;
-    width: fit-content;
     padding-inline: 16px;
-    height: 32px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-
-  .use-lang-btn:hover {
-    opacity: 0.8;
-  }
-
-  .localization-entry h1 {
-    font-size: 16px;
-    font-weight: 500;
   }
 </style>

@@ -206,6 +206,8 @@
   "install.developers": "For Developers",
   "script.download.title": "Download Script",
   "script.download.btn": "Download",
+  "script.run.title": "Run Script",
+  "script.run.btn": "Run",
   "script.copy.title": "Copy to Clipboard",
   "script.copy.btn": "Copy",
   "script.presets.title": "Presets",
@@ -222,11 +224,11 @@
   "script.presets.extreme.title": "Extreme Preset",
   "script.presets.extreme.desc": "Not recomended, breaks some features, use only if you know what you're doing.",
   "script.apply": "Apply",
-  "nav.localizations": "Localizations",
-  "localizations.title": "Localizations",
+  "nav.localizations": "Languages",
+  "localizations.title": "Languages",
   "localizations.desc": "Choose your preferred language for the interface.",
   "localizations.translatedBy": "Translated by",
-  "localizations.useLanguage": "Use this language",
+  "localizations.useLanguage": "Switch language",
   "common.on": "On",
   "common.off": "Off"
 }
