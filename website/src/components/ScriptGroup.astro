@@ -15,9 +15,11 @@ interface Props {
   description: string;
   icon: string;
   tools: Tool[];
+  offText?: string;
+  onText?: string;
 }
 
-const { title, description, icon, tools } = Astro.props;
+const { title, description, icon, tools, offText, onText } = Astro.props;
 ---
 
 <details>
@@ -41,12 +43,20 @@ const { title, description, icon, tools } = Astro.props;
             inputId={tool.inputId}
             description={tool.description}
             group={tool.group || "default-group"}
+            offText={offText}
+            onText={onText}
           />
         );
       }
 
       return (
-        <ScriptToggle title={tool.title} inputId={tool.inputId} description={tool.description} />
+        <ScriptToggle
+          title={tool.title}
+          inputId={tool.inputId}
+          description={tool.description}
+          offText={offText}
+          onText={onText}
+        />
       );
     })
   }

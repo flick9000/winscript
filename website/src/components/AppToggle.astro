@@ -1,6 +1,6 @@
 ---
 // AppToggle.astro
-const { title, desc, inputId } = Astro.props;
+const { title, desc, inputId, offText = "Off", onText = "On" } = Astro.props;
 ---
 
 <div class="content-entry">
@@ -11,7 +11,7 @@ const { title, desc, inputId } = Astro.props;
     </div>
   </div>
   <div class="checkbox-wrapper">
-    <span class="indicator" id="indicator">Off</span>
+    <span class="indicator" id="indicator" data-on={onText} data-off={offText}>{offText}</span>
     <label class="switch">
       <input js-target="install" id={inputId} type="checkbox" />
       <span class="slider"></span>

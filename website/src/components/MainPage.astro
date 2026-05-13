@@ -1,0 +1,1527 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Sidebar from "./Sidebar.astro";
+import Tab from "./Tab.astro";
+import ScriptToggle from "./ScriptToggle.astro";
+import ScriptGroup from "./ScriptGroup.astro";
+import AppGroup from "./AppGroup.astro";
+import MockupCode from "./MockupCode.astro";
+import ButtonEntry from "./ButtonEntry.astro";
+import Select from "./Select.astro";
+import Background from "./Background.astro";
+import Dialogs from "./Dialogs.astro";
+
+interface Props {
+  t: Record<string, string>;
+  locale?: string;
+}
+const { t, locale } = Astro.props;
+const packageManagers = [
+  { value: "chocolatey", label: "Chocolatey" },
+  { value: "winget", label: "Winget" },
+];
+
+const languages = [
+  {
+    name: "English",
+    code: "en",
+    flagCode: "1f1fa-1f1f8",
+    translator: "Francesco",
+    translatorUrl: "https://github.com/flick9000",
+  },
+  {
+    name: "Türkçe",
+    code: "tr",
+    flagCode: "1f1f9-1f1f7",
+    translator: "Eyüp Şengöz",
+    translatorUrl: "https://github.com/LewisLosa",
+  },
+];
+---
+
+<Layout locale={locale}>
+  <div class="main-container">
+    <Background />
+    <Sidebar t={t} />
+    <Dialogs />
+    <div class="content">
+      <div class="content-header">
+        <h1 id="content-header">WinScript</h1>
+        <iconify-icon
+          class="fa-solid fa-bars-staggered"
+          icon="fa6-solid:bars-staggered"
+          width="24"
+          height="24"></iconify-icon>
+        <iconify-icon class="fa-solid fa-xmark" icon="fa6-solid:xmark" width="24" height="24"
+        ></iconify-icon>
+      </div>
+      <div class="content-body">
+        <Tab tab="tools">
+          <ScriptGroup
+            title={t["tools.cleanup.title"]}
+            description={t["tools.cleanup.desc"]}
+            icon="/icons/tools/clean.png"
+            tools={[
+              { title: t["tools.cleanup.cleanmgr"], inputId: "cleanmgr" },
+              { title: t["tools.cleanup.cleantemp"], inputId: "cleantemp" },
+              { title: t["tools.cleanup.emptyrecycle"], inputId: "emptyrecycle" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptGroup
+            title={t["tools.repair.title"]}
+            description={t["tools.repair.desc"]}
+            icon="/icons/tools/sfc.png"
+            tools={[
+              {
+                title: t["tools.repair.dism"],
+                inputId: "dism",
+              },
+              { title: t["tools.repair.sfc"], inputId: "sfc" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["tools.restorepoint.title"]}
+            description={t["tools.restorepoint.desc"]}
+            icon="/icons/tools/restore.png"
+            inputId="restorepoint"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["tools.browserhistory.title"]}
+            description={t["tools.browserhistory.desc"]}
+            icon="/icons/tools/browser.png"
+            inputId="browserhistory"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["tools.resetnetwork.title"]}
+            description={t["tools.resetnetwork.desc"]}
+            icon="/icons/tools/network.png"
+            inputId="resetnetwork"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["tools.installmas.title"]}
+            description={t["tools.installmas.desc"]}
+            icon="/icons/tools/key.png"
+            inputId="installmas"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="debloat">
+          <ScriptGroup
+            title={t["debloat.apps.title"]}
+            description={t["debloat.apps.desc"]}
+            icon="/icons/debloat/app.png"
+            tools={[
+              {
+                title: t["debloat.apps.thirdparty"],
+                inputId: "thirdparty",
+                description: t["debloat.apps.thirdparty.desc"],
+              },
+              {
+                title: t["debloat.apps.msapps"],
+                inputId: "msapps",
+                description: t["debloat.apps.msapps.desc"],
+              },
+              {
+                title: t["debloat.apps.extensions"],
+                inputId: "extensions",
+                description: t["debloat.apps.extensions.desc"],
+              },
+              {
+                title: t["debloat.apps.xbox"],
+                inputId: "xbox",
+                description: t["debloat.apps.xbox.desc"],
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptGroup
+            title={t["debloat.features.title"]}
+            description={t["debloat.features.desc"]}
+            icon="/icons/debloat/features.png"
+            tools={[
+              {
+                title: t["debloat.features.consumer"],
+                inputId: "consumerfeatures",
+                description: t["debloat.features.consumer.desc"],
+              },
+              {
+                title: t["debloat.features.hyperv"],
+                inputId: "hyperv",
+                description: t["debloat.features.hyperv.desc"],
+              },
+              { title: t["debloat.features.iexplorer"], inputId: "iexplorer" },
+
+              { title: t["debloat.features.faxscan"], inputId: "faxscan" },
+              { title: t["debloat.features.mediaplayer"], inputId: "mediaplayer" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptGroup
+            title={t["debloat.ai.title"]}
+            description={t["debloat.ai.desc"]}
+            icon="/icons/debloat/copilot.png"
+            tools={[
+              {
+                title: t["debloat.ai.hideai"],
+                inputId: "hideai",
+              },
+              {
+                title: t["debloat.ai.aiappxpackages"],
+                inputId: "aiappxpackages",
+              },
+              {
+                title: t["debloat.ai.copilot"],
+                inputId: "copilot",
+              },
+              {
+                title: t["debloat.ai.recall"],
+                inputId: "recall",
+              },
+              {
+                title: t["debloat.ai.notepadrewrite"],
+                inputId: "notepadrewrite",
+              },
+              {
+                title: t["debloat.ai.aifiles"],
+                inputId: "aifiles",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.microsoftstore.title"]}
+            description={t["debloat.microsoftstore.desc"]}
+            inputId="microsoftstore"
+            icon="/icons/debloat/store.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.msstoreupdates.title"]}
+            description={t["debloat.msstoreupdates.desc"]}
+            inputId="msstoreupdates"
+            icon="/icons/debloat/appupdates.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.onedrive.title"]}
+            description={t["debloat.onedrive.desc"]}
+            inputId="onedrive"
+            icon="/icons/debloat/onedrive.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.debloatedge.title"]}
+            description={t["debloat.debloatedge.desc"]}
+            inputId="debloatedge"
+            icon="/icons/debloat/debloat-edge.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.edge.title"]}
+            description={t["debloat.edge.desc"]}
+            inputId="edge"
+            icon="/icons/debloat/edge.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.debloatbrave.title"]}
+            description={t["debloat.debloatbrave.desc"]}
+            inputId="debloatbrave"
+            icon="/icons/debloat/debloat-edge.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.widgets.title"]}
+            description={t["debloat.widgets.desc"]}
+            inputId="widgets"
+            icon="/icons/debloat/widgets.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.taskbarwidgets.title"]}
+            description={t["debloat.taskbarwidgets.desc"]}
+            inputId="taskbarwidgets"
+            icon="/icons/debloat/taskbarwidgets.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="privacy">
+          <ScriptGroup
+            title={t["privacy.appaccess.title"]}
+            description={t["privacy.appaccess.desc"]}
+            icon="/icons/privacy/appaccess.png"
+            tools={[
+              {
+                title: t["privacy.appaccess.location"],
+                inputId: "locationaccess",
+              },
+              { title: t["privacy.appaccess.camera"], inputId: "cameraccess" },
+              {
+                title: t["privacy.appaccess.microphone"],
+                inputId: "microphoneaccess",
+              },
+              {
+                title: t["privacy.appaccess.filesystem"],
+                inputId: "systemaccess",
+              },
+              {
+                title: t["privacy.appaccess.accountinfo"],
+                inputId: "accinfoaccess",
+              },
+              {
+                title: t["privacy.appaccess.contacts"],
+                inputId: "contactsaccess",
+              },
+              {
+                title: t["privacy.appaccess.callhistory"],
+                inputId: "callhistoryaccess",
+              },
+              {
+                title: t["privacy.appaccess.messages"],
+                inputId: "messagingaccess",
+              },
+              {
+                title: t["privacy.appaccess.notifications"],
+                inputId: "notificationaccess",
+              },
+              { title: t["privacy.appaccess.email"], inputId: "emailaccess" },
+              { title: t["privacy.appaccess.tasks"], inputId: "tasksaccess" },
+              {
+                title: t["privacy.appaccess.diagnostic"],
+                inputId: "diagaccess",
+              },
+              {
+                title: t["privacy.appaccess.voiceactivation"],
+                inputId: "voiceactivationaccess",
+              },
+              { title: t["privacy.appaccess.phone"], inputId: "phoneaccess" },
+              {
+                title: t["privacy.appaccess.trusted"],
+                inputId: "trustedaccess",
+              },
+              {
+                title: t["privacy.appaccess.calendar"],
+                inputId: "calendaraccess",
+              },
+              {
+                title: t["privacy.appaccess.motion"],
+                inputId: "motionaccess",
+              },
+              { title: t["privacy.appaccess.radios"], inputId: "radioaccess" },
+              {
+                title: t["privacy.appaccess.recordings"],
+                inputId: "recordingsaccess",
+              },
+              {
+                title: t["privacy.appaccess.screenshot"],
+                inputId: "screenshotborderaccess",
+              },
+              {
+                title: t["privacy.appaccess.ai"],
+                inputId: "aigenerationaccess",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.updatepause.title"]}
+            inputId="updatepause"
+            icon="/icons/privacy/updatepause.png"
+            description={t["privacy.updatepause.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.wpbt.title"]}
+            inputId="wpbt"
+            icon="/icons/privacy/wbpt.svg"
+            description={t["privacy.wpbt.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.cloudsync.title"]}
+            inputId="cloudsync"
+            icon="/icons/privacy/cloud.png"
+            description={t["privacy.cloudsync.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.activityfeed.title"]}
+            inputId="activityfeed"
+            icon="/icons/privacy/activity.png"
+            description={t["privacy.activityfeed.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.notificationtray.title"]}
+            inputId="notificationtray"
+            icon="/icons/privacy/notifications.png"
+            description={t["privacy.notificationtray.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.automap.title"]}
+            inputId="automap"
+            icon="/icons/privacy/map.png"
+            description={t["privacy.automap.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.default0user.title"]}
+            inputId="default0user"
+            icon="/icons/privacy/default0.png"
+            description={t["privacy.default0user.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.lockscreencamera.title"]}
+            inputId="lockscreencamera"
+            icon="/icons/privacy/camera.png"
+            description={t["privacy.lockscreencamera.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["privacy.biometrics.title"]}
+            inputId="biometrics"
+            icon="/icons/privacy/biometrics.png"
+            description={t["privacy.biometrics.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="telemetry">
+          <ScriptGroup
+            title={t["telemetry.telemetry.title"]}
+            description={t["telemetry.telemetry.desc"]}
+            icon="/icons/telemetry/telemetry.png"
+            tools={[
+              { title: t["telemetry.windows"], inputId: "wtelemetry" },
+              { title: t["telemetry.windowsupdate"], inputId: "wupdate" },
+              {
+                title: t["telemetry.windowssearch"],
+                inputId: "wsearchtelemetry",
+              },
+              { title: t["telemetry.office"], inputId: "officetelemetry" },
+              {
+                title: t["telemetry.appexperience"],
+                inputId: "appexperience",
+              },
+              {
+                title: t["telemetry.feedback"],
+                inputId: "wfeedback",
+              },
+              {
+                title: t["telemetry.handwriting"],
+                inputId: "handwriting",
+              },
+              {
+                title: t["telemetry.windowsdrm"],
+                inputId: "windowsdrm",
+              },
+              {
+                title: t["telemetry.cloudspeech"],
+                inputId: "cloudbasedspeech",
+              },
+              { title: t["telemetry.ads"], inputId: "targetads" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptGroup
+            title={t["telemetry.3rdparty.title"]}
+            description={t["telemetry.3rdparty.desc"]}
+            icon="/icons/telemetry/3rdparty.png"
+            tools={[
+              { title: t["telemetry.adobetelemetry"], inputId: "adobetelemetry" },
+              { title: t["telemetry.nvidiatelemetry"], inputId: "nvidiatelemetry" },
+              {
+                title: t["telemetry.vscodetelemetry"],
+                inputId: "vscodetelemetry",
+              },
+              {
+                title: t["telemetry.mediatelemetry"],
+                inputId: "mediatelemetry",
+              },
+              {
+                title: t["telemetry.powershelltelemetry"],
+                inputId: "powershelltelemetry",
+              },
+              {
+                title: t["telemetry.ccleanertelemetry"],
+                inputId: "ccleanertelemetry",
+              },
+              {
+                title: t["telemetry.googleupdates"],
+                inputId: "googleupdates",
+              },
+              {
+                title: t["telemetry.adobeupdates"],
+                inputId: "adobeupdates",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptGroup
+            title={t["telemetry.update.title"]}
+            description={t["telemetry.update.desc"]}
+            icon="/icons/telemetry/update.svg"
+            tools={[
+              {
+                title: t["telemetry.defaultupdates"],
+                inputId: "defaultupdate",
+                radio: true,
+                group: "updates",
+              },
+              {
+                title: t["telemetry.securityupdate"],
+                inputId: "securityupdate",
+                radio: true,
+                group: "updates",
+              },
+              {
+                title: t["telemetry.disableupdate"],
+                inputId: "disableupdate",
+                radio: true,
+                group: "updates",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="gaming">
+          <ScriptToggle
+            title={t["gaming.fullscreenoptimizations.title"]}
+            inputId="fullscreenoptimizations"
+            icon="/icons/gaming/fullscreen.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["gaming.mouseacc.title"]}
+            inputId="mouseacc"
+            icon="/icons/gaming/mouse.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["gaming.gamemode.title"]}
+            inputId="gamemode"
+            icon="/icons/gaming/gamemode.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["gaming.gamebar.title"]}
+            inputId="gamebar"
+            icon="/icons/gaming/gamebar.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["gaming.captures.title"]}
+            inputId="screenrecording"
+            icon="/icons/privacy/record.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="performance">
+          <ScriptGroup
+            title={t["performance.dns.title"]}
+            description=""
+            icon="/icons/performance/dns.png"
+            tools={[
+              {
+                title: t["performance.dns.googledns"],
+                inputId: "googledns",
+                radio: true,
+                group: "dns",
+              },
+              {
+                title: t["performance.dns.cloudflaredns"],
+                inputId: "cloudflaredns",
+                radio: true,
+                group: "dns",
+              },
+              {
+                title: t["performance.dns.quad9dns"],
+                inputId: "quad9dns",
+                radio: true,
+                group: "dns",
+              },
+              {
+                title: t["performance.dns.opendns"],
+                inputId: "opendns",
+                radio: true,
+                group: "dns",
+              },
+              {
+                title: t["performance.dns.adguardns"],
+                inputId: "adguardns",
+                radio: true,
+                group: "dns",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptGroup
+            title={t["performance.powerplan.title"]}
+            description=""
+            icon="/icons/performance/ultimate.png"
+            tools={[
+              {
+                title: t["performance.powerplan.balanced"],
+                inputId: "balanced",
+                radio: true,
+                group: "powerplan",
+              },
+              {
+                title: t["performance.powerplan.highperformance"],
+                inputId: "highperformance",
+                radio: true,
+                group: "powerplan",
+              },
+              {
+                title: t["performance.powerplan.ultimateperformance"],
+                inputId: "ultimateperformance",
+                radio: true,
+                group: "powerplan",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.manualservices.title"]}
+            inputId="manualservices"
+            icon="/icons/performance/manual.png"
+            description={t["performance.manualservices.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.transparency.title"]}
+            inputId="transparency"
+            icon="/icons/performance/transparency.png"
+            description={t["performance.transparency.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.hags.title"]}
+            inputId="hags"
+            icon="/icons/performance/hags.png"
+            description={t["performance.hags.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.mousedelay.title"]}
+            inputId="mousedelay"
+            icon="/icons/performance/menudelay.png"
+            description={t["performance.mousedelay.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.limitdefender.title"]}
+            inputId="limitdefender"
+            icon="/icons/performance/limit.png"
+            description={t["performance.limitdefender.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.coreisolation.title"]}
+            inputId="coreisolation"
+            icon="/icons/performance/vbs.png"
+            description={t["performance.coreisolation.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.disableprefetch.title"]}
+            inputId="disableprefetch"
+            icon="/icons/performance/superfetch.png"
+            description={t["performance.disableprefetch.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.storagesense.title"]}
+            inputId="storagesense"
+            icon="/icons/performance/storage.png"
+            description={t["performance.storagesense.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.wsearch.title"]}
+            inputId="wsearch"
+            icon="/icons/performance/search.png"
+            description={t["performance.wsearch.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.disablehibernation.title"]}
+            inputId="disablehibernation"
+            icon="/icons/performance/hibernation.png"
+            description={t["performance.disablehibernation.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="miscellanous">
+          <ScriptToggle
+            title={t["misc.classicmenu.title"]}
+            inputId="classicmenu"
+            icon="/icons/misc/click.png"
+            description={t["misc.classicmenu.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.mpo.title"]}
+            inputId="mpo"
+            icon="/icons/misc/mpo.svg"
+            description={t["misc.mpo.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.endtask.title"]}
+            inputId="endtask"
+            icon="/icons/misc/end.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.taskbarleft.title"]}
+            inputId="taskbarleft"
+            icon="/icons/misc/taskbarleft.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.numlockstartup.title"]}
+            inputId="numlockstartup"
+            icon="/icons/misc/numlock.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.darkmode.title"]}
+            inputId="darkmode"
+            icon="/icons/misc/dark.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.filextensions.title"]}
+            inputId="filextensions"
+            icon="/icons/misc/show.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.stickykeys.title"]}
+            inputId="stickykeys"
+            icon="/icons/misc/sticky.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.snapflyout.title"]}
+            inputId="snapflyout"
+            icon="/icons/misc/snap.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.detailedbsod.title"]}
+            inputId="detailedbsod"
+            icon="/icons/misc/bsod.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["misc.verboselogon.title"]}
+            inputId="verboselogon"
+            icon="/icons/misc/verbose.png"
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="install">
+          <input type="text" class="app-search" id="searchBar" placeholder={t["install.search"]} />
+          <div class="manual-input">
+            <input
+              id="manualInput"
+              class="app-search"
+              type="text"
+              placeholder={t["install.manualInput"]}
+            />
+            <button id="addApp">{t["install.addApp"]}</button>
+          </div>
+
+          <div id="manualList"></div>
+
+          <Select
+            id="packageManager"
+            name={t["install.packageManager"]}
+            options={packageManagers}
+            defaultValue="chocolatey"
+            icon="/icons/install/packagemanager.png"
+          />
+          <AppGroup
+            title={t["install.drivers"]}
+            icon="/icons/install/drivers.png"
+            apps={[
+              {
+                title: "Intel DSA",
+                inputId: "Intel",
+              },
+              {
+                title: "Nvidia Driver",
+                inputId: "NVIDIA",
+              },
+              {
+                title: "Ryzen Chipset",
+                desc: "Not available on winget.",
+                inputId: "Ryzen",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.browsers"]}
+            icon="/icons/install/browser.png"
+            apps={[
+              { title: "Brave", inputId: "Brave" },
+              {
+                title: "Chrome",
+                inputId: "Chrome",
+              },
+              {
+                title: "Chromium",
+                inputId: "Chromium",
+              },
+              {
+                title: "Falkon",
+                inputId: "Falkon",
+              },
+              {
+                title: "Firefox",
+                inputId: "Firefox",
+              },
+              {
+                title: "Floorp",
+                inputId: "Floorp",
+              },
+              {
+                title: "LibreWolf",
+                inputId: "LibreWolf",
+              },
+              { title: "Opera", inputId: "Opera" },
+              { title: "Palemoon", inputId: "Palemoon" },
+              {
+                title: "Thorium",
+                inputId: "Thorium",
+              },
+              { title: "Tor", inputId: "Tor" },
+              {
+                title: "Ungoogled",
+                inputId: "Ungoogled",
+              },
+              {
+                title: "Vivaldi",
+                inputId: "Vivaldi",
+              },
+              {
+                title: "Waterfox",
+                inputId: "Waterfox",
+              },
+              {
+                title: "Zen Browser",
+                inputId: "ZenBrowser",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.compression"]}
+            icon="/icons/install/compression.png"
+            apps={[
+              { title: "7Zip", inputId: "7Zip" },
+              {
+                title: "NanaZip",
+                inputId: "NanaZip",
+              },
+              {
+                title: "PeaZip",
+                inputId: "PeaZip",
+              },
+              {
+                title: "WinRAR",
+                inputId: "WinRAR",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.gaming"]}
+            icon="/icons/install/gaming.png"
+            apps={[
+              {
+                title: "Borderless Gaming",
+                inputId: "BorderlessGaming",
+              },
+              {
+                title: "EA App",
+                inputId: "EAApp",
+              },
+              {
+                title: "Epic Games",
+                inputId: "EpicGames",
+              },
+              {
+                title: "FaceIT",
+                inputId: "FaceIT",
+              },
+              {
+                title: "Geforce NOW",
+                inputId: "GeforceNOW",
+              },
+              {
+                title: "GOG Galaxy",
+                inputId: "GOGGalaxy",
+              },
+              {
+                title: "LG Hub",
+                inputId: "LGHub",
+              },
+              {
+                title: "Minecraft",
+                inputId: "Minecraft",
+              },
+              {
+                title: "Modrinth App",
+                inputId: "Modrinth",
+              },
+              {
+                title: "PlayNite",
+                inputId: "PlayNite",
+              },
+              {
+                title: "Prism Launcher",
+                inputId: "PrismLauncher",
+              },
+              { title: "Steam", inputId: "Steam" },
+              {
+                title: "Ubisoft Connect",
+                inputId: "UbisoftConnect",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.utilities"]}
+            icon="/icons/install/utilities.png"
+            apps={[
+              {
+                title: "1Password",
+                inputId: "1Password",
+              },
+              {
+                title: "AnyDesk",
+                inputId: "AnyDesk",
+              },
+              {
+                title: "AutoHotkey",
+                inputId: "AutoHotkey",
+              },
+              {
+                title: "BitWarden",
+                inputId: "BitWarden",
+              },
+              {
+                title: "Bulk Crap Uninstaller",
+                inputId: "BulkCrapUninstaller",
+              },
+              {
+                title: "Bulk Rename Utility",
+                inputId: "BulkRename",
+              },
+              {
+                title: "CCleaner",
+                inputId: "CCleaner",
+              },
+              { title: "CPU-Z", inputId: "CPU-Z" },
+              { title: "DropBox", inputId: "DropBox" },
+              { title: "DDU", inputId: "DDU" },
+              {
+                title: "Everything",
+                inputId: "Everything",
+              },
+              {
+                title: "FlowLauncher",
+                inputId: "FlowLauncher",
+              },
+              {
+                title: "FXSound",
+                inputId: "FXSound",
+              },
+              { title: "Google Drive", inputId: "GoogleDrive" },
+              { title: "GPU-Z", inputId: "GPU-Z" },
+              {
+                title: "HWInfo",
+                inputId: "HWInfo",
+              },
+              {
+                title: "HWMonitor",
+                inputId: "HWMonitor",
+              },
+              {
+                title: "ImgBurn",
+                inputId: "ImgBurn",
+              },
+              {
+                title: "JDownloader",
+                inputId: "JDownloader",
+              },
+              {
+                title: "KeePass",
+                inputId: "KeePass",
+              },
+              {
+                title: "MEGASync",
+                inputId: "MEGASync",
+              },
+              {
+                title: "Modern Flyouts",
+                inputId: "ModernFlyouts",
+              },
+              {
+                title: "MSI Afterburner",
+                inputId: "Afterburner",
+              },
+              {
+                title: "NileSoft Shell",
+                inputId: "Shell",
+              },
+              {
+                title: "Process Lasso",
+                inputId: "ProcessLasso",
+              },
+              {
+                title: "Proton Drive",
+                inputId: "ProtonDrive",
+              },
+              {
+                title: "Proton Mail",
+                inputId: "ProtonMail",
+              },
+              {
+                title: "Proton Pass",
+                inputId: "ProtonPass",
+              },
+              {
+                title: "qBitTorrent",
+                inputId: "qBitTorrent",
+              },
+              {
+                title: "QuickLook",
+                inputId: "QuickLook",
+              },
+              {
+                title: "Rainmeter",
+                inputId: "Rainmeter",
+              },
+              {
+                title: "Revo Uninstaller",
+                inputId: "Revo",
+              },
+              {
+                title: "Snappy Driver Installer",
+                inputId: "SnappyDriver",
+              },
+              {
+                title: "StartAllBack",
+                inputId: "StartAllBack",
+              },
+              {
+                title: "TeamViewer",
+                inputId: "TeamViewer",
+              },
+              {
+                title: "TotalCommander",
+                inputId: "TotalCommander",
+              },
+              {
+                title: "TransluscentTB",
+                inputId: "TransluscentTB",
+              },
+              {
+                title: "TreeSize",
+                inputId: "TreeSize",
+              },
+              {
+                title: "VirtualBox",
+                inputId: "VirtualBox",
+              },
+              {
+                title: "WinDirStat",
+                inputId: "WinDirStat",
+              },
+              {
+                title: "WindHawk",
+                inputId: "WindHawk",
+              },
+              {
+                title: "WingetUI",
+                inputId: "WingetUI",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.protools"]}
+            icon="/icons/install/protools.png"
+            apps={[
+              {
+                title: "Advanced Ip Scanner",
+                inputId: "AdvancedIpScanner",
+              },
+              { title: "Angry Ip Scanner", inputId: "AngryIpScanner" },
+              { title: "MullvadVPN", inputId: "MullvadVPN" },
+              { title: "OpenVPN", inputId: "OpenVPN" },
+              { title: "ProtonVPN", inputId: "ProtonVPN" },
+              { title: "PuTTY", inputId: "PuTTY" },
+              { title: "SimpleWall", inputId: "SimpleWall" },
+              { title: "WireShark", inputId: "WireShark" },
+              { title: "WireGuard", inputId: "WireGuard" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.microsoft"]}
+            icon="/icons/install/microsoft.png"
+            apps={[
+              { title: "Autoruns", inputId: "Autoruns" },
+              { title: "Nuget", inputId: "Nuget" },
+              { title: "OneDrive", inputId: "OneDrive" },
+              { title: "PowerToys", inputId: "PowerToys" },
+              { title: "PowerBI", inputId: "PowerBI" },
+              { title: "Process Monitor", inputId: "ProcessMonitor" },
+              { title: "Visual C++ 15-22", inputId: "vcredist" },
+              { title: "Windows Terminal", inputId: "WinTerminal" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.multimedia"]}
+            icon="/icons/install/multimedia.png"
+            apps={[
+              { title: "AIMP", inputId: "AIMP" },
+              { title: "Audacity", inputId: "Audacity" },
+              { title: "Clementine", inputId: "Clementine" },
+              { title: "DarkTable", inputId: "DarkTable" },
+              { title: "digiKam", inputId: "digiKam" },
+              { title: "EarTrumpet", inputId: "EarTrumpet" },
+              {
+                title: "EqualizerAPO",
+                desc: "Not available on winget.",
+                inputId: "EqualizerAPO",
+              },
+              { title: "FFmpeg", inputId: "FFmpeg" },
+              { title: "Flameshot", inputId: "Flameshot" },
+              { title: "foobar2000", inputId: "foobar2000" },
+              { title: "FreeCAD", inputId: "FreeCAD" },
+              { title: "HandBrake", inputId: "HandBrake" },
+              {
+                title: "Harmonoid",
+                inputId: "Harmonoid",
+                desc: "Not available on Chocolatey.",
+              },
+              { title: "ImageGlass", inputId: "ImageGlass" },
+              { title: "iTunes", inputId: "iTunes" },
+              { title: "Jellyfin", inputId: "Jellyfin" },
+              { title: "K-Lite Codec Pack", inputId: "KLite" },
+              { title: "Kodi", inputId: "Kodi" },
+              { title: "MediaMonkey", inputId: "MediaMonkey" },
+              { title: "MuseScore", inputId: "MuseScore" },
+              { title: "Nomacs", inputId: "Nomacs" },
+              { title: "OBS", inputId: "OBS" },
+              { title: "OpenShot", inputId: "OpenShot" },
+              { title: "Plex", inputId: "Plex" },
+              { title: "Shotcut", inputId: "Shotcut" },
+              { title: "Spicetify", inputId: "Spicetify" },
+              { title: "Spotify", inputId: "Spotify" },
+              { title: "Stremio", inputId: "Stremio" },
+              { title: "TagScanner", inputId: "TagScanner" },
+              { title: "Tidal", inputId: "Tidal" },
+              { title: "VLC", inputId: "VLC" },
+              { title: "VoiceMeeter", inputId: "VoiceMeeter" },
+              { title: "yt-dlp", inputId: "yt-dlp" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.communication"]}
+            icon="/icons/install/comunication.png"
+            apps={[
+              { title: "Beeper", inputId: "Beeper" },
+              { title: "BetterBird", inputId: "BetterBird" },
+              { title: "Chatterino", inputId: "Chatterino" },
+              { title: "Discord", inputId: "Discord" },
+              { title: "Ferdium", inputId: "Ferdium" },
+              { title: "Hexchat", inputId: "Hexchat" },
+              { title: "Jami", inputId: "Jami" },
+              { title: "Linphone", inputId: "Linphone" },
+              { title: "Signal", inputId: "Signal" },
+              { title: "Slack", inputId: "Slack" },
+              { title: "Teams", inputId: "Teams" },
+              { title: "Telegram", inputId: "Telegram" },
+              { title: "Thunderbird", inputId: "Thunderbird" },
+              { title: "Viber", inputId: "Viber" },
+              { title: "Zoom", inputId: "Zoom" },
+              { title: "Zulip", inputId: "Zulip" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.imaging"]}
+            icon="/icons/install/imaging.png"
+            apps={[
+              { title: "Blender", inputId: "Blender" },
+              { title: "GIMP", inputId: "GIMP" },
+              { title: "Greenshot", inputId: "Greenshot" },
+              { title: "inkScape", inputId: "inkScape" },
+              { title: "KdenLive", inputId: "KdenLive" },
+              { title: "Krita", inputId: "Krita" },
+              { title: "LightShot", inputId: "LightShot" },
+              { title: "ShareX", inputId: "ShareX" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.documents"]}
+            icon="/icons/install/documents.png"
+            apps={[
+              { title: "Anki", inputId: "Anki" },
+              { title: "Adobe Acrobat Reader", inputId: "AdobeReader" },
+              { title: "AFFiNE", inputId: "AFFiNE" },
+              { title: "FoxIt Reader", inputId: "FoxItReader" },
+              { title: "Joplin", inputId: "Joplin" },
+              { title: "LibreOffice", inputId: "LibreOffice" },
+              { title: "LogSeq", inputId: "LogSeq" },
+              { title: "NAPS2", inputId: "NAPS2" },
+              { title: "Obsidian", inputId: "Obsidian" },
+              { title: "OpenOffice", inputId: "OpenOffice" },
+              { title: "PDF24", inputId: "PDF24" },
+              { title: "PDFGear", inputId: "PDFGear" },
+              { title: "PDFSam", inputId: "PDFSam" },
+              { title: "simplenote", inputId: "simplenote" },
+              { title: "SumatraPDF", inputId: "SumatraPDF" },
+              { title: "WinMerge", inputId: "WinMerge" },
+              { title: "Xournal++", inputId: "Xournal" },
+              { title: "Zotero", inputId: "Zotero" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.security"]}
+            icon="/icons/install/security.png"
+            apps={[
+              { title: "Avast", desc: "Not available on winget.", inputId: "Avast" },
+              { title: "AVG", desc: "Not available on winget.", inputId: "AVG" },
+              { title: "BitDefender", inputId: "BitDefender" },
+              { title: "ClamAV", inputId: "ClamAV" },
+              { title: "ESET Nod32", inputId: "ESET" },
+              {
+                title: "Kaspersky",
+                desc: "Not available on winget.",
+                inputId: "Kaspersky",
+              },
+              { title: "MalwareBytes", inputId: "MalwareBytes" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <AppGroup
+            title={t["install.developers"]}
+            icon="/icons/install/developers.png"
+            apps={[
+              { title: "Aegisub", inputId: "Aegisub" },
+              { title: "Anaconda3", inputId: "Anaconda3" },
+              { title: "Clink", inputId: "Clink" },
+              { title: "CMake", inputId: "CMake" },
+              { title: "Cursor", inputId: "Cursor" },
+              { title: "Docker Desktop", inputId: "Docker" },
+              { title: "Git", inputId: "Git" },
+              { title: "Git Extensions", inputId: "GitExtensions" },
+              { title: "GitHub Desktop", inputId: "GitHub" },
+              { title: "GitHub CLI", inputId: "GitHubCLI" },
+              { title: "Go", inputId: "Go" },
+              { title: "Godot", inputId: "Godot" },
+              { title: "JDK 8", inputId: "Java" },
+              { title: "Lazygit", inputId: "Lazygit" },
+              { title: "Miniconda", inputId: "Miniconda" },
+              { title: "Neovim", inputId: "Neovim" },
+              { title: "NET 4.8", inputId: "NET48" },
+              { title: "NET 8", inputId: "NET8" },
+              { title: "NodeJS", inputId: "NodeJS" },
+              { title: "Notepad++", inputId: "Notepad++" },
+              { title: "Oh My Posh", inputId: "OhMyPosh" },
+              { title: "Postman", inputId: "Postman" },
+              { title: "Pulsar", inputId: "Pulsar" },
+              { title: "Python 3", inputId: "Python3" },
+              { title: "Rust", inputId: "Rust" },
+              { title: "Sublime Text", inputId: "SublimeText" },
+              { title: "Vagrant", inputId: "Vagrant" },
+              { title: "VS Code", inputId: "VSCode" },
+              { title: "VS Codium", inputId: "VSCodium" },
+              { title: "Visual Studio", inputId: "VS" },
+              { title: "WSL 2", inputId: "WSL2" },
+              { title: "Yarn", inputId: "Yarn" },
+              { title: "Zed", inputId: "Zed" },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+        </Tab>
+        <Tab tab="script">
+          <MockupCode />
+
+          <ButtonEntry
+            title={t["script.download.title"]}
+            buttonTitle={t["script.download.btn"]}
+            buttonId="downloadBtn"
+            icon="/icons/script/run.png"
+          />
+
+          <ButtonEntry
+            title={t["script.copy.title"]}
+            buttonTitle={t["script.copy.btn"]}
+            buttonId="copyBtn"
+            icon="/icons/script/copy.png"
+          />
+
+          <details>
+            <summary class="content-entry">
+              <div>
+                <img src="/icons/script/preset.png" alt="" />
+                <div>
+                  <h1>{t["script.presets.title"]}</h1>
+                  <p></p>
+                </div>
+              </div>
+              <img class="chevron" src="/icons/chevron-down.png" alt="" />
+            </summary>
+
+            <div class="content-entry about">
+              <div>
+                <div>
+                  <p>
+                    <b>1) {t["script.presets.important"]}</b>
+                    <br />
+                    <i>{t["script.presets.important.desc"]}</i>
+                    <br />
+                    <br />
+                    <b>2) {t["script.presets.table"]}</b>
+                    <br />
+                    <i
+                      >{t["script.presets.table.desc"]}
+                      <a
+                        style="text-decoration: underline;"
+                        target="_blank"
+                        href="https://docs.winscript.cc/#/content/presets"
+                        >{t["script.presets.table"].toLowerCase()}</a
+                      ></i
+                    >
+                    <br />
+                    <br />
+                    <b>3) {t["script.presets.select"]}</b>
+                    <br />
+                    <i>{t["script.presets.select.desc"]}</i>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <ButtonEntry
+              title={t["script.presets.basic.title"]}
+              buttonTitle={t["script.apply"]}
+              buttonId="basicPreset"
+              description={t["script.presets.basic.desc"]}
+            />
+
+            <ButtonEntry
+              title={t["script.presets.strict.title"]}
+              buttonTitle={t["script.apply"]}
+              buttonId="strictPreset"
+              description={t["script.presets.strict.desc"]}
+            />
+
+            <ButtonEntry
+              title={t["script.presets.extreme.title"]}
+              buttonTitle={t["script.apply"]}
+              buttonId="extremePreset"
+              description={t["script.presets.extreme.desc"]}
+            />
+          </details>
+        </Tab>
+        <Tab tab="localizations">
+          {
+            languages.map((lang) => (
+              <div class="content-entry localization-entry" data-lang-code={lang.code}>
+                <div>
+                  <img
+                    src={`https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${lang.flagCode}.svg`}
+                    width="24"
+                    height="24"
+                    alt={lang.name}
+                    style="pointer-events: none;"
+                  />
+                  <div>
+                    <h1>{lang.name}</h1>
+                    <p class="translator-info">
+                      {t["localizations.translatedBy"]}{" "}
+                      <a
+                        href={lang.translatorUrl}
+                        target="_blank"
+                        style="text-decoration: underline;"
+                      >
+                        {lang.translator}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <button class="use-lang-btn" data-locale={lang.code}>
+                  {t["localizations.useLanguage"]}
+                </button>
+              </div>
+            ))
+          }
+        </Tab>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .localization-entry img {
+    max-width: 24px;
+  }
+  .use-lang-btn {
+    padding-inline: 16px;
+  }
+</style>

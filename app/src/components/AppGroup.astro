@@ -12,9 +12,11 @@ interface Props {
   title: string;
   icon: string;
   apps: App[];
+  offText?: string;
+  onText?: string;
 }
 
-const { title, icon, apps } = Astro.props;
+const { title, icon, apps, offText, onText } = Astro.props;
 ---
 
 <details>
@@ -28,5 +30,15 @@ const { title, icon, apps } = Astro.props;
     <img class="chevron" src="icons/chevron-down.png" alt="" />
   </summary>
 
-  {apps.map((tool) => <AppToggle title={tool.title} desc={tool.desc} inputId={tool.inputId} />)}
+  {
+    apps.map((tool) => (
+      <AppToggle
+        title={tool.title}
+        desc={tool.desc}
+        inputId={tool.inputId}
+        offText={offText}
+        onText={onText}
+      />
+    ))
+  }
 </details>

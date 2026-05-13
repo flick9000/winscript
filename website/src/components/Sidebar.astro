@@ -1,3 +1,11 @@
+---
+interface Props {
+  t: any;
+}
+
+const { t } = Astro.props;
+---
+
 <div id="sidebar" class="sidebar">
   <div class="sidebar-header">
     <img src="/logo.svg" width="56" alt="" />
@@ -6,53 +14,67 @@
       <a href="https://github.com/flick9000">github.com/flick9000</a>
     </div>
   </div>
-  <button id="uncheckAll">Uncheck All</button>
+  <button id="uncheckAll">{t["sidebar.uncheckAll"]}</button>
   <div class="sidebar-buttons">
-    <button id="importBtn">Import</button>
-    <button id="exportBtn">Export</button>
+    <button id="importBtn">{t["sidebar.import"]}</button>
+    <button id="exportBtn">{t["sidebar.export"]}</button>
   </div>
   <div class="sidebar-content">
     <div data-tab="tools-tab" class="sidebar-entry">
       <img src="icons/sidebar/tools.svg" alt="" />
-      <h1>Tools</h1>
+      <h1>{t["nav.tools"]}</h1>
     </div>
     <div data-tab="debloat-tab" class="sidebar-entry">
       <img src="icons/sidebar/debloat.ico" alt="" />
-      <h1>Debloat</h1>
+      <h1>{t["nav.debloat"]}</h1>
     </div>
     <div data-tab="privacy-tab" class="sidebar-entry">
       <img src="icons/sidebar/privacy.svg" alt="" />
-      <h1>Privacy</h1>
+      <h1>{t["nav.privacy"]}</h1>
     </div>
     <div data-tab="telemetry-tab" class="sidebar-entry">
       <img src="icons/sidebar/telemetry.svg" alt="" />
-      <h1>Telemetry</h1>
+      <h1>{t["nav.telemetry"]}</h1>
     </div>
     <div data-tab="gaming-tab" class="sidebar-entry">
       <img src="icons/sidebar/Gaming.png" alt="" />
-      <h1>Gaming</h1>
+      <h1>{t["nav.gaming"]}</h1>
     </div>
     <div data-tab="performance-tab" class="sidebar-entry">
       <img src="icons/sidebar/todo.png" alt="" />
-      <h1>Performance</h1>
+      <h1>{t["nav.performance"]}</h1>
     </div>
     <div data-tab="miscellanous-tab" class="sidebar-entry">
       <img src="icons/sidebar/miscellanous.svg" alt="" />
-      <h1>Miscellanous</h1>
+      <h1>{t["nav.miscellaneous"]}</h1>
     </div>
     <div data-tab="install-tab" class="sidebar-entry">
       <img src="icons/sidebar/app.svg" alt="" />
-      <h1>Browse Apps</h1>
+      <h1>{t["nav.install"]}</h1>
     </div>
     <hr />
     <div data-tab="script-tab" class="sidebar-entry">
       <img src="icons/sidebar/code.svg" alt="" />
-      <h1>Download Script</h1>
+      <h1>{t["nav.script"]}</h1>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <hr />
+    <div data-tab="localizations-tab" class="sidebar-entry">
+      <img src="icons/sidebar/language.svg" alt="" />
+      <h1>{t["nav.localizations"]}</h1>
     </div>
   </div>
 </div>
 
 <style>
+  .sidebar-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 1rem;
+  }
   @keyframes slide-in {
     from {
       transform: translateX(-150%);
