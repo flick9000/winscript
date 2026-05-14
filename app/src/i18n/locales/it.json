@@ -172,6 +172,8 @@
   "performance.transparency.desc": "Disabilita la trasparenza, può migliorare le prestazioni del sistema.",
   "performance.hags.title": "Disabilita HAGS",
   "performance.hags.desc": "Disabilita la pianificazione GPU con accelerazione hardware.",
+  "performance.ipv6.title": "Imposta IPv4 come Preferito",
+  "performance.ipv6.desc": "Preferisce l'IPv4 rispetto all'IPv6, può migliorare la latenza.",
   "performance.mousedelay.title": "Disabilita Ritardo Del Mouse",
   "performance.mousedelay.desc": "Disabilita il ritardo di 400ms per la visualizzazione dei menu.",
   "performance.limitdefender.title": "Limita Utilizzo CPU di Defender",
