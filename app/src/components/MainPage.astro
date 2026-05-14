@@ -24,7 +24,7 @@ const languages = [
     name: "English",
     code: "en",
     flagCode: "1f1fa-1f1f8",
-    translator: "Francesco",
+    translator: "Francesco Gerardi",
     translatorUrl: "https://github.com/flick9000",
   },
   {
@@ -33,6 +33,13 @@ const languages = [
     flagCode: "1f1f9-1f1f7",
     translator: "Eyüp Şengöz",
     translatorUrl: "https://github.com/LewisLosa",
+  },
+  {
+    name: "Italiano",
+    code: "it",
+    flagCode: "1f1ee-1f1f9",
+    translator: "Francesco Gerardi",
+    translatorUrl: "https://github.com/flick9000",
   },
 ];
 ---
@@ -52,8 +59,8 @@ const languages = [
               <div>
                 <img src="/icons/tools/shortcuts.png" alt="" />
                 <div>
-                  <h1>Shortcuts</h1>
-                  <p>Shortcuts to various system settings and tools.</p>
+                  <h1>{t["tools.shortcuts.title"]}</h1>
+                  <p>{t["tools.shortcuts.desc"]}</p>
                 </div>
               </div>
               <img class="chevron" src="/icons/chevron-down.png" alt="" />
