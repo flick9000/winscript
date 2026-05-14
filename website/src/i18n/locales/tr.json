@@ -15,6 +15,8 @@
   "install.manualInput": "Paket ID girin",
   "install.addApp": "Uygulama Ekle",
   "install.packageManager": "Package Manager",
+  "tools.shortcuts.title": "Kısayollar",
+  "tools.shortcuts.desc": "Çeşitli sistem ayarlarına ve araçlarına yönelik kısayollar.",
   "tools.cleanup.title": "Temizlik",
   "tools.cleanup.desc": "Geçici dosyaları temizleyerek disk alanı boşaltın.",
   "tools.cleanup.cleanmgr": "Disk Temizleme'yi Çalıştır",

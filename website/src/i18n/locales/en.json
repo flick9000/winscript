@@ -15,6 +15,8 @@
   "install.manualInput": "Enter package ID",
   "install.addApp": "Add App",
   "install.packageManager": "Package Manager",
+  "tools.shortcuts.title": "Shortcuts",
+  "tools.shortcuts.desc": "Shortcuts to various system settings and tools.",
   "tools.cleanup.title": "Clean-up",
   "tools.cleanup.desc": "Free up disk space by cleaning up temporary files.",
   "tools.cleanup.cleanmgr": "Run Disk Cleanup",
