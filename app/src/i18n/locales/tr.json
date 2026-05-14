@@ -17,6 +17,12 @@
   "install.packageManager": "Package Manager",
   "tools.shortcuts.title": "Kısayollar",
   "tools.shortcuts.desc": "Çeşitli sistem ayarlarına ve araçlarına yönelik kısayollar.",
+  "tools.shortcuts.windowsSettings": "Windows Ayarları",
+  "tools.shortcuts.deviceManager": "Aygıt Yöneticisi",
+  "tools.shortcuts.controlPanel": "Denetim Masası",
+  "tools.shortcuts.virtualMemory": "Sanal Bellek",
+  "tools.shortcuts.visualEffects": "Görsel Efektler",
+  "tools.shortcuts.msConfig": "Sistem Yapılandırması",
   "tools.cleanup.title": "Temizlik",
   "tools.cleanup.desc": "Geçici dosyaları temizleyerek disk alanı boşaltın.",
   "tools.cleanup.cleanmgr": "Disk Temizleme'yi Çalıştır",
@@ -232,5 +238,6 @@
   "localizations.translatedBy": "Çeviren",
   "localizations.useLanguage": "Bu dili kullan",
   "common.on": "Açık",
-  "common.off": "Kapalı"
+  "common.off": "Kapalı",
+  "common.open": "Aç"
 }

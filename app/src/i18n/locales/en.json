@@ -17,6 +17,12 @@
   "install.packageManager": "Package Manager",
   "tools.shortcuts.title": "Shortcuts",
   "tools.shortcuts.desc": "Shortcuts to various system settings and tools.",
+  "tools.shortcuts.windowsSettings": "Windows Settings",
+  "tools.shortcuts.deviceManager": "Device Manager",
+  "tools.shortcuts.controlPanel": "Control Panel",
+  "tools.shortcuts.virtualMemory": "Virtual Memory",
+  "tools.shortcuts.visualEffects": "Visual Effects",
+  "tools.shortcuts.msConfig": "MSConfig",
   "tools.cleanup.title": "Clean-up",
   "tools.cleanup.desc": "Free up disk space by cleaning up temporary files.",
   "tools.cleanup.cleanmgr": "Run Disk Cleanup",
@@ -232,5 +238,6 @@
   "localizations.translatedBy": "Translated by",
   "localizations.useLanguage": "Switch language",
   "common.on": "On",
-  "common.off": "Off"
+  "common.off": "Off",
+  "common.open": "Open"
 }

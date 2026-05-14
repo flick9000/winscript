@@ -17,6 +17,12 @@
   "install.packageManager": "Gestore pacchetti",
   "tools.shortcuts.title": "Scorciatoie",
   "tools.shortcuts.desc": "Scorciatoie per varie impostazioni e strumenti.",
+  "tools.shortcuts.windowsSettings": "Impostazioni di Windows",
+  "tools.shortcuts.deviceManager": "Gestione Dispositivi",
+  "tools.shortcuts.controlPanel": "Pannello di Controllo",
+  "tools.shortcuts.virtualMemory": "Memoria Virtuale",
+  "tools.shortcuts.visualEffects": "Effetti Visivi",
+  "tools.shortcuts.msConfig": "Configurazione di Sistema",
   "tools.cleanup.title": "Pulizia",
   "tools.cleanup.desc": "Libera spazio su disco eliminando i file temporanei.",
   "tools.cleanup.cleanmgr": "Esegui Pulizia disco",
@@ -230,5 +236,6 @@
   "localizations.translatedBy": "Tradotto da",
   "localizations.useLanguage": "Usa questa lingua",
   "common.on": "Attivo",
-  "common.off": "Disattivo"
+  "common.off": "Disattivo",
+  "common.open": "Apri"
 }
