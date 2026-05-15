@@ -123,7 +123,13 @@ async function isInstalled() {
 
   async function checkProcess() {
     const processCheck = `([bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)).ToString().ToLower() | Set-Content -Path $env:TEMP\\isPortable.txt;`;
-    const processShell = new Command("cmd", ["/c", "powershell", `${processCheck}`, "pause"]);
+    const processShell = new Command("powershell", [
+      "-NoProfile",
+      "-WindowStyle",
+      "Hidden",
+      "-Command",
+      processCheck,
+    ]);
     await processShell.execute();
   }
 
