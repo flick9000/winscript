@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "WinScript"
-version = "2.7.0"
+version = "2.8.0"
 dependencies = [
  "log",
  "serde",
