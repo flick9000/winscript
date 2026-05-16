@@ -40,10 +40,12 @@ async function getChangelog() {
     return null;
   } else {
     const data = await response.json();
-    let body = data.body.replace(
-      "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
-      "",
-    );
+    let body = data.body
+      .replace(
+        "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
+        "",
+      )
+      .replace(/# changelog/i, "Changelog:");
     body = body.trim();
     return body;
   }
