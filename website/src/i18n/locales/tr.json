@@ -172,6 +172,8 @@
   "performance.transparency.desc": "Saydamlığı devre dışı bırakır, sistem performansını artırabilir.",
   "performance.hags.title": "HAGS Devre Dışı Bırak",
   "performance.hags.desc": "Hardware-Accelerated GPU Scheduling özelliğini devre dışı bırakır.",
+  "performance.ipv6.title": "IPv4'ü Öncelikli Olarak Ayarla",
+  "performance.ipv6.desc": "IPv4'ü IPv6'ya tercih eder; gecikme süresini (latency) iyileştirebilir.",
   "performance.mousedelay.title": "Fare Gecikmesini Devre Dışı Bırak",
   "performance.mousedelay.desc": "400ms menü gösterme ve üzerine gelme gecikmesini devre dışı bırakır.",
   "performance.limitdefender.title": "Defender CPU Kullanımını Sınırla",
