@@ -34,46 +34,17 @@ async function loadConfig() {
   }
 }
 
-async function getChangelog() {
-  const response = await fetch("https://api.github.com/repos/flick9000/winscript/releases/latest");
-  if (!response.ok) {
-    return null;
-  } else {
-    const data = await response.json();
-    let body = data.body
-      .replace(
-        "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
-        "",
-      )
-      .replace(/# changelog/i, "Changelog:");
-    body = body.trim();
-    return body;
-  }
-}
-
 // Checks if an update is available and performs it
 async function checkForUpdates() {
-  const changelog = await getChangelog();
   const update = await check();
 
   if (update) {
-    let updateAsk;
-
-    if (changelog) {
-      updateAsk = await ask(changelog, {
-        title: "Update Available",
-        kind: "info",
-        okLabel: "Update",
-        cancelLabel: "Later",
-      });
-    } else {
-      updateAsk = await ask("An update is available. Do you want to update?", {
-        title: "Update Available",
-        kind: "info",
-        okLabel: "Update",
-        cancelLabel: "Later",
-      });
-    }
+    let updateAsk = await ask("An update is available. Do you want to update?", {
+      title: "Update Available",
+      kind: "info",
+      okLabel: "Update",
+      cancelLabel: "Later",
+    });
 
     if (updateAsk === true) {
       await update.downloadAndInstall();
@@ -88,27 +59,17 @@ async function checkForUpdates() {
 
 // Alert if an update is available (for portable)
 async function alertForUpdates() {
-  const changelog = await getChangelog();
   const update = await check();
 
   if (update) {
     let updateAsk;
 
-    if (changelog) {
-      updateAsk = await ask(changelog, {
-        title: "Update Available",
-        kind: "info",
-        okLabel: "Go to GitHub",
-        cancelLabel: "Later",
-      });
-    } else {
-      updateAsk = await ask("An update is available. Do you want to update?", {
-        title: "Update Available",
-        kind: "info",
-        okLabel: "Go to GitHub",
-        cancelLabel: "Later",
-      });
-    }
+    updateAsk = await ask("An update is available. Do you want to update?", {
+      title: "Update Available",
+      kind: "info",
+      okLabel: "Go to GitHub",
+      cancelLabel: "Later",
+    });
 
     if (updateAsk === true) {
       await openUrl("https://github.com/flick9000/winscript/releases/latest");
