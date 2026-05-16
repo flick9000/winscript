@@ -147,8 +147,6 @@ async function isInstalled() {
   const isPortable = await checkProcess();
   const uninstallExists = await checkUninstaller();
 
-  console.log(isPortable, uninstallExists);
-
   if (isPortable) {
     alertForUpdates();
     return;
