@@ -40,10 +40,12 @@ async function getChangelog() {
     return null;
   } else {
     const data = await response.json();
-    let body = data.body.replace(
-      "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
-      "",
-    );
+    let body = data.body
+      .replace(
+        "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*",
+        "",
+      )
+      .replace(/# changelog/i, "Changelog:");
     body = body.trim();
     return body;
   }
@@ -119,46 +121,42 @@ async function alertForUpdates() {
 }
 
 async function isInstalled() {
-  const tmpDir = await tempDir();
-
   async function checkProcess() {
-    const processCheck = `([bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)).ToString().ToLower() | Set-Content -Path $env:TEMP\\isPortable.txt;`;
-    const processShell = new Command("cmd", ["/c", "powershell", `${processCheck}`, "pause"]);
-    await processShell.execute();
+    const processCheck = `([bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)).ToString().ToLower()`;
+    const processShell = new Command("powershell", [
+      "-NoProfile",
+      "-WindowStyle",
+      "Hidden",
+      "-Command",
+      processCheck,
+    ]);
+    const command = await processShell.execute();
+    return command.stdout.trim();
   }
 
-  async function checkPath() {
-    const pathCheck = `(Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path | Set-Content -Path $env:TEMP\\winscriptPath.txt;`;
+  async function checkUninstaller() {
+    const pathCheck = `(Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path`;
     const pathShell = new Command("powershell", ["-Command", pathCheck]);
-    await pathShell.execute();
+    const command = await pathShell.execute();
+    const uninstallExists = await exists(
+      await join(await dirname(command.stdout.trim()), "uninstall.exe"),
+    );
+    return uninstallExists;
   }
 
-  function cleanFiles() {
-    remove(tmpDir + "isPortable.txt");
-    remove(tmpDir + "winscriptPath.txt");
-  }
+  const isPortable = await checkProcess();
+  const uninstallExists = await checkUninstaller();
 
-  await checkProcess();
-  await checkPath();
+  console.log(isPortable, uninstallExists);
 
-  const isPortableBool = (await readTextFile(tmpDir + "isPortable.txt")).trim() === "true";
-
-  if (isPortableBool) {
-    cleanFiles();
+  if (isPortable) {
     alertForUpdates();
     return;
   }
 
-  const winscriptPath = (await readTextFile(tmpDir + "winscriptPath.txt")).toLowerCase();
-  const winscriptDir = await dirname(winscriptPath);
-  const uninstallPath = await join(winscriptDir, "uninstall.exe");
-  const uninstallExists = await exists(uninstallPath);
-
   if (uninstallExists) {
-    cleanFiles();
     checkForUpdates();
   } else {
-    cleanFiles();
     alertForUpdates();
   }
 }
