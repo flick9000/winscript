@@ -36,22 +36,16 @@ async function loadConfig() {
 
 // Checks if an update is available and performs it
 async function checkForUpdates() {
-  const update = await check();
+  let updateAsk = await ask("An update is available. Do you want to update?", {
+    title: "Update Available",
+    kind: "info",
+    okLabel: "Update",
+    cancelLabel: "Later",
+  });
 
-  if (update) {
-    let updateAsk = await ask("An update is available. Do you want to update?", {
-      title: "Update Available",
-      kind: "info",
-      okLabel: "Update",
-      cancelLabel: "Later",
-    });
-
-    if (updateAsk === true) {
-      await update.downloadAndInstall();
-      await relaunch();
-    } else {
-      return;
-    }
+  if (updateAsk === true) {
+    await update.downloadAndInstall();
+    await relaunch();
   } else {
     return;
   }
@@ -59,30 +53,27 @@ async function checkForUpdates() {
 
 // Alert if an update is available (for portable)
 async function alertForUpdates() {
-  const update = await check();
+  let updateAsk;
 
-  if (update) {
-    let updateAsk;
+  updateAsk = await ask("An update is available. Do you want to update?", {
+    title: "Update Available",
+    kind: "info",
+    okLabel: "Go to GitHub",
+    cancelLabel: "Later",
+  });
 
-    updateAsk = await ask("An update is available. Do you want to update?", {
-      title: "Update Available",
-      kind: "info",
-      okLabel: "Go to GitHub",
-      cancelLabel: "Later",
-    });
-
-    if (updateAsk === true) {
-      await openUrl("https://github.com/flick9000/winscript/releases/latest");
-    } else {
-      return;
-    }
+  if (updateAsk === true) {
+    await openUrl("https://github.com/flick9000/winscript/releases/latest");
   } else {
     return;
   }
 }
 
 async function isInstalled() {
-  const script = `
+  const update = await check();
+
+  if (update) {
+    const script = `
   $processExists = [bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)
   $parentPath = (Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path
   $uninstallPath = Join-Path (Split-Path $parentPath) "uninstall.exe"
@@ -90,28 +81,29 @@ async function isInstalled() {
   @{ isPortable = $processExists; uninstallExists = $uninstallExists } | ConvertTo-Json -Compress
   `;
 
-  const shell = new Command("powershell", [
-    "-NoProfile",
-    "-WindowStyle",
-    "Hidden",
-    "-Command",
-    script,
-  ]);
+    const shell = new Command("powershell", [
+      "-NoProfile",
+      "-WindowStyle",
+      "Hidden",
+      "-Command",
+      script,
+    ]);
 
-  const result = await shell.execute();
-  const { isPortable, uninstallExists } = JSON.parse(result.stdout);
+    const result = await shell.execute();
+    const { isPortable, uninstallExists } = JSON.parse(result.stdout);
 
-  console.log(isPortable, uninstallExists);
+    if (isPortable) {
+      alertForUpdates();
+      return;
+    }
 
-  if (isPortable) {
-    alertForUpdates();
-    return;
-  }
-
-  if (uninstallExists) {
-    checkForUpdates();
+    if (uninstallExists) {
+      checkForUpdates();
+    } else {
+      alertForUpdates();
+    }
   } else {
-    alertForUpdates();
+    return;
   }
 }
 
