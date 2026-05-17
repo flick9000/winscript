@@ -82,31 +82,26 @@ async function alertForUpdates() {
 }
 
 async function isInstalled() {
-  async function checkProcess() {
-    const processCheck = `([bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)).ToString().ToLower()`;
-    const processShell = new Command("powershell", [
-      "-NoProfile",
-      "-WindowStyle",
-      "Hidden",
-      "-Command",
-      processCheck,
-    ]);
-    const command = await processShell.execute();
-    return command.stdout.trim();
-  }
+  const script = `
+  $processExists = [bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)
+  $parentPath = (Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path
+  $uninstallPath = Join-Path (Split-Path $parentPath) "uninstall.exe"
+  $uninstallExists = Test-Path $uninstallPath
+  @{ isPortable = $processExists; uninstallExists = $uninstallExists } | ConvertTo-Json -Compress
+  `;
 
-  async function checkUninstaller() {
-    const pathCheck = `(Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path`;
-    const pathShell = new Command("powershell", ["-Command", pathCheck]);
-    const command = await pathShell.execute();
-    const uninstallExists = await exists(
-      await join(await dirname(command.stdout.trim()), "uninstall.exe"),
-    );
-    return uninstallExists;
-  }
+  const shell = new Command("powershell", [
+    "-NoProfile",
+    "-WindowStyle",
+    "Hidden",
+    "-Command",
+    script,
+  ]);
 
-  const isPortable = await checkProcess();
-  const uninstallExists = await checkUninstaller();
+  const result = await shell.execute();
+  const { isPortable, uninstallExists } = JSON.parse(result.stdout);
+
+  console.log(isPortable, uninstallExists);
 
   if (isPortable) {
     alertForUpdates();
