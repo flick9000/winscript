@@ -36,6 +36,8 @@ async function loadConfig() {
 
 // Checks if an update is available and performs it
 async function checkForUpdates() {
+  const update = await check();
+
   let updateAsk = await ask("An update is available. Do you want to update?", {
     title: "Update Available",
     kind: "info",
