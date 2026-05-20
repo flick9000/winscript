@@ -193,6 +193,7 @@
   "misc.mpo.title": "Disabilita Multiplane Overlay (MPO)",
   "misc.mpo.desc": "Disabilita MPO, può risolvere problemi di sfarfallio e crash dello schermo.",
   "misc.endtask.title": "Aggiungi 'Termina Attività' Al Menu Contestuale",
+  "misc.homegallery.title": "Rimuovi Home e Galleria da Esplora File",
   "misc.taskbarleft.title": "Sposta Le Icone Della Barra Delle Applicazioni A Sinistra",
   "misc.numlockstartup.title": "Disabilita Bloc Num All'Avvio",
   "misc.darkmode.title": "Attiva Modalità Scura",

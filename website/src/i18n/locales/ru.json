@@ -193,6 +193,7 @@
   "misc.mpo.title": "Отключить Multiplane Overlay (MPO)",
   "misc.mpo.desc": "Отключение MPO помогает устранить мерцание экрана, микрофризы и сбои драйверов.",
   "misc.endtask.title": "Добавить «Завершить задачу» в контекстное меню",
+  "misc.homegallery.title": "Удалить разделы «Главная» и «Галерея» из Проводника",
   "misc.taskbarleft.title": "Сдвинуть значки панели задач влево",
   "misc.numlockstartup.title": "Отключить Numlock при загрузке",
   "misc.darkmode.title": "Включить темный режим",

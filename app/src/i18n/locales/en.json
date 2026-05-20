@@ -193,6 +193,7 @@
   "misc.mpo.title": "Disable Multiplane Overlay (MPO)",
   "misc.mpo.desc": "Disables MPO, might help with screen flickering and crashes.",
   "misc.endtask.title": "Add End Task to Context Menu",
+  "misc.homegallery.title": "Remove Home and Gallery from File Explorer",
   "misc.taskbarleft.title": "Move Taskbar Icons to Left",
   "misc.numlockstartup.title": "Disable Numlock on Startup",
   "misc.darkmode.title": "Enable Dark Mode",
