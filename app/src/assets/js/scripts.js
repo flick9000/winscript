@@ -782,6 +782,12 @@ document.addEventListener("DOMContentLoaded", function () {
       "Write-Host '-- Adding End Task to Right-Click' -ForegroundColor Green",
       'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings" /v "TaskbarEndTask" /t REG_DWORD /d "1" /f',
     ],
+    homegallery: [
+      "Write-Host '-- Removing Home and Gallery from File Explorer' -ForegroundColor Green",
+      'reg add "HKCU\\Software\\Classes\\CLSID\\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d "0" /f',
+      'reg add "HKCU\\Software\\Classes\\CLSID\\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d "0" /f',
+      'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "LaunchTo" /t REG_DWORD /d "1" /f',
+    ],
     mpo: [
       "Write-Host '-- Disabling Multiplane Overlay (MPO)' -ForegroundColor Green",
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "00000005" /f',
@@ -937,6 +943,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "filextensions",
     "classicmenu",
     "endtask",
+    "homegallery",
     "mpo",
     "taskbarleft",
     "stickykeys",
@@ -1167,6 +1174,7 @@ const presets = {
     "storagesense",
     "wsearch",
     "endtask",
+    "homegallery",
     "filextensions",
     "stickykeys",
   ],
