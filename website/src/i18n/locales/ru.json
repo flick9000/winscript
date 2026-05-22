@@ -161,6 +161,7 @@
   "telemetry.update.title": "Управление Центром обновления",
   "telemetry.update.desc": "Отложить, отключить или сбросить настройки Центра обновления Windows.",
   "gaming.fullscreenoptimizations.title": "Отключить оптимизацию во весь экран",
+  "gaming.windowedoptimizations.title": "Отключить оптимизацию для игр в оконном режиме",
   "gaming.mouseacc.title": "Отключить акселерацию мыши",
   "gaming.gamemode.title": "Отключить игровой режим",
   "gaming.gamebar.title": "Отключить Game Bar",

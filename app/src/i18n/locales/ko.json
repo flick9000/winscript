@@ -161,6 +161,7 @@
   "telemetry.update.title": "Windows 업데이트 관리",
   "telemetry.update.desc": "Windows 업데이트를 지연, 비활성화 또는 재설정합니다.",
   "gaming.fullscreenoptimizations.title": "전체 화면 최적화 비활성화",
+  "gaming.windowedoptimizations.title": "창 모드 게임에 대한 최적화 비활성화",
   "gaming.mouseacc.title": "마우스 가속 비활성화",
   "gaming.gamemode.title": "게임 모드 비활성화",
   "gaming.gamebar.title": "게임 바 비활성화",

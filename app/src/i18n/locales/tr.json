@@ -161,6 +161,7 @@
   "telemetry.update.title": "Windows Update Yönetimi",
   "telemetry.update.desc": "Windows Update'i geciktirin, devre dışı bırakın veya sıfırlayın.",
   "gaming.fullscreenoptimizations.title": "Tam Ekran Optimizasyonlarını Devre Dışı Bırak",
+  "gaming.windowedoptimizations.title": "Pencereli Oyunlar için İyileştirmeleri Devre Dışı Bırak",
   "gaming.mouseacc.title": "Fare Hızlandırmasını Devre Dışı Bırak",
   "gaming.gamemode.title": "Oyun Modunu Devre Dışı Bırak",
   "gaming.gamebar.title": "Game Bar Devre Dışı Bırak",

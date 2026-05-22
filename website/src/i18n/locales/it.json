@@ -161,6 +161,7 @@
   "telemetry.update.title": "Gestisci Windows Update",
   "telemetry.update.desc": "Posticipa, disabilita o resetta Windows Update.",
   "gaming.fullscreenoptimizations.title": "Disabilita Ottimizzazioni Schermo Intero",
+  "gaming.windowedoptimizations.title": "Disattiva Ottimizzazioni Per Giochi in Finestra",
   "gaming.mouseacc.title": "Disabilita Accelerazione Del Mouse",
   "gaming.gamemode.title": "Disabilita Modalità Gioco",
   "gaming.gamebar.title": "Disabilita Game Bar",
