@@ -566,6 +566,31 @@ const languages = [
             offText={t["common.off"]}
             onText={t["common.on"]}
           />
+
+          <ScriptGroup
+            title={t["telemetry.updatesettings.title"]}
+            description={t["telemetry.updatesettings.desc"]}
+            icon="/icons/telemetry/settings.svg"
+            tools={[
+              {
+                title: t["telemetry.deliveryoptimization.title"],
+                description: t["telemetry.deliveryoptimization.desc"],
+                inputId: "deliveryoptimization",
+              },
+              {
+                title: t["telemetry.meteredconnection.title"],
+                description: t["telemetry.meteredconnection.desc"],
+                inputId: "meteredconnection",
+              },
+              {
+                title: t["telemetry.driverupdates.title"],
+                description: t["telemetry.driverupdates.desc"],
+                inputId: "driverupdates",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
         </Tab>
         <Tab tab="gaming">
           <ScriptToggle

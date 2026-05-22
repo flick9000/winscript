@@ -455,6 +455,19 @@ document.addEventListener("DOMContentLoaded", function () {
       'Write-Host -- "Disabling Windows Update Scheduled Tasks"',
       `$paths = @('\\Microsoft\\Windows\\InstallService\\', '\\Microsoft\\Windows\\UpdateOrchestrator\\', '\\Microsoft\\Windows\\UpdateAssistant\\', '\\Microsoft\\Windows\\WaaSMedic\\', '\\Microsoft\\Windows\\WindowsUpdate\\', '\\Microsoft\\WindowsUpdate\\'); foreach ($path in $paths) { Get-ScheduledTask -TaskPath "$path*" -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue }`,
     ],
+    deliveryoptimization: [
+      "Write-Host '-- Disabling Delivery Optimization' -ForegroundColor Green",
+      'reg add "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "99" /f',
+    ],
+    meteredconnection: [
+      "Write-Host '-- Disabling Updates over Metered Connections' -ForegroundColor Green",
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings" /v "AllowAutoWindowsUpdateDownloadOverMeteredNetwork" /t REG_DWORD /d "0" /f',
+    ],
+    driverupdates: [
+      "Write-Host '-- Disable Hardware Driver Updates' -ForegroundColor Green",
+      'reg add "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f',
+    ],
     googleupdates: [
       "Write-Host '-- Disabling Google updates' -ForegroundColor Green",
       'Set-Service -Name "gupdate" -StartupType Disabled',
@@ -873,6 +886,9 @@ document.addEventListener("DOMContentLoaded", function () {
     "defaultupdate",
     "securityupdate",
     "disableupdate",
+    "deliveryoptimization",
+    "meteredconnection",
+    "driverupdates",
 
     "locationaccess",
     "cameraccess",
@@ -1035,6 +1051,7 @@ const presets = {
     "appexperience",
     "targetads",
     "nvidiatelemetry",
+    "deliveryoptimization",
     "ultimateperformance",
     "manualservices",
     "mousedelay",
@@ -1088,6 +1105,7 @@ const presets = {
     "targetads",
     "nvidiatelemetry",
     "powershelltelemetry",
+    "deliveryoptimization",
     "ultimateperformance",
     "manualservices",
     "hags",
@@ -1162,6 +1180,7 @@ const presets = {
     "ccleanertelemetry",
     "googleupdates",
     "adobeupdates",
+    "deliveryoptimization",
     "gamebar",
     "ultimateperformance",
     "manualservices",
