@@ -8,6 +8,7 @@
   "nav.miscellaneous": "Miscellaneous",
   "nav.install": "Browse Apps",
   "nav.script": "Run Script",
+  "nav.script.download": "Download Script",
   "sidebar.uncheckAll": "Uncheck All",
   "sidebar.import": "Import",
   "sidebar.export": "Export",
