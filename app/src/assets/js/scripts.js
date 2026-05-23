@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
     wupdate: [
       "Write-Host '-- Disabling Windows Update Telemetry' -ForegroundColor Green",
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d 0 /f',
-      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization" /v "DODownloadMode" /t "REG_DWORD" /d 0 /f',
+      'reg add "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "99" /f',
     ],
     wsearchtelemetry: [
       "Write-Host '-- Disabling Windows Search Telemetry' -ForegroundColor Green",
@@ -447,7 +447,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v "AUOptions" /t REG_DWORD /d "1" /f',
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config" /f',
-      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config" /v "DODownloadMode" /t REG_DWORD /d "0" /f',
+      'reg add "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "99" /f',
       'Write-Host "-- Disabling Windows Update Services"',
       '$updateServices = @("BITS","wuauserv","UsoSvc","WaaSMedicSvc")',
       "$updateServices | ForEach-Object { Stop-Service -Name $_; Set-Service -Name $_ -StartupType Disabled }",
@@ -465,8 +465,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     driverupdates: [
       "Write-Host '-- Disable Hardware Driver Updates' -ForegroundColor Green",
-      'reg add "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f',
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d 0 /f',
     ],
     googleupdates: [
       "Write-Host '-- Disabling Google updates' -ForegroundColor Green",
