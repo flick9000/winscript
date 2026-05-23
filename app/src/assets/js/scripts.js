@@ -756,6 +756,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "Write-Host '-- Disabling Fullscreen Optimizations' -ForegroundColor Green",
       'reg add "HKCU\\System\\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d 1 /f',
     ],
+    windowedoptimizations: [
+      "Write-Host '-- Disabling Optimizations for Windowed Games' -ForegroundColor Green",
+      'reg add "HKCU\\Software\\Microsoft\\DirectX\\UserGpuPreferences" /v "DirectXUserGlobalSettings" /t REG_SZ /d "SwapEffectUpgradeEnable=0;" /f',
+    ],
     mouseacc: [
       "Write-Host '-- Disabling Mouse Acceleration' -ForegroundColor Green",
       'reg add "HKCU\\Control Panel\\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f',
@@ -935,6 +939,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "disableprefetch",
 
     "fullscreenoptimizations",
+    "windowedoptimizations",
     "mouseacc",
     "gamemode",
     "gamebar",
