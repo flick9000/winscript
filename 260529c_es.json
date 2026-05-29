@@ -25,7 +25,7 @@
   "tools.shortcuts.visualEffects": "Efectos visuales",
   "tools.shortcuts.msConfig": "Configuración del sistema",
   "tools.cleanup.title": "Limpieza",
-  "tools.cleanup.desc": "Libera espacio del disco limpiando archivo temporales.",
+  "tools.cleanup.desc": "Libera espacio del disco limpiando archivos temporales.",
   "tools.cleanup.cleanmgr": "Ejecutar limpieza de disco",
   "tools.cleanup.cleantemp": "Limpiar archivos temporales",
   "tools.cleanup.emptyrecycle": "Vaciar papelera de reciclaje",
