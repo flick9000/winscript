@@ -225,6 +225,8 @@
   "install.documents": "문서",
   "install.security": "보안",
   "install.developers": "개발자용",
+  "install.no.winget": "Winget에서 사용할 수 없습니다.",
+  "install.no.choco": "Chocolatey에서 사용할 수 없습니다.",
   "script.download.title": "스크립트 다운로드",
   "script.download.btn": "다운로드",
   "script.run.title": "스크립트 실행",

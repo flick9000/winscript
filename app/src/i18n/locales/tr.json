@@ -225,6 +225,8 @@
   "install.documents": "Belgeler",
   "install.security": "Güvenlik",
   "install.developers": "Geliştiriciler İçin",
+  "install.no.winget": "Winget'ta mevcut değil.",
+  "install.no.choco": "Chocolatey'de mevcut değil.",
   "script.download.title": "Betiği İndir",
   "script.download.btn": "İndir",
   "script.run.title": "Betiği Çalıştır",

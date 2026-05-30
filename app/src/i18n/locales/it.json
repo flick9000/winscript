@@ -225,6 +225,8 @@
   "install.documents": "Documenti",
   "install.security": "Sicurezza",
   "install.developers": "Per Sviluppatori",
+  "install.no.winget": "Non disponibile su Winget.",
+  "install.no.choco": "Non disponibile su Chocolatey.",
   "script.download.title": "Scarica Script",
   "script.download.btn": "Scarica",
   "script.run.title": "Esegui Script",

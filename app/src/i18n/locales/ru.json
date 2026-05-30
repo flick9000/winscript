@@ -225,6 +225,8 @@
   "install.documents": "Документы и офис",
   "install.security": "Безопасность",
   "install.developers": "Разработчикам",
+  "install.no.winget": "Недоступно в Winget.",
+  "install.no.choco": "Недоступно в Chocolatey.",
   "script.download.title": "Скачать скрипт",
   "script.download.btn": "Скачать",
   "script.run.title": "Запустить скрипт",
