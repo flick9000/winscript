@@ -123,7 +123,7 @@
 	"privacy.appaccess.motion": "Tắt quyền truy cập dữ liệu chuyển động",
 	"privacy.appaccess.radios": "Tắt quyền truy cập các bộ thu phát vô tuyến",
 	"privacy.appaccess.recordings": "Tắt quyền truy cập bản ghi âm",
-	"privacy.appaccess.screenshot": "Tắt quyền viền chụp ảnh màn hình",
+	"privacy.appaccess.screenshot": "Tắt quyền truy cập viền chụp ảnh màn hình",
 	"privacy.appaccess.ai": "Tắt quyền tạo nội dung bằng AI",
 	"telemetry.telemetry.title": "Tắt dữ liệu đo lường từ xa",
 	"telemetry.telemetry.desc": "Chọn những dữ liệu sẽ được gửi về Microsoft.",
