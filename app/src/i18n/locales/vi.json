@@ -87,7 +87,7 @@
 	"privacy.appaccess.title": "Tắt quyền truy cập của ứng dụng",
 	"privacy.appaccess.desc": "Giới hạn quyền truy cập của ứng dụng vào dữ liệu, tệp và hệ thống.",
 	"privacy.updatepause.title": "Kéo dài thời gian tạm dừng Windows Update",
-	"privacy.updatepause.desc": "Kéo dài giới hạn thời gian tạm dừng cập nhật Windows lên đến 20 years.",
+	"privacy.updatepause.desc": "Kéo dài giới hạn thời gian tạm dừng cập nhật Windows lên đến 20 năm.",
 	"privacy.wpbt.title": "Tắt Windows Platform Binary Table",
 	"privacy.wpbt.desc": "Tính năng này cho phép nhà sản xuất máy tính cài đặt và thực thi phần mềm mà không cần sự đồng ý của người dùng.",
 	"privacy.cloudsync.title": "Tắt đồng bộ hóa đám mây",
