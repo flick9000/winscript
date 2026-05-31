@@ -235,7 +235,7 @@
 	"script.copy.btn": "Sao chép",
 	"script.presets.title": "Cấu hình mẫu",
 	"script.presets.important": "Quan trọng",
-	"script.presets.important.desc": "Hãy kiểm tra tất cả các script một cách cẩn thận trước khi thực thi.",
+	"script.presets.important.desc": "Hãy kiểm tra [TẤT CẢ] các script một cách cẩn thận trước khi thực thi.",
 	"script.presets.table": "Bảng so sánh",
 	"script.presets.table.desc": "Bạn có thể xem bảng so sánh chi tiết giữa các cấu hình mẫu tại đây.",
 	"script.presets.select": "Lựa chọn",
