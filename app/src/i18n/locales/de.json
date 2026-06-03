@@ -152,7 +152,7 @@
   "telemetry.defaultupdates": "Standardeinstellungen",
   "telemetry.securityupdate": "Nur Sicherheitsupdates",
   "telemetry.disableupdate": "Updates deaktivieren",
-  "telemetry.updatesettings.title": "Windwos Update konfigurieren",
+  "telemetry.updatesettings.title": "Windows Update konfigurieren",
   "telemetry.updatesettings.desc": "Einstellungen für Windows Update konfigurieren",
   "telemetry.deliveryoptimization.title": "Übermittlungsoptimierung deaktivieren",
   "telemetry.deliveryoptimization.desc": "Verhindert, dass Teile zuvor heruntergeladener Updates an andere Geräte im Internet gesendet werden.",
