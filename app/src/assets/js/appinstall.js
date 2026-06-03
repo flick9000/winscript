@@ -279,11 +279,21 @@ function appsInstallChocolatey() {
     }
   }
 
+  // Check manual IDs
+  function isValidManualId(manualId) {
+    return /^[A-Za-z0-9._+\-]+$/.test(manualId);
+  }
+
   // Add addButton click listener
   const addButton = document.getElementById("addApp");
   addButton.addEventListener("click", () => {
     const manualInput = document.getElementById("manualInput").value.trim();
     if (manualInput) {
+      if (!isValidManualId(manualInput)) {
+        const manualList = document.getElementById("manualList");
+        manualList.innerHTML = "Please enter a valid package ID.";
+        return;
+      }
       window.manualURLs.push(manualInput);
       document.getElementById("manualInput").value = ""; // Clear input
       updateCommandDisplay();
@@ -577,11 +587,21 @@ function appsInstallWinget() {
     }
   }
 
+  // Check manual IDs
+  function isValidManualId(manualId) {
+    return /^[A-Za-z0-9._+\-]+$/.test(manualId);
+  }
+
   // Add addButton click listener
   const addButton = document.getElementById("addApp");
   addButton.addEventListener("click", () => {
     const manualInput = document.getElementById("manualInput").value.trim();
     if (manualInput) {
+      if (!isValidManualId(manualInput)) {
+        const manualList = document.getElementById("manualList");
+        manualList.innerHTML = "Please enter a valid package ID.";
+        return;
+      }
       window.manualURLs.push(manualInput);
       document.getElementById("manualInput").value = ""; // Clear input
       updateCommandDisplay();
