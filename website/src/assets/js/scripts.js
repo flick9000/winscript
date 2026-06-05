@@ -364,9 +364,11 @@ document.addEventListener("DOMContentLoaded", function () {
       'reg add "HKLM\\SOFTWARE\\NVIDIA Corporation\\Global\\FTS" /v "EnableRID64640" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SOFTWARE\\NVIDIA Corporation\\Global\\FTS" /v "EnableRID66610" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Services\\nvlddmkm\\Global\\Startup" /v "SendTelemetryData" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Services\\nvlddmkm\\Parameters\\Global\\Startup\\SendTelemetryData" /ve /t REG_DWORD /d 0 /f',
       'Disable-ScheduledTask -TaskName "NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" -ErrorAction SilentlyContinue',
       'Disable-ScheduledTask -TaskName "NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" -ErrorAction SilentlyContinue',
       'Disable-ScheduledTask -TaskName "NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" -ErrorAction SilentlyContinue',
+      'Set-Service -Name "NvTelemetryContainer" -StartupType Disabled',
     ],
     vscodetelemetry: [
       "Write-Host '-- Disabling Visual Studio telemetry' -ForegroundColor Green",
