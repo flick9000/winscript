@@ -1,7 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500px" height="313px" viewBox="0 0 500 313" version="1.1">
-<g id="surface1">
-<rect x="0" y="0" width="500" height="313" style="fill:rgb(0%,32.156864%,57.647061%);fill-opacity:1;stroke:none;"/>
-<path style="fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(99.607843%,79.607844%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 0 2.5 L 8 2.5 M 3 0 L 3 5 " transform="matrix(62.5,0,0,62.6,0,0)"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><switch><g><path fill="#1b75bb" d="m64 43c0 6.075-3.373 11-10 11h-44c-6.627 0-10-4.925-10-11v-22c0-6.075 3.373-11 10-11h44c6.627 0 10 4.925 10 11v22"/><path fill="#fdc40c" d="m20 10h9v44h-9z"/><path fill="#fdc40c" d="m0 27h64v8h-64z"/></g></switch></svg>
