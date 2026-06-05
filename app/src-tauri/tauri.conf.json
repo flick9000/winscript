@@ -21,7 +21,7 @@
         "resizable": true,
         "visible": false,
         "center": true,
-        "shadow": false,
+        "decorations": false,
         "transparent": true,
         "fullscreen": false
       }
