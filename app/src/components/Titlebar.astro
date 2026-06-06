@@ -31,8 +31,6 @@
     display: flex;
     justify-content: space-between;
     top: 0;
-    left: 0;
-    right: 0;
     height: 32px;
     width: 100%;
     z-index: 999 !important;
@@ -55,17 +53,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: initial;
     width: 48px;
     height: 32px;
-    margin-top: -1px;
-    margin-right: 1px;
+    /* reset default */
+    min-width: initial;
     background: transparent;
     border: none;
     border-radius: 0;
     cursor: default;
-
-
   }
   button.donate,
   button.bug {
