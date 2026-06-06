@@ -1,7 +1,7 @@
 <div data-tauri-drag-region class="titlebar">
   <div class="logo">
     <img src="/favicon.ico" width="16" alt="" />
-    <h1>WinScript</h1>
+    <h1 id="title">WinScript</h1>
   </div>
   <div class="controls">
     <button class="control bug">
@@ -52,6 +52,9 @@
       font-size: 12px;
       color: var(--text);
     }
+    #title {
+      transition: color 0.1s ease;
+    }
     .controls {
       display: flex;
       margin-top: -2px;
@@ -100,17 +103,38 @@
     import { getCurrentWindow } from "@tauri-apps/api/window";
     import { open } from "@tauri-apps/plugin-shell";
     const window = getCurrentWindow();
+    const title = document.getElementById("title");
 
-    document.querySelector(".bug").addEventListener("click", () => {
+    function updateTitle(isFocused) {
+      if (isFocused) {
+        title!.style.color = "var(--text)";
+      } else {
+        title!.style.color = "var(--muted)";
+      }
+    }
+
+    window.isFocused().then((focused) => {
+      updateTitle(focused);
+    });
+
+    window.listen("tauri://focus", () => {
+      updateTitle(true);
+    });
+
+    window.listen("tauri://blur", () => {
+      updateTitle(false);
+    });
+
+    document.querySelector(".bug")!.addEventListener("click", () => {
       open("https://github.com/flick9000/winscript/issues");
     });
-    document.querySelector(".donate").addEventListener("click", () => {
+    document.querySelector(".donate")!.addEventListener("click", () => {
       open("https://ko-fi.com/flick9000");
     });
-    document.querySelector(".minimize").addEventListener("click", () => {
+    document.querySelector(".minimize")!.addEventListener("click", () => {
       window.minimize();
     });
-    document.querySelector(".close").addEventListener("click", () => {
+    document.querySelector(".close")!.addEventListener("click", () => {
       window.close();
     });
   </script>
