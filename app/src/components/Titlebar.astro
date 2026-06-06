@@ -11,7 +11,7 @@
     </button>
     <button class="control close">
       <svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor">
-        <path d="M0.707 0L10 9.293 9.293 10 0 0.707zM9.293 0L10 0.707 0.707 10 0 9.293z"/>
+        <path d="M0.707 0L10 9.293 9.293 10 0 0.707zM9.293 0L10 0.707 0.707 10 0 9.293z"></path>
       </svg>
     </button>
   </div>
@@ -20,9 +20,6 @@
 <style>
   *[data-tauri-drag-region] {
     app-region: drag;
-  }
-  [data-tauri-drag-region] {
-    -webkit-app-region: drag; /* makes it draggable */
   }
   .titlebar {
     position: fixed;
@@ -46,6 +43,7 @@
   }
   .controls {
     display: flex;
+    app-region: no-drag;
   }
   button {
     display: flex;
@@ -55,28 +53,41 @@
     margin-top: -6px;
     width: 48px;
     height: 32px;
+    margin-top: -1px;
+    margin-right: 1px;
     background: transparent;
     border: none;
     border-radius: 0;
   }
+  @media (prefers-color-scheme: light) {
+    button {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+    }
+  }
   button:hover {
     background-color: hsl(from var(--text) h s l / 0.06);
-    transition: background-color 0.3s ease;
+    box-shadow:
+      0px -5px 0px 0px hsl(from var(--text) h s l / 0.06),
+      0px 0px 0px 0px transparent;
   }
   button.close:hover {
     background-color: hsl(from #c42b1c h s l / 1);
-    transition: background-color 0.3s ease;
+    box-shadow:
+      0px -5px 0px 0px #c42b1c,
+      5px 0px 0px 0px #c42b1c;
   }
 </style>
 
 <script>
-import { getCurrentWindow } from '@tauri-apps/api/window';
-const window = getCurrentWindow();
+  import { getCurrentWindow } from "@tauri-apps/api/window";
+  const window = getCurrentWindow();
 
-document.querySelector('.minimize').addEventListener('click', () => {
-  window.minimize();
-});
-document.querySelector('.close').addEventListener('click', () => {
-  window.close();
-});
+  document.querySelector(".minimize").addEventListener("click", () => {
+    window.minimize();
+  });
+  document.querySelector(".close").addEventListener("click", () => {
+    window.close();
+  });
 </script>
