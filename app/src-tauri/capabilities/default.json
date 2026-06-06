@@ -6,6 +6,8 @@
   "permissions": [
     "core:default",
     "core:window:allow-start-dragging",
+    "core:window:allow-minimize",
+    "core:window:allow-close",
     "updater:default",
     "updater:allow-check",
     "updater:allow-download",

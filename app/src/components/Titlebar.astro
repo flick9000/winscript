@@ -4,12 +4,12 @@
     <h1>WinScript</h1>
   </div>
   <div class="controls">
-    <button class="minimize">
+    <button class="control minimize">
       <svg width="12" height="12" viewBox="0 0 10 1" fill="currentColor">
         <rect width="10" height="1"></rect>
       </svg>
     </button>
-    <button class="close">
+    <button class="control close">
       <svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor">
         <path d="M0.707 0L10 9.293 9.293 10 0 0.707zM9.293 0L10 0.707 0.707 10 0 9.293z"/>
       </svg>
@@ -68,3 +68,15 @@
     transition: background-color 0.3s ease;
   }
 </style>
+
+<script>
+import { getCurrentWindow } from '@tauri-apps/api/window';
+const window = getCurrentWindow();
+
+document.querySelector('.minimize').addEventListener('click', () => {
+  window.minimize();
+});
+document.querySelector('.close').addEventListener('click', () => {
+  window.close();
+});
+</script>
