@@ -1,15 +1,70 @@
-<div id="titlebar">
-    <div data-tauri-drag-region></div>
+<div data-tauri-drag-region class="titlebar">
+  <div class="logo">
+    <img src="/favicon.ico" width="16" alt="" />
+    <h1>WinScript</h1>
+  </div>
+  <div class="controls">
+    <button class="minimize">
+      <svg width="12" height="12" viewBox="0 0 10 1" fill="currentColor">
+        <rect width="10" height="1"></rect>
+      </svg>
+    </button>
+    <button class="close">
+      <svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor">
+        <path d="M0.707 0L10 9.293 9.293 10 0 0.707zM9.293 0L10 0.707 0.707 10 0 9.293z"/>
+      </svg>
+    </button>
+  </div>
 </div>
 
 <style>
-    #titlebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 32px;
-        width: 100%;
-        z-index: 999;
-    }
+  *[data-tauri-drag-region] {
+    app-region: drag;
+  }
+  [data-tauri-drag-region] {
+    -webkit-app-region: drag; /* makes it draggable */
+  }
+  .titlebar {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    width: 100%;
+    z-index: 999 !important;
+    padding-left: 12px;
+    padding-top: 6px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .controls {
+    display: flex;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: initial;
+    margin-top: -6px;
+    width: 48px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+  button:hover {
+    background-color: hsl(from var(--text) h s l / 0.06);
+    transition: background-color 0.3s ease;
+  }
+  button.close:hover {
+    background-color: hsl(from #c42b1c h s l / 1);
+    transition: background-color 0.3s ease;
+  }
 </style>

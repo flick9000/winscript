@@ -15,9 +15,9 @@
       {
         "title": "WinScript",
         "width": 1200,
-        "height": 776,
+        "height": 800,
         "minWidth": 750,
-        "minHeight": 650,
+        "minHeight": 700,
         "resizable": true,
         "visible": false,
         "center": true,
