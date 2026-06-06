@@ -59,7 +59,7 @@
     background-color: hsl(from var(--background) h s l / 0.7) !important;
   }
 
-  .content-entry img {
+  .content-entry img:not(.flag-img) {
     filter: invert(1);
   }
 
