@@ -208,6 +208,7 @@
   "misc.numlockstartup.title": "Отключить Numlock при загрузке",
   "misc.darkmode.title": "Включить темный режим",
   "misc.filextensions.title": "Показывать расширения файлов",
+  "misc.hiddenfiles.title": "Показать скрытые файлы",
   "misc.stickykeys.title": "Отключить залипание клавиш",
   "misc.snapflyout.title": "Отключить макеты привязки (Snap Layout)",
   "misc.detailedbsod.title": "Включить подробный BSOD",

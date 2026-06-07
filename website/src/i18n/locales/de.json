@@ -208,6 +208,7 @@
   "misc.numlockstartup.title": "Numlock beim Start deaktivieren",
   "misc.darkmode.title": "Dunklen Modus aktivieren",
   "misc.filextensions.title": "Dateierweiterungen anzeigen",
+  "misc.hiddenfiles.title": "Versteckte Dateien Anzeigen",
   "misc.stickykeys.title": "Einrastfunktionen deaktivieren",
   "misc.snapflyout.title": "Andockfunktionen deaktivieren",
   "misc.detailedbsod.title": "Detaillierten Fehlerbericht (Bluescreen of Death) aktivieren",

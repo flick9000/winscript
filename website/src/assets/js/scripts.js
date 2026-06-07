@@ -767,6 +767,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "Write-Host '-- Showing File Extensions' -ForegroundColor Green",
       'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f',
     ],
+    hiddenfiles: [
+      "Write-Host '-- Showing Hidden Files' -ForegroundColor Green",
+      'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "Hidden" /t REG_DWORD /d 1 /f',
+    ],
     fullscreenoptimizations: [
       "Write-Host '-- Disabling Fullscreen Optimizations' -ForegroundColor Green",
       'reg add "HKCU\\System\\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d 1 /f',
@@ -964,6 +968,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     "darkmode",
     "filextensions",
+    "hiddenfiles",
     "classicmenu",
     "endtask",
     "homegallery",
@@ -1122,6 +1127,7 @@ const presets = {
     "disableprefetch",
     "endtask",
     "filextensions",
+    "hiddenfiles",
   ],
   extreme: [
     "cleanmgr",
@@ -1202,6 +1208,7 @@ const presets = {
     "endtask",
     "homegallery",
     "filextensions",
+    "hiddenfiles",
     "stickykeys",
   ],
 };
