@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Disabilita Sensore Memoria e interrompe la pulizia automatica del disco.",
   "performance.wsearch.title": "Disabilita Indicizzazione",
   "performance.wsearch.desc": "Disabilita Windows Search e l'indicizzazione delle unità.",
+  "performance.faststartup.title": "Disabilita Avvio Rapido",
+  "performance.faststartup.desc": "Disabilita l'Avvio Rapido, potrebbe risolvere problemi di avvio e aggiornamento.",
   "performance.disablehibernation.title": "Disabilita Ibernazione",
   "performance.disablehibernation.desc": "Non consigliato sui portatili.",
   "misc.classicmenu.title": "Imposta il Menu Classico",

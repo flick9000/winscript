@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Desativa o sensor de armazenamento e interrompe a limpeza automática do disco.",
   "performance.wsearch.title": "Desativar Pesquisa",
   "performance.wsearch.desc": "Desativa a pesquisa do Windows e a indexação de unidades.",
+  "performance.faststartup.title": "Desativar Inicialização Rápida",
+  "performance.faststartup.desc": "Desativa a Inicialização Rápida, pode corrigir problemas de inicialização e atualização.",
   "performance.disablehibernation.title": "Desativar Hibernação",
   "performance.disablehibernation.desc": "Não recomendado para laptops.",
   "misc.classicmenu.title": "Definir Menu Clássico de Contexto",
