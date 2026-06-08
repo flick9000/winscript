@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Disables Storage Sense, stops automatic disk cleanup.",
   "performance.wsearch.title": "Disable Search",
   "performance.wsearch.desc": "Disables Windows Search, disables drive indexing.",
+  "performance.faststartup.title": "Disable Fast Startup",
+  "performance.faststartup.desc": "Disables Fast Startup, may fix boot and update issues.",
   "performance.disablehibernation.title": "Disable Hibernation",
   "performance.disablehibernation.desc": "Not recommended on laptops.",
   "misc.classicmenu.title": "Set Classic Right Click Menu",

@@ -766,7 +766,7 @@ const languages = [
           <ScriptGroup
             title={t["performance.powerplan.title"]}
             description=""
-            icon="/icons/performance/ultimate.png"
+            icon="/icons/performance/powerplan.svg"
             tools={[
               {
                 title: t["performance.powerplan.balanced"],
@@ -877,6 +877,15 @@ const languages = [
             inputId="wsearch"
             icon="/icons/performance/search.png"
             description={t["performance.wsearch.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["performance.faststartup.title"]}
+            inputId="faststartup"
+            icon="/icons/performance/faststartup.png"
+            description={t["performance.faststartup.desc"]}
             offText={t["common.off"]}
             onText={t["common.on"]}
           />
