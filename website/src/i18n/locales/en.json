@@ -208,6 +208,7 @@
   "misc.numlockstartup.title": "Disable Numlock on Startup",
   "misc.darkmode.title": "Enable Dark Mode",
   "misc.filextensions.title": "Show File Extensions",
+  "misc.hiddenfiles.title": "Show Hidden Files",
   "misc.stickykeys.title": "Disable Sticky Keys",
   "misc.snapflyout.title": "Disable Snap Layout",
   "misc.detailedbsod.title": "Enable Detailed BSOD",

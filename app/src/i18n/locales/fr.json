@@ -208,6 +208,7 @@
   "misc.numlockstartup.title": "Désactiver le Verr. Num. au Démarrage",
   "misc.darkmode.title": "Activer le Mode Sombre",
   "misc.filextensions.title": "Afficher les Extensions de Fichiers",
+  "misc.hiddenfiles.title": "Afficher les Fichiers Cachés",
   "misc.stickykeys.title": "Désactiver les Touches Rémanentes",
   "misc.snapflyout.title": "Désactiver les Dispositions d'Ancrage",
   "misc.detailedbsod.title": "Activer l'Écran Bleu (BSOD) Détaillé",

@@ -208,6 +208,7 @@
   "misc.numlockstartup.title": "Desactivar Bloq Num al iniciar",
   "misc.darkmode.title": "Activar modo oscuro",
   "misc.filextensions.title": "Mostrar extensiones de archivo",
+  "misc.hiddenfiles.title": "Mostrar Archivos Ocultos",
   "misc.stickykeys.title": "Desactivar teclas especiales (Sticky Keys)",
   "misc.snapflyout.title": "Desactivar diseños de ajuste (Snap Layout)",
   "misc.detailedbsod.title": "Activar pantalla azul de la muerte (BSOD) detallada",
