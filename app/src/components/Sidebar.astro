@@ -73,7 +73,7 @@ const { t } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding-bottom: 1rem;
+    padding-bottom: 2.5rem;
   }
   @keyframes slide-in {
     from {
@@ -95,10 +95,13 @@ const { t } = Astro.props;
     display: flex;
     position: fixed;
     flex-direction: column;
-    height: 95%;
+    height: 100%;
+    top: 0;
     gap: 16px;
+    padding-top: calc(1.5rem + 32px);
     min-width: 300px;
     margin-left: 1rem;
+    /* border: 1px solid red; */
   }
 
   .sidebar-header {

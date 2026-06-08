@@ -1,7 +1,7 @@
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5000 5000" width="64" height="64">
 	<title>New Project</title>
 	<style>
-		.s0 { fill: none;stroke: #ffffff;stroke-miterlimit:100;stroke-width: 175 } 
+		.s0 { fill: none;stroke: #ffffff;stroke-miterlimit:100;stroke-width: 125 } 
 	</style>
 	<g id="Folder 1">
 		<path id="Shape 1" class="s0" d="m904.8 2899.3l1595.6-1595.6 1595.6 1595.6-1595.6 1595.6zm0 0l1595.6-1595.6 1595.6 1595.6-1595.6 1595.6zm0 0l1595.6-1595.6 1595.6 1595.6-1595.6 1595.6zm0 0l1595.6-1595.6 1595.6 1595.6-1595.6 1595.6zm0 0l1595.6-1595.6 1595.6 1595.6-1595.6 1595.6z"/>

@@ -1,0 +1,141 @@
+<div data-tauri-drag-region class="titlebar">
+  <div class="logo">
+    <img src="/favicon.ico" width="16" alt="" />
+    <h1 id="title">WinScript</h1>
+  </div>
+  <div class="controls">
+    <button class="control bug">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M14.25 2.001a.75.75 0 0 1 .743.648l.007.102v.752c0 .633-.196 1.22-.53 1.704a3.75 3.75 0 0 1 2.521 3.29h.256a2.25 2.25 0 0 0 2.24-2.259l-.006-1.485a.75.75 0 0 1 1.5-.006l.007 1.485a3.75 3.75 0 0 1-3.536 3.76l-.214.006L17 9.997v1.502h4.253a.75.75 0 0 1 .743.649l.007.102a.75.75 0 0 1-.648.743l-.102.007H17v1.999h.238l.214.007a3.75 3.75 0 0 1 3.531 3.56l.005.2-.007 1.485a.75.75 0 0 1-1.493.095l-.007-.102.007-1.485a2.25 2.25 0 0 0-2.087-2.253l-.154-.006h-.476a5.002 5.002 0 0 1-9.542 0H6.74a2.25 2.25 0 0 0-2.24 2.259l.005 1.485a.75.75 0 1 1-1.5.007L3 18.765a3.75 3.75 0 0 1 3.535-3.76L6.75 15l.25-.001v-2H2.75a.75.75 0 0 1-.743-.648L2 12.25a.75.75 0 0 1 .648-.743l.102-.007L7 11.499V9.997h-.25l-.215-.005a3.75 3.75 0 0 1-3.53-3.56L3 6.231l.006-1.485A.75.75 0 0 1 4.5 4.65l.006.102L4.5 6.238a2.25 2.25 0 0 0 2.087 2.254l.154.006h.268A3.753 3.753 0 0 1 9.53 5.206a2.968 2.968 0 0 1-.524-1.494L9 3.503v-.752a.75.75 0 0 1 1.493-.102l.007.102v.752a1.5 1.5 0 0 0 2.993.145l.007-.145v-.752a.75.75 0 0 1 .75-.75Z"
+          fill="#E6A23C"></path></svg
+      >
+    </button>
+    <button class="control donate">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="m12.82 5.58-.82.822-.824-.824a5.375 5.375 0 1 0-7.601 7.602l7.895 7.895a.75.75 0 0 0 1.06 0l7.902-7.897a5.376 5.376 0 0 0-.001-7.599 5.38 5.38 0 0 0-7.611 0Z"
+          fill="#E84B3C"></path></svg
+      >
+    </button>
+    <button class="control minimize">
+      <svg width="12" height="12" viewBox="0 0 10 1" fill="currentColor">
+        <rect width="10" height="1"></rect>
+      </svg>
+    </button>
+    <button class="control close">
+      <svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor">
+        <path d="M0.707 0L10 9.293 9.293 10 0 0.707zM9.293 0L10 0.707 0.707 10 0 9.293z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <style>
+    *[data-tauri-drag-region] {
+      app-region: drag;
+    }
+    .titlebar {
+      position: fixed;
+      display: flex;
+      justify-content: space-between;
+      top: 0;
+      height: 32px;
+      width: 100%;
+      z-index: 999 !important;
+      padding-left: 12px;
+      padding-top: 6px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--text);
+    }
+    #title {
+      transition: color 0.1s ease;
+    }
+    .controls {
+      display: flex;
+      margin-top: -2px;
+      app-region: no-drag;
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 32px;
+      /* reset default */
+      min-width: initial;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      cursor: default;
+    }
+    button.donate,
+    button.bug {
+      width: 36px;
+      cursor: pointer;
+    }
+    @media (prefers-color-scheme: light) {
+      button {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+      }
+    }
+    button:hover {
+      background-color: hsl(from var(--text) h s l / 0.06);
+      box-shadow:
+        0px -5px 0px 0px hsl(from var(--text) h s l / 0.06),
+        0px 0px 0px 0px transparent;
+    }
+    button.close:hover {
+      background-color: hsl(from #c42b1c h s l / 1);
+      box-shadow:
+        0px -5px 0px 0px #c42b1c,
+        5px 0px 0px 0px #c42b1c;
+    }
+  </style>
+
+  <script>
+    import { getCurrentWindow } from "@tauri-apps/api/window";
+    import { open } from "@tauri-apps/plugin-shell";
+    const appWindow = getCurrentWindow();
+    const title = document.getElementById("title");
+
+    function updateTitle(isFocused) {
+      if (isFocused) {
+        title!.style.color = "var(--text)";
+      } else {
+        title!.style.color = "var(--muted)";
+      }
+    }
+
+    appWindow.isFocused().then((focused) => {
+      updateTitle(focused);
+    });
+
+    appWindow.listen("tauri://focus", () => {
+      updateTitle(true);
+    });
+
+    appWindow.listen("tauri://blur", () => {
+      updateTitle(false);
+    });
+
+    document.querySelector(".bug")?.addEventListener("click", () => {
+      open("https://github.com/flick9000/winscript/issues");
+    });
+    document.querySelector(".donate")?.addEventListener("click", () => {
+      open("https://ko-fi.com/flick9000");
+    });
+    document.querySelector(".minimize")?.addEventListener("click", () => {
+      appWindow.minimize();
+    });
+    document.querySelector(".close")?.addEventListener("click", () => {
+      appWindow.close();
+    });
+  </script>
+</div>
