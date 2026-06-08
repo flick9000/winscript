@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Akıllı Depolamayı devre dışı bırakır, otomatik disk temizliğini durdurur.",
   "performance.wsearch.title": "Aramayı Devre Dışı Bırak",
   "performance.wsearch.desc": "Windows Search özelliğini ve sürücü indekslemeyi devre dışı bırakır.",
+  "performance.faststartup.title": "Hızlı Başlatmayı Devre Dışı Bırak",
+  "performance.faststartup.desc": "Hızlı Başlatmayı devre dışı bırakır, önyükleme ve güncelleme sorunlarını düzeltebilir.",
   "performance.disablehibernation.title": "Hazırda Beklet (Hibernation) Devre Dışı Bırak",
   "performance.disablehibernation.desc": "Laptoplarda önerilmez.",
   "misc.classicmenu.title": "Klasik Sağ Tık Menüsünü Ayarla",

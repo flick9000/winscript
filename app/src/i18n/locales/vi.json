@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Tắt Storage Sense, dừng tính năng tự động dọn dẹp ổ đĩa.",
   "performance.wsearch.title": "Tắt tìm kiếm",
   "performance.wsearch.desc": "Tắt dịch vụ Windows Search và tắt tính năng lập chỉ mục ổ đĩa.",
+  "performance.faststartup.title": "Tắt Khởi Động Nhanh",
+  "performance.faststartup.desc": "Tắt Khởi Động Nhanh, có thể khắc phục sự cố khởi động và cập nhật.",
   "performance.disablehibernation.title": "Tắt chế độ ngủ đông",
   "performance.disablehibernation.desc": "Không khuyến khích thực hiện trên máy tính xách tay.",
   "misc.classicmenu.title": "Cài đặt menu chuột phải cổ điển",

@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "저장소 감지를 비활성화하고 자동 디스크 정리를 중지합니다.",
   "performance.wsearch.title": "검색 비활성화",
   "performance.wsearch.desc": "Windows 검색을 비활성화하고 드라이브 인덱싱을 비활성화합니다.",
+  "performance.faststartup.title": "빠른 시작 비활성화",
+  "performance.faststartup.desc": "빠른 시작을 비활성화하며, 부팅 및 업데이트 문제를 해결할 수 있습니다.",
   "performance.disablehibernation.title": "최대 절전 모드 비활성화",
   "performance.disablehibernation.desc": "노트북에서는 권장하지 않습니다.",
   "misc.classicmenu.title": "클래식 오른쪽 클릭 메뉴 설정",

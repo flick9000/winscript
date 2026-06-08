@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Désactive l'assistant de stockage et arrête le nettoyage automatique du disque.",
   "performance.wsearch.title": "Désactiver la Recherche",
   "performance.wsearch.desc": "Désactive Windows Search et l'indexation des lecteurs.",
+  "performance.faststartup.title": "Désactiver le Démarrage Rapide",
+  "performance.faststartup.desc": "Désactive le Démarrage Rapide, peut résoudre des problèmes de démarrage et de mise à jour.",
   "performance.disablehibernation.title": "Désactiver la Mise en Veille Prolongée",
   "performance.disablehibernation.desc": "Non recommandé pour les ordinateurs portables.",
   "misc.classicmenu.title": "Définir le Menu Contextuel Classique",

@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Отключает функцию «Контроль памяти», прекращая автоматическую очистку диска.",
   "performance.wsearch.title": "Отключить Поиск Windows",
   "performance.wsearch.desc": "Отключает службу поиска Windows и индексацию файлов на дисках.",
+  "performance.faststartup.title": "Отключить быстрый запуск",
+  "performance.faststartup.desc": "Отключает быстрый запуск, может исправить проблемы с загрузкой и обновлениями.",
   "performance.disablehibernation.title": "Отключить гибернацию",
   "performance.disablehibernation.desc": "Не рекомендуется отключать на ноутбуках.",
   "misc.classicmenu.title": "Включить классическое контекстное меню",

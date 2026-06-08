@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Inaktiverar Lagringssensor och stoppar automatisk diskrensning.",
   "performance.wsearch.title": "Inaktivera Windows Search",
   "performance.wsearch.desc": "Inaktiverar Windows Search och stänger av enhetsindexering.",
+  "performance.faststartup.title": "Inaktivera Snabbstart",
+  "performance.faststartup.desc": "Inaktiverar Snabbstart, kan åtgärda problem med uppstart och uppdateringar.",
   "performance.disablehibernation.title": "Inaktivera viloläge",
   "performance.disablehibernation.desc": "Rekommenderas inte på bärbara datorer.",
   "misc.classicmenu.title": "Aktivera klassisk högerklicksmeny",

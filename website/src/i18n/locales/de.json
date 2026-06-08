@@ -196,6 +196,8 @@
   "performance.storagesense.desc": "Deaktiviert die Speicheroptimierung, was die automatische Datenträgerbereinigung stoppt.",
   "performance.wsearch.title": "Suche deaktivieren",
   "performance.wsearch.desc": "Deaktiviert die Windows-Suche und die Laufwerksindizierung.",
+  "performance.faststartup.title": "Schnellstart Deaktivieren",
+  "performance.faststartup.desc": "Deaktiviert den Schnellstart, kann Boot- und Aktualisierungsprobleme beheben.",
   "performance.disablehibernation.title": "Ruhezustand deaktivieren",
   "performance.disablehibernation.desc": "Nicht empfohlen für Laptops.",
   "misc.classicmenu.title": "Klassisches Rechtsklick-Menü verwenden",
