@@ -1,9 +1,11 @@
 # WinScript
 
-[![Downloads](https://img.shields.io/github/downloads/flick9000/winscript/total?style=for-the-badge)](https://github.com/flick9000/winscript/releases)
-[![Release](https://img.shields.io/github/v/release/flick9000/winscript?style=for-the-badge&label=Latest%20release)](https://github.com/flick9000/winscript/releases/latest)
-[![Discussions](https://img.shields.io/badge/Join-the%20Discussion-2D9F2D?style=for-the-badge&logo=github&logoColor=white)](https://github.com/flick9000/winscript/discussions)
-[![Ko-Fi](https://shields.io/badge/ko--fi-Donate-13c3ff?logo=kofi&style=for-the-badge)](https://ko-fi.com/flick9000)
+[![Downloads](https://www.shieldcn.dev/github/downloads/flick9000/winscript.svg?variant=outline&size=sm&color=E0E0E0)](https://github.com/flick9000/winscript/releases)
+[![Release](https://www.shieldcn.dev/github/release/flick9000/winscript.svg?variant=outline&size=sm&color=E0E0E0)](https://github.com/flick9000/winscript/releases/latest)
+[![GitHub Sponsors](https://www.shieldcn.dev/badge/Sponsor-GitHub-ea4aaa.svg?logo=githubsponsors&variant=outline&size=sm&color=E0E0E0)](https://github.com/sponsors/flick9000)
+[![Ko-Fi](https://www.shieldcn.dev/badge/Ko--fi-sponsor-FF5E5B.svg?logo=kofi&variant=outline&size=sm&color=E0E0E0)](https://ko-fi.com/flick9000)
+[![Discussions](https://shieldcn.dev/badge/GitHub-Discussions.svg?variant=outline&logo=github&color=E0E0E0)](https://github.com/flick9000/winscript/discussions)
+
 
 WinScript is a lightweight and easy to use tool designed to improve and customize your Windows experience. Easily remove bloatware, disable telemetry, improve Windows performance, bulk install your favorite apps, and more.
 <br>
