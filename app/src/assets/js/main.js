@@ -191,6 +191,11 @@ if (tabs.length > 0 && contents.length > 0) {
   title.textContent = tabs[0].textContent || "WinScript"; // Update header with the first tab's text
 }
 
+// Titlebar button goes to languages tab
+document.querySelector('button[data-tab="localizations-tab"]').addEventListener("click", () => {
+  tabs[9].click();
+});
+
 // Remove 'active' from all other content divs
 contents.forEach((content, index) => {
   if (index !== 0) {
