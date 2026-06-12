@@ -247,10 +247,13 @@ function appsInstallChocolatey() {
     const checkedUrls = getCheckedUrls();
     const allUrls = [...checkedUrls, ...window.manualURLs];
     const finalURL = allUrls.map((url) => `\\"${url}\\"`).join(", ");
+    const refreshEnv =
+      '$env:Path = [System.Environment]::GetEnvironmentVariable(\\"Path\\",\\"Machine\\") + \\";\\" + [System.Environment]::GetEnvironmentVariable(\\"Path\\",\\"User\\")';
 
     const command =
       allUrls.length > 0
         ? `Start-Process powershell.exe -ArgumentList '-NoProfile -NoLogo -NoExit -Command ` +
+          `${refreshEnv}; ` +
           `$apps = @(${finalURL}); ` +
           `foreach ($app in $apps) { choco install $app -y --force --ignorepackageexitcodes }'`
         : "";
