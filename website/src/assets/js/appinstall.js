@@ -279,27 +279,6 @@ function appsInstallChocolatey() {
     }
   }
 
-  // Check manual IDs
-  function isValidManualId(manualId) {
-    return /^[A-Za-z0-9._+\-]+$/.test(manualId);
-  }
-
-  // Add addButton click listener
-  const addButton = document.getElementById("addApp");
-  addButton.addEventListener("click", () => {
-    const manualInput = document.getElementById("manualInput").value.trim();
-    if (manualInput) {
-      if (!isValidManualId(manualInput)) {
-        const manualList = document.getElementById("manualList");
-        manualList.innerHTML = "Please enter a valid package ID.";
-        return;
-      }
-      window.manualURLs.push(manualInput);
-      document.getElementById("manualInput").value = ""; // Clear input
-      updateCommandDisplay();
-    }
-  });
-
   updateCommandDisplay();
 }
 
@@ -587,27 +566,6 @@ function appsInstallWinget() {
     }
   }
 
-  // Check manual IDs
-  function isValidManualId(manualId) {
-    return /^[A-Za-z0-9._+\-]+$/.test(manualId);
-  }
-
-  // Add addButton click listener
-  const addButton = document.getElementById("addApp");
-  addButton.addEventListener("click", () => {
-    const manualInput = document.getElementById("manualInput").value.trim();
-    if (manualInput) {
-      if (!isValidManualId(manualInput)) {
-        const manualList = document.getElementById("manualList");
-        manualList.innerHTML = "Please enter a valid package ID.";
-        return;
-      }
-      window.manualURLs.push(manualInput);
-      document.getElementById("manualInput").value = ""; // Clear input
-      updateCommandDisplay();
-    }
-  });
-
   updateCommandDisplay();
 }
 
@@ -623,7 +581,32 @@ selectedPackageManager.addEventListener("change", () => {
   }
 });
 
-// Set up checkbox event listeners
+// Check manual IDs
+function isValidManualId(manualId) {
+  return /^[A-Za-z0-9._+\-]+$/.test(manualId);
+}
+
+// Manual IDs button listener
+const addButton = document.getElementById("addApp");
+addButton.addEventListener("click", () => {
+  const manualInput = document.getElementById("manualInput").value.trim();
+  if (manualInput) {
+    if (!isValidManualId(manualInput)) {
+      const manualList = document.getElementById("manualList");
+      manualList.innerHTML = "Please enter a valid package ID.";
+      return;
+    }
+    window.manualURLs.push(manualInput);
+    document.getElementById("manualInput").value = ""; // Clear input
+    if (selectedPackageManager.value === "chocolatey") {
+      appsInstallChocolatey();
+    } else if (selectedPackageManager.value === "winget") {
+      appsInstallWinget();
+    }
+  }
+});
+
+// Checkboxes event listeners
 document.addEventListener("DOMContentLoaded", () => {
   const checkboxes = document.querySelectorAll("[js-target=install]");
   if (selectedPackageManager.value === "chocolatey") {
