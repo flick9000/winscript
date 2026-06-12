@@ -608,16 +608,6 @@ addButton.addEventListener("click", () => {
 
 // Checkboxes event listeners
 document.addEventListener("DOMContentLoaded", () => {
-  const checkboxes = document.querySelectorAll("[js-target=install]");
-  if (selectedPackageManager.value === "chocolatey") {
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", appsInstallChocolatey);
-    });
-  } else if (selectedPackageManager.value === "winget") {
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", appsInstallWinget);
-    });
-  }
   document.body.addEventListener("change", (event) => {
     if (event.target.matches("[js-target=install]")) {
       if (selectedPackageManager.value === "chocolatey") {
