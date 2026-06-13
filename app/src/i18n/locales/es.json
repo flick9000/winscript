@@ -60,7 +60,7 @@
   "debloat.features.iexplorer": "Desactivar Internet Explorer",
   "debloat.features.faxscan": "Desactivar Fax y Escáner",
   "debloat.features.medplayer": "Desactivar Med Player",
-  "debloat.ai.title": " de Windows",
+  "debloat.ai.title": "IA de Windows",
   "debloat.ai.desc": "Elimina las características de inteligencia artificial (IA) de Windows.",
   "debloat.ai.hideai": "Ocultar botón Copilot en el Explorador",
   "debloat.ai.aiappxpackages": "Eliminar paquetes de IA",
