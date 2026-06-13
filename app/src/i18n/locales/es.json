@@ -48,7 +48,7 @@
   "debloat.apps.msapps": "Eliminar aplicaciones de Microsoft",
   "debloat.apps.msapps.desc": "Elimina aplicaciones previamente instaladas, como Solitario, Contactos, etc.",
   "debloat.apps.extensions": "Eliminar extensiones",
-  "debloat.apps.extensions.desc": "Elimina extensiones prevmente instaladas, como HEVC, VP9, etc.",
+  "debloat.apps.extensions.desc": "Elimina extensiones previamente instaladas, como HEVC, VP9, etc.",
   "debloat.apps.xbox": "Eliminar Xbox",
   "debloat.apps.xbox.desc": "Desinstala aplicaciones y complementos prevmente instalados de Xbox.",
   "debloat.features.title": "Características de Windows",
