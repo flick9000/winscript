@@ -246,7 +246,7 @@
   "script.presets.basic.title": "Configuración preestablecida básica",
   "script.presets.basic.desc": "Recomendada, buen equilibrio entre privacidad/rendimiento y funcionalidad.",
   "script.presets.strict.title": "Configuración preestablecida estricta",
-  "script.presets.strict.desc": "Gran énfasis en la privacidad y el rendimiento, desactiva algunas características no esencles.",
+  "script.presets.strict.desc": "Gran énfasis en la privacidad y el rendimiento, desactiva algunas características no esenciales.",
   "script.presets.extreme.title": "Configuración preestablecida extrema",
   "script.presets.extreme.desc": "No recomendada, desactiva algunas características; utilizar solo si se sabe lo que se está haciendo.",
   "script.apply": "Aplicar",
