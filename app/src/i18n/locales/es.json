@@ -28,7 +28,7 @@
   "tools.cleanup.desc": "Libera espacio del disco limpiando archivos temporales.",
   "tools.cleanup.cleanmgr": "Ejecutar limpieza de disco",
   "tools.cleanup.cleantemp": "Limpiar archivos temporales",
-  "tools.cleanup.emptyrecycle": "Vacr papelera de reciclaje",
+  "tools.cleanup.emptyrecycle": "Vaciar papelera de reciclaje",
   "tools.repair.title": "Reparación",
   "tools.repair.desc": "Comprueba la integridad de los archivos del sistema y repara los archivos dañados.",
   "tools.repair.dism": "DISM (Administrador de mantenimiento de imágenes de implementación)",
