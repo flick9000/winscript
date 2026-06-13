@@ -35,7 +35,7 @@
   "tools.repair.sfc": "SFC (Comprobador de archivos del sistema)",
   "tools.restorepoint.title": "Crear punto de restauración",
   "tools.restorepoint.desc": "Crea un punto de restauración antes de aplicar las modificaciones.",
-  "tools.browserhistory.title": "Borrar historl del navegador",
+  "tools.browserhistory.title": "Borrar historial del navegador",
   "tools.browserhistory.desc": "Borra el historl de Chrome, Edge, Brave y Firefox.",
   "tools.resetnetwork.title": "Restablecer red",
   "tools.resetnetwork.desc": "Vacía la caché del DNS y renueva la dirección IP.",
