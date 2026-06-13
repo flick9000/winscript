@@ -50,7 +50,7 @@
   "debloat.apps.extensions": "Eliminar extensiones",
   "debloat.apps.extensions.desc": "Elimina extensiones previamente instaladas, como HEVC, VP9, etc.",
   "debloat.apps.xbox": "Eliminar Xbox",
-  "debloat.apps.xbox.desc": "Desinstala aplicaciones y complementos prevmente instalados de Xbox.",
+  "debloat.apps.xbox.desc": "Desinstala aplicaciones y complementos previamente instalados de Xbox.",
   "debloat.features.title": "Características de Windows",
   "debloat.features.desc": "Desactiva características prevmente instaladas.",
   "debloat.features.consumer": "Desactivar características para consumidores",
