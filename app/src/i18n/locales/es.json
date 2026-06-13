@@ -46,7 +46,7 @@
   "debloat.apps.thirdparty": "Eliminar aplicaciones de terceros",
   "debloat.apps.thirdparty.desc": "Elimina aplicaciones de terceros, como Shazam, Spotify, etc.",
   "debloat.apps.msapps": "Eliminar aplicaciones de Microsoft",
-  "debloat.apps.msapps.desc": "Elimina aplicaciones prevmente instaladas, como Solitario, Contactos, etc.",
+  "debloat.apps.msapps.desc": "Elimina aplicaciones previamente instaladas, como Solitario, Contactos, etc.",
   "debloat.apps.extensions": "Eliminar extensiones",
   "debloat.apps.extensions.desc": "Elimina extensiones prevmente instaladas, como HEVC, VP9, etc.",
   "debloat.apps.xbox": "Eliminar Xbox",
