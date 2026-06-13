@@ -235,7 +235,7 @@
   "script.run.title": "Ejecutar script",
   "script.run.btn": "Ejecutar",
   "script.copy.title": "Copiar al portapapeles",
-  "script.copy.btn": "Copr",
+  "script.copy.btn": "Copiar",
   "script.presets.title": "Ajustes preestablecidos",
   "script.presets.important": "Importante",
   "script.presets.important.desc": "Revisa [TODOS] los scripts uno por uno antes de ejecutar.",
