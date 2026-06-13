@@ -57,23 +57,15 @@ const { t } = Astro.props;
       <img src="/icons/sidebar/code.svg" alt="" />
       <h1>{t["nav.script"]}</h1>
     </div>
-  </div>
-  <div class="sidebar-footer">
-    <hr />
     <div data-tab="localizations-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/languages.svg" alt="" />
       <h1>{t["nav.localizations"]}</h1>
     </div>
   </div>
 </div>
 
 <style>
-  .sidebar-footer {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-bottom: 2.5rem;
+  div[data-tab="localizations-tab"] {
+    display: none;
   }
   @keyframes slide-in {
     from {

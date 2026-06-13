@@ -1,0 +1,39 @@
+name: PR Auto Labeler
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Label PR based on type
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const body = context.payload.pull_request.body || '';
+
+            const labelMap = [
+              { pattern: /- \[x\] Bugfix/i,       label: 'bug' },
+              { pattern: /- \[x\] Feature/i,       label: 'new-feature' },
+              { pattern: /- \[x\] Refactoring/i,   label: 'refactoring' },
+              { pattern: /- \[x\] Style/i,         label: 'style' },
+              { pattern: /- \[x\] Localization/i,  label: 'localization' },
+            ];
+
+            const labelsToAdd = labelMap
+              .filter(({ pattern }) => pattern.test(body))
+              .map(({ label }) => label);
+
+            if (labelsToAdd.length === 0) return;
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: labelsToAdd,
+            });
