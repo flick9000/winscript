@@ -59,7 +59,7 @@
   "debloat.features.hyperv.desc": "Es posible que las máquinas virtuales dejen de funcionar al desactivar esta característica.",
   "debloat.features.iexplorer": "Desactivar Internet Explorer",
   "debloat.features.faxscan": "Desactivar Fax y Escáner",
-  "debloat.features.medplayer": "Desactivar Med Player",
+  "debloat.features.mediaplayer": "Desactivar Media Player",
   "debloat.ai.title": "IA de Windows",
   "debloat.ai.desc": "Elimina las características de inteligencia artificial (IA) de Windows.",
   "debloat.ai.hideai": "Ocultar botón Copilot en el Explorador",
