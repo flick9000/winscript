@@ -52,7 +52,7 @@
   "debloat.apps.xbox": "Eliminar Xbox",
   "debloat.apps.xbox.desc": "Desinstala aplicaciones y complementos previamente instalados de Xbox.",
   "debloat.features.title": "Características de Windows",
-  "debloat.features.desc": "Desactiva características prevmente instaladas.",
+  "debloat.features.desc": "Desactiva características previamente instaladas.",
   "debloat.features.consumer": "Desactivar características para consumidores",
   "debloat.features.consumer.desc": "Desactiva la instalación automática de aplicaciones de Microsoft Store.",
   "debloat.features.hyperv": "Desactivar Hyper-V",
