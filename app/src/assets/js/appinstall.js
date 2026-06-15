@@ -27,7 +27,6 @@ function appsInstallChocolatey() {
     { id: "PeaZip", url: "peazip" },
     { id: "WinRAR", url: "winrar" },
     // Gaming
-    { id: "BorderlessGaming", url: "borderlessgaming" },
     { id: "EAApp", url: "ea-app" },
     { id: "EpicGames", url: "epicgameslauncher" },
     { id: "FaceIT", url: "faceit" },
@@ -307,7 +306,6 @@ function appsInstallWinget() {
     { id: "PeaZip", url: "Giorgiotani.PeaZip" },
     { id: "WinRAR", url: "RARLab.WinRAR" },
     // Gaming
-    { id: "BorderlessGaming", url: "Codeusa.BorderlessGaming" },
     { id: "EAApp", url: "ElectronicArts.EADesktop" },
     { id: "EpicGames", url: "EpicGames.EpicGamesLauncher" },
     { id: "FaceIT", url: "FACEITLTD.FACEITClient" },
