@@ -249,7 +249,7 @@
   "script.presets.strict.desc": "Heavy focus on privacy and performance, it disables some non-essential features.",
   "script.presets.extreme.title": "Extreme Preset",
   "script.presets.extreme.desc": "Not recommended, breaks some features, use only if you know what you're doing.",
-  "script.autounattend.title": "Create unattend.xml",
+  "script.autounattend.title": "Create Autounattend",
   "script.autounattend.btn": "Create",
   "script.apply": "Apply",
   "nav.localizations": "Languages",
