@@ -37,6 +37,7 @@ async function loadConfig() {
 async function loadLocale() {
   let locale = localStorage.getItem("locale");
   if (!locale) return;
+  if (locale === "en") return;
 
   if (!window.location.href.includes(locale)) {
     window.location.href = `/${locale}`;
