@@ -34,6 +34,15 @@ async function loadConfig() {
   }
 }
 
+async function loadLocale() {
+  let locale = localStorage.getItem("locale");
+  if (!locale) return;
+
+  if (!window.location.href.includes(locale)) {
+    window.location.href = `/${locale}`;
+  }
+}
+
 // Checks if an update is available and performs it
 async function checkForUpdates() {
   const update = await check();
@@ -132,6 +141,8 @@ function applyMica() {
 }
 
 applyMica();
+
+await loadLocale();
 
 // Show window manually on startup (remove this when mica bug at startup is fixed)
 getCurrentWindow().show();
@@ -502,6 +513,7 @@ document.querySelectorAll(".localization-entry").forEach((entry) => {
     // Redirect to /[locale]
     // If locale is en, we could go to / but /en is safer/more consistent
     window.location.href = `/${locale}`;
+    localStorage.setItem("locale", locale);
   });
 });
 
