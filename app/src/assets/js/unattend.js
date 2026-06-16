@@ -5,6 +5,7 @@ const autoattendBtn = document.getElementById("autounattendBtn");
 autoattendBtn.addEventListener("click", async () => {
   let script = document.getElementById("code").innerText;
   script = script.replace(/\n/g, "\r\n");
+  script = script.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
   const autoattendScript = `
 <?xml version="1.0" encoding="utf-8"?>
@@ -20,6 +21,20 @@ autoattendBtn.addEventListener("click", async () => {
 				<AcceptEula>true</AcceptEula>
 			</UserData>
 			<UseConfigurationSet>false</UseConfigurationSet>
+			<RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+			</RunSynchronous>
 		</component>
 	</settings>
 	<settings pass="generalize"></settings>
@@ -40,7 +55,7 @@ autoattendBtn.addEventListener("click", async () => {
 			<OOBE>
 				<HideEULAPage>true</HideEULAPage>
 				<HideWirelessSetupInOOBE>false</HideWirelessSetupInOOBE>
-				<HideOnlineAccountScreens>false</HideOnlineAccountScreens>
+				<HideOnlineAccountScreens>true</HideOnlineAccountScreens>
 			</OOBE>
 			<FirstLogonCommands>
 				<SynchronousCommand wcm:action="add">
@@ -50,7 +65,7 @@ autoattendBtn.addEventListener("click", async () => {
 			</FirstLogonCommands>
 		</component>
 	</settings>
-	<Extensions>
+	<Extensions xmlns="urn:winscript:unattend">
 		<ExtractScript>
 param(
     [xml] $Document
