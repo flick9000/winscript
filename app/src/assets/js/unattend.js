@@ -48,6 +48,10 @@ autoattendBtn.addEventListener("click", async () => {
 					<Order>2</Order>
 					<Path>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\\Windows\\Setup\\Scripts\\Specialize.ps1"</Path>
 				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+          			<Order>3</Order>
+          			<Path>powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Get-NetAdapter | Disable-NetAdapter -Confirm:$false"</Path>
+        		</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
 	</settings>
@@ -93,7 +97,14 @@ ${script}
 		<File path="C:\\Windows\\Setup\\Scripts\\Specialize.ps1">
 $scripts = @(
 	{
+		reg.exe add "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableCloudOptimizedContent" /t REG_DWORD /d 1 /f;
+	};
+	{
 		reg.exe add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f;
+	};
+	{
+        reg.exe add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f;
+        reg.exe add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v DisableWindowsUpdateAccess /t REG_DWORD /d 1 /f;
 	};
 );
 
@@ -115,6 +126,13 @@ $scripts = @(
 		</File>
 		<File path="C:\\Windows\\Setup\\Scripts\\FirstLogon.ps1">
 $scripts = @(
+	{
+		powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Get-NetAdapter | Disable-NetAdapter -Confirm:$false";
+	};
+	{
+		reg.exe delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v NoAutoUpdate /f;
+		reg.exe delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v DisableWindowsUpdateAccess /f;
+	};
 	{
 		&amp; 'C:\\Windows\\Setup\\Scripts\\winscript.ps1';
 	};
