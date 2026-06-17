@@ -127,7 +127,7 @@ $scripts = @(
 		<File path="C:\\Windows\\Setup\\Scripts\\FirstLogon.ps1">
 $scripts = @(
 	{
-		powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Get-NetAdapter | Disable-NetAdapter -Confirm:$false";
+		Get-NetAdapter | Enable-NetAdapter -Confirm:$false;
 	};
 	{
 		reg.exe delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v NoAutoUpdate /f;
