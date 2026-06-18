@@ -142,15 +142,7 @@ $scripts = @(
   [float] $complete = 0;
   [float] $increment = 100 / $scripts.Count;
   foreach( $script in $scripts ) {
-    Write-Progress -Id 0 -Activity 'Running WinScript to finalize your Windows installation. Do not close this window.' -PercentComplete $complete;
-    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
-      $script.ToString().Trim() -replace '\\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
-    );
-    $start = [datetime]::Now;
     &amp; $script;
-    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
-    "\`r\`n" * 3;
-    $complete += $increment;
   }
 } *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\\Windows\\Setup\\Scripts\\FirstLogon.log";
 		</File>
