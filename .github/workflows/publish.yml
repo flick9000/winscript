@@ -119,10 +119,11 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
-      - name: Remove signature file
+      - name: Remove signature file & old installer
         run: |
           $VERSION = "${{ github.ref_name }}" -replace "^v", ""
           gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe.sig"
+          gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe"
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
