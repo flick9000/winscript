@@ -69,17 +69,12 @@ jobs:
           copy ./app/src-tauri/target/release/winscript-portable.exe release\
           copy ./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe release\winscript-installer.exe
 
-      - name: Create ZIP artifact
-        shell: pwsh
-        run: |
-          Compress-Archive -Path release/* -DestinationPath artifact.zip
-
       - name: Upload unsigned artifact
         id: upload
         uses: actions/upload-artifact@v7
         with:
           name: unsigned
-          path: artifact.zip
+          path: release/
 
       - name: Sign with SignPath
         uses: signpath/github-action-submit-signing-request@v2
