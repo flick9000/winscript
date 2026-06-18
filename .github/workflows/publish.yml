@@ -98,9 +98,11 @@ jobs:
 
       - name: Modify latest.json
         shell: pwsh
+        working-directory: ./app
         run: |
           gh release download "${{ github.ref_name }}" -p "latest.json"
-          $output = npx tauri signer sign -k "${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}" -p "${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}" "signed/winscript-installer.exe" 2>&1 | Out-String
+          $output = npx tauri signer sign -k "${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}" -p "${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}" "../signed/winscript-installer.exe" 2>&1 | Out-String
+          Write-Host $output
           if ($output -match 'Public signature:\s*(?<sig>\S+)') {
               $newSignature = $Matches['sig']
           } else {
