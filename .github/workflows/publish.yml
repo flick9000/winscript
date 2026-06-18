@@ -54,6 +54,10 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
 
+      - name: Wait for release
+        run: |
+          sleep 5
+
       - name: Prepare files for SignPath
         shell: pwsh
         run: |
@@ -100,13 +104,22 @@ jobs:
         shell: pwsh
         run: |
           gh release download "${{ github.ref_name }}" -p "latest.json"
+          $output = npx tauri signer sign -k "${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}" -p "${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}" "signed/winscript-installer.exe" 2>&1 | Out-String
+          if ($output -match 'Public signature:\s*(?<sig>\S+)') {
+              $newSignature = $Matches['sig']
+          } else {
+              Write-Error "Could not find public signature in output."
+          }
           $content = Get-Content -Path "latest.json" -Raw
           $modified = $content -replace 'WinScript_\d+\.\d+\.\d+_x64-setup\.exe', 'winscript-installer.exe'
+          $modified = $modified -replace '("signature":\s*")[^"]*(")', "`$1$newSignature`$2"
           $modified | Set-Content -Path "latest.json"
           Get-Content -Path "latest.json"
           gh release upload "${{ github.ref_name }}" "latest.json" --clobber
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
       - name: Remove signature file
         run: |
