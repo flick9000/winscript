@@ -44,25 +44,6 @@ async function loadLocale() {
   }
 }
 
-// Checks if an update is available and performs it
-async function checkForUpdates() {
-  const update = await check();
-
-  let updateAsk = await ask("An update is available. Do you want to update?", {
-    title: "Update Available",
-    kind: "info",
-    okLabel: "Update",
-    cancelLabel: "Later",
-  });
-
-  if (updateAsk === true) {
-    await update.downloadAndInstall();
-    await relaunch();
-  } else {
-    return;
-  }
-}
-
 // Alert if an update is available (for portable)
 async function alertForUpdates() {
   let updateAsk;
@@ -78,6 +59,30 @@ async function alertForUpdates() {
     await openUrl("https://github.com/flick9000/winscript/releases/latest");
   } else {
     return;
+  }
+}
+
+// Checks if an update is available and performs it
+async function checkForUpdates() {
+  try {
+    const update = await check();
+
+    let updateAsk = await ask("An update is available. Do you want to update?", {
+      title: "Update Available",
+      kind: "info",
+      okLabel: "Update",
+      cancelLabel: "Later",
+    });
+
+    if (updateAsk === true) {
+      await update.downloadAndInstall();
+      await relaunch();
+    } else {
+      return;
+    }
+  } catch (error) {
+    console.error(error);
+    alertForUpdates();
   }
 }
 
