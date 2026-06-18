@@ -130,6 +130,7 @@ $scripts = @(
 		Get-NetAdapter | Enable-NetAdapter -Confirm:$false;
 	};
 	{
+		Write-Host -ForegroundColor Green '-- Re-enabling Windows Update after OOBE';
 		reg.exe delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v NoAutoUpdate /f;
 		reg.exe delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v DisableWindowsUpdateAccess /f;
 	};
@@ -139,12 +140,10 @@ $scripts = @(
 );
 
 &amp; {
-  [float] $complete = 0;
-  [float] $increment = 100 / $scripts.Count;
   foreach( $script in $scripts ) {
     &amp; $script;
   }
-} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\\Windows\\Setup\\Scripts\\FirstLogon.log";
+}
 		</File>
 	</Extensions>
 </unattend>`;
