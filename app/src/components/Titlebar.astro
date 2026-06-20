@@ -146,7 +146,36 @@
       appWindow.minimize();
     });
     document.querySelector(".close")?.addEventListener("click", () => {
-      appWindow.close();
+      const supportDialog = document.getElementById("supportDialog") as HTMLDialogElement;
+      const askCheckbox = document.getElementById("askPreference") as HTMLInputElement;
+      const askPreference = localStorage.getItem("askPreference");
+      const coffeeButton = document.getElementById("coffeeButton");
+      const exitButton = document.getElementById("exitButton");
+
+      if (askPreference === "false") {
+        appWindow.close();
+      }
+
+      if (!askPreference || askPreference === "true") {
+        supportDialog.showModal();
+      }
+
+      askCheckbox?.addEventListener("change", () => {
+        if (askCheckbox.checked) {
+          localStorage.setItem("askPreference", "false");
+        } else {
+          localStorage.setItem("askPreference", "true");
+        }
+      });
+
+      coffeeButton?.addEventListener("click", async () => {
+        await open("https://ko-fi.com/flick9000");
+        appWindow.close();
+      });
+
+      exitButton?.addEventListener("click", () => {
+        appWindow.close();
+      });
     });
   </script>
 </div>

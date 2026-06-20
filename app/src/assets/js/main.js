@@ -408,9 +408,11 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 
   if (checkbox) {
     checkbox.addEventListener("change", () => {
-      indicator.textContent = checkbox.checked
-        ? indicator.getAttribute("data-on") || "On"
-        : indicator.getAttribute("data-off") || "Off";
+      if (indicator) {
+        indicator.textContent = checkbox.checked
+          ? indicator.getAttribute("data-on") || "On"
+          : indicator.getAttribute("data-off") || "Off";
+      }
     });
   }
 

@@ -9,6 +9,7 @@ import AppGroup from "./AppGroup.astro";
 import MockupCode from "./MockupCode.astro";
 import ButtonEntry from "./ButtonEntry.astro";
 import Select from "./Select.astro";
+import Dialogs from "./Dialogs.astro";
 
 interface Props {
   t: Record<string, string>;
@@ -112,6 +113,14 @@ const languages = [
   <Titlebar />
   <div class="main-container">
     <Sidebar t={t} />
+    <Dialogs
+      title={t["supportdialog.title"]}
+      desc={t["supportdialog.desc"]}
+      desc2={t["supportdialog.desc2"]}
+      dontask={t["supportdialog.dontask"]}
+      coffee={t["supportdialog.coffee"]}
+      exit={t["supportdialog.exit"]}
+    />
     <div class="content">
       <div class="content-header">
         <img class="nav-icon" width="16" src="/icons/nav.png" alt="" />
