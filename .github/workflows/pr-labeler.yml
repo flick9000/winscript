@@ -16,13 +16,14 @@ jobs:
         with:
           script: |
             const body = context.payload.pull_request.body || '';
+            const checkbox = '\\[\\s*x\\s*\\]';
 
             const labelMap = [
-              { pattern: /- \[x\] Bugfix/i,       label: 'bug' },
-              { pattern: /- \[x\] Feature/i,       label: 'new-feature' },
-              { pattern: /- \[x\] Refactoring/i,   label: 'refactoring' },
-              { pattern: /- \[x\] Style/i,         label: 'style' },
-              { pattern: /- \[x\] Localization/i,  label: 'localization' },
+              { pattern: new RegExp(`-\\s*${checkbox}\\s*Bugfix`, 'i'),      label: 'bug' },
+              { pattern: new RegExp(`-\\s*${checkbox}\\s*Feature`, 'i'),     label: 'new-feature' },
+              { pattern: new RegExp(`-\\s*${checkbox}\\s*Refactoring`, 'i'), label: 'refactoring' },
+              { pattern: new RegExp(`-\\s*${checkbox}\\s*Style`, 'i'),       label: 'style' },
+              { pattern: new RegExp(`-\\s*${checkbox}\\s*Localization`, 'i'), label: 'localization' },
             ];
 
             const labelsToAdd = labelMap
