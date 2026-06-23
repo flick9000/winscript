@@ -6,7 +6,6 @@
 [![Ko-Fi](https://www.shieldcn.dev/badge/Ko--fi-sponsor-FF5E5B.svg?logo=kofi&variant=outline&size=sm&color=E0E0E0)](https://ko-fi.com/flick9000)
 [![Discussions](https://shieldcn.dev/badge/GitHub-Discussions.svg?variant=outline&logo=github&color=E0E0E0)](https://github.com/flick9000/winscript/discussions)
 
-
 WinScript is a lightweight and easy to use tool designed to improve and customize your Windows experience. Easily remove bloatware, disable telemetry, improve Windows performance, bulk install your favorite apps, and more.
 <br>
 
@@ -29,6 +28,10 @@ You can enable the Ultimate Performance plan, reduce mouse input delays, disable
 ### 📦 App Installer
 
 The Browse Apps section makes it easy to bulk install all your essential software in just a few clicks. Choose from a list of popular apps, browsers, utilities, dev tools, media players, and more, and WinScript will generate a script to install using your preferred package manager: Chocolatey or Winget.
+
+### 💿 Unattended Setup
+
+Create a customized _autounattend.xml_ file to automate Windows installations from start to finish. Bypass Windows 11 hardware requirements, create local accounts, skip unnecessary OOBE prompts and updates, and automatically run your WinScript configuration after setup completes.
 
 ## Usage
 
