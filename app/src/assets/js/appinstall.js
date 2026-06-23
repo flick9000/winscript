@@ -27,7 +27,6 @@ function appsInstallChocolatey() {
     { id: "PeaZip", url: "peazip" },
     { id: "WinRAR", url: "winrar" },
     // Gaming
-    { id: "BorderlessGaming", url: "borderlessgaming" },
     { id: "EAApp", url: "ea-app" },
     { id: "EpicGames", url: "epicgameslauncher" },
     { id: "FaceIT", url: "faceit" },
@@ -246,14 +245,16 @@ function appsInstallChocolatey() {
   function updateCommandDisplay() {
     const checkedUrls = getCheckedUrls();
     const allUrls = [...checkedUrls, ...window.manualURLs];
-    const finalURL = allUrls.join(" ");
+    const finalURL = allUrls.map((url) => `\\"${url}\\"`).join(", ");
+    const refreshEnv =
+      '$env:Path = [System.Environment]::GetEnvironmentVariable(\\"Path\\",\\"Machine\\") + \\";\\" + [System.Environment]::GetEnvironmentVariable(\\"Path\\",\\"User\\")';
 
     const command =
       allUrls.length > 0
-        ? `Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue | Start-Process explorer.exe | Start-Process cmd.exe -ArgumentList '/k ` +
-          "choco install " +
-          finalURL +
-          ` -y --force --ignorepackageexitcodes"'`
+        ? `Start-Process powershell.exe -ArgumentList '-NoProfile -NoLogo -NoExit -Command ` +
+          `${refreshEnv}; ` +
+          `$apps = @(${finalURL}); ` +
+          `foreach ($app in $apps) { choco install $app -y --force --ignorepackageexitcodes }'`
         : "";
 
     // Display the final URL in the div
@@ -265,40 +266,14 @@ function appsInstallChocolatey() {
     const commandDisplay = document.querySelector(".commandDisplay");
     commandDisplay.textContent = command;
 
-    const chocorefresh = document.querySelectorAll(".choco-refresh");
-    chocorefresh.forEach((div) => {
-      div.style.display = "block";
-    });
-
     const installingApps = document.querySelector(".installingApps");
-    installingApps.textContent = finalURL;
+    installingApps.textContent = allUrls.join(", ");
 
     const manualList = document.getElementById("manualList");
     if (window.manualURLs.length > 0) {
       manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
     }
   }
-
-  // Check manual IDs
-  function isValidManualId(manualId) {
-    return /^[A-Za-z0-9._+\-]+$/.test(manualId);
-  }
-
-  // Add addButton click listener
-  const addButton = document.getElementById("addApp");
-  addButton.addEventListener("click", () => {
-    const manualInput = document.getElementById("manualInput").value.trim();
-    if (manualInput) {
-      if (!isValidManualId(manualInput)) {
-        const manualList = document.getElementById("manualList");
-        manualList.innerHTML = "Please enter a valid package ID.";
-        return;
-      }
-      window.manualURLs.push(manualInput);
-      document.getElementById("manualInput").value = ""; // Clear input
-      updateCommandDisplay();
-    }
-  });
 
   updateCommandDisplay();
 }
@@ -331,7 +306,6 @@ function appsInstallWinget() {
     { id: "PeaZip", url: "Giorgiotani.PeaZip" },
     { id: "WinRAR", url: "RARLab.WinRAR" },
     // Gaming
-    { id: "BorderlessGaming", url: "Codeusa.BorderlessGaming" },
     { id: "EAApp", url: "ElectronicArts.EADesktop" },
     { id: "EpicGames", url: "EpicGames.EpicGamesLauncher" },
     { id: "FaceIT", url: "FACEITLTD.FACEITClient" },
@@ -556,14 +530,13 @@ function appsInstallWinget() {
   function updateCommandDisplay() {
     const checkedUrls = getCheckedUrls();
     const allUrls = [...checkedUrls, ...window.manualURLs];
-    const finalURL = allUrls.join(" ");
+    const finalURL = allUrls.map((url) => `\\"${url}\\"`).join(", ");
 
     const command =
       allUrls.length > 0
-        ? `Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue | Start-Process explorer.exe | Start-Process cmd.exe -ArgumentList '/k ` +
-          '"winget install ' +
-          finalURL +
-          ` --accept-source-agreements --accept-package-agreements --force"'`
+        ? `Start-Process powershell.exe -ArgumentList '-NoProfile -NoLogo -NoExit -Command ` +
+          `$apps = @(${finalURL}); ` +
+          `foreach ($app in $apps) { winget install $app --accept-source-agreements --accept-package-agreements --force }'`
         : "";
 
     // Display the final URL in the div
@@ -576,37 +549,16 @@ function appsInstallWinget() {
     commandDisplay.textContent = command;
 
     const installingApps = document.querySelector(".installingApps");
-    installingApps.textContent = finalURL;
+    installingApps.textContent = allUrls.join(", ");
 
     const wingetUpgrade = document.getElementById("wingetUpgrade");
-    wingetUpgrade.textContent = `$v = winget -v; if ([version]($v.TrimStart('v')) -lt [version]'1.7.0') { Write-Output '-- - Old Winget version detected, upgrading.'; Set-Location $env:USERPROFILE; Invoke-WebRequest -Uri 'https://aka.ms/getwinget' -OutFile 'winget.msixbundle'; Add-AppPackage -ForceApplicationShutdown .\\winget.msixbundle; Remove-Item .\\winget.msixbundle } else { Write-Output 'Winget is already up to date, skipping upgrade.' }`;
+    wingetUpgrade.textContent = `$v = winget -v; if ([version]($v.TrimStart('v')) -lt [version]'1.7.0') { Write-Output '-- Old Winget version detected, upgrading.'; Set-Location $env:USERPROFILE; Invoke-WebRequest -Uri 'https://aka.ms/getwinget' -OutFile 'winget.msixbundle'; Add-AppPackage -ForceApplicationShutdown .\\winget.msixbundle; Remove-Item .\\winget.msixbundle } else { Write-Output 'Winget is already up to date, skipping upgrade.' }`;
 
     const manualList = document.getElementById("manualList");
     if (window.manualURLs.length > 0) {
       manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
     }
   }
-
-  // Check manual IDs
-  function isValidManualId(manualId) {
-    return /^[A-Za-z0-9._+\-]+$/.test(manualId);
-  }
-
-  // Add addButton click listener
-  const addButton = document.getElementById("addApp");
-  addButton.addEventListener("click", () => {
-    const manualInput = document.getElementById("manualInput").value.trim();
-    if (manualInput) {
-      if (!isValidManualId(manualInput)) {
-        const manualList = document.getElementById("manualList");
-        manualList.innerHTML = "Please enter a valid package ID.";
-        return;
-      }
-      window.manualURLs.push(manualInput);
-      document.getElementById("manualInput").value = ""; // Clear input
-      updateCommandDisplay();
-    }
-  });
 
   updateCommandDisplay();
 }
@@ -623,18 +575,34 @@ selectedPackageManager.addEventListener("change", () => {
   }
 });
 
-// Set up checkbox event listeners
-document.addEventListener("DOMContentLoaded", () => {
-  const checkboxes = document.querySelectorAll("[js-target=install]");
-  if (selectedPackageManager.value === "chocolatey") {
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", appsInstallChocolatey);
-    });
-  } else if (selectedPackageManager.value === "winget") {
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", appsInstallWinget);
-    });
+// Check manual IDs
+function isValidManualId(manualId) {
+  return /^[A-Za-z0-9._+\-]+$/.test(manualId);
+}
+
+// Manual IDs button listener
+const addButton = document.getElementById("addApp");
+addButton.addEventListener("click", () => {
+  const manualInput = document.getElementById("manualInput").value.trim();
+  if (manualInput) {
+    if (!isValidManualId(manualInput)) {
+      const manualList = document.getElementById("manualList");
+      manualList.innerHTML = "Please enter a valid package ID.";
+      return;
+    }
+    window.manualURLs.push(manualInput);
+    document.getElementById("manualInput").value = ""; // Clear input
+    if (selectedPackageManager.value === "chocolatey") {
+      appsInstallChocolatey();
+    } else if (selectedPackageManager.value === "winget") {
+      appsInstallWinget();
+    }
   }
+});
+
+// Checkboxes event listeners
+const apps = document.querySelectorAll('[js-target="install"]');
+document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("change", (event) => {
     if (event.target.matches("[js-target=install]")) {
       if (selectedPackageManager.value === "chocolatey") {
@@ -642,6 +610,16 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (selectedPackageManager.value === "winget") {
         appsInstallWinget();
       }
+    }
+  });
+});
+
+apps.forEach((app) => {
+  app.addEventListener("change", () => {
+    if (selectedPackageManager.value === "chocolatey") {
+      appsInstallChocolatey();
+    } else if (selectedPackageManager.value === "winget") {
+      appsInstallWinget();
     }
   });
 });

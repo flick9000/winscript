@@ -1,7 +1,20 @@
+---
+interface Props {
+  title: string;
+  desc?: string;
+  desc2?: string;
+  dontask?: string;
+  coffee?: string;
+  star?: string;
+}
+
+const { title, desc, desc2, dontask, coffee, star } = Astro.props;
+---
+
 <dialog id="supportDialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h1>Good to go!</h1>
+      <h1>{title}</h1>
       <svg
         class="close"
         id="closeSupportDialog"
@@ -15,14 +28,11 @@
         ></path></svg
       >
     </div>
-    <p>
-      If you enjoy using WinScript, please consider supporting the project! You can star the project
-      on GitHub or donate to help keep development going. Every bit of support helps keep WinScript
-      open-source and improving for everyone.
-    </p>
+    <p>{desc}</p>
+    <p>{desc2}</p>
     <div class="modal-buttons">
-      <a href="https://github.com/flick9000/winscript/">Star on GitHub -></a>
-      <a href="https://ko-fi.com/flick9000">Buy me a coffee -></a>
+      <a href="https://github.com/flick9000/winscript/">{star}</a>
+      <a href="https://ko-fi.com/flick9000">{coffee}</a>
     </div>
   </div>
 </dialog>

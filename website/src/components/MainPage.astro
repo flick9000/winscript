@@ -79,6 +79,13 @@ const languages = [
     translatorUrl: "https://github.com/flick9000",
   },
   {
+    name: "Magyar",
+    code: "hu",
+    flagCode: "1f1ed-1f1fa",
+    translator: "Whiteful51",
+    translatorUrl: "https://github.com/Whiteful51",
+  },
+  {
     name: "한국어",
     code: "ko",
     flagCode: "1f1f0-1f1f7",
@@ -99,6 +106,13 @@ const languages = [
     translator: "Mehders",
     translatorUrl: "https://github.com/Mehders",
   },
+  {
+    name: "简体中文",
+    code: "zh-CN",
+    flagCode: "1f1e8-1f1f3",
+    translator: "tyrael-z",
+    translatorUrl: "https://github.com/tyrael-z",
+  },
 ];
 ---
 
@@ -106,7 +120,14 @@ const languages = [
   <div class="main-container">
     <Background />
     <Sidebar t={t} />
-    <Dialogs />
+    <Dialogs
+      title={t["supportdialog.title"]}
+      desc={t["supportdialog.desc"]}
+      desc2={t["supportdialog.desc2"]}
+      dontask={t["supportdialog.dontask"]}
+      coffee={t["supportdialog.coffee"]}
+      star={t["supportdialog.star"]}
+    />
     <div class="content">
       <div class="content-header">
         <h1 id="content-header">WinScript</h1>
@@ -1094,10 +1115,6 @@ const languages = [
             icon="/icons/install/gaming.png"
             apps={[
               {
-                title: "Borderless Gaming",
-                inputId: "BorderlessGaming",
-              },
-              {
                 title: "EA App",
                 inputId: "EAApp",
               },
@@ -1547,6 +1564,13 @@ const languages = [
             buttonTitle={t["script.copy.btn"]}
             buttonId="copyBtn"
             icon="/icons/script/copy.png"
+          />
+
+          <ButtonEntry
+            title={t["script.autounattend.title"]}
+            buttonTitle={t["script.autounattend.btn"]}
+            buttonId="autounattendBtn"
+            icon="/icons/script/autounattend.svg"
           />
 
           <details>

@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "WinScript",
-  "version": "2.17.0",
+  "version": "2.19.0",
   "identifier": "flick.winscript.dev",
   "build": {
     "devUrl": "http://localhost:4321/",
@@ -50,7 +50,7 @@
       "windows": {
         "installMode": "passive"
       },
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDg2ODczMDgxREQ1QkY4QTQKUldTaytGdmRnVENIaGdaUkxqMW5rYkJzNDdrTXFZRU9OcmgvL0xIQVJXRnBRbEwxOEVuaUxYWjgK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVCM0M4RDc0QTJGQ0IzNkUKUldSdXMveWlkSTA4NjdtU0t6TVUxNGNSYWZyb0k4amRodUNTT3lXTXhLcVoxYTNSd0V3ZHZ5SmwK",
       "endpoints": ["https://github.com/flick9000/winscript/releases/latest/download/latest.json"]
     },
     "cli": {

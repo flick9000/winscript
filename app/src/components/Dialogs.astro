@@ -1,0 +1,157 @@
+---
+interface Props {
+  title: string;
+  desc?: string;
+  desc2?: string;
+  dontask?: string;
+  coffee?: string;
+  exit?: string;
+}
+
+const { title, desc, desc2, dontask, coffee, exit } = Astro.props;
+---
+
+<dialog id="supportDialog">
+  <div class="modal-content">
+    <h1 class="modal-header">{title}</h1>
+    <div class="modal-text">
+      <p>{desc}</p>
+      <p>{desc2}</p>
+    </div>
+    <div>
+      <div class="checkbox-wrapper">
+        <label class="switch">
+          <input id="askPreference" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+        <span>{dontask}</span>
+      </div>
+    </div>
+    <div class="modal-buttons">
+      <button id="coffeeButton">{coffee}</button>
+      <button id="exitButton">{exit}</button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  dialog[open] {
+    display: flex;
+    font-size: 16px;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  dialog {
+    display: none;
+    position: fixed;
+    opacity: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: hidden;
+    background: hsla(253, 50%, 1%, 0.5);
+    border: transparent;
+    color: var(--text);
+    transition-property: display opacity;
+    transition-duration: 0.3s;
+    transition-behavior: allow-discrete;
+  }
+
+  .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-flow: 1;
+    margin: auto;
+    background: var(--background);
+    text-wrap: pretty;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid hsl(from var(--text) h s l / 0.1) !important;
+    border-radius: 7px;
+    width: clamp(300px, 50vw, 600px);
+    min-height: fit-content;
+  }
+
+  .modal-content:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.015;
+    background-image: url(noise.png);
+  }
+
+  .modal-header {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .modal-text {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .modal-text p {
+    margin: 0;
+  }
+
+  .modal-text p + p {
+    margin-top: 8px; /* adjust as needed */
+    margin-bottom: -4px;
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 14px;
+    color: var(--muted);
+
+    & > span {
+      margin-bottom: 1px;
+    }
+  }
+
+  .modal-buttons {
+    display: flex;
+    align-items: center;
+    margin-inline: -1.5rem;
+    margin-bottom: -1.5rem;
+    height: 80px;
+    background-color: var(--elevated);
+    gap: 1rem;
+  }
+
+  .modal-buttons button {
+    width: 100%;
+    margin-inline: 1.5rem;
+    min-width: fit-content;
+
+    &:nth-child(1) {
+      background-color: var(--primary) !important;
+      color: #fff;
+    }
+  }
+
+  #start-modal .modal-content {
+    width: clamp(300px, 75vw, 600px);
+  }
+  @media screen and (max-width: 600px) {
+    .modal-content {
+      width: 80%;
+      height: 40%;
+    }
+  }
+</style>

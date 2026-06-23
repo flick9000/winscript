@@ -3,6 +3,7 @@
 
 :root {
   --background: #202020;
+  --elevated: #171717;
   --text: #fff;
   --muted: #ccc;
   --primary: #6040bf;
@@ -29,8 +30,10 @@
 @media (prefers-color-scheme: light) {
   :root {
     --background: #fff;
+    --elevated: #f3f3f3;
     --text: #000;
     --muted: #555;
+    --primary: #6040bf;
   }
 
   .sidebar-entry.active {

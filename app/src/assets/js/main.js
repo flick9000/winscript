@@ -34,22 +34,13 @@ async function loadConfig() {
   }
 }
 
-// Checks if an update is available and performs it
-async function checkForUpdates() {
-  const update = await check();
+async function loadLocale() {
+  let locale = localStorage.getItem("locale");
+  if (!locale) return;
+  if (locale === "en") return;
 
-  let updateAsk = await ask("An update is available. Do you want to update?", {
-    title: "Update Available",
-    kind: "info",
-    okLabel: "Update",
-    cancelLabel: "Later",
-  });
-
-  if (updateAsk === true) {
-    await update.downloadAndInstall();
-    await relaunch();
-  } else {
-    return;
+  if (!window.location.href.includes(locale)) {
+    window.location.href = `/${locale}`;
   }
 }
 
@@ -68,6 +59,30 @@ async function alertForUpdates() {
     await openUrl("https://github.com/flick9000/winscript/releases/latest");
   } else {
     return;
+  }
+}
+
+// Checks if an update is available and performs it
+async function checkForUpdates() {
+  try {
+    const update = await check();
+
+    let updateAsk = await ask("An update is available. Do you want to update?", {
+      title: "Update Available",
+      kind: "info",
+      okLabel: "Update",
+      cancelLabel: "Later",
+    });
+
+    if (updateAsk === true) {
+      await update.downloadAndInstall();
+      await relaunch();
+    } else {
+      return;
+    }
+  } catch (error) {
+    console.error(error);
+    alertForUpdates();
   }
 }
 
@@ -133,6 +148,8 @@ function applyMica() {
 
 applyMica();
 
+await loadLocale();
+
 // Show window manually on startup (remove this when mica bug at startup is fixed)
 getCurrentWindow().show();
 
@@ -191,6 +208,11 @@ if (tabs.length > 0 && contents.length > 0) {
   title.textContent = tabs[0].textContent || "WinScript"; // Update header with the first tab's text
 }
 
+// Titlebar button goes to languages tab
+document.querySelector('button[data-tab="localizations-tab"]').addEventListener("click", () => {
+  tabs[9].click();
+});
+
 // Remove 'active' from all other content divs
 contents.forEach((content, index) => {
   if (index !== 0) {
@@ -215,11 +237,16 @@ tabs.forEach((tab, index) => {
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const radios = document.querySelectorAll('input[type="radio"]');
 
 exportBtn.addEventListener("click", async () => {
   let settings = {};
   checkboxes.forEach((checkbox) => {
     settings[checkbox.id] = checkbox.checked;
+  });
+
+  radios.forEach((radio) => {
+    settings[radio.id] = radio.checked;
   });
 
   try {
@@ -258,6 +285,11 @@ importBtn.addEventListener("click", async () => {
       checkboxes.forEach((checkbox) => {
         checkbox.checked = settings[checkbox.id];
         checkbox.dispatchEvent(new Event("change"));
+      });
+
+      radios.forEach((radio) => {
+        radio.checked = settings[radio.id];
+        radio.dispatchEvent(new Event("change"));
       });
     }
   } catch (error) {
@@ -386,9 +418,11 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 
   if (checkbox) {
     checkbox.addEventListener("change", () => {
-      indicator.textContent = checkbox.checked
-        ? indicator.getAttribute("data-on") || "On"
-        : indicator.getAttribute("data-off") || "Off";
+      if (indicator) {
+        indicator.textContent = checkbox.checked
+          ? indicator.getAttribute("data-on") || "On"
+          : indicator.getAttribute("data-off") || "Off";
+      }
     });
   }
 
@@ -497,6 +531,7 @@ document.querySelectorAll(".localization-entry").forEach((entry) => {
     // Redirect to /[locale]
     // If locale is en, we could go to / but /en is safer/more consistent
     window.location.href = `/${locale}`;
+    localStorage.setItem("locale", locale);
   });
 });
 
