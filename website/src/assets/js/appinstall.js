@@ -601,6 +601,7 @@ addButton.addEventListener("click", () => {
 });
 
 // Checkboxes event listeners
+const apps = document.querySelectorAll('[js-target="install"]');
 document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("change", (event) => {
     if (event.target.matches("[js-target=install]")) {
@@ -609,6 +610,16 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (selectedPackageManager.value === "winget") {
         appsInstallWinget();
       }
+    }
+  });
+});
+
+apps.forEach((app) => {
+  app.addEventListener("change", () => {
+    if (selectedPackageManager.value === "chocolatey") {
+      appsInstallChocolatey();
+    } else if (selectedPackageManager.value === "winget") {
+      appsInstallWinget();
     }
   });
 });
