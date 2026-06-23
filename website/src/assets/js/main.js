@@ -104,11 +104,16 @@ document.getElementById("searchBar").addEventListener("input", () => {
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const radios = document.querySelectorAll('input[type="radio"]');
 
 exportBtn.addEventListener("click", () => {
   let settings = {};
   checkboxes.forEach((checkbox) => {
     settings[checkbox.id] = checkbox.checked;
+  });
+
+  radios.forEach((radio) => {
+    settings[radio.id] = radio.checked;
   });
 
   const fileContent = JSON.stringify(settings, null, 2);
@@ -143,6 +148,10 @@ importBtn.addEventListener("click", () => {
         checkboxes.forEach((checkbox) => {
           checkbox.checked = settings[checkbox.id];
           checkbox.dispatchEvent(new Event("change"));
+        });
+        radios.forEach((radio) => {
+          radio.checked = settings[radio.id];
+          radio.dispatchEvent(new Event("change"));
         });
       } catch (error) {
         console.error("Error parsing settings:", error);
