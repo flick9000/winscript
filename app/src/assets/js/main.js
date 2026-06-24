@@ -2,7 +2,7 @@ import { writeTextFile, readTextFile, mkdir, remove, exists } from "@tauri-apps/
 import { tempDir, join, dirname } from "@tauri-apps/api/path";
 import { Command } from "@tauri-apps/plugin-shell";
 import { app } from "@tauri-apps/api";
-import { version } from "@tauri-apps/plugin-os";
+import { version, locale as osLocale } from "@tauri-apps/plugin-os";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
@@ -34,12 +34,48 @@ async function loadConfig() {
   }
 }
 
-async function loadLocale() {
-  let locale = localStorage.getItem("locale");
-  if (!locale) return;
-  if (locale === "en") return;
+const getSupportedLocales = (() => {
+  let cache;
+  return () => {
+    if (cache) return cache;
+    const buttons = document.querySelectorAll(".use-lang-btn");
+    cache = new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+    return cache;
+  };
+})();
 
-  if (!window.location.href.includes(locale)) {
+function detectOsLocale() {
+  const supported = getSupportedLocales();
+  const osLang = osLocale(); // e.g. "zh-CN", "de-DE", "fr-FR"
+
+  if (!osLang) return null;
+
+  // 1) Exact match
+  if (supported.has(osLang)) {
+    return osLang;
+  }
+  // 2) Prefix match: "de-DE" → "de", "fr-FR" → "fr"
+  const prefix = osLang.split("-")[0];
+  if (prefix !== osLang && supported.has(prefix)) {
+    return prefix;
+  }
+  return null;
+}
+
+async function loadLocale() {
+  // Saved preference wins.
+  let locale = localStorage.getItem("locale");
+  if (locale) {
+    if (locale !== "en") {
+      window.location.href = `/${locale}`;
+    }
+    return;
+  }
+
+  // First launch — try to match OS language.
+  locale = detectOsLocale();
+  if (locale && locale !== "en") {
+    localStorage.setItem("locale", locale);
     window.location.href = `/${locale}`;
   }
 }

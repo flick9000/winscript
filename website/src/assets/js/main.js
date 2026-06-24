@@ -1,3 +1,71 @@
+// ── Locale auto-detection ──────────────────────────────────────────────
+
+const getSupportedLocales = (() => {
+  let cache;
+  return () => {
+    if (cache) return cache;
+    const buttons = document.querySelectorAll(".use-lang-btn");
+    cache = new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+    return cache;
+  };
+})();
+
+function detectBrowserLocale() {
+  const supported = getSupportedLocales();
+  const browserLocales = navigator.languages || (navigator.language ? [navigator.language] : []);
+
+  for (const raw of browserLocales) {
+    // 1) Exact match: "zh-CN", "de", "fr", …
+    if (supported.has(raw)) {
+      return raw;
+    }
+    // 2) Prefix match: "de-AT" → "de", "fr-CA" → "fr"
+    const prefix = raw.split("-")[0];
+    if (prefix !== raw && supported.has(prefix)) {
+      return prefix;
+    }
+  }
+  return null;
+}
+
+function getLocaleFromPath() {
+  const segments = window.location.pathname.split("/").filter(Boolean);
+  // "/" → [], "/de/" → ["de"], "/de/index.html" → ["de", "index.html"]
+  const candidate = segments[0];
+  return candidate && candidate !== "index.html" ? candidate : null;
+}
+
+function loadLocale() {
+  // If the URL already specifies a locale, respect it — don't redirect.
+  const pathLocale = getLocaleFromPath();
+  if (pathLocale) {
+    if (getSupportedLocales().has(pathLocale)) {
+      localStorage.setItem("locale", pathLocale);
+      return;
+    }
+    // Unsupported locale in path (e.g. /xyz) — fall back to English.
+    window.location.href = "/";
+    return;
+  }
+
+  // We are on the root path — pick the best locale.
+  let locale = localStorage.getItem("locale");
+  if (locale) {
+    if (locale !== "en") {
+      window.location.href = `/${locale}`;
+    }
+    return;
+  }
+
+  // First visit — try to match browser language.
+  locale = detectBrowserLocale();
+  if (locale && locale !== "en") {
+    localStorage.setItem("locale", locale);
+    window.location.href = `/${locale}`;
+  }
+}
+// ────────────────────────────────────────────────────────────────────────
+
 document.querySelectorAll(".fa-solid").forEach((icon) => {
   icon.addEventListener("click", () => {
     const navbar = document.getElementById("sidebar");
@@ -234,8 +302,11 @@ document.querySelectorAll(".localization-entry").forEach((entry) => {
 
   useBtn.addEventListener("click", (e) => {
     e.stopPropagation();
+    localStorage.setItem("locale", locale);
     // Redirect to /[locale]
     // If locale is en, we could go to / but /en is safer/more consistent
     window.location.href = `/${locale}`;
   });
 });
+
+loadLocale();
