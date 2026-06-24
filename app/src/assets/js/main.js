@@ -146,6 +146,17 @@ function applyMica() {
   }
 }
 
+async function hasWindowsTerminal() {
+  try {
+    const check = new Command("where", ["wt"]);
+    const output = await check.execute();
+    return output.code === 0;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
 applyMica();
 
 await loadLocale();
@@ -404,6 +415,51 @@ document.getElementById("searchBar").addEventListener("input", () => {
   });
 });
 
+// Update apps button
+const updateBtn = document.getElementById("updateBtn");
+const packageManager = document.getElementById("packageManager");
+const chocoUpdateCommand = "choco upgrade all -y";
+const wingetUpdateCommand =
+  "winget upgrade --all --include-unknown --silent --accept-source-agreements --accept-package-agreements";
+
+async function updateApps(packageUpdateCommand) {
+  const hasWt = await hasWindowsTerminal();
+  const args = hasWt
+    ? [
+        "/c",
+        "start",
+        "wt",
+        "powershell",
+        "-NoProfile",
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        packageUpdateCommand,
+      ]
+    : [
+        "/c",
+        "start",
+        "powershell",
+        "-NoProfile",
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        packageUpdateCommand,
+      ];
+
+  new Command("cmd", args).execute();
+}
+
+updateBtn.addEventListener("click", () => {
+  if (packageManager.value === "chocolatey") {
+    updateApps(chocoUpdateCommand);
+  } else if (packageManager.value === "winget") {
+    updateApps(wingetUpdateCommand);
+  }
+});
+
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
   var textContent = document.getElementById("code").innerText;
@@ -471,17 +527,6 @@ document.getElementById("runBtn").addEventListener("click", async function () {
     await mkdir(dirPath, { recursive: true });
 
     await writeTextFile(filePath, textContent);
-
-    async function hasWindowsTerminal() {
-      try {
-        const check = new Command("where", ["wt"]);
-        const output = await check.execute();
-        return output.code === 0;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-    }
 
     const hasWt = await hasWindowsTerminal();
 
