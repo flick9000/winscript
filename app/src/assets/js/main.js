@@ -413,7 +413,11 @@ document.getElementById("searchBar").addEventListener("input", () => {
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
   var textContent = document.getElementById("code").innerText;
-  navigator.clipboard.writeText(textContent);
+  try {
+    navigator.clipboard.writeText(textContent);
+  } catch (error) {
+    console.error("Error copying to clipboard:", error);
+  }
 });
 
 // Update the indicator text
