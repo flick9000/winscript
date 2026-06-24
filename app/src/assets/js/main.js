@@ -21,12 +21,18 @@ async function loadConfig() {
 
     try {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const radios = document.querySelectorAll('input[type="radio"]');
       const contents = await readTextFile(path);
       const settings = JSON.parse(contents);
 
       checkboxes.forEach((checkbox) => {
         checkbox.checked = settings[checkbox.id];
         checkbox.dispatchEvent(new Event("change"));
+      });
+
+      radios.forEach((radio) => {
+        radio.checked = settings[radio.id];
+        radio.dispatchEvent(new Event("change"));
       });
     } catch (error) {
       console.error("Error loading config:", error);
