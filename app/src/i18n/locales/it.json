@@ -45,7 +45,7 @@
   "debloat.apps.desc": "Disinstalla le app preinstallate.",
   "debloat.apps.thirdparty": "Rimuovi app di terze parti",
   "debloat.apps.thirdparty.desc": "Rimuove app pre-installate di terze parti come Shazam, Spotify e altre.",
-  "debloat.apps.msapps": "Rimuovi app microsoft",
+  "debloat.apps.msapps": "Rimuovi app Microsoft",
   "debloat.apps.msapps.desc": "Rimuove app preinstallate come Solitario, Persone e altre.",
   "debloat.apps.extensions": "Rimuovi estensioni",
   "debloat.apps.extensions.desc": "Rimuove estensioni preinstallate come HEVC, VP9 e altre.",
