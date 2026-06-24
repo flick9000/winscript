@@ -70,11 +70,17 @@ async function loadLocale() {
   // Saved preference wins — but validate it's still supported.
   let locale = localStorage.getItem("locale");
   if (locale) {
-    if (getSupportedLocales().has(locale) && locale !== "en") {
-      window.location.href = `/${locale}`;
-    }
-    if (!getSupportedLocales().has(locale)) {
+    const supported = getSupportedLocales();
+    if (supported.has(locale)) {
+      if (locale !== "en") {
+        window.location.href = `/${locale}`;
+      }
+    } else if (supported.size > 0) {
+      // Known to be unsupported — clear stale preference.
       localStorage.removeItem("locale");
+    } else if (locale !== "en") {
+      // DOM not yet parsed — trust the saved preference.
+      window.location.href = `/${locale}`;
     }
     return;
   }

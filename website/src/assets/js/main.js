@@ -43,23 +43,35 @@ function loadLocale() {
   // If the URL already specifies a locale, respect it — don't redirect.
   const pathLocale = getLocaleFromPath();
   if (pathLocale) {
-    if (getSupportedLocales().has(pathLocale)) {
-      localStorage.setItem("locale", pathLocale);
+    const supported = getSupportedLocales();
+    if (supported.size > 0) {
+      if (supported.has(pathLocale)) {
+        localStorage.setItem("locale", pathLocale);
+        return;
+      }
+      // Unsupported locale in path (e.g. /xyz) — fall back to English.
+      window.location.href = "/";
       return;
     }
-    // Unsupported locale in path (e.g. /xyz) — fall back to English.
-    window.location.href = "/";
+    // DOM not yet parsed or no language switcher on this page —
+    // trust the URL path and don't redirect.
     return;
   }
 
   // We are on the root path — pick the best locale.
   let locale = localStorage.getItem("locale");
   if (locale) {
-    if (getSupportedLocales().has(locale) && locale !== "en") {
-      window.location.href = `/${locale}`;
-    }
-    if (!getSupportedLocales().has(locale)) {
+    const supported = getSupportedLocales();
+    if (supported.has(locale)) {
+      if (locale !== "en") {
+        window.location.href = `/${locale}`;
+      }
+    } else if (supported.size > 0) {
+      // Known to be unsupported — clear stale preference.
       localStorage.removeItem("locale");
+    } else if (locale !== "en") {
+      // DOM not yet parsed — trust the saved preference.
+      window.location.href = `/${locale}`;
     }
     return;
   }
