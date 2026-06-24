@@ -186,7 +186,7 @@
   "performance.ipv6.desc": "Preferisce l'IPv4 rispetto all'IPv6, può migliorare la latenza.",
   "performance.mousedelay.title": "Disabilita ritardo del mouse",
   "performance.mousedelay.desc": "Disabilita il ritardo di 400ms per la visualizzazione dei menu.",
-  "performance.limitdefender.title": "Limita utilizzo CPU di defender",
+  "performance.limitdefender.title": "Limita utilizzo CPU di Defender",
   "performance.limitdefender.desc": "Limita l'utilizzo massimo della CPU di defender al 25%.",
   "performance.coreisolation.title": "Disabilita Isolamento core",
   "performance.coreisolation.desc": "Può migliorare le prestazioni a scapito della sicurezza.",
