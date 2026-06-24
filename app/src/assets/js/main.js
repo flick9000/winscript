@@ -424,30 +424,17 @@ const wingetUpdateCommand =
 
 async function updateApps(packageUpdateCommand) {
   const hasWt = await hasWindowsTerminal();
-  const args = hasWt
-    ? [
-        "/c",
-        "start",
-        "wt",
-        "powershell",
-        "-NoProfile",
-        "-NoLogo",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-Command",
-        packageUpdateCommand,
-      ]
-    : [
-        "/c",
-        "start",
-        "powershell",
-        "-NoProfile",
-        "-NoLogo",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-Command",
-        packageUpdateCommand,
-      ];
+  const args = ["/c", "start"];
+  if (hasWt) args.push("wt");
+  args.push(
+    "powershell",
+    "-NoProfile",
+    "-NoLogo",
+    "-ExecutionPolicy",
+    "Bypass",
+    "-Command",
+    packageUpdateCommand,
+  );
 
   new Command("cmd", args).execute();
 }
