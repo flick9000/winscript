@@ -55,8 +55,11 @@ function loadLocale() {
   // We are on the root path — pick the best locale.
   let locale = localStorage.getItem("locale");
   if (locale) {
-    if (locale !== "en") {
+    if (getSupportedLocales().has(locale) && locale !== "en") {
       window.location.href = `/${locale}`;
+    }
+    if (!getSupportedLocales().has(locale)) {
+      localStorage.removeItem("locale");
     }
     return;
   }

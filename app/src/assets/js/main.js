@@ -48,9 +48,9 @@ const getSupportedLocales = (() => {
   };
 })();
 
-function detectOsLocale() {
+async function detectOsLocale() {
   const supported = getSupportedLocales();
-  const osLang = osLocale(); // e.g. "zh-CN", "de-DE", "fr-FR"
+  const osLang = await osLocale(); // e.g. "zh-CN", "de-DE", "fr-FR"
 
   if (!osLang) return null;
 
@@ -67,17 +67,20 @@ function detectOsLocale() {
 }
 
 async function loadLocale() {
-  // Saved preference wins.
+  // Saved preference wins — but validate it's still supported.
   let locale = localStorage.getItem("locale");
   if (locale) {
-    if (locale !== "en") {
+    if (getSupportedLocales().has(locale) && locale !== "en") {
       window.location.href = `/${locale}`;
+    }
+    if (!getSupportedLocales().has(locale)) {
+      localStorage.removeItem("locale");
     }
     return;
   }
 
   // First launch — try to match OS language.
-  locale = detectOsLocale();
+  locale = await detectOsLocale();
   if (locale && locale !== "en") {
     localStorage.setItem("locale", locale);
     window.location.href = `/${locale}`;
