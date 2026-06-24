@@ -39,8 +39,12 @@ const getSupportedLocales = (() => {
   return () => {
     if (cache) return cache;
     const buttons = document.querySelectorAll(".use-lang-btn");
-    cache = new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
-    return cache;
+    const locales = new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+    // Only cache if DOM was parsed and buttons actually exist
+    if (locales.size > 0) {
+      cache = locales;
+    }
+    return locales;
   };
 })();
 
