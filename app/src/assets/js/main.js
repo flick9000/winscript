@@ -34,19 +34,10 @@ async function loadConfig() {
   }
 }
 
-const getSupportedLocales = (() => {
-  let cache;
-  return () => {
-    if (cache) return cache;
-    const buttons = document.querySelectorAll(".use-lang-btn");
-    const locales = new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
-    // Only cache if DOM was parsed and buttons actually exist
-    if (locales.size > 0) {
-      cache = locales;
-    }
-    return locales;
-  };
-})();
+function getSupportedLocales() {
+  const buttons = document.querySelectorAll(".use-lang-btn");
+  return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+}
 
 async function detectOsLocale() {
   const supported = getSupportedLocales();
@@ -67,25 +58,19 @@ async function detectOsLocale() {
 }
 
 async function loadLocale() {
-  // Saved preference wins — but validate it's still supported.
+  // Saved preference wins — redirect only if still supported and not already in the URL.
   let locale = localStorage.getItem("locale");
   if (locale) {
     const supported = getSupportedLocales();
     if (supported.has(locale)) {
-      if (locale !== "en") {
+      if (locale !== "en" && !window.location.href.includes(locale)) {
         window.location.href = `/${locale}`;
       }
-    } else if (supported.size > 0) {
-      // Known to be unsupported — clear stale preference.
-      localStorage.removeItem("locale");
-    } else if (locale !== "en") {
-      // DOM not yet parsed — trust the saved preference.
-      window.location.href = `/${locale}`;
     }
     return;
   }
 
-  // First launch — try to match OS language.
+  // No saved preference — detect OS language and redirect only when it isn't English.
   locale = await detectOsLocale();
   if (locale && locale !== "en") {
     localStorage.setItem("locale", locale);

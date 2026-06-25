@@ -1,18 +1,9 @@
 // ── Locale auto-detection ──────────────────────────────────────────────
 
-const getSupportedLocales = (() => {
-  let cache;
-  return () => {
-    if (cache) return cache;
-    const buttons = document.querySelectorAll(".use-lang-btn");
-    const locales = new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
-    // Only cache if DOM was parsed and buttons actually exist
-    if (locales.size > 0) {
-      cache = locales;
-    }
-    return locales;
-  };
-})();
+function getSupportedLocales() {
+  const buttons = document.querySelectorAll(".use-lang-btn");
+  return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+}
 
 function detectBrowserLocale() {
   const supported = getSupportedLocales();
@@ -32,51 +23,20 @@ function detectBrowserLocale() {
   return null;
 }
 
-function getLocaleFromPath() {
-  const segments = window.location.pathname.split("/").filter(Boolean);
-  // "/" → [], "/de/" → ["de"], "/de/index.html" → ["de", "index.html"]
-  const candidate = segments[0];
-  return candidate && candidate !== "index.html" ? candidate : null;
-}
-
 function loadLocale() {
-  // If the URL already specifies a locale, respect it — don't redirect.
-  const pathLocale = getLocaleFromPath();
-  if (pathLocale) {
-    const supported = getSupportedLocales();
-    if (supported.size > 0) {
-      if (supported.has(pathLocale)) {
-        localStorage.setItem("locale", pathLocale);
-        return;
-      }
-      // Unsupported locale in path (e.g. /xyz) — fall back to English.
-      window.location.href = "/";
-      return;
-    }
-    // DOM not yet parsed or no language switcher on this page —
-    // trust the URL path and don't redirect.
-    return;
-  }
-
-  // We are on the root path — pick the best locale.
+  // Saved preference wins — redirect only if still supported and not already in the URL.
   let locale = localStorage.getItem("locale");
   if (locale) {
     const supported = getSupportedLocales();
     if (supported.has(locale)) {
-      if (locale !== "en") {
+      if (locale !== "en" && !window.location.href.includes(locale)) {
         window.location.href = `/${locale}`;
       }
-    } else if (supported.size > 0) {
-      // Known to be unsupported — clear stale preference.
-      localStorage.removeItem("locale");
-    } else if (locale !== "en") {
-      // DOM not yet parsed — trust the saved preference.
-      window.location.href = `/${locale}`;
     }
     return;
   }
 
-  // First visit — try to match browser language.
+  // No saved preference — detect browser language and redirect only when it isn't English.
   locale = detectBrowserLocale();
   if (locale && locale !== "en") {
     localStorage.setItem("locale", locale);
