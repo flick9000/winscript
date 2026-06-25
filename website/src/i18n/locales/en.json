@@ -90,6 +90,8 @@
   "privacy.updatepause.desc": "Extends Windows Update pause limit to 20 years.",
   "privacy.wpbt.title": "Disable Windows Platform Binary Table",
   "privacy.wpbt.desc": "WPBT allows your computer vendor to install and execute software without user consent.",
+  "privacy.bitlocker.title": "Disable Bitlocker Drive Encryption",
+  "privacy.bitlocker.desc": "Disables Bitlocker automatic drive encryption.",
   "privacy.cloudsync.title": "Disable Cloud Sync",
   "privacy.cloudsync.desc": "Disables cloud syncing of settings, themes, and passwords.",
   "privacy.activityfeed.title": "Disable Activity History",
