@@ -81,7 +81,7 @@ jobs:
 
       - name: Rename Tauri installer
         run: |
-          Get-Item "./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe" | Rename-Item -NewName winscript-installer.exe
+          Copy-Item "./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe" -Destination "./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe"
 
       - name: Upload Tauri installer
         id: nsis
