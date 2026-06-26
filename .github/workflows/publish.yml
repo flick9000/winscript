@@ -35,9 +35,12 @@ jobs:
         with:
           workspaces: "./app/src-tauri -> target"
 
-      - name: install frontend dependencies
+      - name: Install frontend dependencies
         working-directory: ./app
         run: npm install
+
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2" --locked
 
       - name: Build Tauri portable
         working-directory: ./app/src-tauri
