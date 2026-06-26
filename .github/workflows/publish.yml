@@ -73,7 +73,7 @@ jobs:
 
       - name: Build Tauri installer
         working-directory: ./app/src-tauri
-        run: cargo tauri bundle --bundles nsis
+        run: npm run tauri -- bundle -- --bundles nsis
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
