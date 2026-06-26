@@ -44,7 +44,7 @@ jobs:
 
       - name: Build Tauri portable
         working-directory: ./app/src-tauri
-        run: cargo tauri build --release
+        run: cargo tauri build
 
       - name: Upload Tauri portable
         uses: actions/upload-artifact@v7
