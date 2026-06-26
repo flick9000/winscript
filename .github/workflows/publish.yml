@@ -39,6 +39,63 @@ jobs:
         working-directory: ./app
         run: npm install
 
+      - name: Build Tauri portable
+        working-directory: ./app/src-tauri
+        run: cargo tauri build --release
+
+      - name: Upload Tauri portable
+        uses: actions/upload-artifact@v7
+        id: portable
+        with:
+          path: ./app/src-tauri/target/release/WinScript.exe
+          archive: false
+
+      - name: Sign Tauri portable
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
+          project-slug: winscript
+          signing-policy-slug: release-signing
+          artifact-configuration-slug: single-exe
+
+          github-artifact-id: ${{ steps.portable.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: signed
+
+      - name: Copy signed portable to build directory
+        run: |
+          Remove-Item -Path ./app/src-tauri/target/release/WinScript.exe
+          cp ./signed/WinScript.exe ./app/src-tauri/target/release
+
+      - name: Build Tauri installer
+        working-directory: ./app/src-tauri
+        run: cargo tauri bundle --bundles nsis
+
+      - name: Rename Tauri installer
+        run: |
+          Get-Item "./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe" | Rename-Item -NewName winscript-installer.exe
+
+      - name: Upload Tauri installer
+        id: nsis
+        uses: actions/upload-artifact@v7
+        with:
+          path: ./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe
+          archive: false
+
+      - name: Sign Tauri installer
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
+          project-slug: winscript
+          signing-policy-slug: release-signing
+          artifact-configuration-slug: single-exe
+
+          github-artifact-id: ${{ steps.nsis.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: signed
+
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
@@ -53,41 +110,17 @@ jobs:
           updaterJsonPreferNsis: true
           releaseDraft: true
           prerelease: false
+          includeDebug: false
+          includeRelease: false
           args: ${{ matrix.args }}
 
       - name: Wait for release
         run: |
           sleep 5
 
-      - name: Prepare files for SignPath
-        shell: pwsh
+      - name: Rename signed Tauri portable
         run: |
-          mkdir release
-
-          ren ./app/src-tauri/target/release/winscript.exe winscript-portable.exe
-
-          copy ./app/src-tauri/target/release/winscript-portable.exe release\
-          copy ./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe release\winscript-installer.exe
-
-      - name: Upload unsigned artifact
-        id: upload
-        uses: actions/upload-artifact@v7
-        with:
-          name: unsigned
-          path: release/
-
-      - name: Sign with SignPath
-        uses: signpath/github-action-submit-signing-request@v2
-        with:
-          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
-          organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
-          project-slug: winscript
-          signing-policy-slug: test-signing
-
-          github-artifact-id: ${{ steps.upload.outputs.artifact-id }}
-
-          wait-for-completion: true
-          output-artifact-directory: signed
+          Get-Item "signed/WinScript.exe" | Rename-Item -NewName winscript-portable.exe
 
       - name: Upload signed executables to release
         shell: pwsh
@@ -119,11 +152,10 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
-      - name: Remove signature file & old installer
+      - name: Remove signature file
         run: |
           $VERSION = "${{ github.ref_name }}" -replace "^v", ""
           gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe.sig"
-          gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe"
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
