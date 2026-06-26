@@ -9,14 +9,14 @@ function detectBrowserLocale() {
   const supported = getSupportedLocales();
   const browserLocales = navigator.languages || (navigator.language ? [navigator.language] : []);
 
-  for (const raw of browserLocales) {
+  for (const rawLocale of browserLocales) {
     // 1) Exact match: "zh-CN", "de", "fr", …
-    if (supported.has(raw)) {
-      return raw;
+    if (supported.has(rawLocale)) {
+      return rawLocale;
     }
     // 2) Prefix match: "de-AT" → "de", "fr-CA" → "fr"
-    const prefix = raw.split("-")[0];
-    if (prefix !== raw && supported.has(prefix)) {
+    const prefix = rawLocale.split("-")[0];
+    if (prefix !== rawLocale && supported.has(prefix)) {
       return prefix;
     }
   }

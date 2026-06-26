@@ -2,7 +2,7 @@ import { writeTextFile, readTextFile, mkdir, remove, exists } from "@tauri-apps/
 import { tempDir, join, dirname } from "@tauri-apps/api/path";
 import { Command } from "@tauri-apps/plugin-shell";
 import { app } from "@tauri-apps/api";
-import { version, locale as osLocale } from "@tauri-apps/plugin-os";
+import { version, locale as getOsLocale } from "@tauri-apps/plugin-os";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
@@ -41,7 +41,7 @@ function getSupportedLocales() {
 
 async function detectOsLocale() {
   const supported = getSupportedLocales();
-  const osLang = await osLocale(); // e.g. "zh-CN", "de-DE", "fr-FR"
+  const osLang = await getOsLocale(); // e.g. "zh-CN", "de-DE", "fr-FR"
 
   if (!osLang) return null;
 
@@ -71,10 +71,10 @@ async function loadLocale() {
   }
 
   // No saved preference — detect OS language and redirect only when it isn't English.
-  locale = await detectOsLocale();
-  if (locale && locale !== "en") {
-    localStorage.setItem("locale", locale);
-    window.location.href = `/${locale}`;
+  const osLocale = await detectOsLocale();
+  if (osLocale && osLocale !== "en") {
+    localStorage.setItem("locale", osLocale);
+    window.location.href = `/${osLocale}`;
   }
 }
 
