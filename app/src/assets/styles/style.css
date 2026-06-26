@@ -157,6 +157,7 @@ button {
   min-width: 130px;
   min-height: 32px;
   border-radius: 5px;
+  padding-inline: 12px;
   border: none;
   background-color: hsl(from var(--text) h s l / 0.055);
   border: 1px solid hsl(from var(--text) h s l / 0.02);
