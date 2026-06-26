@@ -97,6 +97,7 @@ jobs:
           organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
           project-slug: winscript
           signing-policy-slug: release-signing
+          artifact-configuration-slug: installer
 
           github-artifact-id: ${{ steps.nsis.outputs.artifact-id }}
           wait-for-completion: true
