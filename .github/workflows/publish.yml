@@ -55,7 +55,6 @@ jobs:
         id: portable
         with:
           path: ./app/src-tauri/target/release/WinScript.exe
-          archive: false
 
       - name: Sign Tauri portable
         uses: signpath/github-action-submit-signing-request@v2
@@ -64,7 +63,6 @@ jobs:
           organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
           project-slug: winscript
           signing-policy-slug: release-signing
-          artifact-configuration-slug: single-exe
 
           github-artifact-id: ${{ steps.portable.outputs.artifact-id }}
           wait-for-completion: true
@@ -92,7 +90,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           path: ./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe
-          archive: false
 
       - name: Sign Tauri installer
         uses: signpath/github-action-submit-signing-request@v2
@@ -101,7 +98,6 @@ jobs:
           organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
           project-slug: winscript
           signing-policy-slug: release-signing
-          artifact-configuration-slug: single-exe
 
           github-artifact-id: ${{ steps.nsis.outputs.artifact-id }}
           wait-for-completion: true
