@@ -45,6 +45,10 @@ jobs:
       - name: Build Tauri portable
         working-directory: ./app/src-tauri
         run: cargo tauri build
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
       - name: Upload Tauri portable
         uses: actions/upload-artifact@v7
@@ -74,6 +78,10 @@ jobs:
       - name: Build Tauri installer
         working-directory: ./app/src-tauri
         run: cargo tauri bundle --bundles nsis
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
       - name: Rename Tauri installer
         run: |
