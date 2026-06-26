@@ -103,23 +103,11 @@ jobs:
           wait-for-completion: true
           output-artifact-directory: signed
 
-      - uses: tauri-apps/tauri-action@v0
+      - name: Create Draft release
+        run: |
+          gh release create ${{ github.ref_name }} --draft --notes "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*"
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        with:
-          projectPath: ./app
-          tagName: ${{ github.ref_name }}
-          releaseName: ${{ github.ref_name }}
-          releaseBody: "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*"
-          includeUpdaterJson: true
-          updaterJsonPreferNsis: true
-          releaseDraft: true
-          prerelease: false
-          includeDebug: false
-          includeRelease: false
-          args: ${{ matrix.args }}
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
       - name: Wait for release
         run: |
@@ -136,11 +124,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
-      - name: Modify latest.json
+      - name: Create latest.json
         shell: pwsh
         working-directory: ./app
         run: |
-          gh release download "${{ github.ref_name }}" -p "latest.json"
           $output = npx tauri signer sign -k "${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}" -p "${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}" "../signed/winscript-installer.exe" 2>&1 | Out-String
           Write-Host $output
           if ($output -match 'Public signature:\s*(?<sig>\S+)') {
@@ -148,11 +135,25 @@ jobs:
           } else {
               Write-Error "Could not find public signature in output."
           }
-          $content = Get-Content -Path "latest.json" -Raw
-          $modified = $content -replace 'WinScript_\d+\.\d+\.\d+_x64-setup\.exe', 'winscript-installer.exe'
-          $modified = $modified -replace '("signature":\s*")[^"]*(")', "`$1$newSignature`$2"
-          $modified | Set-Content -Path "latest.json"
-          Get-Content -Path "latest.json"
+          $tag = "${{ github.ref_name }}"
+          $version = $tag -replace '^v', ''
+          $latest = @"
+          {
+            "version": "$version",
+            "platforms": {
+              "windows-x86_64": {
+                "signature": "",
+                "url": "https://github.com/flick9000/winscript/releases/download/$tag/winscript-installer.exe"
+              },
+              "windows-x86_64-nsis": {
+                "signature": "",
+                "url": "https://github.com/flick9000/winscript/releases/download/$tag/winscript-installer.exe"
+              }
+            }
+          }
+          "@
+          $modified = $latest -replace '("signature":\s*")[^"]*(")', "`$1$newSignature`$2"
+          $modified | Out-File -FilePath "latest.json"
           gh release upload "${{ github.ref_name }}" "latest.json" --clobber
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
