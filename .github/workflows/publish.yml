@@ -39,12 +39,9 @@ jobs:
         working-directory: ./app
         run: npm install
 
-      - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
-
       - name: Build Tauri portable
-        working-directory: ./app/src-tauri
-        run: cargo tauri build
+        working-directory: ./app
+        run: npm run tauri build
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
@@ -54,6 +51,7 @@ jobs:
         uses: actions/upload-artifact@v7
         id: portable
         with:
+          name: portable
           path: ./app/src-tauri/target/release/WinScript.exe
 
       - name: Sign Tauri portable
@@ -89,6 +87,7 @@ jobs:
         id: nsis
         uses: actions/upload-artifact@v7
         with:
+          name: installer
           path: ./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe
 
       - name: Sign Tauri installer
