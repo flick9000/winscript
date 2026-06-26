@@ -35,20 +35,24 @@ jobs:
         with:
           workspaces: "./app/src-tauri -> target"
 
-      - name: install frontend dependencies
+      - name: Install frontend dependencies
         working-directory: ./app
         run: npm install
 
       - name: Build Tauri portable
-        working-directory: ./app/src-tauri
-        run: cargo tauri build --release
+        working-directory: ./app
+        run: npm run tauri build
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
       - name: Upload Tauri portable
         uses: actions/upload-artifact@v7
         id: portable
         with:
+          name: portable
           path: ./app/src-tauri/target/release/WinScript.exe
-          archive: false
 
       - name: Sign Tauri portable
         uses: signpath/github-action-submit-signing-request@v2
@@ -57,7 +61,6 @@ jobs:
           organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
           project-slug: winscript
           signing-policy-slug: release-signing
-          artifact-configuration-slug: single-exe
 
           github-artifact-id: ${{ steps.portable.outputs.artifact-id }}
           wait-for-completion: true
@@ -70,18 +73,22 @@ jobs:
 
       - name: Build Tauri installer
         working-directory: ./app/src-tauri
-        run: cargo tauri bundle --bundles nsis
+        run: npm run tauri bundle -- --bundles nsis
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
 
       - name: Rename Tauri installer
         run: |
-          Get-Item "./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe" | Rename-Item -NewName winscript-installer.exe
+          Copy-Item "./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe" -Destination "./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe"
 
       - name: Upload Tauri installer
         id: nsis
         uses: actions/upload-artifact@v7
         with:
+          name: installer
           path: ./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe
-          archive: false
 
       - name: Sign Tauri installer
         uses: signpath/github-action-submit-signing-request@v2
@@ -90,29 +97,17 @@ jobs:
           organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
           project-slug: winscript
           signing-policy-slug: release-signing
-          artifact-configuration-slug: single-exe
+          artifact-configuration-slug: installer
 
           github-artifact-id: ${{ steps.nsis.outputs.artifact-id }}
           wait-for-completion: true
           output-artifact-directory: signed
 
-      - uses: tauri-apps/tauri-action@v0
+      - name: Create Draft release
+        run: |
+          gh release create ${{ github.ref_name }} --draft --notes "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*"
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        with:
-          projectPath: ./app
-          tagName: ${{ github.ref_name }}
-          releaseName: ${{ github.ref_name }}
-          releaseBody: "*The desktop app may be flagged as a threat by Windows Defender; however, this is a false positive. This occurs because the scripts you create with WinScript can modify system settings. Rest assured, WinScript is safe, transparent, and open-source.*"
-          includeUpdaterJson: true
-          updaterJsonPreferNsis: true
-          releaseDraft: true
-          prerelease: false
-          includeDebug: false
-          includeRelease: false
-          args: ${{ matrix.args }}
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
       - name: Wait for release
         run: |
@@ -129,11 +124,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
-      - name: Modify latest.json
+      - name: Create latest.json
         shell: pwsh
         working-directory: ./app
         run: |
-          gh release download "${{ github.ref_name }}" -p "latest.json"
           $output = npx tauri signer sign -k "${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}" -p "${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}" "../signed/winscript-installer.exe" 2>&1 | Out-String
           Write-Host $output
           if ($output -match 'Public signature:\s*(?<sig>\S+)') {
@@ -141,21 +135,27 @@ jobs:
           } else {
               Write-Error "Could not find public signature in output."
           }
-          $content = Get-Content -Path "latest.json" -Raw
-          $modified = $content -replace 'WinScript_\d+\.\d+\.\d+_x64-setup\.exe', 'winscript-installer.exe'
-          $modified = $modified -replace '("signature":\s*")[^"]*(")', "`$1$newSignature`$2"
-          $modified | Set-Content -Path "latest.json"
-          Get-Content -Path "latest.json"
+          $tag = "${{ github.ref_name }}"
+          $version = $tag -replace '^v', ''
+          $latest = @"
+          {
+            "version": "$version",
+            "platforms": {
+              "windows-x86_64": {
+                "signature": "",
+                "url": "https://github.com/flick9000/winscript/releases/download/$tag/winscript-installer.exe"
+              },
+              "windows-x86_64-nsis": {
+                "signature": "",
+                "url": "https://github.com/flick9000/winscript/releases/download/$tag/winscript-installer.exe"
+              }
+            }
+          }
+          "@
+          $modified = $latest -replace '("signature":\s*")[^"]*(")', "`$1$newSignature`$2"
+          $modified | Out-File -FilePath "latest.json"
           gh release upload "${{ github.ref_name }}" "latest.json" --clobber
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-
-      - name: Remove signature file
-        run: |
-          $VERSION = "${{ github.ref_name }}" -replace "^v", ""
-          gh release delete-asset "${{ github.ref_name }}" "WinScript_${VERSION}_x64-setup.exe.sig"
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
