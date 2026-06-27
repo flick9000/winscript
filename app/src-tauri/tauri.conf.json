@@ -36,6 +36,10 @@
     "createUpdaterArtifacts": true,
     "active": true,
     "windows": {
+      "signCommand": {
+        "cmd": "powershell",
+        "args": ["-ExecutionPolicy", "Bypass", "-File", "/signScript.ps1", "%1"]
+      },
       "nsis": {
         "installerIcon": "icons/favicon.ico",
         "sidebarImage": "icons/sidebar.bmp",
