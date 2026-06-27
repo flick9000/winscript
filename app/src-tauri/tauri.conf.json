@@ -38,7 +38,7 @@
     "windows": {
       "signCommand": {
         "cmd": "powershell",
-        "args": ["-ExecutionPolicy", "Bypass", "-File", "/signScript.ps1", "%1"]
+        "args": ["-ExecutionPolicy", "Bypass", "-File", "signScript.ps1", "%1"]
       },
       "nsis": {
         "installerIcon": "icons/favicon.ico",
