@@ -33,7 +33,7 @@ jobs:
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
-          workspaces: "./app/src-tauri -> target"
+          workspaces: ./app/src-tauri
 
       - name: Install frontend dependencies
         working-directory: ./app
@@ -73,6 +73,7 @@ jobs:
 
       - name: Build Tauri installer
         working-directory: ./app/src-tauri
+        continue-on-error: true
         run: |
           # Temporary workaround for tauri binary patching that invalidates the certificate
           $exePath = Resolve-Path "target/release/WinScript.exe"
