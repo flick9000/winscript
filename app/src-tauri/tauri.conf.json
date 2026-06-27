@@ -37,7 +37,7 @@
     "active": true,
     "windows": {
       "signCommand": {
-        "cmd": "powershell",
+        "cmd": "pwsh",
         "args": ["-ExecutionPolicy", "Bypass", "-File", "signScript.ps1", "%1"]
       },
       "nsis": {
