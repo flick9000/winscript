@@ -73,7 +73,22 @@ jobs:
 
       - name: Build Tauri installer
         working-directory: ./app/src-tauri
-        run: npm run tauri bundle -- --bundles nsis
+        run: |
+          # Temporary workaround for tauri binary patching that invalidates the certificate
+          $exePath = Resolve-Path "target/release/WinScript.exe"
+          Set-ItemProperty -Path $exePath -Name IsReadOnly -Value $true
+          try {
+            npm run tauri bundle -- --bundles=nsis
+          } finally {
+            $installerPath = Resolve-Path "target/release/bundle/nsis/WinScript_*_x64-setup.exe"
+            if (Test-Path $installerPath) {
+              Write-Host "Installer built, ignore tauri bundle error"
+              Set-ItemProperty -Path $exePath -Name IsReadOnly -Value $false 
+            } else {
+              Write-Error "Failed to build installer"
+              throw
+            }
+          }
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
