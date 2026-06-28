@@ -1,3 +1,50 @@
+// ── Locale auto-detection ──────────────────────────────────────────────
+
+function getSupportedLocales() {
+  const buttons = document.querySelectorAll(".use-lang-btn");
+  return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+}
+
+function detectBrowserLocale() {
+  const supported = getSupportedLocales();
+  const browserLocales = navigator.languages || (navigator.language ? [navigator.language] : []);
+
+  for (const rawLocale of browserLocales) {
+    // 1) Exact match: "zh-CN", "de", "fr", …
+    if (supported.has(rawLocale)) {
+      return rawLocale;
+    }
+    // 2) Prefix match: "de-AT" → "de", "fr-CA" → "fr"
+    const prefix = rawLocale.split("-")[0];
+    if (prefix !== rawLocale && supported.has(prefix)) {
+      return prefix;
+    }
+  }
+  return null;
+}
+
+function loadLocale() {
+  // Saved preference wins — redirect only if still supported and not already in the URL.
+  let locale = localStorage.getItem("locale");
+  if (locale) {
+    const supported = getSupportedLocales();
+    if (supported.has(locale)) {
+      if (locale !== "en" && !window.location.href.includes(locale)) {
+        window.location.href = `/${locale}`;
+      }
+    }
+    return;
+  }
+
+  // No saved preference — detect browser language and redirect only when it isn't English.
+  locale = detectBrowserLocale();
+  if (locale && locale !== "en") {
+    localStorage.setItem("locale", locale);
+    window.location.href = `/${locale}`;
+  }
+}
+// ────────────────────────────────────────────────────────────────────────
+
 document.querySelectorAll(".fa-solid").forEach((icon) => {
   icon.addEventListener("click", () => {
     const navbar = document.getElementById("sidebar");
@@ -234,8 +281,11 @@ document.querySelectorAll(".localization-entry").forEach((entry) => {
 
   useBtn.addEventListener("click", (e) => {
     e.stopPropagation();
+    localStorage.setItem("locale", locale);
     // Redirect to /[locale]
     // If locale is en, we could go to / but /en is safer/more consistent
     window.location.href = `/${locale}`;
   });
 });
+
+loadLocale();
