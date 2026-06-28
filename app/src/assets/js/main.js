@@ -21,12 +21,18 @@ async function loadConfig() {
 
     try {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const radios = document.querySelectorAll('input[type="radio"]');
       const contents = await readTextFile(path);
       const settings = JSON.parse(contents);
 
       checkboxes.forEach((checkbox) => {
         checkbox.checked = settings[checkbox.id];
         checkbox.dispatchEvent(new Event("change"));
+      });
+
+      radios.forEach((radio) => {
+        radio.checked = settings[radio.id];
+        radio.dispatchEvent(new Event("change"));
       });
     } catch (error) {
       console.error("Error loading config:", error);
@@ -143,6 +149,17 @@ function applyMica() {
   } catch (error) {
     console.error(error);
     document.body.style.backgroundColor = "var(--background)";
+  }
+}
+
+async function hasWindowsTerminal() {
+  try {
+    const check = new Command("where", ["wt"]);
+    const output = await check.execute();
+    return output.code === 0;
+  } catch (error) {
+    console.error(error);
+    return false;
   }
 }
 
@@ -404,10 +421,46 @@ document.getElementById("searchBar").addEventListener("input", () => {
   });
 });
 
+// Update apps button
+const updateBtn = document.getElementById("updateBtn");
+const packageManager = document.getElementById("packageManager");
+const chocoUpdateCommand = "choco upgrade all -y";
+const wingetUpdateCommand =
+  "winget upgrade --all --include-unknown --silent --accept-source-agreements --accept-package-agreements";
+
+async function updateApps(packageUpdateCommand) {
+  const hasWt = await hasWindowsTerminal();
+  const args = ["/c", "start"];
+  if (hasWt) args.push("wt");
+  args.push(
+    "powershell",
+    "-NoProfile",
+    "-NoLogo",
+    "-ExecutionPolicy",
+    "Bypass",
+    "-Command",
+    packageUpdateCommand,
+  );
+
+  new Command("cmd", args).execute();
+}
+
+updateBtn.addEventListener("click", () => {
+  if (packageManager.value === "chocolatey") {
+    updateApps(chocoUpdateCommand);
+  } else if (packageManager.value === "winget") {
+    updateApps(wingetUpdateCommand);
+  }
+});
+
 // Copy to clipboard button
 document.getElementById("copyBtn").addEventListener("click", function () {
   var textContent = document.getElementById("code").innerText;
-  navigator.clipboard.writeText(textContent);
+  try {
+    navigator.clipboard.writeText(textContent);
+  } catch (error) {
+    console.error("Error copying to clipboard:", error);
+  }
 });
 
 // Update the indicator text
@@ -471,17 +524,6 @@ document.getElementById("runBtn").addEventListener("click", async function () {
     await mkdir(dirPath, { recursive: true });
 
     await writeTextFile(filePath, textContent);
-
-    async function hasWindowsTerminal() {
-      try {
-        const check = new Command("where", ["wt"]);
-        const output = await check.execute();
-        return output.code === 0;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-    }
 
     const hasWt = await hasWindowsTerminal();
 
