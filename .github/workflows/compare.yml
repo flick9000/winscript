@@ -1,0 +1,100 @@
+name: Compare Files
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Prettier
+        run: npm install -g prettier
+
+      - name: Run Prettier Verification
+        shell: pwsh
+        run: |
+          $env:NODE_NO_WARNINGS = "1"
+
+          Write-Host "Running Prettier Check..."
+
+          foreach ($dir in @("app", "website")) {
+            if (Test-Path $dir) {
+              Push-Location $dir
+              npm install
+              npx prettier --log-level warn --check "**/*.{js,astro,css,json}"
+              Pop-Location
+            }
+          }
+
+      - name: Compare app & website files
+        shell: pwsh
+        run: |
+          $config = Get-Content -Raw -Path "app/astro.config.mjs"
+          if (!(Test-Path "app/astro.config.mjs")) {
+              Write-Host "Missing app/astro.config.mjs"
+              exit 1
+          }
+
+          if ($config -match 'locales:\s*\[([^\]]+)\]') {
+              $locales = $Matches[1] -replace "['""\s]" -split ','
+              $locales
+          }
+
+          $failed = $false
+
+          foreach ($locale in $locales) {
+              $appFile = "app/src/i18n/locales/$locale.json"
+              $webFile  = "website/src/i18n/locales/$locale.json"
+
+              if (!(Test-Path $appFile) -or !(Test-Path $webFile)) {
+                  Write-Host "Missing locale file for '$locale' in either app or website."
+                  $failed = $true
+                  continue
+              }
+
+              if ((Get-FileHash $appFile).Hash -ne (Get-FileHash $webFile).Hash) {
+                  Write-Host "$appFile does not match $webFile"
+                  $failed = $true
+              }
+          }
+
+          $appInstallApp = "app/src/assets/js/appinstall.js"
+          $appInstallWeb = "website/src/assets/js/appinstall.js"
+
+          if ((Test-Path $appInstallApp) -and (Test-Path $appInstallWeb)) {
+              if ((Get-FileHash $appInstallApp).Hash -ne (Get-FileHash $appInstallWeb).Hash) {
+                  Write-Host "$appInstallApp does not match $appInstallWeb"
+                  $failed = $true
+              }
+          }
+
+          $scriptsApp = "app/src/assets/js/scripts.js"
+          $scriptsWeb = "website/src/assets/js/scripts.js"
+
+          if ((Test-Path $scriptsApp) -and (Test-Path $scriptsWeb)) {
+              if ((Get-FileHash $scriptsApp).Hash -ne (Get-FileHash $scriptsWeb).Hash) {
+                  Write-Host "$scriptsApp does not match $scriptsWeb"
+                  $failed = $true
+              }
+          }
+
+          # Fail the workflow if there are any differences
+          if ($failed) {
+              Write-Error "Mismatched files detected between app and website directories."
+              exit 1
+          }
+
+          Write-Host "No differences found between app and website directories."

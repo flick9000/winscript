@@ -69,6 +69,10 @@ Feel free to leave a star and help the project reach more people!
 
 If you find this project helpful, consider supporting it by [buying me a coffee!](https://ko-fi.com/flick9000)
 
+## Code Signing
+
+📜 Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org).
+
 ## Contact
 
 📧 Have a question or want to get in touch? Reach out at contact@winscript.cc

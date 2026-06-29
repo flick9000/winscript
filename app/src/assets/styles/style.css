@@ -157,6 +157,7 @@ button {
   min-width: 130px;
   min-height: 32px;
   border-radius: 5px;
+  padding-inline: 12px;
   border: none;
   background-color: hsl(from var(--text) h s l / 0.055);
   border: 1px solid hsl(from var(--text) h s l / 0.02);
@@ -376,7 +377,7 @@ input:checked + .slider:before {
   align-items: center;
   gap: 8px;
   border: 1px solid hsl(from var(--text) h s l / 0.05);
-  border-bottom: 1px solid hsl(from var(--text) h s l / 0.5);
+  border-bottom: 1px solid hsl(from var(--text) h s l / 0.3);
   padding-inline: 12px;
   border-radius: 5px;
   min-height: 32px;

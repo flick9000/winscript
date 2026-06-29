@@ -508,6 +508,15 @@ const languages = [
           />
 
           <ScriptToggle
+            title={t["privacy.bitlocker.title"]}
+            inputId="bitlocker"
+            icon="/icons/privacy/bitlocker.svg"
+            description={t["privacy.bitlocker.desc"]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
             title={t["privacy.cloudsync.title"]}
             inputId="cloudsync"
             icon="/icons/privacy/cloud.png"
@@ -1052,6 +1061,14 @@ const languages = [
             defaultValue="chocolatey"
             icon="/icons/install/packagemanager.png"
           />
+
+          <ButtonEntry
+            title={t["install.update.title"]}
+            buttonTitle={t["install.update.btn"]}
+            buttonId="updateBtn"
+            icon="/icons/debloat/appupdates.png"
+          />
+
           <AppGroup
             title={t["install.drivers"]}
             icon="/icons/install/drivers.png"
