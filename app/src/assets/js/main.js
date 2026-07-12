@@ -2,7 +2,7 @@ import { writeTextFile, readTextFile, mkdir, remove, exists } from "@tauri-apps/
 import { tempDir, join, dirname } from "@tauri-apps/api/path";
 import { Command } from "@tauri-apps/plugin-shell";
 import { app } from "@tauri-apps/api";
-import { version } from "@tauri-apps/plugin-os";
+import { version, locale as getOsLocale } from "@tauri-apps/plugin-os";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
@@ -40,13 +40,48 @@ async function loadConfig() {
   }
 }
 
-async function loadLocale() {
-  let locale = localStorage.getItem("locale");
-  if (!locale) return;
-  if (locale === "en") return;
+function getSupportedLocales() {
+  const buttons = document.querySelectorAll(".use-lang-btn");
+  return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+}
 
-  if (!window.location.href.includes(locale)) {
-    window.location.href = `/${locale}`;
+async function detectOsLocale() {
+  const supported = getSupportedLocales();
+  const osLang = await getOsLocale();
+
+  if (!osLang) return null;
+
+  // Exact match
+  if (supported.has(osLang)) {
+    return osLang;
+  }
+
+  // Prefix match: "de-DE" → "de"
+  const prefix = osLang.split("-")[0];
+  if (prefix !== osLang && supported.has(prefix)) {
+    return prefix;
+  }
+  return null;
+}
+
+async function loadLocale() {
+  // Saved preference wins
+  let locale = localStorage.getItem("locale");
+  if (locale) {
+    const supported = getSupportedLocales();
+    if (supported.has(locale)) {
+      if (locale !== "en" && !window.location.href.includes(locale)) {
+        window.location.href = `/${locale}`;
+      }
+    }
+    return;
+  }
+
+  // No saved preference - use OS locale
+  const osLocale = await detectOsLocale();
+  if (osLocale && osLocale !== "en") {
+    localStorage.setItem("locale", osLocale);
+    window.location.href = `/${osLocale}`;
   }
 }
 

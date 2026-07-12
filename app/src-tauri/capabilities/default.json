@@ -32,6 +32,7 @@
     "core:window:allow-hide",
     "core:window:allow-show",
     "os:allow-hostname",
+    "os:allow-locale",
     "core:window:allow-set-effects",
     {
       "identifier": "fs:allow-read-text-file",
