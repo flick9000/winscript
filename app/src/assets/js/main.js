@@ -47,15 +47,16 @@ function getSupportedLocales() {
 
 async function detectOsLocale() {
   const supported = getSupportedLocales();
-  const osLang = await getOsLocale(); // e.g. "zh-CN", "de-DE", "fr-FR"
+  const osLang = await getOsLocale();
 
   if (!osLang) return null;
 
-  // 1) Exact match
+  // Exact match
   if (supported.has(osLang)) {
     return osLang;
   }
-  // 2) Prefix match: "de-DE" → "de", "fr-FR" → "fr"
+
+  // Prefix match: "de-DE" → "de"
   const prefix = osLang.split("-")[0];
   if (prefix !== osLang && supported.has(prefix)) {
     return prefix;
@@ -64,7 +65,7 @@ async function detectOsLocale() {
 }
 
 async function loadLocale() {
-  // Saved preference wins — redirect only if still supported and not already in the URL.
+  // Saved preference wins
   let locale = localStorage.getItem("locale");
   if (locale) {
     const supported = getSupportedLocales();
@@ -76,7 +77,7 @@ async function loadLocale() {
     return;
   }
 
-  // No saved preference — detect OS language and redirect only when it isn't English.
+  // No saved preference - use OS locale
   const osLocale = await detectOsLocale();
   if (osLocale && osLocale !== "en") {
     localStorage.setItem("locale", osLocale);

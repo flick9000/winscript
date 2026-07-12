@@ -1,5 +1,3 @@
-// ── Locale auto-detection ──────────────────────────────────────────────
-
 function getSupportedLocales() {
   const buttons = document.querySelectorAll(".use-lang-btn");
   return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
@@ -10,11 +8,11 @@ function detectBrowserLocale() {
   const browserLocales = navigator.languages || (navigator.language ? [navigator.language] : []);
 
   for (const rawLocale of browserLocales) {
-    // 1) Exact match: "zh-CN", "de", "fr", …
+    // Exact match: "de-AT" or "de",
     if (supported.has(rawLocale)) {
       return rawLocale;
     }
-    // 2) Prefix match: "de-AT" → "de", "fr-CA" → "fr"
+    // Prefix match: "de-AT" → "de"
     const prefix = rawLocale.split("-")[0];
     if (prefix !== rawLocale && supported.has(prefix)) {
       return prefix;
@@ -24,7 +22,7 @@ function detectBrowserLocale() {
 }
 
 function loadLocale() {
-  // Saved preference wins — redirect only if still supported and not already in the URL.
+  // Saved preference wins
   let locale = localStorage.getItem("locale");
   if (locale) {
     const supported = getSupportedLocales();
@@ -36,14 +34,13 @@ function loadLocale() {
     return;
   }
 
-  // No saved preference — detect browser language and redirect only when it isn't English.
+  // No saved preference — use browser locale
   locale = detectBrowserLocale();
   if (locale && locale !== "en") {
     localStorage.setItem("locale", locale);
     window.location.href = `/${locale}`;
   }
 }
-// ────────────────────────────────────────────────────────────────────────
 
 document.querySelectorAll(".fa-solid").forEach((icon) => {
   icon.addEventListener("click", () => {
