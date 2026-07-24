@@ -12,6 +12,25 @@
   --primary: #6040bf;
 }
 
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  details::details-content {
+    opacity: 0.3;
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      content-visibility 0.2s allow-discrete,
+      opacity 0.2s,
+      block-size 0.2s ease-in-out;
+  }
+  details[open]::details-content {
+    opacity: 1;
+    block-size: auto;
+  }
+}
+
 * {
   user-select: none;
 }
@@ -179,23 +198,6 @@ button:hover {
   height: fit-content;
   padding-inline: 48px;
   padding-block: 16px;
-}
-
-details {
-  interpolate-size: allow-keywords;
-  &::details-content {
-    opacity: 0.3;
-    block-size: 0;
-    overflow-y: clip;
-    transition:
-      content-visibility 0.2s allow-discrete,
-      opacity 0.2s,
-      block-size 0.2s ease-in-out;
-  }
-  &[open]::details-content {
-    opacity: 1;
-    block-size: auto;
-  }
 }
 
 details summary::-webkit-details-marker {
