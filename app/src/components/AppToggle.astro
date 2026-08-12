@@ -1,10 +1,11 @@
 ---
 // AppToggle.astro
-const { title, desc, inputId, offText = "Off", onText = "On" } = Astro.props;
+const { title, icon, desc, inputId, offText = "Off", onText = "On" } = Astro.props;
 ---
 
 <div class="content-entry">
   <div>
+    <img src={icon} />
     <div>
       <h1>{title}</h1>
       <p>{desc}</p>
