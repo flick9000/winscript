@@ -83,7 +83,7 @@ function appsInstallChocolatey() {
     { id: "VirtualBox", url: "virtualbox" },
     { id: "WinDirStat", url: "windirstat" },
     { id: "WindHawk", url: "windhawk" },
-    { id: "WingetUI", url: "wingetui" },
+    { id: "UniGetUI", url: "unigetui" },
     // Pro Tools
     { id: "AdvancedIpScanner", url: "advanced-ip-scanner" },
     { id: "AngryIpScanner", url: "angryip" },
@@ -362,7 +362,7 @@ function appsInstallWinget() {
     { id: "VirtualBox", url: "Oracle.VirtualBox" },
     { id: "WinDirStat", url: "WinDirStat.WinDirStat" },
     { id: "WindHawk", url: "RamenSoftware.Windhawk" },
-    { id: "WingetUI", url: "marticliment.UniGetUI" },
+    { id: "UniGetUI", url: "Devolutions.UniGetUI" },
     // Pro Tools
     { id: "AdvancedIpScanner", url: "Famatech.AdvancedIPScanner" },
     { id: "AngryIpScanner", url: "angryziber.AngryIPScanner" },
