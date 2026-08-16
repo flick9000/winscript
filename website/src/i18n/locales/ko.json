@@ -270,5 +270,6 @@
   "supportdialog.exit": "종료",
   "common.on": "켬",
   "common.off": "끔",
-  "common.open": "열기"
+  "common.open": "열기",
+  "common.none": "선택 안 함 (선택 해제)"
 }

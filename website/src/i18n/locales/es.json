@@ -270,5 +270,6 @@
   "supportdialog.exit": "Salir",
   "common.on": "Activado",
   "common.off": "Desactivado",
-  "common.open": "Abrir"
+  "common.open": "Abrir",
+  "common.none": "Ninguno (Borrar selección)"
 }

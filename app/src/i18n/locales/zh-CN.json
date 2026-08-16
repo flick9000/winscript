@@ -264,5 +264,6 @@
   "supportdialog.exit": "退出",
   "common.on": "开",
   "common.off": "关",
-  "common.open": "打开"
+  "common.open": "打开",
+  "common.none": "无（清除选择"
 }

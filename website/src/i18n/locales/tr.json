@@ -257,5 +257,6 @@
   "localizations.useLanguage": "Bu dili kullan",
   "common.on": "Açık",
   "common.off": "Kapalı",
-  "common.open": "Aç"
+  "common.open": "Aç",
+  "common.none": "Yok (Seçimi Temizle)"
 }

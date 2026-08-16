@@ -270,5 +270,6 @@
   "supportdialog.exit": "Schließen",
   "common.on": "An",
   "common.off": "Aus",
-  "common.open": "Öffnen"
+  "common.open": "Öffnen",
+  "common.none": "Keine (Auswahl aufheben)"
 }

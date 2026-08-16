@@ -257,5 +257,6 @@
   "localizations.useLanguage": "Changer de langue",
   "common.on": "Activé",
   "common.off": "Désactivé",
-  "common.open": "Ouvrir"
+  "common.open": "Ouvrir",
+  "common.none": "Aucun (Effacer la sélection)"
 }

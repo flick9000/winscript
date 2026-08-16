@@ -257,5 +257,6 @@
   "localizations.useLanguage": "Chuyển đổi ngôn ngữ",
   "common.on": "Bật",
   "common.off": "Tắt",
-  "common.open": "Mở"
+  "common.open": "Mở",
+  "common.none": "Không (Xóa lựa chọn)"
 }

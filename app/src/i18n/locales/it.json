@@ -259,5 +259,6 @@
   "localizations.useLanguage": "Usa questa lingua",
   "common.on": "Attivo",
   "common.off": "Disattivo",
-  "common.open": "Apri"
+  "common.open": "Apri",
+  "common.none": "Nessuno (Cancella selezione)"
 }

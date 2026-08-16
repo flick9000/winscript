@@ -257,5 +257,6 @@
   "localizations.useLanguage": "Byt språk",
   "common.on": "På",
   "common.off": "Av",
-  "common.open": "Öppna"
+  "common.open": "Öppna",
+  "common.none": "Ingen (Rensa val)"
 }

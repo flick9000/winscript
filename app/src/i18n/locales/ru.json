@@ -257,5 +257,6 @@
   "localizations.useLanguage": "Переключить язык",
   "common.on": "Вкл",
   "common.off": "Выкл",
-  "common.open": "Открыть"
+  "common.open": "Открыть",
+  "common.none": "Нет (Очистить выбор)"
 }

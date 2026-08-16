@@ -270,5 +270,6 @@
   "supportdialog.exit": "Kilépés",
   "common.on": "Be",
   "common.off": "Ki",
-  "common.open": "Megnyitás"
+  "common.open": "Megnyitás",
+  "common.none": "Nincs (Kijelölés törlése)"
 }
