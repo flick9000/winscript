@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar.astro";
 import Tab from "./Tab.astro";
 import ScriptToggle from "./ScriptToggle.astro";
 import ScriptGroup from "./ScriptGroup.astro";
+import DebloatGroup from "./DebloatGroup.astro";
 import AppGroup from "./AppGroup.astro";
 import MockupCode from "./MockupCode.astro";
 import ButtonEntry from "./ButtonEntry.astro";
@@ -250,36 +251,6 @@ const languages = [
         </Tab>
         <Tab tab="debloat">
           <ScriptGroup
-            title={t["debloat.apps.title"]}
-            description={t["debloat.apps.desc"]}
-            icon="/icons/debloat/app.png"
-            tools={[
-              {
-                title: t["debloat.apps.thirdparty"],
-                inputId: "thirdparty",
-                description: t["debloat.apps.thirdparty.desc"],
-              },
-              {
-                title: t["debloat.apps.msapps"],
-                inputId: "msapps",
-                description: t["debloat.apps.msapps.desc"],
-              },
-              {
-                title: t["debloat.apps.extensions"],
-                inputId: "extensions",
-                description: t["debloat.apps.extensions.desc"],
-              },
-              {
-                title: t["debloat.apps.xbox"],
-                inputId: "xbox",
-                description: t["debloat.apps.xbox.desc"],
-              },
-            ]}
-            offText={t["common.off"]}
-            onText={t["common.on"]}
-          />
-
-          <ScriptGroup
             title={t["debloat.features.title"]}
             description={t["debloat.features.desc"]}
             icon="/icons/debloat/features.png"
@@ -333,6 +304,384 @@ const languages = [
                 inputId: "aifiles",
               },
             ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <DebloatGroup
+            title={t["debloat.apps.msapps"]}
+            desc={t["debloat.apps.msapps.desc"]}
+            icon="/icons/debloat/app.png"
+            id="microsoft"
+            apps={[
+              {
+                title: "3D Builder",
+                appId: "Microsoft.3DBuilder",
+              },
+              {
+                title: "3D Viewer",
+                appId: "Microsoft.Microsoft3DViewer",
+              },
+              {
+                title: "App Connector",
+                appId: "Microsoft.AppConnector",
+              },
+              {
+                title: "Bing Food & Drink",
+                appId: "Microsoft.BingFoodAndDrink",
+              },
+              {
+                title: "Bing Health & Fitness",
+                appId: "Microsoft.BingHealthAndFitness",
+              },
+              {
+                title: "Bing Search",
+                appId: "*BingSearch*",
+              },
+              {
+                title: "Bing Translator",
+                appId: "Microsoft.BingTranslator",
+              },
+              {
+                title: "Bing Travel",
+                appId: "Microsoft.BingTravel",
+              },
+              {
+                title: "Clipchamp",
+                appId: "Clipchamp.Clipchamp",
+              },
+              {
+                title: "Clock (Alarms & Clock)",
+                appId: "Microsoft.WindowsAlarms",
+              },
+              {
+                title: "Cortana",
+                appId: "Microsoft.549981C3F5F10",
+              },
+              {
+                title: "Feedback Hub",
+                appId: "Microsoft.WindowsFeedbackHub",
+              },
+              {
+                title: "Get Help",
+                appId: "Microsoft.GetHelp",
+              },
+              {
+                title: "Get Started",
+                appId: "Microsoft.Getstarted",
+              },
+              {
+                title: "Groove Music",
+                appId: "Microsoft.ZuneMusic",
+              },
+              {
+                title: "GroupMe",
+                appId: "Microsoft.GroupMe10",
+              },
+              {
+                title: "Mail and Calendar",
+                appId: "microsoft.windowscommunicationsapps",
+              },
+              {
+                title: "Microsoft 365 (Office Hub)",
+                appId: "Microsoft.MicrosoftOfficeHub",
+              },
+              {
+                title: "Microsoft Family Safety",
+                appId: "MicrosoftCorporationII.MicrosoftFamily",
+              },
+              {
+                title: "Microsoft Lens",
+                appId: "Microsoft.Office.Lens",
+              },
+              {
+                title: "Microsoft Messaging",
+                appId: "Microsoft.WindowsSoundRecorder",
+              },
+              {
+                title: "Microsoft News",
+                appId: "Microsoft.News",
+              },
+              {
+                title: "Microsoft People",
+                appId: "Microsoft.People",
+              },
+              {
+                title: "Microsoft Solitaire Collection",
+                appId: "Microsoft.MicrosoftSolitaireCollection",
+              },
+              {
+                title: "Microsoft Teams",
+                appId: "MSTeams",
+              },
+              {
+                title: "Microsoft To Do",
+                appId: "Microsoft.Todos",
+              },
+              {
+                title: "Microsoft Wallet",
+                appId: "Microsoft.Wallet",
+              },
+              {
+                title: "Microsoft Whiteboard",
+                appId: "Microsoft.Whiteboard",
+              },
+              {
+                title: "Minecraft (Bedrock Edition)",
+                appId: "Microsoft.MinecraftUWP",
+              },
+              {
+                title: "Mixed Reality Portal",
+                appId: "Microsoft.MixedReality.Portal",
+              },
+              {
+                title: "MSN Money",
+                appId: "Microsoft.BingFinance",
+              },
+              {
+                title: "MSN News",
+                appId: "Microsoft.BingNews",
+              },
+              {
+                title: "MSN Sports",
+                appId: "Microsoft.BingSports",
+              },
+              {
+                title: "MSN Weather",
+                appId: "Microsoft.BingWeather",
+              },
+              {
+                title: "OneNote",
+                appId: "Microsoft.Office.OneNote",
+              },
+              {
+                title: "Outlook for Windows",
+                appId: "Microsoft.OutlookForWindows",
+              },
+              {
+                title: "Paid Wi-Fi & Cellular",
+                appId: "Microsoft.OneConnect",
+              },
+              {
+                title: "Paint",
+                appId: "Microsoft.MSPaint",
+              },
+              {
+                title: "Phone",
+                appId: "Microsoft.CommsPhone",
+              },
+              {
+                title: "Phone Link",
+                appId: "Microsoft.YourPhone",
+              },
+              {
+                title: "Print 3D",
+                appId: "Microsoft.Print3D",
+              },
+              {
+                title: "Quick Assist",
+                appId: "*QuickAssist*",
+              },
+              {
+                title: "Skype",
+                appId: "Microsoft.SkypeApp",
+              },
+              {
+                title: "Sticky Notes",
+                appId: "Microsoft.MicrosoftStickyNotes",
+              },
+              {
+                title: "Sway",
+                appId: "Microsoft.Office.Sway",
+              },
+              {
+                title: "Windows User Experience Improvement Program",
+                appId: "*UserExperienceImprovementProgram*",
+              },
+              {
+                title: "Windows Maps",
+                appId: "Microsoft.WindowsMaps",
+              },
+              {
+                title: "Windows Phone Companion",
+                appId: "Microsoft.WindowsPhone",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <DebloatGroup
+            title={t["debloat.apps.thirdparty"]}
+            desc={t["debloat.apps.thirdparty.desc"]}
+            icon="/icons/debloat/thirdparty.svg"
+            id="thirdparty"
+            apps={[
+              {
+                title: "ACG Media Player",
+                appId: "*ACGMediaPlayer*",
+              },
+              {
+                title: "Actipro Software",
+                appId: "*ActiproSoftwareLLC*",
+              },
+              {
+                title: "Adobe Photoshop Express",
+                appId: "*AdobeSystemsIncorporated.AdobePhotoshopExpress*",
+              },
+              {
+                title: "Adobe Photoshop Express",
+                appId: "*AdobePhotoshopExpress*",
+              },
+              {
+                title: "Bubble Witch 3 Saga",
+                appId: "*BubbleWitch3Saga*",
+              },
+              {
+                title: "Candy Crush",
+                appId: "*CandyCrush*",
+              },
+              {
+                title: "Dolby",
+                appId: "*Dolby*",
+              },
+              {
+                title: "Dropbox",
+                appId: "*DropboxOEM*",
+              },
+              {
+                title: "Duolingo",
+                appId: "*Duolingo-LearnLanguagesforFree*",
+              },
+              {
+                title: "Eclipse Manager",
+                appId: "*EclipseManager*",
+              },
+              {
+                title: "Facebook",
+                appId: "*Facebook*",
+              },
+              {
+                title: "Flipboard",
+                appId: "*Flipboard*",
+              },
+              {
+                title: "Hidden City",
+                appId: "*HiddenCity*",
+              },
+              {
+                title: "Hulu",
+                appId: "*Hulu*",
+              },
+              {
+                title: "iHeartRadio",
+                appId: "ClearChannelRadioDigital.iHeartRadio",
+              },
+              {
+                title: "LinkedIn",
+                appId: "*LinkedInForWindows*",
+              },
+              {
+                title: "McAfee",
+                appId: "*McAfee*",
+              },
+              {
+                title: "Minecraft",
+                appId: "*Minecraft*",
+              },
+              {
+                title: "Netflix",
+                appId: "*Netflix*",
+              },
+              {
+                title: "OneCalendar",
+                appId: "*OneCalendar*",
+              },
+              {
+                title: "Pandora",
+                appId: "*PandoraMediaInc*",
+              },
+              {
+                title: "Random Salad Games",
+                appId: "*RandomSaladGamesLLC*",
+              },
+              {
+                title: "Royal Revolt",
+                appId: "*Royal Revolt*",
+              },
+              {
+                title: "Shazam",
+                appId: "ShazamEntertainmentLtd.Shazam",
+              },
+              {
+                title: "Speed Test",
+                appId: "*Speed Test*",
+              },
+              {
+                title: "Spotify",
+                appId: "SpotifyAB.SpotifyMusic",
+              },
+              {
+                title: "Sway",
+                appId: "*Sway*",
+              },
+              {
+                title: "Twitter",
+                appId: "*Twitter*",
+              },
+              {
+                title: "Viber",
+                appId: "*Viber*",
+              },
+              {
+                title: "Wunderlist",
+                appId: "*Wunderlist*",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <DebloatGroup
+            title={t["debloat.apps.extensions"]}
+            desc={t["debloat.apps.extensions.desc"]}
+            icon="/icons/debloat/extension.svg"
+            id="extensions"
+            apps={[
+              {
+                title: "HEIF Image Extension",
+                appId: "Microsoft.HEIFImageExtension",
+              },
+              {
+                title: "VP9 Video Extensions",
+                appId: "Microsoft.VP9VideoExtensions",
+              },
+              {
+                title: "WebP Image Extension",
+                appId: "Microsoft.WebpImageExtension",
+              },
+              {
+                title: "HEVC Video Extension",
+                appId: "Microsoft.HEVCVideoExtension",
+              },
+              {
+                title: "Raw Image Extension",
+                appId: "Microsoft.RawImageExtension",
+              },
+              {
+                title: "Web Media Extensions",
+                appId: "Microsoft.WebMediaExtensions",
+              },
+            ]}
+            offText={t["common.off"]}
+            onText={t["common.on"]}
+          />
+
+          <ScriptToggle
+            title={t["debloat.apps.xbox"]}
+            description={t["debloat.apps.xbox.desc"]}
+            inputId="xbox"
+            icon="/icons/debloat/xbox.svg"
             offText={t["common.off"]}
             onText={t["common.on"]}
           />
