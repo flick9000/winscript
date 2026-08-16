@@ -291,6 +291,19 @@ details > div.content-entry {
   height: 56px;
 }
 
+/* styles for app details  */
+details.app-details > div.content-entry {
+  padding-left: 12px;
+}
+
+details.app-details h1 {
+  text-wrap: nowrap !important;
+}
+
+details.app-details > div.content-entry img {
+  max-width: 20px;
+}
+
 details[open] .chevron {
   transform: rotate(180deg);
   transition: transform 0.2s ease-out;
