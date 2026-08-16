@@ -1,10 +1,10 @@
 # WinScript
 
-[![Downloads](https://www.shieldcn.dev/github/downloads/flick9000/winscript.svg?variant=outline&size=sm&color=E0E0E0)](https://github.com/flick9000/winscript/releases)
-[![Release](https://www.shieldcn.dev/github/release/flick9000/winscript.svg?variant=outline&size=sm&color=E0E0E0)](https://github.com/flick9000/winscript/releases/latest)
-[![GitHub Sponsors](https://www.shieldcn.dev/badge/Sponsor-GitHub-ea4aaa.svg?logo=githubsponsors&variant=outline&size=sm&color=E0E0E0)](https://github.com/sponsors/flick9000)
-[![Ko-Fi](https://www.shieldcn.dev/badge/Ko--fi-sponsor-FF5E5B.svg?logo=kofi&variant=outline&size=sm&color=E0E0E0)](https://ko-fi.com/flick9000)
-[![Discussions](https://shieldcn.dev/badge/GitHub-Discussions.svg?variant=outline&logo=github&color=E0E0E0)](https://github.com/flick9000/winscript/discussions)
+<a href="https://github.com/flick9000/winscript"><picture><source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/stars/flick9000/winscript.svg?variant=outline&amp;size=sm&amp;mode=dark"><img alt="GitHub Stars" src="https://www.shieldcn.dev/github/stars/flick9000/winscript.svg?variant=outline&amp;size=sm&amp;mode=light"></picture></a>
+<a href="https://github.com/flick9000/winscript/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/downloads/flick9000/winscript.svg?variant=outline&amp;size=sm&amp;mode=dark"><img alt="GitHub Downloads" src="https://www.shieldcn.dev/github/downloads/flick9000/winscript.svg?variant=outline&amp;size=sm&amp;mode=light"></picture></a>
+<a href="https://github.com/flick9000/winscript/releases/latest"><picture><source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/release/flick9000/winscript.svg?variant=outline&amp;size=sm&amp;mode=dark"><img alt="GitHub Release" src="https://www.shieldcn.dev/github/release/flick9000/winscript.svg?variant=outline&amp;size=sm&amp;mode=light"></picture></a>
+<a href="https://github.com/sponsors/flick9000"><picture><source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/badge/Sponsor-GitHub.svg?logo=githubsponsors&amp;variant=outline&amp;size=sm&amp;mode=dark"><img alt="GitHub Sponsors" src="https://www.shieldcn.dev/badge/Sponsor-GitHub.svg?logo=githubsponsors&amp;variant=outline&amp;size=sm&amp;mode=light"></picture></a>
+<a href="https://ko-fi.com/flick9000"><picture><source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/badge/Ko--fi-sponsor.svg?logo=kofi&amp;variant=outline&amp;size=sm&amp;mode=dark"><img alt="Ko-fi" src="https://www.shieldcn.dev/badge/Ko--fi-sponsor.svg?logo=kofi&amp;variant=outline&amp;size=sm&amp;mode=light"></picture></a>
 
 WinScript is a lightweight and easy to use tool designed to improve and customize your Windows experience. Easily remove bloatware, disable telemetry, improve Windows performance, bulk install your favorite apps, and more.
 <br>
