@@ -31,14 +31,11 @@ const { title, desc, icon, id, apps, offText, onText } = Astro.props;
       </div>
     </div>
     <div class="checkbox-wrapper">
-      <span class="indicator" id={`indicator-${id}`} data-on={onText} data-off={offText}
-        >{offText}</span
-      >
+      <img class="chevron" src="/icons/chevron-down.png" alt="" />
       <label class="switch">
         <input id={`debloat-${id}`} type="checkbox" />
         <span class="slider"></span>
       </label>
-      <img class="chevron" src="/icons/chevron-down.png" alt="" />
     </div>
   </summary>
   {

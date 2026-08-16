@@ -1110,7 +1110,6 @@ const presets = {
     "cleanmgr",
     "cleantemp",
     "sfc",
-    "thirdparty",
     "consumerfeatures",
     "recall",
     "msstoreupdates",
