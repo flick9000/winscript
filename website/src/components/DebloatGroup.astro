@@ -1,0 +1,98 @@
+---
+// AppGroup.astro
+import DebloatToggle from "./DebloatToggle.astro";
+
+interface App {
+  title: string;
+  desc?: string;
+  appId: string;
+}
+
+interface Props {
+  title: string;
+  desc: string;
+  icon: string;
+  id: string;
+  apps: App[];
+  offText?: string;
+  onText?: string;
+}
+
+const { title, desc, icon, id, apps, offText, onText } = Astro.props;
+---
+
+<details>
+  <summary class="content-entry">
+    <div>
+      <img src={icon} alt={title} />
+      <div>
+        <h1>{title}</h1>
+        <p>{desc}</p>
+      </div>
+    </div>
+    <div class="checkbox-wrapper">
+      <img class="chevron" src="/icons/chevron-down.png" alt="" />
+      <label class="switch">
+        <input id={`debloat-${id}`} type="checkbox" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </summary>
+  {
+    apps.map((tool) => (
+      <DebloatToggle
+        title={tool.title}
+        desc={tool.desc}
+        appId={tool.appId}
+        offText={offText}
+        onText={onText}
+      />
+    ))
+  }
+</details>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const groupCheckbox = document.querySelectorAll<HTMLInputElement>("input[id^=debloat-]");
+    const debloatApps = document.querySelectorAll<HTMLInputElement>("[js-target=debloat]");
+
+    groupCheckbox.forEach((group) => {
+      group.addEventListener("change", () => {
+        const groupContainer = group.closest("details");
+        if (!groupContainer) return;
+
+        const groupItems = groupContainer.querySelectorAll<HTMLInputElement>("[js-target=debloat]");
+        groupItems.forEach((item) => {
+          item.checked = group.checked;
+          item.dispatchEvent(new Event("change"));
+        });
+      });
+    });
+
+    function updateDebloatScript() {
+      const allSelectedAppIds = [
+        ...document.querySelectorAll<HTMLInputElement>("[js-target=debloat]:checked"),
+      ].map((input) => `"${input.id}"`);
+      const debloatContainer = document.querySelector(".debloat-container") as HTMLDivElement;
+      const debloatScript = document.getElementById("debloatScript");
+      if (!debloatContainer || !debloatScript) return;
+
+      debloatContainer.style.display = allSelectedAppIds.length > 0 ? "block" : "none";
+
+      const command =
+        allSelectedAppIds.length > 0
+          ? `@(${allSelectedAppIds}) | ForEach-Object { $pkg = Get-AppxPackage $_; if ($pkg) { $pkg | Remove-AppxPackage; Write-Host "Removed: $_" } }`
+          : "";
+
+      debloatScript.textContent = command;
+    }
+
+    debloatApps.forEach((app) => {
+      app.addEventListener("change", () => {
+        updateDebloatScript();
+      });
+    });
+
+    updateDebloatScript();
+  });
+</script>
