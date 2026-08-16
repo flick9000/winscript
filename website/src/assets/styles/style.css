@@ -90,6 +90,7 @@ body {
 h1 {
   line-height: 1.5;
   text-wrap: balance;
+  letter-spacing: -0.01em;
 }
 
 button {
