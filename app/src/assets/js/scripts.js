@@ -860,11 +860,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     taskbarwidgets: [
       "Write-Host '-- Disabling Taskbar Widgets' -ForegroundColor Green",
-      // TaskbarDa is blocked by Windows 11 24H2
-      // 'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "TaskbarDa" /t REG_DWORD /d 0 /f',
       'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\NewsAndInterests\\AllowNewsAndInterests" /v "value" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds" /v "EnableFeeds" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent" /v "DisableCloudOptimizedContent" /t REG_DWORD /d 1 /f',
+      // TaskbarDa is blocked by Windows 11 24H2
+      // 'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "TaskbarDa" /t REG_DWORD /d 0 /f',
     ],
     numlockstartup: [
       "Write-Host '-- Disabling Num Lock on Startup' -ForegroundColor Green",
