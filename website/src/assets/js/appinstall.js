@@ -245,7 +245,10 @@ function appsInstallChocolatey() {
   function updateCommandDisplay() {
     const checkedUrls = getCheckedUrls();
     const allUrls = [...checkedUrls, ...window.manualURLs];
-    const finalURL = allUrls.map((url) => `\\"${url}\\"`).join(", ");
+    const finalURL = allUrls
+      .filter((url) => url && url.trim() !== "")
+      .map((url) => `\\"${url}\\"`)
+      .join(", ");
     const refreshEnv =
       '$env:Path = [System.Environment]::GetEnvironmentVariable(\\"Path\\",\\"Machine\\") + \\";\\" + [System.Environment]::GetEnvironmentVariable(\\"Path\\",\\"User\\")';
 
@@ -530,7 +533,10 @@ function appsInstallWinget() {
   function updateCommandDisplay() {
     const checkedUrls = getCheckedUrls();
     const allUrls = [...checkedUrls, ...window.manualURLs];
-    const finalURL = allUrls.map((url) => `\\"${url}\\"`).join(", ");
+    const finalURL = allUrls
+      .filter((url) => url && url.trim() !== "")
+      .map((url) => `\\"${url}\\"`)
+      .join(", ");
 
     const command =
       allUrls.length > 0
