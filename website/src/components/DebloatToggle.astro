@@ -1,0 +1,20 @@
+---
+// DebloatToggle.astro
+const { title, desc, appId, offText = "Off", onText = "On" } = Astro.props;
+---
+
+<div class="content-entry">
+  <div>
+    <div>
+      <h1>{title}</h1>
+      <p>{desc}</p>
+    </div>
+  </div>
+  <div class="checkbox-wrapper">
+    <span class="indicator" id="indicator" data-on={onText} data-off={offText}>{offText}</span>
+    <label class="switch">
+      <input js-target="debloat" id={appId} type="checkbox" />
+      <span class="slider"></span>
+    </label>
+  </div>
+</div>
