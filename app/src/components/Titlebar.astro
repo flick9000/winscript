@@ -96,15 +96,18 @@
         background-color: transparent !important;
         border: none !important;
       }
+      button.close:hover {
+        color: var(--background);
+      }
     }
-    button:hover {
-      background-color: hsl(from var(--text) h s l / 0.06);
+    .titlebar button:hover {
+      background-color: hsl(from var(--text) h s l / 0.06) !important;
       box-shadow:
         0px -5px 0px 0px hsl(from var(--text) h s l / 0.06),
         0px 0px 0px 0px transparent;
     }
-    button.close:hover {
-      background-color: hsl(from #c42b1c h s l / 1);
+    .titlebar button.close:hover {
+      background-color: hsl(from #c42b1c h s l / 1) !important;
       box-shadow:
         0px -5px 0px 0px #c42b1c,
         5px 0px 0px 0px #c42b1c;
