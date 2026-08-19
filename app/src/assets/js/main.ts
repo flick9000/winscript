@@ -298,10 +298,8 @@ tabs.forEach((tab, index) => {
 // Import & Export
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
-const checkboxes = document.querySelectorAll(
-  'input[type="checkbox"]',
-) as NodeListOf<HTMLInputElement>;
-const radios = document.querySelectorAll('input[type="radio"]') as NodeListOf<HTMLInputElement>;
+const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
 
 exportBtn?.addEventListener("click", async () => {
   let settings: Record<string, boolean> = {};
