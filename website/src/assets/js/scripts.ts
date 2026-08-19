@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const parentDiv = document.querySelector(".allScripts");
 
-  function addScript(className, scriptContent) {
+  function addScript(className: string, scriptContent: string) {
+    if (!parentDiv) return;
     const newDiv = document.createElement("div");
     const codeElement = document.createElement("code");
 
@@ -11,14 +12,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     newDiv.appendChild(codeElement);
     parentDiv.appendChild(newDiv);
-    hljs.highlightElement(codeElement);
+    (window as any).hljs.highlightElement(codeElement);
   }
 
-  function removeScripts(className) {
+  function removeScripts(className: string) {
+    if (!parentDiv) return;
     parentDiv.querySelectorAll(`.${className}`).forEach((el) => el.remove());
   }
 
-  const scripts = {
+  const scripts: Record<string, string[]> = {
     microsoftstore: [
       "Write-Host '-- Uninstalling Microsoft Store' -ForegroundColor Green",
       'Get-AppxPackage "*Microsoft.WindowsStore*" | Remove-AppxPackage',
@@ -1020,11 +1022,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   checkboxItems.forEach((id) => {
     const checkbox = document.getElementById(id);
-    if (checkbox) {
+    if (checkbox instanceof HTMLInputElement) {
       checkbox.addEventListener("change", () => {
-        checkbox.checked
-          ? scripts[id]?.forEach((script) => addScript(id, script))
-          : removeScripts(id);
+        if (checkbox.checked) {
+          scripts[id]?.forEach((script) => addScript(id, script));
+        } else {
+          removeScripts(id);
+        }
       });
     }
   });
@@ -1032,7 +1036,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const radios = document.querySelectorAll('input[type="radio"]');
   radios.forEach((radio) => {
     radio.addEventListener("change", () => {
-      if (radio.checked) {
+      if (radio instanceof HTMLInputElement && radio.checked) {
         const groupName = radio.name;
 
         document
@@ -1050,19 +1054,23 @@ function uncheckAll() {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   const radios = document.querySelectorAll('input[type="radio"]');
   const indicator = document.querySelectorAll(".indicator");
+  const manualList = document.getElementById("manualList");
 
   window.manualURLs = [];
-  document.getElementById("manualList").innerHTML = "";
+
+  if (manualList) {
+    manualList.innerHTML = "";
+  }
 
   checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
+    if (checkbox instanceof HTMLInputElement && checkbox.checked) {
       checkbox.checked = false;
       checkbox.dispatchEvent(new Event("change"));
     }
   });
 
   radios.forEach((radio) => {
-    if (radio.checked) {
+    if (radio instanceof HTMLInputElement && radio.checked) {
       radio.checked = false;
       radio.dispatchEvent(new Event("change"));
     }
@@ -1072,15 +1080,20 @@ function uncheckAll() {
     indicator.textContent = indicator.getAttribute("data-off") || "Off";
   });
 
-  document.querySelector(".chocolatey-container").style.display = "none";
-  document.querySelector(".winget-container").style.display = "none";
-  document.querySelector(".div-install").style.display = "none";
+  const chocolateyContainer = document.querySelector(".chocolatey-container") as HTMLDivElement;
+  const wingetContainer = document.querySelector(".winget-container") as HTMLDivElement;
+  const divInstall = document.querySelector(".div-install") as HTMLDivElement;
+  if (!chocolateyContainer || !wingetContainer || !divInstall) return;
+
+  chocolateyContainer.style.display = "none";
+  wingetContainer.style.display = "none";
+  divInstall.style.display = "none";
 }
 
-document.getElementById("uncheckAll").addEventListener("click", uncheckAll);
+document.getElementById("uncheckAll")?.addEventListener("click", uncheckAll);
 
 // Presets
-const presets = {
+const presets: Record<string, string[]> = {
   basic: [
     "cleanmgr",
     "cleantemp",
@@ -1253,11 +1266,11 @@ const presets = {
   ],
 };
 
-const applyPreset = (ids) => {
+const applyPreset = (ids: string[]) => {
   uncheckAll();
   ids.forEach((id) => {
     const checkbox = document.getElementById(id);
-    if (checkbox) {
+    if (checkbox instanceof HTMLInputElement) {
       checkbox.checked = true;
       checkbox.dispatchEvent(new Event("change"));
     }
@@ -1267,5 +1280,5 @@ const applyPreset = (ids) => {
 ["basic", "strict", "extreme"].forEach((preset) =>
   document
     .getElementById(`${preset}Preset`)
-    .addEventListener("click", () => applyPreset(presets[preset])),
+    ?.addEventListener("click", () => applyPreset(presets[preset])),
 );
