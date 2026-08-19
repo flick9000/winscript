@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig(async () => ({
-  root: "src", // Change root to src
+  root: "src",
   resolve: { alias: { "~": "" } }, // Remove /src from resolved paths
   server: {
     // Tauri expects a fixed port, fail if that port is not available
@@ -14,8 +14,8 @@ export default defineConfig(async () => ({
   },
   build: {
     target: "esnext",
-    outDir: "../dist", // Change outDir to dist
-    emptyOutDir: true, // Empty outDir before building
+    outDir: "../dist",
+    emptyOutDir: true,
 
     minify: !process.env.TAURI_ENV_DEBUG ? "esbuild" : false,
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
