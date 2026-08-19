@@ -1,9 +1,9 @@
-import { writeTextFile, readTextFile, mkdir, remove, exists } from "@tauri-apps/plugin-fs";
-import { tempDir, join, dirname } from "@tauri-apps/api/path";
+import { writeTextFile, readTextFile, mkdir } from "@tauri-apps/plugin-fs";
+import { tempDir, join } from "@tauri-apps/api/path";
 import { Command } from "@tauri-apps/plugin-shell";
 import { app } from "@tauri-apps/api";
 import { version, locale as getOsLocale } from "@tauri-apps/plugin-os";
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import { Effect, getCurrentWindow } from "@tauri-apps/api/window";
 import { ask, save, open } from "@tauri-apps/plugin-dialog";
 import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
@@ -13,15 +13,19 @@ import { getMatches } from "@tauri-apps/plugin-cli";
 async function loadConfig() {
   const matches = await getMatches();
   if (matches.args.import) {
-    const path = matches.args.import.value;
+    const path = matches.args.import.value?.toString();
 
     if (!path) {
       return;
     }
 
     try {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      const radios = document.querySelectorAll('input[type="radio"]');
+      const checkboxes = document.querySelectorAll(
+        'input[type="checkbox"]',
+      ) as NodeListOf<HTMLInputElement>;
+      const radios = document.querySelectorAll(
+        'input[type="radio"]',
+      ) as NodeListOf<HTMLInputElement>;
       const contents = await readTextFile(path);
       const settings = JSON.parse(contents);
 
@@ -115,7 +119,7 @@ async function checkForUpdates() {
       cancelLabel: "Later",
     });
 
-    if (updateAsk === true) {
+    if (update && updateAsk === true) {
       await update.downloadAndInstall();
       await relaunch();
     } else {
@@ -129,9 +133,9 @@ async function checkForUpdates() {
 
 async function isInstalled() {
   const update = await check();
+  if (!update) return;
 
-  if (update) {
-    const script = `
+  const script = `
   $processExists = [bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)
   $parentPath = (Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path
   $uninstallPath = Join-Path (Split-Path $parentPath) "uninstall.exe"
@@ -139,29 +143,26 @@ async function isInstalled() {
   @{ isPortable = $processExists; uninstallExists = $uninstallExists } | ConvertTo-Json -Compress
   `;
 
-    const shell = new Command("powershell", [
-      "-NoProfile",
-      "-WindowStyle",
-      "Hidden",
-      "-Command",
-      script,
-    ]);
+  const shell = Command.create("powershell", [
+    "-NoProfile",
+    "-WindowStyle",
+    "Hidden",
+    "-Command",
+    script,
+  ]);
 
-    const result = await shell.execute();
-    const { isPortable, uninstallExists } = JSON.parse(result.stdout);
+  const result = await shell.execute();
+  const { isPortable, uninstallExists } = JSON.parse(result.stdout);
 
-    if (isPortable) {
-      alertForUpdates();
-      return;
-    }
-
-    if (uninstallExists) {
-      checkForUpdates();
-    } else {
-      alertForUpdates();
-    }
-  } else {
+  if (isPortable) {
+    alertForUpdates();
     return;
+  }
+
+  if (uninstallExists) {
+    checkForUpdates();
+  } else {
+    alertForUpdates();
   }
 }
 
@@ -177,7 +178,7 @@ function isWindows11() {
 function applyMica() {
   try {
     if (isWindows11()) {
-      getCurrentWindow().setEffects({ effects: ["mica"] });
+      getCurrentWindow().setEffects({ effects: [Effect.Mica] });
     } else {
       document.body.style.backgroundColor = "var(--background)";
     }
@@ -189,7 +190,7 @@ function applyMica() {
 
 async function hasWindowsTerminal() {
   try {
-    const check = new Command("where", ["wt"]);
+    const check = Command.create("where", ["wt"]);
     const output = await check.execute();
     return output.code === 0;
   } catch (error) {
@@ -213,21 +214,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function displayVersion() {
+  const versionElement = document.getElementById("version");
+  if (!versionElement) return;
   try {
     const version = await app.getVersion();
-    document.getElementById("version").textContent = `${version}`;
+    versionElement.textContent = `${version}`;
   } catch (error) {
-    document.getElementById("version").textContent = ``;
+    versionElement.textContent = ``;
     console.error("Failed to get app version:", error);
   }
 }
 
 displayVersion();
 
-document.querySelector(".nav-icon").addEventListener("click", () => {
+document.querySelector(".nav-icon")?.addEventListener("click", () => {
   const navbar = document.getElementById("sidebar");
   const content = document.querySelector(".content");
-  const paragraphs = document.querySelectorAll(".content-entry:not(.about) p");
+  const paragraphs = document.querySelectorAll(
+    ".content-entry:not(.about) p",
+  ) as NodeListOf<HTMLParagraphElement>;
+  if (!navbar || !content) return;
 
   if (!navbar.classList.contains("responsive")) {
     navbar.classList.add("responsive");
@@ -249,7 +255,7 @@ document.querySelector(".nav-icon").addEventListener("click", () => {
   }
 });
 
-const tabs = document.querySelectorAll(".sidebar-entry");
+const tabs = document.querySelectorAll(".sidebar-entry") as NodeListOf<HTMLDivElement>;
 const contents = document.querySelectorAll(".tab-content");
 const title = document.getElementById("content-header"); // Select the header element for updating
 
@@ -257,11 +263,13 @@ const title = document.getElementById("content-header"); // Select the header el
 if (tabs.length > 0 && contents.length > 0) {
   tabs[0].classList.add("active");
   contents[0].classList.add("active");
-  title.textContent = tabs[0].textContent || "WinScript"; // Update header with the first tab's text
+  if (title) {
+    title.textContent = tabs[0].textContent || "WinScript";
+  }
 }
 
 // Titlebar button goes to languages tab
-document.querySelector('button[data-tab="localizations-tab"]').addEventListener("click", () => {
+document.querySelector('button[data-tab="localizations-tab"]')?.addEventListener("click", () => {
   tabs[9].click();
 });
 
@@ -281,18 +289,22 @@ tabs.forEach((tab, index) => {
     tab.classList.add("active");
     contents[index].classList.add("active");
 
-    title.textContent = tab.textContent;
+    if (title) {
+      title.textContent = tab.textContent;
+    }
   });
 });
 
 // Import & Export
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-const radios = document.querySelectorAll('input[type="radio"]');
+const checkboxes = document.querySelectorAll(
+  'input[type="checkbox"]',
+) as NodeListOf<HTMLInputElement>;
+const radios = document.querySelectorAll('input[type="radio"]') as NodeListOf<HTMLInputElement>;
 
-exportBtn.addEventListener("click", async () => {
-  let settings = {};
+exportBtn?.addEventListener("click", async () => {
+  let settings: Record<string, boolean> = {};
   checkboxes.forEach((checkbox) => {
     settings[checkbox.id] = checkbox.checked;
   });
@@ -319,7 +331,7 @@ exportBtn.addEventListener("click", async () => {
   }
 });
 
-importBtn.addEventListener("click", async () => {
+importBtn?.addEventListener("click", async () => {
   try {
     const filePath = await open({
       filters: [
@@ -357,41 +369,43 @@ const visualEffects = document.getElementById("openVisualEffects");
 const pageFile = document.getElementById("openPageFile");
 const msConfig = document.getElementById("openMSConfig");
 
-windowsSettings.addEventListener("click", () => {
-  new Command("cmd", ["/c", "start", "ms-settings:"]).execute();
+windowsSettings?.addEventListener("click", () => {
+  Command.create("cmd", ["/c", "start", "ms-settings:"]).execute();
 });
-deviceManager.addEventListener("click", () => {
-  new Command("cmd", ["/c", "start", "devmgmt.msc"]).execute();
+deviceManager?.addEventListener("click", () => {
+  Command.create("cmd", ["/c", "start", "devmgmt.msc"]).execute();
 });
-controlPanel.addEventListener("click", () => {
-  new Command("cmd", ["/c", "start", "control"]).execute();
+controlPanel?.addEventListener("click", () => {
+  Command.create("cmd", ["/c", "start", "control"]).execute();
 });
-visualEffects.addEventListener("click", () => {
-  new Command("cmd", ["/c", "start", "SystemPropertiesPerformance"]).execute();
+visualEffects?.addEventListener("click", () => {
+  Command.create("cmd", ["/c", "start", "SystemPropertiesPerformance"]).execute();
 });
-pageFile.addEventListener("click", () => {
-  new Command("cmd", ["/c", "SystemPropertiesPerformance /pagefile"]).execute();
+pageFile?.addEventListener("click", () => {
+  Command.create("cmd", ["/c", "SystemPropertiesPerformance /pagefile"]).execute();
 });
 
-msConfig.addEventListener("click", () => {
-  new Command("cmd", ["/c", "start", "msconfig"]).execute();
+msConfig?.addEventListener("click", () => {
+  Command.create("cmd", ["/c", "start", "msconfig"]).execute();
 });
 
 // MAS Checkbox
 const masCheckbox = document.getElementById("installmas");
-masCheckbox.addEventListener("change", () => {
-  if (masCheckbox.checked) {
-    document.querySelector(".mas-container").style.display = "block";
-  } else {
-    document.querySelector(".mas-container").style.display = "none";
-  }
-});
+const masContainer = document.querySelector(".mas-container");
+
+if (masCheckbox instanceof HTMLInputElement && masContainer instanceof HTMLDivElement) {
+  masCheckbox.addEventListener("change", () => {
+    masContainer.style.display = masCheckbox.checked ? "block" : "none";
+  });
+}
 
 // OneDrive Checkbox
 const onedriveCheckbox = document.getElementById("onedrive");
 let onedriveChanging = false;
 
-onedriveCheckbox.addEventListener("click", async (e) => {
+onedriveCheckbox?.addEventListener("click", async (e) => {
+  if (!(onedriveCheckbox instanceof HTMLInputElement)) return;
+
   if (onedriveChanging) {
     onedriveChanging = false;
     return;
@@ -404,7 +418,6 @@ onedriveCheckbox.addEventListener("click", async (e) => {
       "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?",
       {
         title: "Uninstall OneDrive",
-        type: "question",
       },
     );
 
@@ -417,44 +430,44 @@ onedriveCheckbox.addEventListener("click", async (e) => {
 });
 
 // Restore Point Checkbox
-const restoreCheckbox = document.getElementById("restorepoint");
-restoreCheckbox.addEventListener("change", () => {
-  if (restoreCheckbox.checked) {
-    document.querySelector(".restore-container").style.display = "block";
-  } else {
-    document.querySelector(".restore-container").style.display = "none";
-  }
+const restoreCheckbox = document.getElementById("restorepoint") as HTMLInputElement;
+const restoreContainer = document.querySelector(".restore-container") as HTMLDivElement;
+restoreCheckbox?.addEventListener("change", () => {
+  restoreContainer.style.display = restoreCheckbox.checked ? "block" : "none";
 });
 
 // App Search Bar
-document.getElementById("searchBar").addEventListener("input", () => {
-  const searchValue = document.getElementById("searchBar").value.toLowerCase();
-  const detailsElements = document.querySelectorAll("#install-tab details");
+const searchBar = document.getElementById("searchBar");
+if (searchBar instanceof HTMLInputElement) {
+  searchBar?.addEventListener("input", () => {
+    const searchValue = searchBar.value.toLowerCase();
+    const detailsElements = document.querySelectorAll<HTMLDetailsElement>("#install-tab details");
 
-  detailsElements.forEach((details) => {
-    const entries = [...details.querySelectorAll(".content-entry")];
-    const summary = details.querySelector("summary");
+    detailsElements.forEach((details) => {
+      const entries = [...details.querySelectorAll<HTMLDivElement>(".content-entry")];
+      const summary = details.querySelector("summary");
 
-    let hasMatch = false;
+      let hasMatch = false;
 
-    entries.forEach((entry) => {
-      if (!entry.isSameNode(summary)) {
-        const isMatch = entry.textContent.toLowerCase().includes(searchValue);
-        entry.style.display = isMatch ? "" : "none";
-        hasMatch ||= isMatch;
+      entries.forEach((entry) => {
+        if (!entry.isSameNode(summary)) {
+          const isMatch = entry.textContent.toLowerCase().includes(searchValue);
+          entry.style.display = isMatch ? "" : "none";
+          hasMatch ||= isMatch;
+        }
+      });
+
+      if (!searchValue) {
+        details.style.display = "";
+        details.open = false;
+        entries.forEach((entry) => (entry.style.display = ""));
+      } else {
+        details.style.display = hasMatch ? "" : "none";
+        details.open = hasMatch;
       }
     });
-
-    if (!searchValue) {
-      details.style.display = "";
-      details.open = false;
-      entries.forEach((entry) => (entry.style.display = ""));
-    } else {
-      details.style.display = hasMatch ? "" : "none";
-      details.open = hasMatch;
-    }
   });
-});
+}
 
 // Update apps button
 const updateBtn = document.getElementById("updateBtn");
@@ -463,7 +476,7 @@ const chocoUpdateCommand = "choco upgrade all -y";
 const wingetUpdateCommand =
   "winget upgrade --all --include-unknown --silent --accept-source-agreements --accept-package-agreements";
 
-async function updateApps(packageUpdateCommand) {
+async function updateApps(packageUpdateCommand: string) {
   const hasWt = await hasWindowsTerminal();
   const args = ["/c", "start"];
   if (hasWt) args.push("wt");
@@ -477,22 +490,25 @@ async function updateApps(packageUpdateCommand) {
     packageUpdateCommand,
   );
 
-  new Command("cmd", args).execute();
+  Command.create("cmd", args).execute();
 }
 
-updateBtn.addEventListener("click", () => {
-  if (packageManager.value === "chocolatey") {
-    updateApps(chocoUpdateCommand);
-  } else if (packageManager.value === "winget") {
-    updateApps(wingetUpdateCommand);
-  }
-});
+if (packageManager instanceof HTMLInputElement) {
+  updateBtn?.addEventListener("click", () => {
+    if (packageManager.value === "chocolatey") {
+      updateApps(chocoUpdateCommand);
+    } else if (packageManager.value === "winget") {
+      updateApps(wingetUpdateCommand);
+    }
+  });
+}
 
 // Copy to clipboard button
-document.getElementById("copyBtn").addEventListener("click", function () {
-  var textContent = document.getElementById("code").innerText;
+document.getElementById("copyBtn")?.addEventListener("click", async function () {
+  var textContent = document.getElementById("code")?.innerText;
+  if (!textContent) return;
   try {
-    navigator.clipboard.writeText(textContent);
+    await navigator.clipboard.writeText(textContent);
   } catch (error) {
     console.error("Error copying to clipboard:", error);
   }
@@ -504,7 +520,7 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   const radio = wrapper.querySelector('input[type="radio"]');
   const indicator = wrapper.querySelector(".indicator");
 
-  if (checkbox) {
+  if (checkbox && checkbox instanceof HTMLInputElement) {
     checkbox.addEventListener("change", () => {
       if (indicator) {
         indicator.textContent = checkbox.checked
@@ -517,36 +533,33 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   if (radio) {
     radio.addEventListener("change", () => {
       const radioName = radio.getAttribute("name");
-      document.querySelectorAll(`input[type="radio"][name="${radioName}"]`).forEach((r) => {
-        const parentWrapper = r.closest(".checkbox-wrapper");
-        if (parentWrapper) {
-          const ind = parentWrapper.querySelector(".indicator");
-          if (ind) {
-            ind.textContent = r.checked
-              ? ind.getAttribute("data-on") || "On"
-              : ind.getAttribute("data-off") || "Off";
-          }
-        }
-      });
+      document
+        .querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${radioName}"]`)
+        .forEach((r) => {
+          const parentWrapper = r.closest(".checkbox-wrapper");
+          const ind = parentWrapper?.querySelector(".indicator");
+          if (!ind) return;
+          ind.textContent = r.checked
+            ? ind.getAttribute("data-on") || "On"
+            : ind.getAttribute("data-off") || "Off";
+        });
     });
   }
 });
 
 // Run Button
-document.getElementById("runBtn").addEventListener("click", async function () {
+document.getElementById("runBtn")?.addEventListener("click", async function () {
   if (!restoreCheckbox.checked) {
     let restoreAsk = await ask("Do you want to create a restore point?", {
       title: "Restore Point",
     });
 
-    if (restoreAsk === true) {
-      document.querySelector(".restore-container").style.display = "block";
-    } else {
-      document.querySelector(".restore-container").style.display = "none";
-    }
+    if (!restoreContainer) return;
+    restoreContainer.style.display = restoreAsk ? "block" : "none";
   }
 
-  let textContent = document.getElementById("code").innerText;
+  let textContent = document.getElementById("code")?.innerText;
+  if (!textContent) return;
 
   // Convert LF to CRLF
   textContent = textContent.replace(/\n/g, "\r\n");
@@ -587,7 +600,7 @@ document.getElementById("runBtn").addEventListener("click", async function () {
           filePath,
         ];
 
-    const command = new Command("cmd", args);
+    const command = Command.create("cmd", args);
 
     command
       .spawn()
@@ -601,9 +614,10 @@ document.getElementById("runBtn").addEventListener("click", async function () {
 // Language switching
 document.querySelectorAll(".localization-entry").forEach((entry) => {
   const useBtn = entry.querySelector(".use-lang-btn");
-  const locale = useBtn.getAttribute("data-locale");
+  const locale = useBtn?.getAttribute("data-locale");
 
-  useBtn.addEventListener("click", (e) => {
+  useBtn?.addEventListener("click", (e) => {
+    if (!locale) return;
     e.stopPropagation();
     // Redirect to /[locale]
     // If locale is en, we could go to / but /en is safer/more consistent
