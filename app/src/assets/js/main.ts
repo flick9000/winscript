@@ -20,12 +20,8 @@ async function loadConfig() {
     }
 
     try {
-      const checkboxes = document.querySelectorAll(
-        'input[type="checkbox"]',
-      ) as NodeListOf<HTMLInputElement>;
-      const radios = document.querySelectorAll(
-        'input[type="radio"]',
-      ) as NodeListOf<HTMLInputElement>;
+      const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+      const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
       const contents = await readTextFile(path);
       const settings = JSON.parse(contents);
 
@@ -230,9 +226,9 @@ displayVersion();
 document.querySelector(".nav-icon")?.addEventListener("click", () => {
   const navbar = document.getElementById("sidebar");
   const content = document.querySelector(".content");
-  const paragraphs = document.querySelectorAll(
+  const paragraphs = document.querySelectorAll<HTMLParagraphElement>(
     ".content-entry:not(.about) p",
-  ) as NodeListOf<HTMLParagraphElement>;
+  );
   if (!navbar || !content) return;
 
   if (!navbar.classList.contains("responsive")) {
@@ -255,7 +251,7 @@ document.querySelector(".nav-icon")?.addEventListener("click", () => {
   }
 });
 
-const tabs = document.querySelectorAll(".sidebar-entry") as NodeListOf<HTMLDivElement>;
+const tabs = document.querySelectorAll<HTMLDivElement>(".sidebar-entry");
 const contents = document.querySelectorAll(".tab-content");
 const title = document.getElementById("content-header"); // Select the header element for updating
 
