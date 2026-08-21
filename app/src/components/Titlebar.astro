@@ -120,12 +120,9 @@
     const appWindow = getCurrentWindow();
     const title = document.getElementById("title");
 
-    function updateTitle(isFocused) {
-      if (isFocused) {
-        title!.style.color = "var(--text)";
-      } else {
-        title!.style.color = "var(--muted)";
-      }
+    function updateTitle(isFocused: boolean) {
+      if (!title) return;
+      title.style.color = isFocused ? "var(--text)" : "var(--muted)";
     }
 
     appWindow.isFocused().then((focused) => {
@@ -165,11 +162,7 @@
       }
 
       askCheckbox?.addEventListener("change", () => {
-        if (askCheckbox.checked) {
-          localStorage.setItem("askPreference", "false");
-        } else {
-          localStorage.setItem("askPreference", "true");
-        }
+        localStorage.setItem("askPreference", askCheckbox.checked ? "false" : "true")
       });
 
       coffeeButton?.addEventListener("click", async () => {

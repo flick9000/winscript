@@ -45,8 +45,10 @@ function loadLocale() {
 document.querySelectorAll(".fa-solid").forEach((icon) => {
   icon.addEventListener("click", () => {
     const navbar = document.getElementById("sidebar");
-    const menuIcon = document.querySelector(".fa-solid.fa-bars-staggered");
-    const markIcon = document.querySelector(".fa-solid.fa-xmark");
+    const menuIcon = document.querySelector(".fa-solid.fa-bars-staggered") as HTMLElement;
+    const markIcon = document.querySelector(".fa-solid.fa-xmark") as HTMLElement;
+
+    if (!navbar || !menuIcon || !markIcon) return;
 
     if (!navbar.classList.contains("responsive")) {
       navbar.classList.add("responsive");
@@ -72,7 +74,9 @@ const title = document.getElementById("content-header");
 if (tabs.length > 0 && contents.length > 0) {
   tabs[0].classList.add("active");
   contents[0].classList.add("active");
-  title.textContent = tabs[0].textContent || "WinScript"; // Update header with the first tab's text
+  if (title) {
+    title.textContent = tabs[0].textContent || "WinScript";
+  }
 }
 
 // Remove 'active' from all other content divs
@@ -91,67 +95,69 @@ tabs.forEach((tab, index) => {
     tab.classList.add("active");
     contents[index].classList.add("active");
 
-    title.textContent = tab.textContent;
+    if (title) {
+      title.textContent = tab.textContent;
+    }
   });
 });
 
 // MAS Checkbox
 const masCheckbox = document.getElementById("installmas");
-masCheckbox.addEventListener("change", () => {
-  if (masCheckbox.checked) {
-    document.querySelector(".mas-container").style.display = "block";
-  } else {
-    document.querySelector(".mas-container").style.display = "none";
-  }
-});
+const masContainer = document.querySelector(".mas-container");
+
+if (masCheckbox instanceof HTMLInputElement && masContainer instanceof HTMLDivElement) {
+  masCheckbox.addEventListener("change", () => {
+    masContainer.style.display = masCheckbox.checked ? "block" : "none";
+  });
+}
 
 // Restore Point Checkbox
-const restoreCheckbox = document.getElementById("restorepoint");
-restoreCheckbox.addEventListener("change", () => {
-  if (restoreCheckbox.checked) {
-    document.querySelector(".restore-container").style.display = "block";
-  } else {
-    document.querySelector(".restore-container").style.display = "none";
-  }
+const restoreCheckbox = document.getElementById("restorepoint") as HTMLInputElement;
+const restoreContainer = document.querySelector(".restore-container") as HTMLDivElement;
+restoreCheckbox?.addEventListener("change", () => {
+  restoreContainer.style.display = restoreCheckbox.checked ? "block" : "none";
 });
 
 // App Search Bar
-document.getElementById("searchBar").addEventListener("input", () => {
-  const searchValue = document.getElementById("searchBar").value.toLowerCase();
-  const detailsElements = document.querySelectorAll("#install-tab details");
+const searchBar = document.getElementById("searchBar");
+if (searchBar instanceof HTMLInputElement) {
+  searchBar?.addEventListener("input", () => {
+    const searchValue = searchBar.value.toLowerCase();
+    const detailsElements = document.querySelectorAll<HTMLDetailsElement>("#install-tab details");
 
-  detailsElements.forEach((details) => {
-    const entries = [...details.querySelectorAll(".content-entry")];
-    const summary = details.querySelector("summary");
+    detailsElements.forEach((details) => {
+      const entries = [...details.querySelectorAll<HTMLDivElement>(".content-entry")];
+      const summary = details.querySelector("summary");
 
-    let hasMatch = false;
+      let hasMatch = false;
 
-    entries.forEach((entry) => {
-      if (!entry.isSameNode(summary)) {
-        const isMatch = entry.textContent.toLowerCase().includes(searchValue);
-        entry.style.display = isMatch ? "" : "none";
-        hasMatch ||= isMatch;
+      entries.forEach((entry) => {
+        if (!entry.isSameNode(summary)) {
+          const isMatch = entry.textContent.toLowerCase().includes(searchValue);
+          entry.style.display = isMatch ? "" : "none";
+          hasMatch ||= isMatch;
+        }
+      });
+
+      if (!searchValue) {
+        details.style.display = "";
+        details.open = false;
+        entries.forEach((entry) => (entry.style.display = ""));
+      } else {
+        details.style.display = hasMatch ? "" : "none";
+        details.open = hasMatch;
       }
     });
-
-    if (!searchValue) {
-      details.style.display = "";
-      details.open = false;
-      entries.forEach((entry) => (entry.style.display = ""));
-    } else {
-      details.style.display = hasMatch ? "" : "none";
-      details.open = hasMatch;
-    }
   });
-});
+}
 
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-const radios = document.querySelectorAll('input[type="radio"]');
+const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
 
-exportBtn.addEventListener("click", () => {
-  let settings = {};
+exportBtn?.addEventListener("click", () => {
+  let settings: Record<string, boolean> = {};
   checkboxes.forEach((checkbox) => {
     settings[checkbox.id] = checkbox.checked;
   });
@@ -176,19 +182,21 @@ exportBtn.addEventListener("click", () => {
   console.log("File saved successfully");
 });
 
-importBtn.addEventListener("click", () => {
+importBtn?.addEventListener("click", () => {
   const fileInput = document.createElement("input");
   fileInput.type = "file";
   fileInput.accept = ".json";
 
   fileInput.addEventListener("change", (event) => {
-    const file = event.target.files[0];
+    const file = (event.target as HTMLInputElement)?.files?.[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const settings = JSON.parse(e.target.result);
+        const result = (e.target as FileReader)?.result;
+        if (typeof result !== "string") return;
+        const settings = JSON.parse(result);
         checkboxes.forEach((checkbox) => {
           checkbox.checked = settings[checkbox.id];
           checkbox.dispatchEvent(new Event("change"));
@@ -209,9 +217,14 @@ importBtn.addEventListener("click", () => {
 });
 
 // Copy to clipboard button
-document.getElementById("copyBtn").addEventListener("click", function () {
-  var textContent = document.getElementById("code").innerText;
-  navigator.clipboard.writeText(textContent);
+document.getElementById("copyBtn")?.addEventListener("click", async function () {
+  var textContent = document.getElementById("code")?.innerText;
+  if (!textContent) return;
+  try {
+    await navigator.clipboard.writeText(textContent);
+  } catch (error) {
+    console.error("Error copying to clipboard:", error);
+  }
 });
 
 // Update the indicator text
@@ -220,7 +233,7 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   const radio = wrapper.querySelector('input[type="radio"]');
   const indicator = wrapper.querySelector(".indicator");
 
-  if (checkbox) {
+  if (checkbox && checkbox instanceof HTMLInputElement) {
     checkbox.addEventListener("change", () => {
       if (indicator) {
         indicator.textContent = checkbox.checked
@@ -233,26 +246,29 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
   if (radio) {
     radio.addEventListener("change", () => {
       const radioName = radio.getAttribute("name");
-      document.querySelectorAll(`input[type="radio"][name="${radioName}"]`).forEach((r) => {
-        const parentWrapper = r.closest(".checkbox-wrapper");
-        if (parentWrapper) {
-          const ind = parentWrapper.querySelector(".indicator");
-          if (ind) {
-            ind.textContent = r.checked
-              ? ind.getAttribute("data-on") || "On"
-              : ind.getAttribute("data-off") || "Off";
+      document
+        .querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${radioName}"]`)
+        .forEach((r) => {
+          const parentWrapper = r.closest(".checkbox-wrapper");
+          if (parentWrapper) {
+            const ind = parentWrapper.querySelector(".indicator");
+            if (ind) {
+              ind.textContent = r.checked
+                ? ind.getAttribute("data-on") || "On"
+                : ind.getAttribute("data-off") || "Off";
+            }
           }
-        }
-      });
+        });
     });
   }
 });
 
-document.getElementById("downloadBtn").addEventListener("click", function () {
+document.getElementById("downloadBtn")?.addEventListener("click", function () {
   const supportDialog = document.getElementById("supportDialog");
   const closeSupportDialog = document.getElementById("closeSupportDialog");
 
-  var textContent = document.getElementById("code").innerText;
+  var textContent = document.getElementById("code")?.innerText;
+  if (!textContent) return;
 
   // Convert LF to CRLF
   textContent = textContent.replace(/\n/g, "\r\n");
@@ -266,19 +282,22 @@ document.getElementById("downloadBtn").addEventListener("click", function () {
   link.click();
   document.body.removeChild(link);
 
-  supportDialog.showModal();
+  if (supportDialog instanceof HTMLDialogElement && closeSupportDialog instanceof SVGElement) {
+    supportDialog?.showModal();
 
-  closeSupportDialog.addEventListener("click", () => {
-    supportDialog.close();
-  });
+    closeSupportDialog?.addEventListener("click", () => {
+      supportDialog?.close();
+    });
+  }
 });
 
 // Language switching
 document.querySelectorAll(".localization-entry").forEach((entry) => {
   const useBtn = entry.querySelector(".use-lang-btn");
-  const locale = useBtn.getAttribute("data-locale");
+  const locale = useBtn?.getAttribute("data-locale");
 
-  useBtn.addEventListener("click", (e) => {
+  useBtn?.addEventListener("click", (e) => {
+    if (!locale) return;
     e.stopPropagation();
     localStorage.setItem("locale", locale);
     // Redirect to /[locale]
