@@ -205,6 +205,7 @@
   "misc.endtask.title": "Add End Task to Context Menu",
   "misc.homegallery.title": "Remove Home and Gallery from File Explorer",
   "misc.taskbarleft.title": "Move Taskbar Icons to Left",
+  "misc.utctime.title": "Set Hardware Clock to UTC",
   "misc.numlockstartup.title": "Disable Numlock on Startup",
   "misc.darkmode.title": "Enable Dark Mode",
   "misc.filextensions.title": "Show File Extensions",

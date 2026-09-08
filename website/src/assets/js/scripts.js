@@ -853,6 +853,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "Write-Host '-- Moving Taskbar Icons to the left' -ForegroundColor Green",
       'reg add "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f',
     ],
+    utctime: [
+      "Write-Host '-- Setting Hardware Clock to UTC' -ForegroundColor Green",
+      'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation" /v RealTimeIsUniversal /t REG_DWORD /d 1 /f',
+    ],
     stickykeys: [
       "Write-Host '-- Disabling Sticky Keys' -ForegroundColor Green",
       'reg add "HKCU\\Control Panel\\Accessibility\\StickyKeys" /v "Flags" /t REG_SZ /d "58" /f',
@@ -1010,6 +1014,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "endtask",
     "homegallery",
     "mpo",
+    "utctime",
     "taskbarleft",
     "stickykeys",
     "numlockstartup",
