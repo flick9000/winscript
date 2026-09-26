@@ -666,6 +666,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cleantemp: [
       "Write-Host '-- Deleting Temp files' -ForegroundColor Green",
       'Remove-Item -Path "C:\\Windows\\Temp\\*" -Recurse -Force',
+      'Remove-Item -Path "$env:LOCALAPPDATA\\Temp" -Recurse -Force',
       'Remove-Item -Path "C:\\Windows\\Prefetch\\*" -Recurse -Force',
     ],
     cleanmgr: [
