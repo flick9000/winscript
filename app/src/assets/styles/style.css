@@ -436,3 +436,113 @@ input:checked + .slider:before {
     display: block !important;
   }
 }
+
+/* Right-to-left languages (Hebrew): mirror the whole layout */
+@keyframes slide-in-rtl {
+  from {
+    transform: translateX(150%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(150%);
+  }
+}
+
+html[dir="rtl"] .titlebar {
+  padding-left: 0;
+  padding-right: 12px;
+}
+
+html[dir="rtl"] .titlebar button.close:hover {
+  box-shadow:
+    0px -5px 0px 0px #c42b1c,
+    -5px 0px 0px 0px #c42b1c;
+}
+
+html[dir="rtl"] .sidebar {
+  right: 0;
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+html[dir="rtl"] .sidebar-entry {
+  border-left: none;
+  border-right: 4px solid transparent;
+}
+
+html[dir="rtl"] .content {
+  margin-left: 1rem !important;
+  margin-right: 342px !important;
+}
+
+html[dir="rtl"] .content-entry .chevron {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+html[dir="rtl"] details > div.content-entry {
+  padding-left: 12px;
+  padding-right: 48px;
+}
+
+html[dir="rtl"] .indicator {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+html[dir="rtl"] .slider:before {
+  left: auto;
+  right: 4px;
+}
+
+html[dir="rtl"] input:checked + .slider:before {
+  transform: translateX(-20px);
+}
+
+html[dir="rtl"] .custom-select .selected-value {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+html[dir="rtl"] .custom-select .chevron {
+  right: auto;
+  left: 0;
+  margin-left: 0;
+}
+
+html[dir="rtl"] #manualList {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+/* Code and package IDs stay left-to-right */
+html[dir="rtl"] .mockup-code,
+html[dir="rtl"] #manualInput {
+  direction: ltr;
+}
+
+@media screen and (max-width: 800px) {
+  html[dir="rtl"] .content {
+    margin-left: 1rem !important;
+    margin-right: 1.5rem !important;
+    transition: margin-right 0.3s ease;
+  }
+
+  html[dir="rtl"] .content.responsive {
+    margin-right: 342px !important;
+  }
+}
+
+@media (min-width: 800px) {
+  html[dir="rtl"] .sidebar {
+    animation-name: slide-in-rtl;
+  }
+}

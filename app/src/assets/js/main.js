@@ -10,6 +10,12 @@ import { relaunch } from "@tauri-apps/plugin-process";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { getMatches } from "@tauri-apps/plugin-cli";
 
+// Runtime strings, rendered into the page by MainPage.astro
+const i18n = JSON.parse(document.getElementById("i18n-runtime")?.textContent || "{}");
+const tr = (key, fallback) => i18n[key] || fallback;
+// Sidebar slides in from the right in RTL layouts
+const rtlSuffix = document.documentElement.dir === "rtl" ? "-rtl" : "";
+
 async function loadConfig() {
   const matches = await getMatches();
   if (matches.args.import) {
@@ -89,12 +95,15 @@ async function loadLocale() {
 async function alertForUpdates() {
   let updateAsk;
 
-  updateAsk = await ask("An update is available. Do you want to update?", {
-    title: "Update Available",
-    kind: "info",
-    okLabel: "Go to GitHub",
-    cancelLabel: "Later",
-  });
+  updateAsk = await ask(
+    tr("dialog.update.message", "An update is available. Do you want to update?"),
+    {
+      title: tr("dialog.update.title", "Update Available"),
+      kind: "info",
+      okLabel: tr("dialog.update.github", "Go to GitHub"),
+      cancelLabel: tr("dialog.update.later", "Later"),
+    },
+  );
 
   if (updateAsk === true) {
     await openUrl("https://github.com/flick9000/winscript/releases/latest");
@@ -108,12 +117,15 @@ async function checkForUpdates() {
   try {
     const update = await check();
 
-    let updateAsk = await ask("An update is available. Do you want to update?", {
-      title: "Update Available",
-      kind: "info",
-      okLabel: "Update",
-      cancelLabel: "Later",
-    });
+    let updateAsk = await ask(
+      tr("dialog.update.message", "An update is available. Do you want to update?"),
+      {
+        title: tr("dialog.update.title", "Update Available"),
+        kind: "info",
+        okLabel: tr("dialog.update.update", "Update"),
+        cancelLabel: tr("dialog.update.later", "Later"),
+      },
+    );
 
     if (updateAsk === true) {
       await update.downloadAndInstall();
@@ -232,12 +244,12 @@ document.querySelector(".nav-icon").addEventListener("click", () => {
   if (!navbar.classList.contains("responsive")) {
     navbar.classList.add("responsive");
     content.classList.add("responsive");
-    navbar.style.animation = "slide-in 0.3s ease forwards";
+    navbar.style.animation = `slide-in${rtlSuffix} 0.3s ease forwards`;
     paragraphs.forEach((p) => {
       p.style.display = "none";
     });
   } else {
-    navbar.style.animation = "slide-out 0.3s ease forwards";
+    navbar.style.animation = `slide-out${rtlSuffix} 0.3s ease forwards`;
     content.classList.remove("responsive");
     paragraphs.forEach((p) => {
       p.style.display = "block";
@@ -401,9 +413,12 @@ onedriveCheckbox.addEventListener("click", async (e) => {
 
   if (!onedriveChanging) {
     const onedriveAsk = await ask(
-      "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?",
+      tr(
+        "dialog.onedrive.message",
+        "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?",
+      ),
       {
-        title: "Uninstall OneDrive",
+        title: tr("dialog.onedrive.title", "Uninstall OneDrive"),
         type: "question",
       },
     );
@@ -535,9 +550,12 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
 // Run Button
 document.getElementById("runBtn").addEventListener("click", async function () {
   if (!restoreCheckbox.checked) {
-    let restoreAsk = await ask("Do you want to create a restore point?", {
-      title: "Restore Point",
-    });
+    let restoreAsk = await ask(
+      tr("dialog.restore.message", "Do you want to create a restore point?"),
+      {
+        title: tr("dialog.restore.title", "Restore Point"),
+      },
+    );
 
     if (restoreAsk === true) {
       document.querySelector(".restore-container").style.display = "block";

@@ -18,6 +18,9 @@ interface Props {
   locale?: string;
 }
 const { t, locale } = Astro.props;
+const runtimeStrings = Object.fromEntries(
+  Object.entries(t).filter(([key]) => key.startsWith("dialog.") || key.startsWith("install.")),
+);
 const packageManagers = [
   { value: "chocolatey", label: "Chocolatey" },
   { value: "winget", label: "Winget" },
@@ -115,10 +118,18 @@ const languages = [
     translator: "tyrael-z",
     translatorUrl: "https://github.com/tyrael-z",
   },
+  {
+    name: "עברית",
+    code: "he",
+    flagCode: "1f1ee-1f1f1",
+    translator: "yossi-computers",
+    translatorUrl: "https://github.com/yossi-computers",
+  },
 ];
 ---
 
 <Layout locale={locale}>
+  <script type="application/json" id="i18n-runtime" set:html={JSON.stringify(runtimeStrings)} />
   <Titlebar />
   <div class="main-container">
     <Sidebar t={t} />
