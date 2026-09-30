@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f',
     ],
     onedrive: [
-      'Write-Host "Uninstalling OneDrive" -ForegroundColor Green',
+      'Write-Host "-- Uninstalling OneDrive" -ForegroundColor Green',
       'Stop-Process -Name "OneDrive" -Force',
       '$onedriveUninstaller = "$env:SystemRoot\\System32\\OneDriveSetup.exe"',
       "if (Test-Path $onedriveUninstaller) {",
@@ -432,9 +432,9 @@ document.addEventListener("DOMContentLoaded", function () {
       'Set-Service -Name "wuauserv" -StartupType Manual',
       'Set-Service -Name "usosvc" -StartupType Automatic',
       'Set-Service -Name "WaaSMedicSvc" -StartupType Manual',
-      'Write-Host -- "Re-enabling WU scheduled tasks"',
+      'Write-Host "Re-enabling WU scheduled tasks"',
       `$paths = @('\\Microsoft\\Windows\\InstallService\\', '\\Microsoft\\Windows\\UpdateOrchestrator\\', '\\Microsoft\\Windows\\UpdateAssistant\\', '\\Microsoft\\Windows\\WaaSMedic\\', '\\Microsoft\\Windows\\WindowsUpdate\\', '\\Microsoft\\WindowsUpdate\\'); foreach ($path in $paths) { Get-ScheduledTask -TaskPath "$path*" -ErrorAction SilentlyContinue | Enable-ScheduledTask -ErrorAction SilentlyContinue }`,
-      'Write-Host -- "Resetting Windows local security policies to default"',
+      'Write-Host "Resetting Windows local security policies to default"',
       'secedit /configure /cfg "$Env:SystemRoot\\inf\\defltbase.inf" /db defltbase.sdb',
     ],
     securityupdate: [
@@ -454,7 +454,7 @@ document.addEventListener("DOMContentLoaded", function () {
       '$updateServices = @("BITS","wuauserv","UsoSvc","WaaSMedicSvc")',
       "$updateServices | ForEach-Object { Stop-Service -Name $_; Set-Service -Name $_ -StartupType Disabled }",
       'Remove-Item -Path "C:\\Windows\\SoftwareDistribution" -Recurse -Force',
-      'Write-Host -- "Disabling Windows Update Scheduled Tasks"',
+      'Write-Host "Disabling Windows Update Scheduled Tasks"',
       `$paths = @('\\Microsoft\\Windows\\InstallService\\', '\\Microsoft\\Windows\\UpdateOrchestrator\\', '\\Microsoft\\Windows\\UpdateAssistant\\', '\\Microsoft\\Windows\\WaaSMedic\\', '\\Microsoft\\Windows\\WindowsUpdate\\', '\\Microsoft\\WindowsUpdate\\'); foreach ($path in $paths) { Get-ScheduledTask -TaskPath "$path*" -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue }`,
     ],
     deliveryoptimization: [
@@ -466,7 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'reg add "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings" /v "AllowAutoWindowsUpdateDownloadOverMeteredNetwork" /t REG_DWORD /d "0" /f',
     ],
     driverupdates: [
-      "Write-Host '-- Disable Hardware Driver Updates' -ForegroundColor Green",
+      "Write-Host '-- Disabling Hardware Driver Updates' -ForegroundColor Green",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f',
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d 0 /f',
     ],
