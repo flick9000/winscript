@@ -577,6 +577,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bitlocker: [
       "Write-Host '-- Disabling Bitlocker Drive Encryption' -ForegroundColor Green",
       'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d 1 /f',
+      "Disable-BitLocker -MountPoint $Env:SystemDrive -ErrorAction SilentlyContinue",
     ],
     cloudsync: [
       "Write-Host '-- Disabling Cloud Sync' -ForegroundColor Green",
