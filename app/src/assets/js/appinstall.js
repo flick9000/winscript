@@ -1,3 +1,7 @@
+// Runtime strings, rendered into the page by MainPage.astro
+const i18n = JSON.parse(document.getElementById("i18n-runtime")?.textContent || "{}");
+const tr = (key, fallback) => i18n[key] || fallback;
+
 function appsInstallChocolatey() {
   // List of apps
   const appListChocolatey = [
@@ -426,7 +430,8 @@ function appsInstallChocolatey() {
 
     const manualList = document.getElementById("manualList");
     if (window.manualURLs.length > 0) {
-      manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
+      manualList.innerHTML =
+        tr("install.manualAdded", "Manual packages added: ") + window.manualURLs.join(" | ");
     }
   }
 
@@ -861,7 +866,8 @@ function appsInstallWinget() {
 
     const manualList = document.getElementById("manualList");
     if (window.manualURLs.length > 0) {
-      manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
+      manualList.innerHTML =
+        tr("install.manualAdded", "Manual packages added: ") + window.manualURLs.join(" | ");
     }
   }
 
@@ -892,7 +898,7 @@ addButton.addEventListener("click", () => {
   if (manualInput) {
     if (!isValidManualId(manualInput)) {
       const manualList = document.getElementById("manualList");
-      manualList.innerHTML = "Please enter a valid package ID.";
+      manualList.innerHTML = tr("install.invalidId", "Please enter a valid package ID.");
       return;
     }
     window.manualURLs.push(manualInput);

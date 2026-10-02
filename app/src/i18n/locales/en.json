@@ -273,5 +273,16 @@
   "common.on": "On",
   "common.off": "Off",
   "common.open": "Open",
-  "common.none": "None (Clear Selection)"
+  "common.none": "None (Clear Selection)",
+  "install.manualAdded": "Manual packages added: ",
+  "install.invalidId": "Please enter a valid package ID.",
+  "dialog.update.title": "Update Available",
+  "dialog.update.message": "An update is available. Do you want to update?",
+  "dialog.update.update": "Update",
+  "dialog.update.github": "Go to GitHub",
+  "dialog.update.later": "Later",
+  "dialog.onedrive.title": "Uninstall OneDrive",
+  "dialog.onedrive.message": "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?",
+  "dialog.restore.title": "Restore Point",
+  "dialog.restore.message": "Do you want to create a restore point?"
 }
