@@ -49,7 +49,7 @@ jobs:
           }
 
           if ($config -match 'locales:\s*\[([^\]]+)\]') {
-              $locales = $Matches[1] -replace "['""\s]" -split ','
+              $locales = ($Matches[1] -replace "['""\s]").Split(',') | Where-Object { $_ }
               $locales
           }
 
