@@ -71,8 +71,8 @@ jobs:
               }
           }
 
-          $appInstallApp = "app/src/assets/js/appinstall.js"
-          $appInstallWeb = "website/src/assets/js/appinstall.js"
+          $appInstallApp = "app/src/assets/js/appinstall.ts"
+          $appInstallWeb = "website/src/assets/js/appinstall.ts"
 
           if ((Test-Path $appInstallApp) -and (Test-Path $appInstallWeb)) {
               if ((Get-FileHash $appInstallApp).Hash -ne (Get-FileHash $appInstallWeb).Hash) {
@@ -81,8 +81,8 @@ jobs:
               }
           }
 
-          $scriptsApp = "app/src/assets/js/scripts.js"
-          $scriptsWeb = "website/src/assets/js/scripts.js"
+          $scriptsApp = "app/src/assets/js/scripts.ts"
+          $scriptsWeb = "website/src/assets/js/scripts.ts"
 
           if ((Test-Path $scriptsApp) -and (Test-Path $scriptsWeb)) {
               if ((Get-FileHash $scriptsApp).Hash -ne (Get-FileHash $scriptsWeb).Hash) {
