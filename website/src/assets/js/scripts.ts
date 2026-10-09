@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'Remove-Item -Path "$env:LOCALAPPDATA\\OneDrive" -Recurse -Force',
       'Remove-Item -Path "$env:LOCALAPPDATA\\Microsoft\\OneDrive" -Recurse -Force',
       'Remove-Item -Path "$env:ProgramData\\Microsoft OneDrive" -Recurse -Force',
-      'Remove-Item -Path "C:\\OneDriveTemp" -Recurse -Force',
+      'Remove-Item -Path "$env:SystemDrive\\OneDriveTemp" -Recurse -Force',
       'Remove-Item -Path "HKCU:\\Software\\Microsoft\\OneDrive" -Recurse -Force',
     ],
     debloatedge: [
@@ -91,8 +91,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     edge: [
       "Write-Host '-- Uninstalling Edge' -ForegroundColor Green",
-      '$Path = (Get-ChildItem "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe")[0].FullName',
-      'New-Item "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\\MicrosoftEdge.exe" -Force | Out-Null',
+      '$Path = (Get-ChildItem "$env:SystemDrive\\Program Files (x86)\\Microsoft\\Edge\\Application\\*\\Installer\\setup.exe")[0].FullName',
+      'New-Item "$env:SystemDrive\\Windows\\SystemApps\\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\\MicrosoftEdge.exe" -Force | Out-Null',
       "Start-Process $Path -ArgumentList '--uninstall --system-level --force-uninstall --delete-profile'",
     ],
     copilot: [
@@ -453,7 +453,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'Write-Host "Disabling Windows Update Services"',
       '$updateServices = @("BITS","wuauserv","UsoSvc","WaaSMedicSvc")',
       "$updateServices | ForEach-Object { Stop-Service -Name $_; Set-Service -Name $_ -StartupType Disabled }",
-      'Remove-Item -Path "C:\\Windows\\SoftwareDistribution" -Recurse -Force',
+      'Remove-Item -Path "$env:SystemDrive\\Windows\\SoftwareDistribution" -Recurse -Force',
       'Write-Host "Disabling Windows Update Scheduled Tasks"',
       `$paths = @('\\Microsoft\\Windows\\InstallService\\', '\\Microsoft\\Windows\\UpdateOrchestrator\\', '\\Microsoft\\Windows\\UpdateAssistant\\', '\\Microsoft\\Windows\\WaaSMedic\\', '\\Microsoft\\Windows\\WindowsUpdate\\', '\\Microsoft\\WindowsUpdate\\'); foreach ($path in $paths) { Get-ScheduledTask -TaskPath "$path*" -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue }`,
     ],
@@ -666,9 +666,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cleantemp: [
       "Write-Host '-- Deleting Temp files' -ForegroundColor Green",
-      'Remove-Item -Path "C:\\Windows\\Temp\\*" -Recurse -Force',
+      'Remove-Item -Path "$env:SystemDrive\\Windows\\Temp\\*" -Recurse -Force',
       'Remove-Item -Path "$env:LOCALAPPDATA\\Temp" -Recurse -Force',
-      'Remove-Item -Path "C:\\Windows\\Prefetch\\*" -Recurse -Force',
+      'Remove-Item -Path "$env:SystemDrive\\Windows\\Prefetch\\*" -Recurse -Force',
     ],
     cleanmgr: [
       "Write-Host '-- Running Disk Clean-up' -ForegroundColor Green",
