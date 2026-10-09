@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d 1 /f',
     ],
     notepadrewrite: [
-      "Write-Host '-- Removing AI from Copilot' -ForegroundColor Green",
+      "Write-Host '-- Removing AI from Notepad' -ForegroundColor Green",
       'reg add "HKLM\\Software\\Policies\\WindowsNotepad" /v "DisableAIFeatures" /t REG_DWORD /d 1 /f',
       'reg add "HKCU\\Software\\Microsoft\\Notepad" /v "ShowRewriteButton" /t REG_DWORD /d 0 /f',
     ],
