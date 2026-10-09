@@ -858,7 +858,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     taskbarleft: [
       "Write-Host '-- Moving Taskbar Icons to the left' -ForegroundColor Green",
-      'reg add "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f',
+      'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f',
     ],
     utctime: [
       "Write-Host '-- Setting Hardware Clock to UTC' -ForegroundColor Green",
