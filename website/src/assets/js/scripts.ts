@@ -676,7 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     emptyrecycle: [
       "Write-Host '-- Emptying Recycle Bin' -ForegroundColor Green",
-      `$bin = (New-Object -ComObject Shell.Application).NameSpace(10); $bin.items() | ForEach { Write-Host "Deleting $($_.Name) from Recycle Bin"; Remove-Item $_.Path -Recurse -Force }`,
+      "Clear-RecycleBin -Force -ErrorAction SilentlyContinue",
     ],
     browserhistory: [
       "Write-Host '-- Clearing Browser History' -ForegroundColor Green",
