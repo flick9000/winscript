@@ -829,7 +829,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     gamebar: [
       "Write-Host '-- Disabling Game Bar' -ForegroundColor Green",
-      'reg add "HKLM\\SOFTWARE\\Polices\\Microsoft\\Windows\\GameDVR" /v "AllowGameDVR" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR" /v "AllowGameDVR" /t REG_DWORD /d 0 /f',
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f',
       'reg add "HKCU\\SOFTWARE\\Microsoft\\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d 0 /f',
       'reg add "HKCU\\SOFTWARE\\Microsoft\\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d 0 /f',
