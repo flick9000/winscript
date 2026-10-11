@@ -12,47 +12,47 @@
     </div>
 
     <div class="restore-container">
-      <pre><code class="language-powershell" /></pre>
+      <pre><code class="language-powershell" /> </pre>
       <pre><code class="language-powershell">Write-Host "-- Creating a restore point" -ForegroundColor Green</code></pre>
       <pre><code class="language-powershell">Enable-ComputerRestore -Drive $env:SystemDrive ; Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"</code></pre>
     </div>
     <div class="chocolatey-container">
-      <pre><code class="language-powershell" /></pre>
+      <pre><code class="language-powershell" /> </pre>
       <pre><code class="language-powershell">Write-Host "-- Installing Chocolatey" -ForegroundColor Green</code></pre>
       <pre><code class="language-powershell" is:raw>if (-not (Get-Command choco -ErrorAction SilentlyContinue)) { Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) *> $null }</code></pre>
     </div>
     <div class="winget-container">
-      <pre><code class="language-powershell" /></pre>
+      <pre><code class="language-powershell" /> </pre>
       <pre><code class="language-powershell">Write-Host "-- Updating Winget" -ForegroundColor Green</code></pre>
       <pre><code id="wingetUpgrade" class="language-powershell" /></pre>
       <pre><code class="language-powershell" />winget settings --enable BypassCertificatePinningForMicrosoftStore<code /></pre>
     </div>
     <div class="debloat-container">
-      <pre><code class="language-powershell" /></pre>
+      <pre><code class="language-powershell" /> </pre>
       <pre><code class="language-powershell">Write-Host "-- Removing Selected Apps" -ForegroundColor Green</code></pre>
       <pre><code id="debloatScript" class="language-powershell" /></pre>
     </div>
     <div class="scripts-container">
       <pre><code class="allScripts" /></pre>
-      <pre><code class="language-powershell" /></pre>
+      <pre><code class="language-powershell" /> </pre>
     </div>
     <div class="mas-container">
       <pre><code class="language-powershell">Write-Host "-- Running MAS" -ForegroundColor Green</code></pre>
       <pre><code class="language-powershell">irm "https://get.activated.win" | iex *> $null</code></pre>
-      <pre><code class="language-powershell" /></pre>
+      <pre><code class="language-powershell" /> </pre>
     </div>
     <div class="div-install">
       <pre><code class="language-powershell">Write-Host -- Installing these apps: </code></pre>
       <pre><code class="language-powershell">Write-Host -- </code><span class="installingApps" /></pre>
       <pre><code class="commandDisplay" /></pre>
-      <pre><code class="language-powershell" /></pre>
+      <pre><code class="language-powershell" /> </pre>
     </div>
     <div>
       <pre><code class="language-powershell"># Pause the script</code></pre>
     </div>
     <div>
       <pre><code class="language-powershell">Pause</code></pre>
-      <pre><code /></pre>
+      <pre><code /> </pre>
     </div>
     <div>
       <pre><code class="language-powershell"># Exit the script</code></pre>
@@ -73,7 +73,7 @@
     max-height: 333px;
     background-color: hsl(from var(--text) h s l / 0.055);
     border-radius: 5px;
-    padding: 1.5rem;
+    padding: 2rem;
   }
 
   .mas-container,
