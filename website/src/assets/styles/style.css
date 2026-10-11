@@ -10,6 +10,7 @@
   --text: #fff;
   --muted: #ccc;
   --primary: #6040bf;
+  color-scheme: dark;
 }
 
 @supports (interpolate-size: allow-keywords) {

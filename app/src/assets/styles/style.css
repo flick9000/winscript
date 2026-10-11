@@ -7,6 +7,7 @@
   --text: #fff;
   --muted: #ccc;
   --primary: #6040bf;
+  color-scheme: dark;
 }
 
 @keyframes pop-in {
@@ -34,6 +35,7 @@
     --text: #000;
     --muted: #555;
     --primary: #6040bf;
+    color-scheme: light;
   }
 
   .sidebar-entry.active {
