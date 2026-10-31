@@ -588,6 +588,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "Write-Host '-- Disable Windows Platform Binary Table' -ForegroundColor Green",
       'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager" /v "DisableWpbtExecution" /t REG_DWORD /d 1 /f',
     ],
+    backgroundapps: [
+      "Write-Host '-- Disabling Microsoft Store Background Apps' -ForegroundColor Green",
+      'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f',
+    ],
     bitlocker: [
       "Write-Host '-- Disabling Bitlocker Drive Encryption' -ForegroundColor Green",
       'reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d 1 /f',
@@ -983,6 +987,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "aigenerationaccess",
     "updatepause",
     "wpbt",
+    "backgroundapps",
     "bitlocker",
     "cloudsync",
     "notificationtray",
