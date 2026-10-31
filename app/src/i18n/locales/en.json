@@ -129,7 +129,6 @@
   "telemetry.telemetry.title": "Disable Telemetry",
   "telemetry.telemetry.desc": "Choose what data is sent to Microsoft.",
   "telemetry.windows": "Disable Windows Telemetry",
-  "telemetry.windowsupdate": "Disable Windows Update Telemetry",
   "telemetry.windowssearch": "Disable Windows Search Telemetry",
   "telemetry.office": "Disable Office Telemetry",
   "telemetry.appexperience": "Disable Application Experience Data Collection",
