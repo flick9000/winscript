@@ -63,6 +63,7 @@
   "debloat.ai.copilot": "Remove Copilot",
   "debloat.ai.recall": "Remove Recall",
   "debloat.ai.notepadrewrite": "Disable Notepad AI",
+  "debloat.ai.paintai": "Disable Paint AI",
   "debloat.ai.aifiles": "Remove AI Files",
   "debloat.microsoftstore.title": "Remove Microsoft Store",
   "debloat.microsoftstore.desc": "You will no longer be able to manage apps from the Microsoft Store.",
