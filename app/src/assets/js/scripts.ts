@@ -487,6 +487,7 @@ document.addEventListener("DOMContentLoaded", function () {
     driverupdates: [
       "Write-Host '-- Disabling Hardware Driver Updates' -ForegroundColor Green",
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f',
+      'reg add "HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UpdatePolicy\\PolicyState" /v "ExcludeWUDrivers" /t REG_DWORD /d "1" /f',
       'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d 0 /f',
     ],
     googleupdates: [
