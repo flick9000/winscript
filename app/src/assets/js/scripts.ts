@@ -158,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
       'DISM /Online /Disable-Feature /NoRestart /FeatureName:Recall | Out-Null; if ($LASTEXITCODE -eq 0) { Write-Host "Successfully removed the feature: Recall" } else { Write-Host "Feature not found: Recall" }',
       `$recallTasks = @('\\Microsoft\\Windows\\WindowsAI\\*', '\\Microsoft\\Windows\\Recall\\*'); foreach ($taskPath in $recallTasks) { try { $tasks = Get-ScheduledTask -TaskPath $taskPath -ErrorAction SilentlyContinue; if ($tasks) { $tasks | Unregister-ScheduledTask -Confirm:$false -ErrorAction Stop; $taskCount = ($tasks | Measure-Object).Count; Write-Host "Removed $taskCount task(s) from: $taskPath" -ForegroundColor Green; } } catch { Write-Host "Could not remove tasks from: $taskPath" -ForegroundColor Red; } }`,
       'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d 1 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "AllowRecallEnablement" /t REG_DWORD /d 0 /f',
+      'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "TurnOffSavingSnapshots" /t REG_DWORD /d 1 /f',
     ],
     notepadrewrite: [
       "Write-Host '-- Removing AI from Notepad' -ForegroundColor Green",
