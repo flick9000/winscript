@@ -143,7 +143,7 @@ $scripts = @(
 		Get-NetAdapter | Enable-NetAdapter -Confirm:$false;
 	};
 	{
-		Write-Host -ForegroundColor Green '-- Re-enabling Windows Update after OOBE';
+		Write-Host -ForegroundColor Magenta '-- Re-enabling Windows Update after OOBE';
 		reg.exe delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v NoAutoUpdate /f;
 		reg.exe delete "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate" /v DisableWindowsUpdateAccess /f;
 	};
