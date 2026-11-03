@@ -15,26 +15,20 @@ $Logo = @"
 
 try {
     Clear-Host
-    
-    # Ascii Art
-    Write-Host $Logo
+    Write-Host $Logo -ForegroundColor Magenta
 
-    # Check if the script is running as admin
     if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { Write-Host "This script requires administrator privileges."`n"Please run the terminal as an administrator." -ForegroundColor Red; exit }
     
-    # Remove old file if it exists
     if (Test-Path $tempFile) {
         Remove-Item -Path $tempFile -Force -ErrorAction SilentlyContinue
-        Write-Host "Removed old temporary file." -ForegroundColor Green
+        Write-Host "Removed old temporary file." -ForegroundColor Magenta
     }
     
-    # Get latest release info
     $releaseInfo = Invoke-RestMethod -Uri $apiUrl -Headers @{
         "Accept"     = "application/vnd.github.v3+json"
         "User-Agent" = "PowerShell Script"
     }
     
-    # Get download URL for portable exe
     $downloadUrl = ($releaseInfo.assets | Where-Object { $_.name -eq "winscript-portable.exe" }).browser_download_url
     
     if (-not $downloadUrl) {
@@ -42,23 +36,21 @@ try {
     }
 
     if (Test-Path $tempFile) {
-        Write-Host "WinScript already downloaded, starting..." -ForegroundColor Green
+        Write-Host "WinScript already downloaded, starting..." -ForegroundColor Magenta
         Start-Process -FilePath $tempFile -Wait
     }
     else {
-        # Download & run the file
-        Write-Host "Downloading from GitHub..." -ForegroundColor Green
+        Write-Host "Downloading from GitHub..." -ForegroundColor Magenta
         Invoke-WebRequest -Uri $downloadUrl -OutFile $tempFile
     
-        Write-Host "Starting WinScript..." -ForegroundColor Green
+        Write-Host "Starting WinScript..." -ForegroundColor Magenta
         Start-Process -FilePath $tempFile -Wait
     }
     
-    # Clean up
     if (Test-Path $tempFile) {
         Remove-Item -Path $tempFile -Force
         Write-Host ""
-        Write-Host "Thanks for using WinScript!" -ForegroundColor Green
+        Write-Host "Thanks for using WinScript!" -ForegroundColor Magenta
         Write-Host ""
     }
     

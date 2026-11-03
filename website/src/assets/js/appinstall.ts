@@ -388,7 +388,7 @@ function appsInstallChocolatey() {
     return appListChocolatey
       .filter((app) => {
         const element = document.getElementById(app.id);
-        return element && element.checked;
+        return element instanceof HTMLInputElement && element.checked;
       })
       .map((app) => app.url);
   }
@@ -396,7 +396,7 @@ function appsInstallChocolatey() {
   // Function to update the command display
   function updateCommandDisplay() {
     const checkedUrls = getCheckedUrls();
-    const allUrls = [...checkedUrls, ...window.manualURLs];
+    const allUrls = [...checkedUrls, ...(window.manualURLs ?? [])];
     const finalURL = allUrls
       .filter((url) => url && url.trim() !== "")
       .map((url) => `\\"${url}\\"`)
@@ -413,19 +413,22 @@ function appsInstallChocolatey() {
         : "";
 
     // Display the final URL in the div
-    document.querySelector(".div-install").style.display = allUrls.length > 0 ? "block" : "none";
-    document.querySelector(".winget-container").style.display = "none";
-    document.querySelector(".chocolatey-container").style.display =
-      allUrls.length > 0 ? "block" : "none";
+    const divInstall = document.querySelector(".div-install") as HTMLDivElement;
+    const wingetContainer = document.querySelector(".winget-container") as HTMLDivElement;
+    const chocolateyContainer = document.querySelector(".chocolatey-container") as HTMLDivElement;
+
+    divInstall.style.display = allUrls.length > 0 ? "block" : "none";
+    wingetContainer.style.display = "none";
+    chocolateyContainer.style.display = allUrls.length > 0 ? "block" : "none";
 
     const commandDisplay = document.querySelector(".commandDisplay");
-    commandDisplay.textContent = command;
+    if (commandDisplay) commandDisplay.textContent = command;
 
     const installingApps = document.querySelector(".installingApps");
-    installingApps.textContent = allUrls.join(", ");
+    if (installingApps) installingApps.textContent = allUrls.join(", ");
 
     const manualList = document.getElementById("manualList");
-    if (window.manualURLs.length > 0) {
+    if (window.manualURLs && window.manualURLs.length > 0 && manualList) {
       manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
     }
   }
@@ -823,7 +826,7 @@ function appsInstallWinget() {
     return appListWinget
       .filter((app) => {
         const element = document.getElementById(app.id);
-        return element && element.checked;
+        return element instanceof HTMLInputElement && element.checked;
       })
       .map((app) => app.url);
   }
@@ -831,7 +834,7 @@ function appsInstallWinget() {
   // Function to update the command display
   function updateCommandDisplay() {
     const checkedUrls = getCheckedUrls();
-    const allUrls = [...checkedUrls, ...window.manualURLs];
+    const allUrls = [...checkedUrls, ...(window.manualURLs ?? [])];
     const finalURL = allUrls
       .filter((url) => url && url.trim() !== "")
       .map((url) => `\\"${url}\\"`)
@@ -845,22 +848,26 @@ function appsInstallWinget() {
         : "";
 
     // Display the final URL in the div
-    document.querySelector(".div-install").style.display = allUrls.length > 0 ? "block" : "none";
-    document.querySelector(".chocolatey-container").style.display = "none";
-    document.querySelector(".winget-container").style.display =
-      allUrls.length > 0 ? "block" : "none";
+    const divInstall = document.querySelector(".div-install") as HTMLDivElement;
+    const chocolateyContainer = document.querySelector(".chocolatey-container") as HTMLDivElement;
+    const wingetContainer = document.querySelector(".winget-container") as HTMLDivElement;
+
+    divInstall.style.display = allUrls.length > 0 ? "block" : "none";
+    chocolateyContainer.style.display = "none";
+    wingetContainer.style.display = allUrls.length > 0 ? "block" : "none";
 
     const commandDisplay = document.querySelector(".commandDisplay");
-    commandDisplay.textContent = command;
+    if (commandDisplay) commandDisplay.textContent = command;
 
     const installingApps = document.querySelector(".installingApps");
-    installingApps.textContent = allUrls.join(", ");
+    if (installingApps) installingApps.textContent = allUrls.join(", ");
 
     const wingetUpgrade = document.getElementById("wingetUpgrade");
-    wingetUpgrade.textContent = `$v = winget -v; if ([version]($v.TrimStart('v')) -lt [version]'1.7.0') { Write-Output '-- Old Winget version detected, upgrading.'; Set-Location $env:USERPROFILE; Invoke-WebRequest -Uri 'https://aka.ms/getwinget' -OutFile 'winget.msixbundle'; Add-AppPackage -ForceApplicationShutdown .\\winget.msixbundle; Remove-Item .\\winget.msixbundle } else { Write-Output 'Winget is already up to date, skipping upgrade.' }`;
+    if (wingetUpgrade)
+      wingetUpgrade.textContent = `$v = winget -v; if ([version]($v.TrimStart('v')) -lt [version]'1.7.0') { Write-Output '-- Old Winget version detected, upgrading.'; Set-Location $env:USERPROFILE; Invoke-WebRequest -Uri 'https://aka.ms/getwinget' -OutFile 'winget.msixbundle'; Add-AppPackage -ForceApplicationShutdown .\\winget.msixbundle; Remove-Item .\\winget.msixbundle } else { Write-Output 'Winget is already up to date, skipping upgrade.' }`;
 
     const manualList = document.getElementById("manualList");
-    if (window.manualURLs.length > 0) {
+    if (window.manualURLs && window.manualURLs.length > 0 && manualList) {
       manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
     }
   }
@@ -871,8 +878,8 @@ function appsInstallWinget() {
 appsInstallWinget();
 appsInstallChocolatey();
 
-const selectedPackageManager = document.getElementById("packageManager");
-selectedPackageManager.addEventListener("change", () => {
+const selectedPackageManager = document.getElementById("packageManager") as HTMLInputElement;
+selectedPackageManager?.addEventListener("change", () => {
   if (selectedPackageManager.value === "chocolatey") {
     appsInstallChocolatey();
   } else if (selectedPackageManager.value === "winget") {
@@ -881,27 +888,30 @@ selectedPackageManager.addEventListener("change", () => {
 });
 
 // Check manual IDs
-function isValidManualId(manualId) {
+function isValidManualId(manualId: string) {
   return /^[A-Za-z0-9._+\-]+$/.test(manualId);
 }
 
 // Manual IDs button listener
 const addButton = document.getElementById("addApp");
-addButton.addEventListener("click", () => {
-  const manualInput = document.getElementById("manualInput").value.trim();
-  if (manualInput) {
-    if (!isValidManualId(manualInput)) {
-      const manualList = document.getElementById("manualList");
-      manualList.innerHTML = "Please enter a valid package ID.";
-      return;
-    }
-    window.manualURLs.push(manualInput);
-    document.getElementById("manualInput").value = ""; // Clear input
-    if (selectedPackageManager.value === "chocolatey") {
-      appsInstallChocolatey();
-    } else if (selectedPackageManager.value === "winget") {
-      appsInstallWinget();
-    }
+addButton?.addEventListener("click", () => {
+  const manualInput = document.getElementById("manualInput") as HTMLInputElement;
+  const manualList = document.getElementById("manualList");
+  const inputValue = manualInput.value.trim();
+
+  if (!manualInput || !manualList) return;
+
+  if (!isValidManualId(inputValue)) {
+    manualList.innerHTML = "Please enter a valid package ID.";
+    return;
+  }
+  if (window.manualURLs) window.manualURLs.push(inputValue);
+  manualInput.value = "";
+
+  if (selectedPackageManager.value === "chocolatey") {
+    appsInstallChocolatey();
+  } else if (selectedPackageManager.value === "winget") {
+    appsInstallWinget();
   }
 });
 
@@ -909,7 +919,7 @@ addButton.addEventListener("click", () => {
 const apps = document.querySelectorAll('[js-target="install"]');
 document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("change", (event) => {
-    if (event.target.matches("[js-target=install]")) {
+    if (event.target instanceof Element && event.target.matches("[js-target=install]")) {
       if (selectedPackageManager.value === "chocolatey") {
         appsInstallChocolatey();
       } else if (selectedPackageManager.value === "winget") {

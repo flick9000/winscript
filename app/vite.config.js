@@ -4,11 +4,9 @@ const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig(async () => ({
   root: "src",
-  resolve: { alias: { "~": "" } }, // Remove /src from resolved paths
+  resolve: { alias: { "~": "" } },
   server: {
-    // Tauri expects a fixed port, fail if that port is not available
     strictPort: true,
-    // if the host Tauri is expecting is set, use it
     host: host || false,
     port: 4321,
   },

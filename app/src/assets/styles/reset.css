@@ -2,6 +2,9 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: currentColor;
 }
 *,
 html,
@@ -40,6 +43,8 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+  font-size: inherit;
+  font-weight: inherit;
 }
 a {
   color: inherit;
@@ -53,4 +58,10 @@ ul,
 li,
 ol {
   list-style: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1;
+  color: #9ca3af;
 }
