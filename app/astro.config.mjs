@@ -19,6 +19,7 @@ export default defineConfig({
       "zh-CN",
       "sl",
       "cs",
+      "he",
     ],
     defaultLocale: "en",
   },
