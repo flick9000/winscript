@@ -204,10 +204,8 @@ await loadLocale();
 getCurrentWindow().show();
 
 // Prevent context menu
-document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-  });
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
 });
 
 async function displayVersion() {
