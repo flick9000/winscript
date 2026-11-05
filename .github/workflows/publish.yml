@@ -22,11 +22,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
 
@@ -34,14 +29,22 @@ jobs:
         uses: swatinem/rust-cache@v2
         with:
           workspaces: ./app/src-tauri
+          shared-key: release
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: app/package-lock.json
 
       - name: Install frontend dependencies
         working-directory: ./app
-        run: npm install
+        run: npm ci
 
       - name: Build Tauri portable
         working-directory: ./app
-        run: npm run tauri build
+        run: npm run tauri build -- --no-bundle
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
