@@ -30,29 +30,25 @@ const selectedOption = options.find((option) => option.value === defaultValue);
 
   <div class={`custom-select-container`}>
     <div class="custom-select" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-      <div class="selected-value">
-        {selectedOption?.label || ""}
-      </div>
+      <div class="selected-value">{selectedOption?.label || ""}</div>
       <img class="chevron" src="/icons/chevron-down.png" alt="Dropdown arrow" />
 
       <input type="hidden" id={id} name={name} value={defaultValue} />
     </div>
 
     <div class="select-dropdown" role="listbox">
-      {
-        options.map((option) => (
-          <div
-            class={`select-option ${option.value === defaultValue ? "selected" : ""}`}
-            role="option"
-            aria-selected={option.value === defaultValue ? "true" : "false"}
-            data-value={option.value}
-          >
-            <div>
-              <span>{option.label}</span>
-            </div>
+      {options.map((option) => (
+        <div
+          class={`select-option ${option.value === defaultValue ? "selected" : ""}`}
+          role="option"
+          aria-selected={option.value === defaultValue ? "true" : "false"}
+          data-value={option.value}
+        >
+          <div>
+            <span>{option.label}</span>
           </div>
-        ))
-      }
+        </div>
+      ))}
     </div>
   </div>
 </div>

@@ -39,19 +39,17 @@ const { title, description, icon, id, scripts, offText, onText } = Astro.props;
       </label>
     </div>
   </summary>
-  {
-    scripts.map((script) => {
-      return (
-        <ScriptToggle
-          title={script.title}
-          inputId={script.inputId}
-          description={script.description}
-          offText={offText}
-          onText={onText}
-        />
-      );
-    })
-  }
+  {scripts.map((script) => {
+    return (
+      <ScriptToggle
+        title={script.title}
+        inputId={script.inputId}
+        description={script.description}
+        offText={offText}
+        onText={onText}
+      />
+    );
+  })}
 </details>
 
 <script>

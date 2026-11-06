@@ -2265,15 +2265,16 @@ const languages = [
                     <br />
                     <b>2) {t["script.presets.table"]}</b>
                     <br />
-                    <i
-                      >{t["script.presets.table.desc"]}
+                    <i>
+                      {t["script.presets.table.desc"]}
                       <a
                         style="text-decoration: underline;"
                         target="_blank"
                         href="https://docs.winscript.cc/#/content/presets"
-                        >{t["script.presets.table"]}</a
-                      ></i
-                    >
+                      >
+                        {t["script.presets.table"]}
+                      </a>
+                    </i>
                     <br />
                     <br />
                     <b>3) {t["script.presets.select"]}</b>
@@ -2307,38 +2308,36 @@ const languages = [
           </details>
         </Tab>
         <Tab tab="localizations">
-          {
-            languages.map((lang) => (
-              <div class="content-entry localization-entry" data-lang-code={lang.code}>
+          {languages.map((lang) => (
+            <div class="content-entry localization-entry" data-lang-code={lang.code}>
+              <div>
+                <img
+                  src={`/icons/flags/${lang.code}.svg`}
+                  width="24"
+                  height="24"
+                  alt={lang.name}
+                  style="pointer-events: none;"
+                  class="flag-img"
+                />
                 <div>
-                  <img
-                    src={`/icons/flags/${lang.code}.svg`}
-                    width="24"
-                    height="24"
-                    alt={lang.name}
-                    style="pointer-events: none;"
-                    class="flag-img"
-                  />
-                  <div>
-                    <h1>{lang.name}</h1>
-                    <p class="translator-info">
-                      {t["localizations.translatedBy"]}{" "}
-                      <a
-                        href={lang.translatorUrl}
-                        target="_blank"
-                        style="text-decoration: underline;"
-                      >
-                        {lang.translator}
-                      </a>
-                    </p>
-                  </div>
+                  <h1>{lang.name}</h1>
+                  <p class="translator-info">
+                    {t["localizations.translatedBy"]}{" "}
+                    <a
+                      href={lang.translatorUrl}
+                      target="_blank"
+                      style="text-decoration: underline;"
+                    >
+                      {lang.translator}
+                    </a>
+                  </p>
                 </div>
-                <button class="use-lang-btn" data-locale={lang.code}>
-                  {t["localizations.useLanguage"]}
-                </button>
               </div>
-            ))
-          }
+              <button class="use-lang-btn" data-locale={lang.code}>
+                {t["localizations.useLanguage"]}
+              </button>
+            </div>
+          ))}
         </Tab>
       </div>
     </div>

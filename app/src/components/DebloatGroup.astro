@@ -38,17 +38,15 @@ const { title, desc, icon, id, apps, offText, onText } = Astro.props;
       </label>
     </div>
   </summary>
-  {
-    apps.map((tool) => (
-      <DebloatToggle
-        title={tool.title}
-        desc={tool.desc}
-        appId={tool.appId}
-        offText={offText}
-        onText={onText}
-      />
-    ))
-  }
+  {apps.map((tool) => (
+    <DebloatToggle
+      title={tool.title}
+      desc={tool.desc}
+      appId={tool.appId}
+      offText={offText}
+      onText={onText}
+    />
+  ))}
 </details>
 
 <script>
