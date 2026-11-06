@@ -3,59 +3,61 @@ import ScriptToggle from "./ScriptToggle.astro";
 import ScriptRadio from "./ScriptRadio.astro";
 
 interface Tool {
-  title: string;
-  description?: string;
-  inputId: string;
-  radio?: boolean;
-  group?: string;
+    title: string;
+    description?: string;
+    inputId: string;
+    radio?: boolean;
+    group?: string;
 }
 
 interface Props {
-  title: string;
-  description: string;
-  icon: string;
-  tools: Tool[];
-  offText?: string;
-  onText?: string;
+    title: string;
+    description: string;
+    icon: string;
+    tools: Tool[];
+    offText?: string;
+    onText?: string;
 }
 
 const { title, description, icon, tools, offText, onText } = Astro.props;
 ---
 
 <details>
-  <summary class="content-entry">
-    <div>
-      <img src={icon} alt={title} />
-      <div>
-        <h1>{title}</h1>
-        <p>{description}</p>
-      </div>
-    </div>
-    <img class="chevron" src="/icons/chevron-down.png" alt="Expand" />
-  </summary>
+    <summary class="content-entry">
+        <div>
+            <img src={icon} alt={title} />
+            <div>
+                <h1>{title}</h1>
+                <p>{description}</p>
+            </div>
+        </div>
+        <img class="chevron" src="/icons/chevron-down.png" alt="Expand" />
+    </summary>
 
-  {tools.map((tool) => {
-    if (tool.radio) {
-      return (
-        <ScriptRadio
-          title={tool.title}
-          inputId={tool.inputId}
-          description={tool.description}
-          group={tool.group || "default-group"}
-          offText={offText}
-          onText={onText}
-        />
-      );
+    {
+        tools.map((tool) => {
+            if (tool.radio) {
+                return (
+                    <ScriptRadio
+                        title={tool.title}
+                        inputId={tool.inputId}
+                        description={tool.description}
+                        group={tool.group || "default-group"}
+                        offText={offText}
+                        onText={onText}
+                    />
+                );
+            }
+
+            return (
+                <ScriptToggle
+                    title={tool.title}
+                    inputId={tool.inputId}
+                    description={tool.description}
+                    offText={offText}
+                    onText={onText}
+                />
+            );
+        })
     }
-
-    return (
-      <ScriptToggle
-        title={tool.title}
-        inputId={tool.inputId}
-        description={tool.description}
-        offText={offText}
-        onText={onText}
-      />
-    );
-  })}
 </details>

@@ -10,8 +10,8 @@
         "preview": "astro preview",
         "astro": "astro",
         "tauri": "tauri",
-        "format": "prettier --config ../.prettierrc --write .",
-        "format:check": "prettier --config ../.prettierrc --check ."
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
     },
     "devDependencies": {
         "@tauri-apps/cli": "^2.11.4",

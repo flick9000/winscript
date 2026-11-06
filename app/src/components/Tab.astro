@@ -3,21 +3,21 @@ const { tab } = Astro.props;
 ---
 
 <div class="tab-content" id=`${tab}-tab`>
-  <slot />
+    <slot />
 </div>
 
 <style>
-  .tab-content {
-    display: none;
-  }
+    .tab-content {
+        display: none;
+    }
 
-  .tab-content.active {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    overflow-y: auto;
-    max-height: calc(100vh - 152px);
-    animation: pop-in 0.3s ease;
-    transition: padding-bottom 0.3s ease;
-  }
+    .tab-content.active {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        overflow-y: auto;
+        max-height: calc(100vh - 152px);
+        animation: pop-in 0.3s ease;
+        transition: padding-bottom 0.3s ease;
+    }
 </style>

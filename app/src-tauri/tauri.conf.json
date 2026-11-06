@@ -1,67 +1,69 @@
 {
-  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "WinScript",
-  "version": "2.28.1",
-  "identifier": "flick.winscript.dev",
-  "build": {
-    "devUrl": "http://localhost:4321/",
-    "frontendDist": "../dist",
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
-    "removeUnusedCommands": true
-  },
-  "app": {
-    "windows": [
-      {
-        "title": "WinScript",
-        "width": 1200,
-        "height": 800,
-        "minWidth": 750,
-        "minHeight": 700,
-        "resizable": true,
-        "visible": false,
-        "center": true,
-        "decorations": false,
-        "transparent": true,
-        "fullscreen": false
-      }
-    ],
-    "security": {
-      "csp": null
-    }
-  },
-  "bundle": {
-    "publisher": "flick9000",
-    "license": "GPL-3.0",
-    "createUpdaterArtifacts": true,
-    "active": true,
-    "windows": {
-      "nsis": {
-        "installerIcon": "icons/favicon.ico",
-        "sidebarImage": "icons/sidebar.bmp",
-        "installMode": "both"
-      }
+    "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+    "productName": "WinScript",
+    "version": "2.28.1",
+    "identifier": "flick.winscript.dev",
+    "build": {
+        "devUrl": "http://localhost:4321/",
+        "frontendDist": "../dist",
+        "beforeDevCommand": "npm run dev",
+        "beforeBuildCommand": "npm run build",
+        "removeUnusedCommands": true
     },
-    "targets": ["nsis"],
-    "icon": ["icons/favicon.ico"]
-  },
-  "plugins": {
-    "updater": {
-      "windows": {
-        "installMode": "passive"
-      },
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVCM0M4RDc0QTJGQ0IzNkUKUldSdXMveWlkSTA4NjdtU0t6TVUxNGNSYWZyb0k4amRodUNTT3lXTXhLcVoxYTNSd0V3ZHZ5SmwK",
-      "endpoints": ["https://github.com/flick9000/winscript/releases/latest/download/latest.json"]
-    },
-    "cli": {
-      "args": [
-        {
-          "short": "i",
-          "name": "import",
-          "description": "Imports config file",
-          "takesValue": true
+    "app": {
+        "windows": [
+            {
+                "title": "WinScript",
+                "width": 1200,
+                "height": 800,
+                "minWidth": 750,
+                "minHeight": 700,
+                "resizable": true,
+                "visible": false,
+                "center": true,
+                "decorations": false,
+                "transparent": true,
+                "fullscreen": false
+            }
+        ],
+        "security": {
+            "csp": null
         }
-      ]
+    },
+    "bundle": {
+        "publisher": "flick9000",
+        "license": "GPL-3.0",
+        "createUpdaterArtifacts": true,
+        "active": true,
+        "windows": {
+            "nsis": {
+                "installerIcon": "icons/favicon.ico",
+                "sidebarImage": "icons/sidebar.bmp",
+                "installMode": "both"
+            }
+        },
+        "targets": ["nsis"],
+        "icon": ["icons/favicon.ico"]
+    },
+    "plugins": {
+        "updater": {
+            "windows": {
+                "installMode": "passive"
+            },
+            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVCM0M4RDc0QTJGQ0IzNkUKUldSdXMveWlkSTA4NjdtU0t6TVUxNGNSYWZyb0k4amRodUNTT3lXTXhLcVoxYTNSd0V3ZHZ5SmwK",
+            "endpoints": [
+                "https://github.com/flick9000/winscript/releases/latest/download/latest.json"
+            ]
+        },
+        "cli": {
+            "args": [
+                {
+                    "short": "i",
+                    "name": "import",
+                    "description": "Imports config file",
+                    "takesValue": true
+                }
+            ]
+        }
     }
-  }
 }

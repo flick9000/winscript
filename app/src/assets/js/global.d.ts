@@ -1,7 +1,7 @@
 declare global {
-  interface Window {
-    manualURLs?: string[];
-  }
+    interface Window {
+        manualURLs?: string[];
+    }
 }
 
 export {};

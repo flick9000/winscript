@@ -3,74 +3,83 @@
 import ScriptToggle from "./ScriptToggle.astro";
 
 interface Script {
-  title: string;
-  description?: string;
-  inputId: string;
-  group?: string;
+    title: string;
+    description?: string;
+    inputId: string;
+    group?: string;
 }
 
 interface Props {
-  title: string;
-  description: string;
-  icon: string;
-  id: string;
-  scripts: Script[];
-  offText?: string;
-  onText?: string;
+    title: string;
+    description: string;
+    icon: string;
+    id: string;
+    scripts: Script[];
+    offText?: string;
+    onText?: string;
 }
 
 const { title, description, icon, id, scripts, offText, onText } = Astro.props;
 ---
 
 <details>
-  <summary class="content-entry">
-    <div>
-      <img src={icon} alt={title} />
-      <div>
-        <h1>{title}</h1>
-        <p>{description}</p>
-      </div>
-    </div>
-    <div class="checkbox-wrapper">
-      <img class="chevron" src="/icons/chevron-down.png" alt="" />
-      <label class="switch">
-        <input class="group-checkbox" id={`group-${id}`} type="checkbox" />
-        <span class="slider"></span>
-      </label>
-    </div>
-  </summary>
-  {scripts.map((script) => {
-    return (
-      <ScriptToggle
-        title={script.title}
-        inputId={script.inputId}
-        description={script.description}
-        offText={offText}
-        onText={onText}
-      />
-    );
-  })}
+    <summary class="content-entry">
+        <div>
+            <img src={icon} alt={title} />
+            <div>
+                <h1>{title}</h1>
+                <p>{description}</p>
+            </div>
+        </div>
+        <div class="checkbox-wrapper">
+            <img class="chevron" src="/icons/chevron-down.png" alt="" />
+            <label class="switch">
+                <input
+                    class="group-checkbox"
+                    id={`group-${id}`}
+                    type="checkbox"
+                />
+                <span class="slider"></span>
+            </label>
+        </div>
+    </summary>
+    {
+        scripts.map((script) => {
+            return (
+                <ScriptToggle
+                    title={script.title}
+                    inputId={script.inputId}
+                    description={script.description}
+                    offText={offText}
+                    onText={onText}
+                />
+            );
+        })
+    }
 </details>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const groupCheckbox = document.querySelectorAll<HTMLInputElement>("input[id^=group-]");
+    document.addEventListener("DOMContentLoaded", () => {
+        const groupCheckbox =
+            document.querySelectorAll<HTMLInputElement>("input[id^=group-]");
 
-    groupCheckbox.forEach((group) => {
-      group.addEventListener("change", () => {
-        const groupContainer = group.closest("details");
-        if (!groupContainer) return;
+        groupCheckbox.forEach((group) => {
+            group.addEventListener("change", () => {
+                const groupContainer = group.closest("details");
+                if (!groupContainer) return;
 
-        const groupItems =
-          groupContainer.querySelectorAll<HTMLInputElement>("input:not([id^=group-])");
+                const groupItems =
+                    groupContainer.querySelectorAll<HTMLInputElement>(
+                        "input:not([id^=group-])",
+                    );
 
-        groupItems.forEach((item) => {
-          if (item.checked !== group.checked) {
-            item.checked = group.checked;
-            item.dispatchEvent(new Event("change"));
-          }
+                groupItems.forEach((item) => {
+                    if (item.checked !== group.checked) {
+                        item.checked = group.checked;
+                        item.dispatchEvent(new Event("change"));
+                    }
+                });
+            });
         });
-      });
     });
-  });
 </script>

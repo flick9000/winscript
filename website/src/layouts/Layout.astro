@@ -8,38 +8,46 @@ const { locale = "en" } = Astro.props;
 
 <!doctype html>
 <html lang={locale} data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Build your Windows 10/11 script from scratch." />
-    <title>WinScript | Online</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <meta
+            name="description"
+            content="Build your Windows 10/11 script from scratch."
+        />
+        <title>WinScript | Online</title>
 
-    <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
 
-    <link rel="canonical" href="https://winscript.cc/online" />
+        <link rel="canonical" href="https://winscript.cc/online" />
 
-    <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
-  </head>
-  <body>
-    <slot />
-  </body>
+        <script
+            src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"
+        ></script>
+    </head>
+    <body>
+        <slot />
+    </body>
 
-  <script>
-    // @ts-nocheck
-    import hljs from "highlight.js/lib/core";
-    import dos from "highlight.js/lib/languages/dos";
-    import powershell from "highlight.js/lib/languages/powershell";
+    <script>
+        // @ts-nocheck
+        import hljs from "highlight.js/lib/core";
+        import dos from "highlight.js/lib/languages/dos";
+        import powershell from "highlight.js/lib/languages/powershell";
 
-    hljs.registerLanguage("powershell", powershell);
-    hljs.registerLanguage("dos", dos);
+        hljs.registerLanguage("powershell", powershell);
+        hljs.registerLanguage("dos", dos);
 
-    window.hljs = hljs;
+        window.hljs = hljs;
 
-    hljs.highlightAll();
-  </script>
+        hljs.highlightAll();
+    </script>
 
-  <script src="../assets/js/main.ts"></script>
-  <script src="../assets/js/appinstall.ts"></script>
-  <script src="../assets/js/scripts.ts"></script>
-  <script src="../assets/js/unattend.ts"></script>
+    <script src="../assets/js/main.ts"></script>
+    <script src="../assets/js/appinstall.ts"></script>
+    <script src="../assets/js/scripts.ts"></script>
+    <script src="../assets/js/unattend.ts"></script>
 </html>

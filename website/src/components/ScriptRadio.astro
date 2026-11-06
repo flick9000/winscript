@@ -1,78 +1,91 @@
 ---
 interface Props {
-  title: string;
-  inputId: string;
-  group: string;
-  icon?: string;
-  description?: string;
-  offText?: string;
-  onText?: string;
+    title: string;
+    inputId: string;
+    group: string;
+    icon?: string;
+    description?: string;
+    offText?: string;
+    onText?: string;
 }
 
-const { title, inputId, group, icon, description, offText = "Off", onText = "On" } = Astro.props;
+const {
+    title,
+    inputId,
+    group,
+    icon,
+    description,
+    offText = "Off",
+    onText = "On",
+} = Astro.props;
 ---
 
 <div class="content-entry">
-  <div>
-    {icon && <img src={icon} alt={title} />}
     <div>
-      <h1>{title}</h1>
-      {description && <p>{description}</p>}
+        {icon && <img src={icon} alt={title} />}
+        <div>
+            <h1>{title}</h1>
+            {description && <p>{description}</p>}
+        </div>
     </div>
-  </div>
 
-  <div class="checkbox-wrapper">
-    <span class="indicator" id={`indicator-${inputId}`} data-on={onText} data-off={offText}>
-      {offText}
-    </span>
-    <label class="radio">
-      <input id={inputId} type="radio" name={group} />
-      <span class="dot"></span>
-    </label>
-  </div>
+    <div class="checkbox-wrapper">
+        <span
+            class="indicator"
+            id={`indicator-${inputId}`}
+            data-on={onText}
+            data-off={offText}
+        >
+            {offText}
+        </span>
+        <label class="radio">
+            <input id={inputId} type="radio" name={group} />
+            <span class="dot"></span>
+        </label>
+    </div>
 </div>
 
 <style>
-  .radio {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-  }
+    .radio {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-  .radio input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+    .radio input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
-  .radio .dot {
-    display: block;
-    width: 16px;
-    height: 16px;
-    border: 1px solid var(--muted);
-    border-radius: 50%;
-    position: relative;
-    transition: all 0.2s ease;
-    box-shadow:
-      0 0 1px 0px var(--muted) inset,
-      0 0 1px 0px var(--muted);
-  }
+    .radio .dot {
+        display: block;
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--muted);
+        border-radius: 50%;
+        position: relative;
+        transition: all 0.2s ease;
+        box-shadow:
+            0 0 1px 0px var(--muted) inset,
+            0 0 1px 0px var(--muted);
+    }
 
-  .radio .dot::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--primary);
-    transition: transform 0.2s ease;
-  }
+    .radio .dot::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        transition: transform 0.2s ease;
+    }
 
-  .radio input[type="radio"]:checked + .dot::after {
-    transform: translate(-50%, -50%) scale(1);
-  }
+    .radio input[type="radio"]:checked + .dot::after {
+        transform: translate(-50%, -50%) scale(1);
+    }
 </style>

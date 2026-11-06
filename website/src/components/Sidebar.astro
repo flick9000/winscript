@@ -1,190 +1,190 @@
 ---
 interface Props {
-  t: any;
+    t: any;
 }
 
 const { t } = Astro.props;
 ---
 
 <div id="sidebar" class="sidebar">
-  <div class="sidebar-header">
-    <img src="/logo.svg" width="56" alt="" />
-    <div class="sidebar-user">
-      <h1>WinScript</h1>
-      <a href="https://github.com/flick9000">github.com/flick9000</a>
+    <div class="sidebar-header">
+        <img src="/logo.svg" width="56" alt="" />
+        <div class="sidebar-user">
+            <h1>WinScript</h1>
+            <a href="https://github.com/flick9000">github.com/flick9000</a>
+        </div>
     </div>
-  </div>
-  <button id="uncheckAll">{t["sidebar.uncheckAll"]}</button>
-  <div class="sidebar-buttons">
-    <button id="importBtn">{t["sidebar.import"]}</button>
-    <button id="exportBtn">{t["sidebar.export"]}</button>
-  </div>
-  <div class="sidebar-content">
-    <div data-tab="tools-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/tools.svg" alt="" />
-      <h1>{t["nav.tools"]}</h1>
+    <button id="uncheckAll">{t["sidebar.uncheckAll"]}</button>
+    <div class="sidebar-buttons">
+        <button id="importBtn">{t["sidebar.import"]}</button>
+        <button id="exportBtn">{t["sidebar.export"]}</button>
     </div>
-    <div data-tab="debloat-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/debloat.ico" alt="" />
-      <h1>{t["nav.debloat"]}</h1>
+    <div class="sidebar-content">
+        <div data-tab="tools-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/tools.svg" alt="" />
+            <h1>{t["nav.tools"]}</h1>
+        </div>
+        <div data-tab="debloat-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/debloat.ico" alt="" />
+            <h1>{t["nav.debloat"]}</h1>
+        </div>
+        <div data-tab="privacy-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/privacy.svg" alt="" />
+            <h1>{t["nav.privacy"]}</h1>
+        </div>
+        <div data-tab="telemetry-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/telemetry.svg" alt="" />
+            <h1>{t["nav.telemetry"]}</h1>
+        </div>
+        <div data-tab="gaming-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/Gaming.png" alt="" />
+            <h1>{t["nav.gaming"]}</h1>
+        </div>
+        <div data-tab="performance-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/performance.svg" alt="" />
+            <h1>{t["nav.performance"]}</h1>
+        </div>
+        <div data-tab="miscellanous-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/miscellanous.svg" alt="" />
+            <h1>{t["nav.miscellaneous"]}</h1>
+        </div>
+        <div data-tab="install-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/app.svg" alt="" />
+            <h1>{t["nav.install"]}</h1>
+        </div>
+        <hr />
+        <div data-tab="script-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/code.svg" alt="" />
+            <h1>{t["nav.script.download"]}</h1>
+        </div>
     </div>
-    <div data-tab="privacy-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/privacy.svg" alt="" />
-      <h1>{t["nav.privacy"]}</h1>
+    <div class="sidebar-footer">
+        <hr />
+        <div data-tab="localizations-tab" class="sidebar-entry">
+            <img src="/icons/sidebar/languages.svg" alt="" />
+            <h1>{t["nav.localizations"]}</h1>
+        </div>
     </div>
-    <div data-tab="telemetry-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/telemetry.svg" alt="" />
-      <h1>{t["nav.telemetry"]}</h1>
-    </div>
-    <div data-tab="gaming-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/Gaming.png" alt="" />
-      <h1>{t["nav.gaming"]}</h1>
-    </div>
-    <div data-tab="performance-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/performance.svg" alt="" />
-      <h1>{t["nav.performance"]}</h1>
-    </div>
-    <div data-tab="miscellanous-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/miscellanous.svg" alt="" />
-      <h1>{t["nav.miscellaneous"]}</h1>
-    </div>
-    <div data-tab="install-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/app.svg" alt="" />
-      <h1>{t["nav.install"]}</h1>
-    </div>
-    <hr />
-    <div data-tab="script-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/code.svg" alt="" />
-      <h1>{t["nav.script.download"]}</h1>
-    </div>
-  </div>
-  <div class="sidebar-footer">
-    <hr />
-    <div data-tab="localizations-tab" class="sidebar-entry">
-      <img src="/icons/sidebar/languages.svg" alt="" />
-      <h1>{t["nav.localizations"]}</h1>
-    </div>
-  </div>
 </div>
 
 <style>
-  .sidebar-footer {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-bottom: 1rem;
-  }
-  @keyframes slide-in {
-    from {
-      transform: translateX(-150%);
+    .sidebar-footer {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding-bottom: 1rem;
     }
-    to {
-      transform: translateX(0);
+    @keyframes slide-in {
+        from {
+            transform: translateX(-150%);
+        }
+        to {
+            transform: translateX(0);
+        }
     }
-  }
-  @keyframes sidebar-border-fade {
-    from {
-      border-color: transparent;
+    @keyframes sidebar-border-fade {
+        from {
+            border-color: transparent;
+        }
+        to {
+            border-color: var(--primary);
+        }
     }
-    to {
-      border-color: var(--primary);
-    }
-  }
-  .sidebar {
-    display: flex;
-    position: fixed;
-    flex-direction: column;
-    height: 95%;
-    gap: 16px;
-    min-width: 300px;
-    margin-left: 1rem;
-  }
-
-  .sidebar-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .sidebar-user {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sidebar-user h1 {
-    font-weight: 500;
-  }
-
-  .sidebar-buttons {
-    display: flex;
-    gap: 8px;
-  }
-
-  .sidebar-buttons button {
-    width: 100%;
-  }
-
-  .sidebar-user > a {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 400;
-  }
-
-  .sidebar-content {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .sidebar-entry {
-    width: 100%;
-    padding-inline: 8px;
-    border-radius: 5px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    border-left: 4px solid transparent;
-  }
-
-  .sidebar-entry:hover {
-    background-color: hsl(from var(--text) h s l / 0.08);
-  }
-
-  .sidebar-entry.active {
-    background-color: hsl(from var(--text) h s l / 0.08);
-    animation: sidebar-border-fade 0.3s ease forwards;
-  }
-
-  .sidebar-entry > img {
-    max-width: 22px;
-  }
-
-  @media screen and (max-width: 800px) {
     .sidebar {
-      display: none;
+        display: flex;
+        position: fixed;
+        flex-direction: column;
+        height: 95%;
+        gap: 16px;
+        min-width: 300px;
+        margin-left: 1rem;
     }
 
-    .sidebar.responsive {
-      position: fixed;
-      display: flex;
-      background-color: hsla(253, 50%, 7%, 0.4);
-      backdrop-filter: blur(75px);
-      -webkit-backdrop-filter: blur(75px);
-      width: 100%;
-      height: 100%;
-      top: 0;
-      margin: 0;
-      padding-top: 3rem;
-      padding-inline: 1.5rem;
-      z-index: 2;
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
-  }
 
-  @media (min-width: 800px) {
-    .sidebar {
-      animation: slide-in 0.3s ease forwards;
+    .sidebar-user {
+        display: flex;
+        flex-direction: column;
     }
-  }
+
+    .sidebar-user h1 {
+        font-weight: 500;
+    }
+
+    .sidebar-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .sidebar-buttons button {
+        width: 100%;
+    }
+
+    .sidebar-user > a {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 400;
+    }
+
+    .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .sidebar-entry {
+        width: 100%;
+        padding-inline: 8px;
+        border-radius: 5px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border-left: 4px solid transparent;
+    }
+
+    .sidebar-entry:hover {
+        background-color: hsl(from var(--text) h s l / 0.08);
+    }
+
+    .sidebar-entry.active {
+        background-color: hsl(from var(--text) h s l / 0.08);
+        animation: sidebar-border-fade 0.3s ease forwards;
+    }
+
+    .sidebar-entry > img {
+        max-width: 22px;
+    }
+
+    @media screen and (max-width: 800px) {
+        .sidebar {
+            display: none;
+        }
+
+        .sidebar.responsive {
+            position: fixed;
+            display: flex;
+            background-color: hsla(253, 50%, 7%, 0.4);
+            backdrop-filter: blur(75px);
+            -webkit-backdrop-filter: blur(75px);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            margin: 0;
+            padding-top: 3rem;
+            padding-inline: 1.5rem;
+            z-index: 2;
+        }
+    }
+
+    @media (min-width: 800px) {
+        .sidebar {
+            animation: slide-in 0.3s ease forwards;
+        }
+    }
 </style>

@@ -8,34 +8,40 @@ const { locale = "en" } = Astro.props;
 
 <!doctype html>
 <html lang={locale}>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Build your Windows 10/11 script from scratch." />
-    <title>WinScript</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <meta
+            name="description"
+            content="Build your Windows 10/11 script from scratch."
+        />
+        <title>WinScript</title>
 
-    <link rel="icon" href="/favicon.ico" />
-  </head>
-  <body>
-    <slot />
-  </body>
+        <link rel="icon" href="/favicon.ico" />
+    </head>
+    <body>
+        <slot />
+    </body>
 
-  <script src="../assets/js/main.ts"></script>
-  <script src="../assets/js/scripts.ts"></script>
-  <script src="../assets/js/appinstall.ts"></script>
-  <script src="../assets/js/unattend.ts"></script>
+    <script src="../assets/js/main.ts"></script>
+    <script src="../assets/js/scripts.ts"></script>
+    <script src="../assets/js/appinstall.ts"></script>
+    <script src="../assets/js/unattend.ts"></script>
 
-  <script>
-    // @ts-nocheck
-    import hljs from "highlight.js/lib/core";
-    import dos from "highlight.js/lib/languages/dos";
-    import powershell from "highlight.js/lib/languages/powershell";
+    <script>
+        // @ts-nocheck
+        import hljs from "highlight.js/lib/core";
+        import dos from "highlight.js/lib/languages/dos";
+        import powershell from "highlight.js/lib/languages/powershell";
 
-    hljs.registerLanguage("powershell", powershell);
-    hljs.registerLanguage("dos", dos);
+        hljs.registerLanguage("powershell", powershell);
+        hljs.registerLanguage("dos", dos);
 
-    window.hljs = hljs;
+        window.hljs = hljs;
 
-    hljs.highlightAll();
-  </script>
+        hljs.highlightAll();
+    </script>
 </html>

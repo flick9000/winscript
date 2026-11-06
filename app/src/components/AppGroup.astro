@@ -3,40 +3,42 @@
 import AppToggle from "./AppToggle.astro";
 
 interface App {
-  title: string;
-  desc?: string;
-  inputId: string;
+    title: string;
+    desc?: string;
+    inputId: string;
 }
 
 interface Props {
-  title: string;
-  icon: string;
-  apps: App[];
-  offText?: string;
-  onText?: string;
+    title: string;
+    icon: string;
+    apps: App[];
+    offText?: string;
+    onText?: string;
 }
 
 const { title, icon, apps, offText, onText } = Astro.props;
 ---
 
 <details>
-  <summary class="content-entry">
-    <div>
-      <img src={icon} alt={title} />
-      <div>
-        <h1>{title}</h1>
-      </div>
-    </div>
-    <img class="chevron" src="/icons/chevron-down.png" alt="" />
-  </summary>
+    <summary class="content-entry">
+        <div>
+            <img src={icon} alt={title} />
+            <div>
+                <h1>{title}</h1>
+            </div>
+        </div>
+        <img class="chevron" src="/icons/chevron-down.png" alt="" />
+    </summary>
 
-  {apps.map((tool) => (
-    <AppToggle
-      title={tool.title}
-      desc={tool.desc}
-      inputId={tool.inputId}
-      offText={offText}
-      onText={onText}
-    />
-  ))}
+    {
+        apps.map((tool) => (
+            <AppToggle
+                title={tool.title}
+                desc={tool.desc}
+                inputId={tool.inputId}
+                offText={offText}
+                onText={onText}
+            />
+        ))
+    }
 </details>

@@ -1,69 +1,76 @@
 function getSupportedLocales() {
-  const buttons = document.querySelectorAll(".use-lang-btn");
-  return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+    const buttons = document.querySelectorAll(".use-lang-btn");
+    return new Set(
+        Array.from(buttons).map((btn) => btn.getAttribute("data-locale")),
+    );
 }
 
 function detectBrowserLocale() {
-  const supported = getSupportedLocales();
-  const browserLocales = navigator.languages || (navigator.language ? [navigator.language] : []);
+    const supported = getSupportedLocales();
+    const browserLocales =
+        navigator.languages || (navigator.language ? [navigator.language] : []);
 
-  for (const rawLocale of browserLocales) {
-    // Exact match: "de-AT" or "de",
-    if (supported.has(rawLocale)) {
-      return rawLocale;
+    for (const rawLocale of browserLocales) {
+        // Exact match: "de-AT" or "de",
+        if (supported.has(rawLocale)) {
+            return rawLocale;
+        }
+        // Prefix match: "de-AT" → "de"
+        const prefix = rawLocale.split("-")[0];
+        if (prefix !== rawLocale && supported.has(prefix)) {
+            return prefix;
+        }
     }
-    // Prefix match: "de-AT" → "de"
-    const prefix = rawLocale.split("-")[0];
-    if (prefix !== rawLocale && supported.has(prefix)) {
-      return prefix;
-    }
-  }
-  return null;
+    return null;
 }
 
 function loadLocale() {
-  // Saved preference wins
-  let locale = localStorage.getItem("locale");
-  if (locale) {
-    const supported = getSupportedLocales();
-    if (supported.has(locale)) {
-      if (locale !== "en" && !window.location.href.includes(locale)) {
-        window.location.href = `/${locale}`;
-      }
+    // Saved preference wins
+    let locale = localStorage.getItem("locale");
+    if (locale) {
+        const supported = getSupportedLocales();
+        if (supported.has(locale)) {
+            if (locale !== "en" && !window.location.href.includes(locale)) {
+                window.location.href = `/${locale}`;
+            }
+        }
+        return;
     }
-    return;
-  }
 
-  // No saved preference — use browser locale
-  locale = detectBrowserLocale();
-  if (locale && locale !== "en") {
-    localStorage.setItem("locale", locale);
-    window.location.href = `/${locale}`;
-  }
+    // No saved preference — use browser locale
+    locale = detectBrowserLocale();
+    if (locale && locale !== "en") {
+        localStorage.setItem("locale", locale);
+        window.location.href = `/${locale}`;
+    }
 }
 
 document.querySelectorAll(".fa-solid").forEach((icon) => {
-  icon.addEventListener("click", () => {
-    const navbar = document.getElementById("sidebar");
-    const menuIcon = document.querySelector(".fa-solid.fa-bars-staggered") as HTMLElement;
-    const markIcon = document.querySelector(".fa-solid.fa-xmark") as HTMLElement;
+    icon.addEventListener("click", () => {
+        const navbar = document.getElementById("sidebar");
+        const menuIcon = document.querySelector(
+            ".fa-solid.fa-bars-staggered",
+        ) as HTMLElement;
+        const markIcon = document.querySelector(
+            ".fa-solid.fa-xmark",
+        ) as HTMLElement;
 
-    if (!navbar || !menuIcon || !markIcon) return;
+        if (!navbar || !menuIcon || !markIcon) return;
 
-    if (!navbar.classList.contains("responsive")) {
-      navbar.classList.add("responsive");
-      menuIcon.style.display = "none";
-      markIcon.style.display = "flex";
+        if (!navbar.classList.contains("responsive")) {
+            navbar.classList.add("responsive");
+            menuIcon.style.display = "none";
+            markIcon.style.display = "flex";
 
-      document.body.style.overflow = "hidden";
-    } else {
-      navbar.classList.remove("responsive");
-      menuIcon.style.display = "flex";
-      markIcon.style.display = "none";
+            document.body.style.overflow = "hidden";
+        } else {
+            navbar.classList.remove("responsive");
+            menuIcon.style.display = "flex";
+            markIcon.style.display = "none";
 
-      document.body.style.overflow = "visible";
-    }
-  });
+            document.body.style.overflow = "visible";
+        }
+    });
 });
 
 const tabs = document.querySelectorAll(".sidebar-entry");
@@ -72,235 +79,257 @@ const title = document.getElementById("content-header");
 
 // Set only the first tab and its corresponding content as active
 if (tabs.length > 0 && contents.length > 0) {
-  tabs[0].classList.add("active");
-  contents[0].classList.add("active");
+    tabs[0].classList.add("active");
+    contents[0].classList.add("active");
 
-  if (title) {
-    title.textContent = tabs[0].textContent || "WinScript";
-  }
+    if (title) {
+        title.textContent = tabs[0].textContent || "WinScript";
+    }
 }
 
 // Remove 'active' from all other content divs
 contents.forEach((content, index) => {
-  if (index !== 0) {
-    content.classList.remove("active");
-  }
+    if (index !== 0) {
+        content.classList.remove("active");
+    }
 });
 
 // Add click event to each tab button
 tabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => {
-    tabs.forEach((t) => t.classList.remove("active"));
-    contents.forEach((c) => c.classList.remove("active"));
+    tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        contents.forEach((c) => c.classList.remove("active"));
 
-    tab.classList.add("active");
-    contents[index].classList.add("active");
+        tab.classList.add("active");
+        contents[index].classList.add("active");
 
-    if (title) {
-      title.textContent = tab.textContent;
-    }
-  });
+        if (title) {
+            title.textContent = tab.textContent;
+        }
+    });
 });
 
 // MAS Checkbox
 const masCheckbox = document.getElementById("installmas");
 const masContainer = document.querySelector(".mas-container");
 
-if (masCheckbox instanceof HTMLInputElement && masContainer instanceof HTMLDivElement) {
-  masCheckbox.addEventListener("change", () => {
-    masContainer.style.display = masCheckbox.checked ? "block" : "none";
-  });
+if (
+    masCheckbox instanceof HTMLInputElement &&
+    masContainer instanceof HTMLDivElement
+) {
+    masCheckbox.addEventListener("change", () => {
+        masContainer.style.display = masCheckbox.checked ? "block" : "none";
+    });
 }
 
-const restoreCheckbox = document.getElementById("restorepoint") as HTMLInputElement;
-const restoreContainer = document.querySelector(".restore-container") as HTMLDivElement;
+const restoreCheckbox = document.getElementById(
+    "restorepoint",
+) as HTMLInputElement;
+const restoreContainer = document.querySelector(
+    ".restore-container",
+) as HTMLDivElement;
 restoreCheckbox?.addEventListener("change", () => {
-  restoreContainer.style.display = restoreCheckbox.checked ? "block" : "none";
+    restoreContainer.style.display = restoreCheckbox.checked ? "block" : "none";
 });
 
 // App Search Bar
 const searchBar = document.getElementById("searchBar") as HTMLInputElement;
 searchBar?.addEventListener("input", () => {
-  const searchValue = searchBar.value.toLowerCase();
-  const detailsElements = document.querySelectorAll<HTMLDetailsElement>("#install-tab details");
+    const searchValue = searchBar.value.toLowerCase();
+    const detailsElements = document.querySelectorAll<HTMLDetailsElement>(
+        "#install-tab details",
+    );
 
-  detailsElements.forEach((details) => {
-    const entries = [...details.querySelectorAll<HTMLDivElement>(".content-entry")];
-    const summary = details.querySelector("summary");
+    detailsElements.forEach((details) => {
+        const entries = [
+            ...details.querySelectorAll<HTMLDivElement>(".content-entry"),
+        ];
+        const summary = details.querySelector("summary");
 
-    let hasMatch = false;
+        let hasMatch = false;
 
-    entries.forEach((entry) => {
-      if (!entry.isSameNode(summary)) {
-        const isMatch = entry.textContent.toLowerCase().includes(searchValue);
-        entry.style.display = isMatch ? "" : "none";
-        hasMatch ||= isMatch;
-      }
+        entries.forEach((entry) => {
+            if (!entry.isSameNode(summary)) {
+                const isMatch = entry.textContent
+                    .toLowerCase()
+                    .includes(searchValue);
+                entry.style.display = isMatch ? "" : "none";
+                hasMatch ||= isMatch;
+            }
+        });
+
+        if (!searchValue) {
+            details.style.display = "";
+            details.open = false;
+            entries.forEach((entry) => (entry.style.display = ""));
+        } else {
+            details.style.display = hasMatch ? "" : "none";
+            details.open = hasMatch;
+        }
     });
-
-    if (!searchValue) {
-      details.style.display = "";
-      details.open = false;
-      entries.forEach((entry) => (entry.style.display = ""));
-    } else {
-      details.style.display = hasMatch ? "" : "none";
-      details.open = hasMatch;
-    }
-  });
 });
 
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
-const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
-const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+const checkboxes = document.querySelectorAll<HTMLInputElement>(
+    'input[type="checkbox"]',
+);
+const radios = document.querySelectorAll<HTMLInputElement>(
+    'input[type="radio"]',
+);
 
 exportBtn?.addEventListener("click", () => {
-  let settings: Record<string, boolean> = {};
-  checkboxes.forEach((checkbox) => {
-    settings[checkbox.id] = checkbox.checked;
-  });
+    let settings: Record<string, boolean> = {};
+    checkboxes.forEach((checkbox) => {
+        settings[checkbox.id] = checkbox.checked;
+    });
 
-  radios.forEach((radio) => {
-    settings[radio.id] = radio.checked;
-  });
+    radios.forEach((radio) => {
+        settings[radio.id] = radio.checked;
+    });
 
-  const fileContent = JSON.stringify(settings, null, 2);
+    const fileContent = JSON.stringify(settings, null, 2);
 
-  const blob = new Blob([fileContent], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const downloadLink = document.createElement("a");
-  downloadLink.href = url;
-  downloadLink.download = "settings.json";
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
+    const blob = new Blob([fileContent], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement("a");
+    downloadLink.href = url;
+    downloadLink.download = "settings.json";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
 
-  document.body.removeChild(downloadLink);
-  URL.revokeObjectURL(url);
+    document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(url);
 
-  console.log("File saved successfully");
+    console.log("File saved successfully");
 });
 
 importBtn?.addEventListener("click", () => {
-  const fileInput = document.createElement("input");
-  fileInput.type = "file";
-  fileInput.accept = ".json";
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".json";
 
-  fileInput.addEventListener("change", (event) => {
-    const file = (event.target as HTMLInputElement)?.files?.[0];
-    if (!file) return;
+    fileInput.addEventListener("change", (event) => {
+        const file = (event.target as HTMLInputElement)?.files?.[0];
+        if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const result = (e.target as FileReader)?.result;
-        if (typeof result !== "string") return;
-        const settings = JSON.parse(result);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const result = (e.target as FileReader)?.result;
+                if (typeof result !== "string") return;
+                const settings = JSON.parse(result);
 
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = settings[checkbox.id];
-          checkbox.dispatchEvent(new Event("change"));
-        });
-        radios.forEach((radio) => {
-          radio.checked = settings[radio.id];
-          radio.dispatchEvent(new Event("change"));
-        });
-      } catch (error) {
-        console.error("Error parsing settings:", error);
-      }
-    };
+                checkboxes.forEach((checkbox) => {
+                    checkbox.checked = settings[checkbox.id];
+                    checkbox.dispatchEvent(new Event("change"));
+                });
+                radios.forEach((radio) => {
+                    radio.checked = settings[radio.id];
+                    radio.dispatchEvent(new Event("change"));
+                });
+            } catch (error) {
+                console.error("Error parsing settings:", error);
+            }
+        };
 
-    reader.readAsText(file);
-  });
+        reader.readAsText(file);
+    });
 
-  fileInput.click();
+    fileInput.click();
 });
 
 // Copy to clipboard button
-document.getElementById("copyBtn")?.addEventListener("click", async function () {
-  var textContent = document.getElementById("code")?.innerText;
-  if (!textContent) return;
-  try {
-    await navigator.clipboard.writeText(textContent);
-  } catch (error) {
-    console.error("Error copying to clipboard:", error);
-  }
-});
+document
+    .getElementById("copyBtn")
+    ?.addEventListener("click", async function () {
+        var textContent = document.getElementById("code")?.innerText;
+        if (!textContent) return;
+        try {
+            await navigator.clipboard.writeText(textContent);
+        } catch (error) {
+            console.error("Error copying to clipboard:", error);
+        }
+    });
 
 // Update the indicator text
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
-  const checkbox = wrapper.querySelector('input[type="checkbox"]');
-  const radio = wrapper.querySelector('input[type="radio"]');
-  const indicator = wrapper.querySelector(".indicator");
+    const checkbox = wrapper.querySelector('input[type="checkbox"]');
+    const radio = wrapper.querySelector('input[type="radio"]');
+    const indicator = wrapper.querySelector(".indicator");
 
-  if (checkbox instanceof HTMLInputElement) {
-    checkbox.addEventListener("change", () => {
-      if (indicator) {
-        indicator.textContent = checkbox.checked
-          ? indicator.getAttribute("data-on") || "On"
-          : indicator.getAttribute("data-off") || "Off";
-      }
-    });
-  }
-
-  if (radio) {
-    radio.addEventListener("change", () => {
-      const radioName = radio.getAttribute("name");
-      document
-        .querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${radioName}"]`)
-        .forEach((r) => {
-          const parentWrapper = r.closest(".checkbox-wrapper");
-          if (parentWrapper) {
-            const indicator = parentWrapper.querySelector(".indicator");
-            if (!indicator) return;
-            indicator.textContent = r.checked
-              ? indicator.getAttribute("data-on") || "On"
-              : indicator.getAttribute("data-off") || "Off";
-          }
+    if (checkbox instanceof HTMLInputElement) {
+        checkbox.addEventListener("change", () => {
+            if (indicator) {
+                indicator.textContent = checkbox.checked
+                    ? indicator.getAttribute("data-on") || "On"
+                    : indicator.getAttribute("data-off") || "Off";
+            }
         });
-    });
-  }
+    }
+
+    if (radio) {
+        radio.addEventListener("change", () => {
+            const radioName = radio.getAttribute("name");
+            document
+                .querySelectorAll<HTMLInputElement>(
+                    `input[type="radio"][name="${radioName}"]`,
+                )
+                .forEach((r) => {
+                    const parentWrapper = r.closest(".checkbox-wrapper");
+                    if (parentWrapper) {
+                        const indicator =
+                            parentWrapper.querySelector(".indicator");
+                        if (!indicator) return;
+                        indicator.textContent = r.checked
+                            ? indicator.getAttribute("data-on") || "On"
+                            : indicator.getAttribute("data-off") || "Off";
+                    }
+                });
+        });
+    }
 });
 
 document.getElementById("downloadBtn")?.addEventListener("click", function () {
-  const supportDialog = document.getElementById("supportDialog");
-  const closeSupportDialog = document.getElementById("closeSupportDialog");
+    const supportDialog = document.getElementById("supportDialog");
+    const closeSupportDialog = document.getElementById("closeSupportDialog");
 
-  var textContent = document.getElementById("code")?.innerText;
-  if (!textContent) return;
+    var textContent = document.getElementById("code")?.innerText;
+    if (!textContent) return;
 
-  // Convert LF to CRLF
-  textContent = textContent.replace(/\n/g, "\r\n");
+    // Convert LF to CRLF
+    textContent = textContent.replace(/\n/g, "\r\n");
 
-  var blob = new Blob([textContent], { type: "text/plain" });
-  var link = document.createElement("a");
-  link.href = window.URL.createObjectURL(blob);
-  link.download = "winscript.ps1";
+    var blob = new Blob([textContent], { type: "text/plain" });
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "winscript.ps1";
 
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
-  if (supportDialog instanceof HTMLDialogElement) {
-    supportDialog?.showModal();
+    if (supportDialog instanceof HTMLDialogElement) {
+        supportDialog?.showModal();
 
-    closeSupportDialog?.addEventListener("click", () => {
-      supportDialog?.close();
-    });
-  }
+        closeSupportDialog?.addEventListener("click", () => {
+            supportDialog?.close();
+        });
+    }
 });
 
 // Language switching
 document.querySelectorAll(".localization-entry").forEach((entry) => {
-  const useBtn = entry.querySelector(".use-lang-btn");
-  const locale = useBtn?.getAttribute("data-locale");
+    const useBtn = entry.querySelector(".use-lang-btn");
+    const locale = useBtn?.getAttribute("data-locale");
 
-  useBtn?.addEventListener("click", (e) => {
-    if (!locale) return;
-    e.stopPropagation();
+    useBtn?.addEventListener("click", (e) => {
+        if (!locale) return;
+        e.stopPropagation();
 
-    localStorage.setItem("locale", locale);
-    window.location.href = `/${locale}`;
-  });
+        localStorage.setItem("locale", locale);
+        window.location.href = `/${locale}`;
+    });
 });
 
 loadLocale();

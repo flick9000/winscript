@@ -7,8 +7,8 @@
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "prettier --config ../.prettierrc --write .",
-        "format:check": "prettier --config ../.prettierrc --check ."
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
     },
     "dependencies": {
         "astro": "^6.1.9",

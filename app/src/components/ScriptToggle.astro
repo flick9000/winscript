@@ -1,31 +1,43 @@
 ---
 interface Props {
-  title: string;
-  inputId: string;
-  icon?: string;
-  description?: string;
-  offText?: string;
-  onText?: string;
+    title: string;
+    inputId: string;
+    icon?: string;
+    description?: string;
+    offText?: string;
+    onText?: string;
 }
 
-const { title, inputId, icon, description, offText = "Off", onText = "On" } = Astro.props;
+const {
+    title,
+    inputId,
+    icon,
+    description,
+    offText = "Off",
+    onText = "On",
+} = Astro.props;
 ---
 
 <div class="content-entry">
-  <div>
-    {icon && <img src={icon} alt={title} />}
     <div>
-      <h1>{title}</h1>
-      {description && <p>{description}</p>}
+        {icon && <img src={icon} alt={title} />}
+        <div>
+            <h1>{title}</h1>
+            {description && <p>{description}</p>}
+        </div>
     </div>
-  </div>
-  <div class="checkbox-wrapper">
-    <span class="indicator" id={`indicator-${inputId}`} data-on={onText} data-off={offText}>
-      {offText}
-    </span>
-    <label class="switch">
-      <input id={inputId} type="checkbox" />
-      <span class="slider"></span>
-    </label>
-  </div>
+    <div class="checkbox-wrapper">
+        <span
+            class="indicator"
+            id={`indicator-${inputId}`}
+            data-on={onText}
+            data-off={offText}
+        >
+            {offText}
+        </span>
+        <label class="switch">
+            <input id={inputId} type="checkbox" />
+            <span class="slider"></span>
+        </label>
+    </div>
 </div>
