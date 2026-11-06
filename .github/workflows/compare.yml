@@ -20,24 +20,17 @@ jobs:
               with:
                   node-version: "22"
 
-            - name: Install Prettier
-              run: npm install -g prettier
+            - name: Install Sub-project Dependencies
+              run: |
+                  npm --prefix app ci
+                  npm --prefix website ci
 
-            - name: Run Prettier Verification
+            - name: Run Prettier Check
               shell: pwsh
               run: |
                   $env:NODE_NO_WARNINGS = "1"
-
-                  Write-Host "Running Prettier Check..."
-
-                  foreach ($dir in @("app", "website")) {
-                    if (Test-Path $dir) {
-                      Push-Location $dir
-                      npm install
-                      npx prettier --log-level warn --check "**/*.{js,astro,css,json}"
-                      Pop-Location
-                    }
-                  }
+                  npm --prefix app run format:check
+                  npm --prefix website run format:check
 
             - name: Compare app & website files
               shell: pwsh
