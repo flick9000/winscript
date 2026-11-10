@@ -126,18 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "Get-AppxPackage *WebExperience* | Remove-AppxPackage",
             'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Appx\\AppxAllUserStore\\Deprovisioned\\MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy" /f',
         ],
-        thirdparty: [
-            "Write-Host '-- Uninstalling third-party apps' -ForegroundColor Magenta",
-            `@("*Minecraft*","*DropboxOEM*","*RandomSaladGamesLLC*","*McAfee*","ShazamEntertainmentLtd.Shazam","ClearChannelRadioDigital.iHeartRadio","SpotifyAB.SpotifyMusic","*EclipseManager*","*ActiproSoftwareLLC*","*AdobeSystemsIncorporated.AdobePhotoshopExpress*","*Duolingo-LearnLanguagesforFree*","*PandoraMediaInc*","*CandyCrush*","*BubbleWitch3Saga*","*Wunderlist*","*Flipboard*","*Twitter*","*Facebook*","*Royal Revolt*","*Sway*","*Speed Test*","*Dolby*","*Viber*","*ACGMediaPlayer*","*Netflix*","*OneCalendar*","*LinkedInForWindows*","*HiddenCityMysteryofShadows*","*Hulu*","*HiddenCity*","*AdobePhotoshopExpress*") | ForEach-Object { $pkg = Get-AppxPackage $_; if ($pkg) { $pkg | Remove-AppxPackage; Write-Host "Removed: $_" } }`,
-        ],
-        extensions: [
-            "Write-Host '-- Uninstalling extensions' -ForegroundColor Magenta",
-            `@("Microsoft.HEIFImageExtension","Microsoft.VP9VideoExtensions","Microsoft.WebpImageExtension","Microsoft.HEVCVideoExtension","Microsoft.RawImageExtension","Microsoft.WebMediaExtensions") | ForEach-Object { $pkg = Get-AppxPackage $_; if ($pkg) { $pkg | Remove-AppxPackage; Write-Host "Removed: $_" } }`,
-        ],
-        msapps: [
-            "Write-Host '-- Uninstalling Microsoft apps' -ForegroundColor Magenta",
-            `@("Microsoft.ZuneMusic","Microsoft.Whiteboard","*UserExperienceImprovementProgram*","Microsoft.Office.Lens","Microsoft.News","Microsoft.GetHelp","*BingSearch*","Microsoft.BingTravel","Microsoft.BingHealthAndFitness","Microsoft.BingFoodAndDrink","Microsoft.BingTranslator","Microsoft.AppConnector","MicrosoftCorporationII.MicrosoftFamily","*QuickAssist*","Microsoft.OutlookForWindows","Clipchamp.Clipchamp","Microsoft.3DBuilder","Microsoft.Microsoft3DViewer","Microsoft.BingWeather","Microsoft.BingSports","Microsoft.BingFinance","Microsoft.MicrosoftOfficeHub","Microsoft.BingNews","Microsoft.Office.OneNote","Microsoft.Office.Sway","Microsoft.WindowsPhone","Microsoft.CommsPhone","Microsoft.YourPhone","Microsoft.Getstarted","Microsoft.549981C3F5F10","Microsoft.Messaging","Microsoft.WindowsSoundRecorder","Microsoft.MixedReality.Portal","Microsoft.WindowsFeedbackHub","Microsoft.WindowsAlarms","Microsoft.MSPaint","Microsoft.WindowsMaps","Microsoft.MinecraftUWP","Microsoft.People","Microsoft.Wallet","Microsoft.Print3D","Microsoft.OneConnect","Microsoft.MicrosoftSolitaireCollection","Microsoft.MicrosoftStickyNotes","microsoft.windowscommunicationsapps","Microsoft.SkypeApp","Microsoft.GroupMe10","MSTeams","Microsoft.Todos") | ForEach-Object { $pkg = Get-AppxPackage $_; if ($pkg) { $pkg | Remove-AppxPackage; Write-Host "Removed: $_" } }`,
-        ],
         xbox: [
             "Write-Host '-- Uninstalling Xbox' -ForegroundColor Magenta",
             `@("Microsoft.XboxApp","Microsoft.Xbox.TCUI","Microsoft.XboxGamingOverlay","Microsoft.XboxGameOverlay","Microsoft.XboxIdentityProvider","Microsoft.XboxSpeechToTextOverlay","Microsoft.GamingApp") | ForEach-Object { $pkg = Get-AppxPackage $_ -AllUsers; if ($pkg) { $pkg | Remove-AppxPackage -AllUsers; Write-Host "Removed: $_" } }`,
