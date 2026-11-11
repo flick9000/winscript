@@ -1,3 +1,4 @@
+{
   "common.none": "Nincs (Kijelölés törlése)"
   "common.off": "Ki",
   "common.on": "Be",
@@ -275,5 +276,4 @@
   "tools.shortcuts.virtualMemory": "Virtuális memória",
   "tools.shortcuts.visualEffects": "Vizuális effektusok",
   "tools.shortcuts.windowsSettings": "Windows beállítások",
-{
 }
