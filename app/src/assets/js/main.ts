@@ -142,11 +142,19 @@ async function isInstalled() {
     if (!update) return;
 
     const script = `
-  $processExists = [bool](Get-Process winscript-portable -ErrorAction SilentlyContinue)
-  $parentPath = (Get-Process -Id (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").ParentProcessId).Path
-  $uninstallPath = Join-Path (Split-Path $parentPath) "uninstall.exe"
-  $uninstallExists = Test-Path $uninstallPath
-  @{ isPortable = $processExists; uninstallExists = $uninstallExists } | ConvertTo-Json -Compress
+$processes = Get-Process -Name "winscript*" -ErrorAction SilentlyContinue
+$isInstalled = $false
+foreach ($process in $processes) {
+    if ($process.Path) {
+        $uninstaller = Join-Path (Split-Path $process.Path) "uninstall.exe"
+
+        if (Test-Path $uninstaller) {
+            $isInstalled = $true
+            break
+        }
+    }
+}
+@{ isPortable = -not $isInstalled } | ConvertTo-Json -Compress
   `;
 
     const shell = Command.create("powershell", [
@@ -158,17 +166,12 @@ async function isInstalled() {
     ]);
 
     const result = await shell.execute();
-    const { isPortable, uninstallExists } = JSON.parse(result.stdout);
+    const { isPortable } = JSON.parse(result.stdout);
 
     if (isPortable) {
         alertForUpdates();
-        return;
-    }
-
-    if (uninstallExists) {
-        checkAndUpdate();
     } else {
-        alertForUpdates();
+        checkAndUpdate();
     }
 }
 
