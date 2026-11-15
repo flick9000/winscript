@@ -1327,11 +1327,46 @@ const languages = [
                     />
                 </Tab>
                 <Tab tab="miscellanous">
-                    <ScriptToggle
-                        title={t["misc.classicmenu.title"]}
-                        inputId="classicmenu"
-                        icon="/icons/misc/click.png"
-                        description={t["misc.classicmenu.desc"]}
+                    <GroupToggle
+                        title={t["misc.uisettings.title"]}
+                        description={t["misc.uisettings.desc"]}
+                        icon="/icons/misc/ui.svg"
+                        id="uisettings"
+                        scripts={[
+                            {
+                                title: t["misc.darkmode.title"],
+                                inputId: "darkmode",
+                            },
+
+                            {
+                                title: t["misc.classicmenu.title"],
+                                inputId: "classicmenu",
+                            },
+                            {
+                                title: t["misc.filextensions.title"],
+                                inputId: "filextensions",
+                            },
+                            {
+                                title: t["misc.endtask.title"],
+                                inputId: "endtask",
+                            },
+                            {
+                                title: t["misc.hiddenfiles.title"],
+                                inputId: "hiddenfiles",
+                            },
+                            {
+                                title: t["misc.taskbarleft.title"],
+                                inputId: "taskbarleft",
+                            },
+                            {
+                                title: t["misc.recentapps.title"],
+                                inputId: "recentapps",
+                            },
+                            {
+                                title: t["misc.homegallery.title"],
+                                inputId: "homegallery",
+                            },
+                        ]}
                         offText={t["common.off"]}
                         onText={t["common.on"]}
                     />
@@ -1341,38 +1376,6 @@ const languages = [
                         inputId="mpo"
                         icon="/icons/misc/mpo.svg"
                         description={t["misc.mpo.desc"]}
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.endtask.title"]}
-                        inputId="endtask"
-                        icon="/icons/misc/end.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.recentapps.title"]}
-                        inputId="recentapps"
-                        icon="/icons/misc/recentapps.svg"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.homegallery.title"]}
-                        inputId="homegallery"
-                        icon="/icons/misc/home.svg"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.taskbarleft.title"]}
-                        inputId="taskbarleft"
-                        icon="/icons/misc/taskbarleft.png"
                         offText={t["common.off"]}
                         onText={t["common.on"]}
                     />
@@ -1389,30 +1392,6 @@ const languages = [
                         title={t["misc.numlockstartup.title"]}
                         inputId="numlockstartup"
                         icon="/icons/misc/numlock.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.darkmode.title"]}
-                        inputId="darkmode"
-                        icon="/icons/misc/dark.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.filextensions.title"]}
-                        inputId="filextensions"
-                        icon="/icons/misc/show.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.hiddenfiles.title"]}
-                        inputId="hiddenfiles"
-                        icon="/icons/misc/hidden.svg"
                         offText={t["common.off"]}
                         onText={t["common.on"]}
                     />
