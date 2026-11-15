@@ -81,7 +81,6 @@
         <tr><td>installmas</td><td></td><td></td><td></td></tr>
         <tr><td>extensions</td><td></td><td></td><td></td></tr>
         <tr><td>mediaplayer</td><td></td><td></td><td></td></tr>
-        <tr><td>hideai</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>aiappxpackages</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>notepadrewrite</td><td></td><td>✔</td><td>✔</td></tr>
         <tr><td>aifiles</td><td></td><td>✔</td><td>✔</td></tr>

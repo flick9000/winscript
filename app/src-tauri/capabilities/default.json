@@ -1,96 +1,96 @@
 {
-  "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "default",
-  "description": "enables the default permissions",
-  "windows": ["main"],
-  "permissions": [
-    "core:default",
-    "core:window:allow-start-dragging",
-    "core:window:allow-minimize",
-    "core:window:allow-close",
-    "updater:default",
-    "updater:allow-check",
-    "updater:allow-download",
-    "updater:allow-download-and-install",
-    "fs:default",
-    {
-      "identifier": "fs:allow-exists",
-      "allow": [
+    "$schema": "../gen/schemas/desktop-schema.json",
+    "identifier": "default",
+    "description": "enables the default permissions",
+    "windows": ["main"],
+    "permissions": [
+        "core:default",
+        "core:window:allow-start-dragging",
+        "core:window:allow-minimize",
+        "core:window:allow-close",
+        "updater:default",
+        "updater:allow-check",
+        "updater:allow-download",
+        "updater:allow-download-and-install",
+        "fs:default",
         {
-          "path": "**/*"
-        }
-      ]
-    },
-    "fs:allow-temp-write",
-    "fs:allow-temp-read",
-    "fs:allow-temp-write-recursive",
-    "fs:allow-temp-read-recursive",
-    "fs:allow-read-text-file",
-    "shell:allow-execute",
-    "shell:allow-spawn",
-    "shell:allow-open",
-    "core:window:allow-hide",
-    "core:window:allow-show",
-    "os:allow-hostname",
-    "os:allow-locale",
-    "core:window:allow-set-effects",
-    {
-      "identifier": "fs:allow-read-text-file",
-      "allow": [
+            "identifier": "fs:allow-exists",
+            "allow": [
+                {
+                    "path": "**/*"
+                }
+            ]
+        },
+        "fs:allow-temp-write",
+        "fs:allow-temp-read",
+        "fs:allow-temp-write-recursive",
+        "fs:allow-temp-read-recursive",
+        "fs:allow-read-text-file",
+        "shell:allow-execute",
+        "shell:allow-spawn",
+        "shell:allow-open",
+        "core:window:allow-hide",
+        "core:window:allow-show",
+        "os:allow-hostname",
+        "os:allow-locale",
+        "core:window:allow-set-effects",
         {
-          "path": "**/*"
-        }
-      ]
-    },
-    {
-      "identifier": "shell:allow-spawn",
-      "allow": [
-        {
-          "name": "cmd",
-          "cmd": "cmd.exe",
-          "args": true
-        }
-      ]
-    },
-    {
-      "identifier": "shell:allow-execute",
-      "allow": [
-        {
-          "name": "cmd",
-          "cmd": "cmd.exe",
-          "args": true
+            "identifier": "fs:allow-read-text-file",
+            "allow": [
+                {
+                    "path": "**/*"
+                }
+            ]
         },
         {
-          "name": "where",
-          "cmd": "where.exe",
-          "args": true
-        }
-      ]
-    },
-    {
-      "identifier": "shell:allow-spawn",
-      "allow": [
+            "identifier": "shell:allow-spawn",
+            "allow": [
+                {
+                    "name": "cmd",
+                    "cmd": "cmd.exe",
+                    "args": true
+                }
+            ]
+        },
         {
-          "name": "powershell",
-          "cmd": "powershell.exe",
-          "args": true
-        }
-      ]
-    },
-    {
-      "identifier": "shell:allow-execute",
-      "allow": [
+            "identifier": "shell:allow-execute",
+            "allow": [
+                {
+                    "name": "cmd",
+                    "cmd": "cmd.exe",
+                    "args": true
+                },
+                {
+                    "name": "where",
+                    "cmd": "where.exe",
+                    "args": true
+                }
+            ]
+        },
         {
-          "name": "powershell",
-          "cmd": "powershell.exe",
-          "args": true
-        }
-      ]
-    },
-    "os:default",
-    "dialog:default",
-    "dialog:allow-ask",
-    "dialog:allow-message",
-    "opener:default"
-  ]
+            "identifier": "shell:allow-spawn",
+            "allow": [
+                {
+                    "name": "powershell",
+                    "cmd": "powershell.exe",
+                    "args": true
+                }
+            ]
+        },
+        {
+            "identifier": "shell:allow-execute",
+            "allow": [
+                {
+                    "name": "powershell",
+                    "cmd": "powershell.exe",
+                    "args": true
+                }
+            ]
+        },
+        "os:default",
+        "dialog:default",
+        "dialog:allow-ask",
+        "dialog:allow-message",
+        "opener:default"
+    ]
 }

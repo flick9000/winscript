@@ -1,37 +1,37 @@
 name: Submit flick9000.WinScript
 on:
-  workflow_dispatch:
-  release:
-    types: [published]
+    workflow_dispatch:
+    release:
+        types: [published]
 
 jobs:
-  sync-repo:
-    name: Sync winget-pkgs repo
-    runs-on: ubuntu-latest
-    steps:
-      - run: gh repo sync flick9000/winget-pkgs -b master
-        env:
-          GH_TOKEN: ${{ secrets.WINGET_TOKEN }}
+    sync-repo:
+        name: Sync winget-pkgs repo
+        runs-on: ubuntu-latest
+        steps:
+            - run: gh repo sync flick9000/winget-pkgs -b master
+              env:
+                  GH_TOKEN: ${{ secrets.WINGET_TOKEN }}
 
-  winget:
-    name: Publish winget package
-    needs: sync-repo
-    runs-on: windows-latest
-    steps:
-      - name: Submit package to Windows Package Manager Community Repository
-        run: |
-          $packageId = "flick9000.WinScript"
-          $gitToken = "${{ secrets.WINGET_TOKEN }}"
+    winget:
+        name: Publish winget package
+        needs: sync-repo
+        runs-on: windows-latest
+        steps:
+            - name: Submit package to Windows Package Manager Community Repository
+              run: |
+                  $packageId = "flick9000.WinScript"
+                  $gitToken = "${{ secrets.WINGET_TOKEN }}"
 
-          # Fetching latest release from GitHub
-          $github = Invoke-RestMethod -uri "https://api.github.com/repos/flick9000/winscript/releases/latest"
-          $packageVersion = $github.tag_name.Trim("v")
+                  # Fetching latest release from GitHub
+                  $github = Invoke-RestMethod -uri "https://api.github.com/repos/flick9000/winscript/releases/latest"
+                  $packageVersion = $github.tag_name.Trim("v")
 
-          # Get the download URL for winscript-installer.exe
-          $installerUrl = $github.assets | 
-            Where-Object { $_.name -eq "winscript-installer.exe" } | 
-            Select-Object -ExpandProperty browser_download_url
+                  # Get the download URL for winscript-installer.exe
+                  $installerUrl = $github.assets | 
+                    Where-Object { $_.name -eq "winscript-installer.exe" } | 
+                    Select-Object -ExpandProperty browser_download_url
 
-          # Update package using wingetcreate with URL|architecture format
-          Invoke-WebRequest https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
-          .\wingetcreate.exe update $packageId --version $packageVersion --urls "$installerUrl|x64" --submit --token $gitToken
+                  # Update package using wingetcreate with URL|architecture format
+                  Invoke-WebRequest https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
+                  .\wingetcreate.exe update $packageId --version $packageVersion --urls "$installerUrl|x64" --submit --token $gitToken

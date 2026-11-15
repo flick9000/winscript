@@ -3,64 +3,64 @@
 Disable apps access to certain part of the system, list below.
 
 - Location Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location` set to `Deny`
 
 - Camera Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam` set to `Deny`
 
 - Microphone Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone` set to `Deny`
 
 - System Files Access:
-  - `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\documentsLibrary` set to `Deny`
-  - `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\picturesLibrary` set to `Deny`
-  - `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary` set to `Deny`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess` set to `Deny`
+    - `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\documentsLibrary` set to `Deny`
+    - `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\picturesLibrary` set to `Deny`
+    - `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess` set to `Deny`
 
 - Account Information Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation` set to `Deny`
 
 - Contacts Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts` set to `Deny`
 
 - Call History Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory` set to `Deny`
 
 - Messaging Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat` set to `Deny`
 
 - Notification Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener` set to `Deny`
 
 - Email Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email` set to `Deny`
 
 - Tasks Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks` set to `Deny`
 
 - Diagnostics Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics` set to `Deny`
 
 - Voice Activation Access:
-  - `HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps` set `AgentActivationEnabled` to `0`
+    - `HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps` set `AgentActivationEnabled` to `0`
 
 - Phone Access:
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone` set to `2`
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone_UserInControlOfTheseApps` set to empty
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone_ForceAllowTheseApps` set to empty
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone_ForceDenyTheseApps` set to empty
+    - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone` set to `2`
+    - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone_UserInControlOfTheseApps` set to empty
+    - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone_ForceAllowTheseApps` set to empty
+    - `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\LetAppsAccessPhone_ForceDenyTheseApps` set to empty
 
 - Trusted Devices Access:
-  - `HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{C1D23ACC-752B-43E5-8448-8D0E519CD6D6}` set to `Deny`
+    - `HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{C1D23ACC-752B-43E5-8448-8D0E519CD6D6}` set to `Deny`
 
 - Calendar Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments` set to `Deny`
 
 - Motion Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity` set to `Deny`
 
 - Radio Access:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios` set to `Deny`
+    - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios` set to `Deny`
 
 ## Extend Windows Update Pause Limit
 

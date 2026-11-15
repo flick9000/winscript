@@ -3,21 +3,19 @@ import { defineConfig } from "vite";
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig(async () => ({
-  root: "src",
-  resolve: { alias: { "~": "" } }, // Remove /src from resolved paths
-  server: {
-    // Tauri expects a fixed port, fail if that port is not available
-    strictPort: true,
-    // if the host Tauri is expecting is set, use it
-    host: host || false,
-    port: 4321,
-  },
-  build: {
-    target: "esnext",
-    outDir: "../dist",
-    emptyOutDir: true,
+    root: "src",
+    resolve: { alias: { "~": "" } },
+    server: {
+        strictPort: true,
+        host: host || false,
+        port: 4321,
+    },
+    build: {
+        target: "esnext",
+        outDir: "../dist",
+        emptyOutDir: true,
 
-    minify: !process.env.TAURI_ENV_DEBUG ? "esbuild" : false,
-    sourcemap: !!process.env.TAURI_ENV_DEBUG,
-  },
+        minify: !process.env.TAURI_ENV_DEBUG ? "esbuild" : false,
+        sourcemap: !!process.env.TAURI_ENV_DEBUG,
+    },
 }));
