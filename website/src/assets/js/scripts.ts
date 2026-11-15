@@ -651,33 +651,36 @@ document.addEventListener("DOMContentLoaded", function () {
             'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics" /v "Enabled" /t REG_DWORD /d "0" /f',
             'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider" /v "Enabled" /t "REG_DWORD" /d "0" /f',
         ],
-
         googledns: [
             "Write-Host '-- Setting Google DNS' -ForegroundColor Magenta",
-            'netsh interface ip set dns name="Ethernet" static 8.8.8.8 | Out-Null',
-            'netsh interface ip add dns name="Ethernet" 8.8.4.4 index=2 | Out-Null',
+            '$adapterName = (Get-NetAdapter | Where-Object {$_.Status -eq "Up"}).Name',
+            'netsh interface ip set dns name="$adapterName" static 8.8.8.8 | Out-Null',
+            'netsh interface ip add dns name="$adapterName" 8.8.4.4 index=2 | Out-Null',
         ],
         cloudflaredns: [
             "Write-Host '-- Setting Cloudflare DNS' -ForegroundColor Magenta",
-            'netsh interface ip set dns name="Ethernet" static 1.1.1.1 | Out-Null',
-            'netsh interface ip add dns name="Ethernet" 1.0.0.1 index=2 | Out-Null',
+            '$adapterName = (Get-NetAdapter | Where-Object {$_.Status -eq "Up"}).Name',
+            'netsh interface ip set dns name="$adapterName" static 1.1.1.1 | Out-Null',
+            'netsh interface ip add dns name="$adapterName" 1.0.0.1 index=2 | Out-Null',
         ],
         quad9dns: [
             "Write-Host '-- Setting Quad9 DNS' -ForegroundColor Magenta",
-            'netsh interface ip set dns name="Ethernet" static 9.9.9.9 | Out-Null',
-            'netsh interface ip add dns name="Ethernet" 149.112.112.112 index=2 | Out-Null',
+            '$adapterName = (Get-NetAdapter | Where-Object {$_.Status -eq "Up"}).Name',
+            'netsh interface ip set dns name="$adapterName" static 9.9.9.9 | Out-Null',
+            'netsh interface ip add dns name="$adapterName" 149.112.112.112 index=2 | Out-Null',
         ],
         opendns: [
             "Write-Host '-- Setting OpenDNS DNS' -ForegroundColor Magenta",
-            'netsh interface ip set dns name="Ethernet" static 208.67.222.222 | Out-Null',
-            'netsh interface ip add dns name="Ethernet" 208.67.220.220 index=2 | Out-Null',
+            '$adapterName = (Get-NetAdapter | Where-Object {$_.Status -eq "Up"}).Name',
+            'netsh interface ip set dns name="$adapterName" static 208.67.222.222 | Out-Null',
+            'netsh interface ip add dns name="$adapterName" 208.67.220.220 index=2 | Out-Null',
         ],
         adguardns: [
             "Write-Host '-- Setting AdGuard DNS' -ForegroundColor Magenta",
-            'netsh interface ip set dns name="Ethernet" static 94.140.14.14 | Out-Null',
-            'netsh interface ip add dns name="Ethernet" 94.140.15.15 index=2 | Out-Null',
+            '$adapterName = (Get-NetAdapter | Where-Object {$_.Status -eq "Up"}).Name',
+            'netsh interface ip set dns name="$adapterName" static 94.140.14.14 | Out-Null',
+            'netsh interface ip add dns name="$adapterName" 94.140.15.15 index=2 | Out-Null',
         ],
-
         cleantemp: [
             "Write-Host '-- Deleting Temp files' -ForegroundColor Magenta",
             'Remove-Item -Path "$env:SystemDrive\\Windows\\Temp\\*" -Recurse -Force',
