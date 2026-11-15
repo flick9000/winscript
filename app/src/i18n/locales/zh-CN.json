@@ -62,7 +62,6 @@
     "debloat.features.mediaplayer": "禁用 Media Player",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "删除 Windows 中的 AI 功能。",
-    "debloat.ai.hideai": "隐藏资源管理器中的 Copilot 按钮",
     "debloat.ai.aiappxpackages": "删除 AI 包",
     "debloat.ai.copilot": "删除 Copilot",
     "debloat.ai.recall": "删除 Recall",

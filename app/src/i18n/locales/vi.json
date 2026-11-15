@@ -58,7 +58,6 @@
     "debloat.features.mediaplayer": "Tắt Media Player",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "Gỡ bỏ các tính năng AI khỏi Windows.",
-    "debloat.ai.hideai": "Ẩn nút Copilot trong File Explorer",
     "debloat.ai.aiappxpackages": "Gỡ bỏ các gói AI",
     "debloat.ai.copilot": "Gỡ bỏ Copilot",
     "debloat.ai.recall": "Gỡ bỏ Recall",

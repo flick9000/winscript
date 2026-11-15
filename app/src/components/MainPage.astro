@@ -320,10 +320,6 @@ const languages = [
                         id="windowsai"
                         scripts={[
                             {
-                                title: t["debloat.ai.hideai"],
-                                inputId: "hideai",
-                            },
-                            {
                                 title: t["debloat.ai.aiappxpackages"],
                                 inputId: "aiappxpackages",
                             },
@@ -334,6 +330,10 @@ const languages = [
                             {
                                 title: t["debloat.ai.recall"],
                                 inputId: "recall",
+                            },
+                            {
+                                title: t["debloat.ai.clicktodo"],
+                                inputId: "clicktodo",
                             },
                             {
                                 title: t["debloat.ai.notepadrewrite"],
@@ -564,10 +564,6 @@ const languages = [
                             {
                                 title: "Actipro Software",
                                 appId: "*ActiproSoftwareLLC*",
-                            },
-                            {
-                                title: "Adobe Photoshop Express",
-                                appId: "*AdobeSystemsIncorporated.AdobePhotoshopExpress*",
                             },
                             {
                                 title: "Adobe Photoshop Express",
@@ -1379,11 +1375,49 @@ const languages = [
                     />
                 </Tab>
                 <Tab tab="miscellanous">
-                    <ScriptToggle
-                        title={t["misc.classicmenu.title"]}
-                        inputId="classicmenu"
-                        icon="/icons/misc/click.png"
-                        description={t["misc.classicmenu.desc"]}
+                    <GroupToggle
+                        title={t["misc.uisettings.title"]}
+                        description={t["misc.uisettings.desc"]}
+                        icon="/icons/misc/ui.svg"
+                        id="uisettings"
+                        scripts={[
+                            {
+                                title: t["misc.darkmode.title"],
+                                inputId: "darkmode",
+                            },
+                            {
+                                title: t["misc.classicmenu.title"],
+                                inputId: "classicmenu",
+                            },
+                            {
+                                title: t["misc.filextensions.title"],
+                                inputId: "filextensions",
+                            },
+                            {
+                                title: t["misc.endtask.title"],
+                                inputId: "endtask",
+                            },
+                            {
+                                title: t["misc.hiddenfiles.title"],
+                                inputId: "hiddenfiles",
+                            },
+                            {
+                                title: t["misc.taskbarleft.title"],
+                                inputId: "taskbarleft",
+                            },
+                            {
+                                title: t["misc.recentapps.title"],
+                                inputId: "recentapps",
+                            },
+                            {
+                                title: t["misc.settingshome.title"],
+                                inputId: "settingshome",
+                            },
+                            {
+                                title: t["misc.homegallery.title"],
+                                inputId: "homegallery",
+                            },
+                        ]}
                         offText={t["common.off"]}
                         onText={t["common.on"]}
                     />
@@ -1393,38 +1427,6 @@ const languages = [
                         inputId="mpo"
                         icon="/icons/misc/mpo.svg"
                         description={t["misc.mpo.desc"]}
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.endtask.title"]}
-                        inputId="endtask"
-                        icon="/icons/misc/end.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.recentapps.title"]}
-                        inputId="recentapps"
-                        icon="/icons/misc/recentapps.svg"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.homegallery.title"]}
-                        inputId="homegallery"
-                        icon="/icons/misc/home.svg"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.taskbarleft.title"]}
-                        inputId="taskbarleft"
-                        icon="/icons/misc/taskbarleft.png"
                         offText={t["common.off"]}
                         onText={t["common.on"]}
                     />
@@ -1441,30 +1443,6 @@ const languages = [
                         title={t["misc.numlockstartup.title"]}
                         inputId="numlockstartup"
                         icon="/icons/misc/numlock.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.darkmode.title"]}
-                        inputId="darkmode"
-                        icon="/icons/misc/dark.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.filextensions.title"]}
-                        inputId="filextensions"
-                        icon="/icons/misc/show.png"
-                        offText={t["common.off"]}
-                        onText={t["common.on"]}
-                    />
-
-                    <ScriptToggle
-                        title={t["misc.hiddenfiles.title"]}
-                        inputId="hiddenfiles"
-                        icon="/icons/misc/hidden.svg"
                         offText={t["common.off"]}
                         onText={t["common.on"]}
                     />
@@ -2399,44 +2377,6 @@ const languages = [
                                 alt=""
                             />
                         </summary>
-
-                        <div class="content-entry about">
-                            <div>
-                                <div>
-                                    <p>
-                                        <b>1) {t["script.presets.important"]}</b
-                                        >
-                                        <br />
-                                        <i
-                                            >{
-                                                t[
-                                                    "script.presets.important.desc"
-                                                ]
-                                            }</i
-                                        >
-                                        <br />
-                                        <br />
-                                        <b>2) {t["script.presets.table"]}</b>
-                                        <br />
-                                        <i>
-                                            {t["script.presets.table.desc"]}
-                                            <a
-                                                style="text-decoration: underline;"
-                                                target="_blank"
-                                                href="https://docs.winscript.cc/#/content/presets"
-                                            >
-                                                {t["script.presets.table"]}
-                                            </a>
-                                        </i>
-                                        <br />
-                                        <br />
-                                        <b>3) {t["script.presets.select"]}</b>
-                                        <br />
-                                        <i>{t["script.presets.select.desc"]}</i>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
 
                         <ButtonEntry
                             title={t["script.presets.basic.title"]}

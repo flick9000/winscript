@@ -58,7 +58,6 @@
     "debloat.features.mediaplayer": "A Media Player letiltása",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "Távolítsa el az AI-funkciókat a Windowsból.",
-    "debloat.ai.hideai": "Copilot gomb elrejtése az Intézőben",
     "debloat.ai.aiappxpackages": "Távolítsa el az AI-csomagokat",
     "debloat.ai.copilot": "Copilot eltávolítása",
     "debloat.ai.recall": "Recall (digitális emlékezetet) eltávolítása",

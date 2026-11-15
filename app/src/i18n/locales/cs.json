@@ -58,7 +58,6 @@
     "debloat.features.mediaplayer": "Vypnout Media Player",
     "debloat.ai.title": "Umělá inteligence ve Windows (AI)",
     "debloat.ai.desc": "Odstraňte funkce AI ze systému Windows.",
-    "debloat.ai.hideai": "Skrýt tlačítko Copilot v Průzkumníku",
     "debloat.ai.aiappxpackages": "Odstranit balíčky AI",
     "debloat.ai.copilot": "Odstranit Copilot",
     "debloat.ai.recall": "Odstranit Recall",

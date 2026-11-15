@@ -62,7 +62,6 @@
     "debloat.features.mediaplayer": "Disabilita Media Player",
     "debloat.ai.title": "Funzionalità AI di Windows",
     "debloat.ai.desc": "Rimuovi le funzionalità AI da Windows.",
-    "debloat.ai.hideai": "Nascondi il Pulsante Copilot In Esplora File",
     "debloat.ai.aiappxpackages": "Rimuovi Pacchetti AI",
     "debloat.ai.copilot": "Rimuovi Copilot",
     "debloat.ai.recall": "Rimuovi Recall",

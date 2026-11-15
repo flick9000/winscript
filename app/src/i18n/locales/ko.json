@@ -58,7 +58,6 @@
     "debloat.features.mediaplayer": "미디어 플레이어 비활성화",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "Windows에서 AI 기능을 제거합니다.",
-    "debloat.ai.hideai": "탐색기에서 Copilot 버튼 숨기기",
     "debloat.ai.aiappxpackages": "AI 패키지 제거",
     "debloat.ai.copilot": "Copilot 제거",
     "debloat.ai.recall": "Recall 제거",

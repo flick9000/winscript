@@ -62,7 +62,6 @@
     "debloat.features.mediaplayer": "Media Player Devre Dışı Bırak",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "AI özelliklerini Windows'tan kaldırın.",
-    "debloat.ai.hideai": "Explorer'da Copilot Butonunu Gizle",
     "debloat.ai.aiappxpackages": "AI Paketlerini Kaldır",
     "debloat.ai.copilot": "Copilot Kaldır",
     "debloat.ai.recall": "Recall Kaldır",
