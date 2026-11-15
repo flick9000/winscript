@@ -151,6 +151,11 @@ document.addEventListener("DOMContentLoaded", function () {
             'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "AllowRecallEnablement" /t REG_DWORD /d 0 /f',
             'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "TurnOffSavingSnapshots" /t REG_DWORD /d 1 /f',
         ],
+        clicktodo: [
+            "Write-Host '-- Disabling Click To Do' -ForegroundColor Magenta",
+            'reg add "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "DisableClickToDo" /t REG_DWORD /d "1" /f',
+            'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" /v "DisableClickToDo" /t REG_DWORD /d "1" /f',
+        ],
         notepadrewrite: [
             "Write-Host '-- Removing AI from Notepad' -ForegroundColor Magenta",
             'reg add "HKLM\\Software\\Policies\\WindowsNotepad" /v "DisableAIFeatures" /t REG_DWORD /d 1 /f',
@@ -928,6 +933,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "xbox",
         "consumerfeatures",
         "recall",
+        "clicktodo",
         "notepadrewrite",
         "paintai",
         "aiappxpackages",
@@ -1157,6 +1163,7 @@ const presets: Record<string, string[]> = {
         "debloatedge",
         "copilot",
         "notepadrewrite",
+        "clicktodo",
         "paintai",
         "aiappxpackages",
         "hideai",

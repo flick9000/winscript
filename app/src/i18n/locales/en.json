@@ -62,6 +62,7 @@
     "debloat.ai.aiappxpackages": "Remove AI Packages",
     "debloat.ai.copilot": "Remove Copilot",
     "debloat.ai.recall": "Remove Recall",
+    "debloat.ai.clicktodo": "Disable Click To Do",
     "debloat.ai.notepadrewrite": "Disable Notepad AI",
     "debloat.ai.paintai": "Disable Paint AI",
     "debloat.ai.aifiles": "Remove AI Files",
