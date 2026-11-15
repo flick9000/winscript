@@ -62,7 +62,6 @@
     "debloat.features.mediaplayer": "Отключить Проигрыватель Windows Media",
     "debloat.ai.title": "Искусственный интеллект Windows",
     "debloat.ai.desc": "Удаление функций ИИ из Windows.",
-    "debloat.ai.hideai": "Скрыть кнопку Copilot в Проводнике",
     "debloat.ai.aiappxpackages": "Удалить пакеты ИИ",
     "debloat.ai.copilot": "Удалить Copilot",
     "debloat.ai.recall": "Удалить Recall",

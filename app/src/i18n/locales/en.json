@@ -58,7 +58,6 @@
     "debloat.features.mediaplayer": "Disable Media Player",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "Remove AI features from Windows.",
-    "debloat.ai.hideai": "Hide Copilot Button in Explorer",
     "debloat.ai.aiappxpackages": "Remove AI Packages",
     "debloat.ai.copilot": "Remove Copilot",
     "debloat.ai.recall": "Remove Recall",

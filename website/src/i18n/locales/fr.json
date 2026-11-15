@@ -58,7 +58,6 @@
     "debloat.features.mediaplayer": "Désactiver le Lecteur multimédia",
     "debloat.ai.title": "IA Windows",
     "debloat.ai.desc": "Supprime les fonctionnalités d'IA de Windows.",
-    "debloat.ai.hideai": "Masquer le bouton Copilot dans l'Explorateur",
     "debloat.ai.aiappxpackages": "Supprimer les packages d'IA",
     "debloat.ai.copilot": "Supprimer Copilot",
     "debloat.ai.recall": "Supprimer Recall",

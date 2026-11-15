@@ -62,7 +62,6 @@
     "debloat.features.mediaplayer": "Inaktivera Mediaspelare",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "Ta bort AI-funktioner från Windows.",
-    "debloat.ai.hideai": "Dölj Copilot-knappen i Utforskaren",
     "debloat.ai.aiappxpackages": "Ta bort AI-paket",
     "debloat.ai.copilot": "Ta bort Copilot",
     "debloat.ai.recall": "Ta bort Recall",

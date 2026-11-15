@@ -58,7 +58,6 @@
     "debloat.features.mediaplayer": "Media Player deaktivieren",
     "debloat.ai.title": "Windows AI",
     "debloat.ai.desc": "Entfernt die KI-Funktionen aus Windows.",
-    "debloat.ai.hideai": "Copilot-Schaltfläche im Explorer ausblenden",
     "debloat.ai.aiappxpackages": "KI-Pakete entfernen",
     "debloat.ai.copilot": "Copilot entfernen",
     "debloat.ai.recall": "Recall entfernen",

@@ -168,10 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "Write-Host '-- Removing AI AppX Packages' -ForegroundColor Magenta",
             `$aiPackages = @('Microsoft.Windows.Ai.Copilot.Provider','Microsoft.Copilot','Microsoft.WindowsAiFoundation','Microsoft.Windows.Recall'); foreach ($package in $aiPackages) { try { $removed = $false; $appxPackages = Get-AppxPackage -Name $package -AllUsers; if ($appxPackages) { $appxPackages | Remove-AppxPackage -AllUsers; $removed = $true; } $provisionedPackages = Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $package; if ($provisionedPackages) { $provisionedPackages | Remove-AppxProvisionedPackage -Online; $removed = $true; } if ($removed) { Write-Host 'Removed: ' $package; } } catch { Write-Host 'Could not remove: ' $package -ForegroundColor Red; } }`,
         ],
-        hideai: [
-            "Write-Host '-- Hiding Copilot Button in Explorer' -ForegroundColor Magenta",
-            'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d 0 /f',
-        ],
         aifiles: [
             "Write-Host '-- Removing AI Files' -ForegroundColor Magenta",
             `$aiPaths = @("$env:ProgramFiles\\WindowsApps\\Microsoft.Copilot*", "$env:ProgramFiles\\WindowsApps\\Microsoft.Windows.Ai*", "$env:LocalAppData\\Packages\\Microsoft.Copilot*", "$env:LocalAppData\\Packages\\Microsoft.Windows.Ai*", "$env:SystemRoot\\SystemApps\\Microsoft.Windows.Copilot*"); foreach ($path in $aiPaths) { if (Test-Path $path) { try { Remove-Item -Path $path -Recurse -Force; Write-Host "Removed: $path" -ForegroundColor Magenta } catch { Write-Host "Could not remove: $path" -ForegroundColor Red } } }`,
@@ -931,7 +927,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "notepadrewrite",
         "paintai",
         "aiappxpackages",
-        "hideai",
         "aifiles",
         "iexplorer",
         "hyperv",
@@ -1159,7 +1154,6 @@ const presets: Record<string, string[]> = {
         "notepadrewrite",
         "paintai",
         "aiappxpackages",
-        "hideai",
         "aifiles",
         "taskbarwidgets",
         "accinfoaccess",
