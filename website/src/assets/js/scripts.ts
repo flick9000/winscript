@@ -866,6 +866,10 @@ document.addEventListener("DOMContentLoaded", function () {
             "Write-Host '-- Hiding Recently Added Apps in Start Menu' -ForegroundColor Magenta",
             'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Start" /v "ShowRecentList" /t REG_DWORD /d "0" /f',
         ],
+        settingshome: [
+            "Write-Host '-- Hiding Settings Home Page' -ForegroundColor Magenta",
+            'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer" /v SettingsPageVisibility /t REG_SZ /d "hide:home" /f',
+        ],
         homegallery: [
             "Write-Host '-- Removing Home and Gallery from File Explorer' -ForegroundColor Magenta",
             'reg add "HKCU\\Software\\Classes\\CLSID\\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d "0" /f',
@@ -1041,6 +1045,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "classicmenu",
         "endtask",
         "recentapps",
+        "settingshome",
         "homegallery",
         "mpo",
         "utctime",
