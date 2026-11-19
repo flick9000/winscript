@@ -1148,7 +1148,6 @@ const presets: Record<string, string[]> = {
         "targetads",
         "nvidiatelemetry",
         "deliveryoptimization",
-        "ultimateperformance",
         "manualservices",
         "mousedelay",
         "endtask",
