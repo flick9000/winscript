@@ -459,7 +459,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         disableupdate: [
             "Write-Host '-- Disabling Windows Update' -ForegroundColor Magenta",
-            'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /f',
             'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f',
             'reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU" /v "AUOptions" /t REG_DWORD /d "1" /f',
             'reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config" /f',
@@ -467,7 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
             'Write-Host "Disabling Windows Update Services"',
             '$updateServices = @("BITS","wuauserv","UsoSvc","WaaSMedicSvc")',
             "$updateServices | ForEach-Object { Stop-Service -Name $_; Set-Service -Name $_ -StartupType Disabled }",
-            'Remove-Item -Path "$env:SystemDrive\\Windows\\SoftwareDistribution" -Recurse -Force',
+            'Remove-Item -Path "$env:SystemDrive\\Windows\\SoftwareDistribution\\Download\\*" -Recurse -Force',
             'Write-Host "Disabling Windows Update Scheduled Tasks"',
             `$paths = @('\\Microsoft\\Windows\\InstallService\\', '\\Microsoft\\Windows\\UpdateOrchestrator\\', '\\Microsoft\\Windows\\UpdateAssistant\\', '\\Microsoft\\Windows\\WaaSMedic\\', '\\Microsoft\\Windows\\WindowsUpdate\\', '\\Microsoft\\WindowsUpdate\\'); foreach ($path in $paths) { Get-ScheduledTask -TaskPath "$path*" -ErrorAction SilentlyContinue | Disable-ScheduledTask -ErrorAction SilentlyContinue }`,
         ],
