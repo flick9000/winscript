@@ -45,19 +45,8 @@
             <pre><code class="language-powershell" /> </pre>
         </div>
         <div>
-            <pre><code class="language-powershell"># Pause the script</code></pre>
-        </div>
-        <div>
-            <pre><code class="language-powershell">Pause</code></pre>
-            <pre><code /> </pre>
-        </div>
-        <div>
-            <pre><code class="language-powershell"># Exit the script</code></pre>
-        </div>
-        <div>
-            <pre><code class="language-powershell">Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue</code></pre>
-            <pre><code class="language-powershell">Start-Process explorer.exe</code></pre>
-            <pre><code class="language-powershell">exit</code></pre>
+            <pre><code class="language-powershell"># Ask for restart</code></pre>
+            <pre><code class="language-powershell" is:raw>do { Write-Host "Restart required. Do you want to restart now? (Y/N)" -ForegroundColor Magenta; $response = Read-Host } until ($response -match '^(y|yes|n|no)$'); if ($response -match '^(y|yes)$') { Write-Output "Restarting..."; Restart-Computer -Force } else { Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue; Start-Process explorer.exe; exit }</code></pre>
         </div>
     </div>
 </div>
