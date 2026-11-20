@@ -1,6 +1,8 @@
 # build output
 dist/
 
+vite.config.js
+
 # Logs
 logs
 *.log
