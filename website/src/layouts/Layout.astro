@@ -1,7 +1,7 @@
 ---
-import "../assets/styles/reset.css";
+import "@shared/assets/styles/reset.css";
 import "../assets/styles/style.css";
-import "../assets/styles/atom-one.css";
+import "@shared/assets/styles/atom-one.css";
 
 const { locale = "en" } = Astro.props;
 ---
@@ -47,7 +47,7 @@ const { locale = "en" } = Astro.props;
     </script>
 
     <script src="../assets/js/main.ts"></script>
-    <script src="../assets/js/appinstall.ts"></script>
-    <script src="../assets/js/scripts.ts"></script>
     <script src="../assets/js/unattend.ts"></script>
+    <script src="@shared/assets/js/appinstall.ts"></script>
+    <scrpit src="@shared/assets/js/scripts.ts"></scrpit>
 </html>

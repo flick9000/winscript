@@ -1,6 +1,6 @@
 ---
-import MainPage from "@/components/MainPage.astro";
-import { withFallback } from "@/i18n/utils";
+import MainPage from "../../components/MainPage.astro";
+import { withFallback } from "@shared/i18n/utils";
 
 export async function getStaticPaths() {
     const localeFiles = import.meta.glob<{ default: Record<string, string> }>(
