@@ -1266,6 +1266,37 @@ const languages = [
                         onText={t["common.on"]}
                     />
 
+                    <ScriptGroup
+                        title={t["performance.powerplansettings.title"]}
+                        description={t["performance.powerplansettings.desc"]}
+                        icon="/icons/performance/powerplansettings.svg"
+                        tools={[
+                            {
+                                title: t[
+                                    "performance.powerplansettings.powermanagement"
+                                ],
+                                inputId: "powermanagement",
+                                group: "powerplansettings",
+                            },
+                            {
+                                title: t[
+                                    "performance.powerplansettings.usbsuspending"
+                                ],
+                                inputId: "usbsuspending",
+                                group: "powerplansettings",
+                            },
+                            {
+                                title: t[
+                                    "performance.powerplansettings.disktimeout"
+                                ],
+                                inputId: "disktimeout",
+                                group: "powerplansettings",
+                            },
+                        ]}
+                        offText={t["common.off"]}
+                        onText={t["common.on"]}
+                    />
+
                     <ScriptToggle
                         title={t["performance.manualservices.title"]}
                         inputId="manualservices"
