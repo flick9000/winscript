@@ -766,6 +766,18 @@ document.addEventListener("DOMContentLoaded", function () {
             `}`,
             `powercfg -setactive $ultimateGUID`,
         ],
+        powermanagement: [
+            "Write-Host '-- Disabling PCI Express Link State Power Management' -ForegroundColor Magenta",
+            "powercfg /SETACVALUEINDEX SCHEME_CURRENT 501a4d13-42af-4429-9fd1-a8218c268e20 ee12f906-d277-404b-b6da-e5fa1a576df5 0",
+        ],
+        usbsuspending: [
+            "Write-Host '-- Disabling USB Selective Suspending' -ForegroundColor Magenta",
+            "powercfg /SETACVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0",
+        ],
+        disktimeout: [
+            "Write-Host '-- Disabling Disk Idle Timeout' -ForegroundColor Magenta",
+            "powercfg /SETACVALUEINDEX SCHEME_CURRENT 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0",
+        ],
         transparency: [
             "Write-Host '-- Disabling Transparency' -ForegroundColor Magenta",
             'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f',
@@ -1021,6 +1033,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "balanced",
         "highperformance",
         "ultimateperformance",
+        "powermanagement",
+        "usbsuspending",
+        "disktimeout",
         "manualservices",
         "transparency",
         "mousedelay",
