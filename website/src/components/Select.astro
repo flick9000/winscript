@@ -114,7 +114,7 @@ const selectedOption = options.find((option) => option.value === defaultValue);
     .chevron {
         position: absolute;
         right: 0;
-        max-width: 12px;
+        max-width: 10px;
         transition: transform 0.2s ease-out;
     }
 
@@ -130,8 +130,7 @@ const selectedOption = options.find((option) => option.value === defaultValue);
         max-height: 0;
         overflow: hidden;
         border-radius: 5px;
-        background-color: hsl(from var(--background) h s l / 0.055);
-        backdrop-filter: blur(50px);
+        background-color: var(--background);
         border: 1px solid hsl(from var(--text) h s l / 0.1);
         z-index: 10;
         opacity: 0;
