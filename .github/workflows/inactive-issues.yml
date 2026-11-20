@@ -14,8 +14,8 @@ jobs:
             - uses: actions/stale@v9
               with:
                   exempt-issue-labels: "no-stale"
-                  days-before-issue-stale: 30
-                  days-before-issue-close: 60
+                  days-before-issue-stale: 60
+                  days-before-issue-close: 90
                   stale-issue-label: "stale"
                   stale-issue-message: "This issue has been marked as stale due to inactivity."
                   close-issue-message: "This issue was closed after being stale with no activity."
