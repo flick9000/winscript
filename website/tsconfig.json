@@ -4,7 +4,7 @@
     "exclude": ["dist"],
     "compilerOptions": {
         "paths": {
-            "@shared/*": ["../src/*"]
+            "@shared/*": ["../desktop/src/*"]
         }
     }
 }

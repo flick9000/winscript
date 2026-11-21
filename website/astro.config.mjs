@@ -22,5 +22,5 @@ export default defineConfig({
         ],
         defaultLocale: "en",
     },
-    publicDir: "../public",
+    publicDir: "../desktop/public",
 });
