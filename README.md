@@ -9,7 +9,7 @@
 WinScript is a lightweight and easy to use tool designed to improve and customize your Windows experience. Easily remove bloatware, disable telemetry, improve Windows performance, bulk install your favorite apps, and more.
 <br>
 
-![App Screenshot](/website/public/winscript.webp)
+![App Screenshot](/public/winscript.webp)
 
 ## Features
 
