@@ -1,6 +1,6 @@
 {
     "extends": "astro/tsconfigs/strict",
-    "include": [".astro/types.d.ts", "**/*", "../shared/assets/**/*"],
+    "include": [".astro/types.d.ts", "**/*", "../shared/**/*"],
     "exclude": ["dist"],
     "compilerOptions": {
         "paths": {

@@ -1,7 +1,7 @@
 ---
-import "@shared/assets/styles/reset.css";
-import "../assets/styles/style.css";
-import "@shared/assets/styles/atom-one.css";
+import "@shared/styles/reset.css";
+import "@/styles/style.css";
+import "@shared/styles/atom-one.css";
 
 const { locale = "en" } = Astro.props;
 ---
@@ -46,7 +46,7 @@ const { locale = "en" } = Astro.props;
         hljs.highlightAll();
     </script>
 
-    <script src="../assets/scripts/main.ts"></script>
-    <script src="@shared/assets/scripts/tweaks.ts"></script>
-    <script src="@shared/assets/scripts/appinstall.ts"></script>
+    <script src="@/scripts/main.ts"></script>
+    <script src="@shared/scripts/tweaks.ts"></script>
+    <script src="@shared/scripts/appinstall.ts"></script>
 </html>

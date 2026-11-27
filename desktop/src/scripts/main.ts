@@ -9,7 +9,7 @@ import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { getMatches } from "@tauri-apps/plugin-cli";
-import { generateAutounattend } from "@shared/assets/scripts/unattend";
+import { generateAutounattend } from "@shared/scripts/unattend";
 
 async function loadConfig() {
     const matches = await getMatches();
