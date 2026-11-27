@@ -16,7 +16,7 @@ export interface Props {
 
 const { options, id, name, defaultValue = "", icon = "" } = Astro.props;
 
-const selectedOption = options.find((option) => option.value === defaultValue);
+const selectedOption = options.find((option: Option) => option.value === defaultValue);
 ---
 
 <div class="content-entry">
@@ -47,7 +47,7 @@ const selectedOption = options.find((option) => option.value === defaultValue);
 
         <div class="select-dropdown" role="listbox">
             {
-                options.map((option) => (
+                options.map((option: Option) => (
                     <div
                         class={`select-option ${option.value === defaultValue ? "selected" : ""}`}
                         role="option"

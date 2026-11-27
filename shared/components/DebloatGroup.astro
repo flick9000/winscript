@@ -39,7 +39,7 @@ const { title, desc, icon, id, apps, offText, onText } = Astro.props;
         </div>
     </summary>
     {
-        apps.map((tool) => (
+        apps.map((tool: App) => (
             <DebloatToggle
                 title={tool.title}
                 desc={tool.desc}

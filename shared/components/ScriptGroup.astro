@@ -2,7 +2,7 @@
 import ScriptToggle from "./ScriptToggle.astro";
 import ScriptRadio from "./ScriptRadio.astro";
 
-interface Tool {
+interface Script {
     title: string;
     description?: string;
     inputId: string;
@@ -14,12 +14,12 @@ interface Props {
     title: string;
     description: string;
     icon: string;
-    tools: Tool[];
+    scripts: Script[];
     offText?: string;
     onText?: string;
 }
 
-const { title, description, icon, tools, offText, onText } = Astro.props;
+const { title, description, icon, scripts, offText, onText } = Astro.props;
 ---
 
 <details>
@@ -35,14 +35,14 @@ const { title, description, icon, tools, offText, onText } = Astro.props;
     </summary>
 
     {
-        tools.map((tool) => {
-            if (tool.radio) {
+        scripts.map((script: Script) => {
+            if (script.radio) {
                 return (
                     <ScriptRadio
-                        title={tool.title}
-                        inputId={tool.inputId}
-                        description={tool.description}
-                        group={tool.group || "default-group"}
+                        title={script.title}
+                        inputId={script.inputId}
+                        description={script.description}
+                        group={script.group || "default-group"}
                         offText={offText}
                         onText={onText}
                     />
@@ -51,9 +51,9 @@ const { title, description, icon, tools, offText, onText } = Astro.props;
 
             return (
                 <ScriptToggle
-                    title={tool.title}
-                    inputId={tool.inputId}
-                    description={tool.description}
+                    title={script.title}
+                    inputId={script.inputId}
+                    description={script.description}
                     offText={offText}
                     onText={onText}
                 />

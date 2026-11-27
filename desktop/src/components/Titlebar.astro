@@ -140,7 +140,7 @@
         const appWindow = getCurrentWindow();
         const title = document.getElementById("title");
 
-        function updateTitle(isFocused) {
+        function updateTitle(isFocused: boolean) {
             if (isFocused) {
                 title!.style.color = "var(--text)";
             } else {
