@@ -1,3 +1,5 @@
+import { generateAutounattend } from "@shared/assets/js/unattend";
+
 function getSupportedLocales() {
     const buttons = document.querySelectorAll(".use-lang-btn");
     return new Set(
@@ -249,6 +251,25 @@ document
             await navigator.clipboard.writeText(textContent);
         } catch (error) {
             console.error("Error copying to clipboard:", error);
+        }
+    });
+
+document
+    .getElementById("autounattendBtn")
+    ?.addEventListener("click", async function () {
+        const autoattendScript = await generateAutounattend();
+        if (!autoattendScript) return;
+        try {
+            let blob = new Blob([autoattendScript], { type: "text/plain" });
+            let link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "autounattend.xml";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error("Error saving autoattend:", error);
         }
     });
 

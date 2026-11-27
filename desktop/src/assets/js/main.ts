@@ -9,6 +9,7 @@ import { check } from "@tauri-apps/plugin-updater";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { getMatches } from "@tauri-apps/plugin-cli";
+import { generateAutounattend } from "@shared/assets/js/unattend";
 
 async function loadConfig() {
     const matches = await getMatches();
@@ -542,6 +543,32 @@ document.getElementById("copyBtn")?.addEventListener("click", function () {
         console.error("Error copying to clipboard:", error);
     }
 });
+
+// Generate autounattend.xml button
+document
+    .getElementById("autounattendBtn")
+    ?.addEventListener("click", async () => {
+        const autoattendScript = await generateAutounattend();
+        if (!autoattendScript) return;
+
+        try {
+            const filePath = await save({
+                defaultPath: "autounattend.xml",
+                filters: [
+                    {
+                        name: "XML",
+                        extensions: ["xml"],
+                    },
+                ],
+            });
+
+            if (filePath) {
+                await writeTextFile(filePath, autoattendScript);
+            }
+        } catch (error) {
+            console.error("Error saving autoattend:", error);
+        }
+    });
 
 // Update the indicator text
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {

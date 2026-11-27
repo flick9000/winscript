@@ -1,8 +1,4 @@
-import { save } from "@tauri-apps/plugin-dialog";
-import { writeTextFile } from "@tauri-apps/plugin-fs";
-
-const autoattendBtn = document.getElementById("autounattendBtn");
-autoattendBtn?.addEventListener("click", async () => {
+export async function generateAutounattend() {
     const code = document.getElementById("code");
     if (!code) return;
 
@@ -164,21 +160,5 @@ $scripts = @(
 	</Extensions>
 </unattend>`;
 
-    try {
-        const filePath = await save({
-            defaultPath: "autounattend.xml",
-            filters: [
-                {
-                    name: "XML",
-                    extensions: ["xml"],
-                },
-            ],
-        });
-
-        if (filePath) {
-            await writeTextFile(filePath, autoattendScript);
-        }
-    } catch (error) {
-        console.error("Error saving autoattend:", error);
-    }
-});
+    return autoattendScript;
+}
