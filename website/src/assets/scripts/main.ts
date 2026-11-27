@@ -1,4 +1,4 @@
-import { generateAutounattend } from "@shared/assets/js/unattend";
+import { generateAutounattend } from "@shared/assets/scripts/unattend";
 
 function getSupportedLocales() {
     const buttons = document.querySelectorAll(".use-lang-btn");
