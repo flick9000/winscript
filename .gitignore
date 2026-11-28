@@ -1,6 +1,8 @@
 # build output
 dist/
 
+vite.config.js
+
 # Logs
 logs
 *.log
@@ -10,21 +12,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-bun.lock
+.vscode/
 
-.vscode
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+src-tauri/target
 
-# generated types
 .astro/
-.astro
 
-# dependencies
 node_modules/

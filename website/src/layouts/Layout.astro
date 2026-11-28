@@ -1,7 +1,7 @@
 ---
-import "../assets/styles/reset.css";
-import "../assets/styles/style.css";
-import "../assets/styles/atom-one.css";
+import "@shared/styles/reset.css";
+import "@/styles/style.css";
+import "@shared/styles/atom-one.css";
 
 const { locale = "en" } = Astro.props;
 ---
@@ -10,23 +10,15 @@ const { locale = "en" } = Astro.props;
 <html lang={locale} data-theme="dark">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        />
-        <meta
-            name="description"
-            content="Build your Windows 10/11 script from scratch."
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="description" content="Build your Windows 10/11 script from scratch." />
         <title>WinScript | Online</title>
 
         <link rel="icon" href="/favicon.ico" />
 
         <link rel="canonical" href="https://winscript.cc/online" />
 
-        <script
-            src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"
-        ></script>
+        <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
     </head>
     <body>
         <slot />
@@ -46,8 +38,7 @@ const { locale = "en" } = Astro.props;
         hljs.highlightAll();
     </script>
 
-    <script src="../assets/js/main.ts"></script>
-    <script src="../assets/js/appinstall.ts"></script>
-    <script src="../assets/js/scripts.ts"></script>
-    <script src="../assets/js/unattend.ts"></script>
+    <script src="@/scripts/main.ts"></script>
+    <script src="@shared/scripts/tweaks.ts"></script>
+    <script src="@shared/scripts/appinstall.ts"></script>
 </html>

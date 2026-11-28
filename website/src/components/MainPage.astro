@@ -1,17 +1,17 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
 import Sidebar from "./Sidebar.astro";
-import Tab from "./Tab.astro";
-import ScriptToggle from "./ScriptToggle.astro";
-import ScriptGroup from "./ScriptGroup.astro";
-import DebloatGroup from "./DebloatGroup.astro";
-import AppGroup from "./AppGroup.astro";
-import MockupCode from "./MockupCode.astro";
-import ButtonEntry from "./ButtonEntry.astro";
-import Select from "./Select.astro";
 import Background from "./Background.astro";
 import Dialogs from "./Dialogs.astro";
-import GroupToggle from "./GroupToggle.astro";
+import Tab from "@shared/components/Tab.astro";
+import ScriptToggle from "@shared/components/ScriptToggle.astro";
+import ScriptGroup from "@shared/components/ScriptGroup.astro";
+import DebloatGroup from "@shared/components/DebloatGroup.astro";
+import AppGroup from "@shared/components/AppGroup.astro";
+import MockupCode from "@shared/components/MockupCode.astro";
+import ButtonEntry from "@shared/components/ButtonEntry.astro";
+import Select from "@shared/components/Select.astro";
+import GroupToggle from "@shared/components/GroupToggle.astro";
 
 interface Props {
     t: Record<string, string>;
@@ -19,8 +19,8 @@ interface Props {
 }
 const { t, locale } = Astro.props;
 const packageManagers = [
-    { value: "chocolatey", label: "Chocolatey" },
     { value: "winget", label: "Winget" },
+    { value: "chocolatey", label: "Chocolatey" },
 ];
 
 const languages = [
@@ -140,7 +140,6 @@ const languages = [
             title={t["supportdialog.title"]}
             desc={t["supportdialog.desc"]}
             desc2={t["supportdialog.desc2"]}
-            dontask={t["supportdialog.dontask"]}
             coffee={t["supportdialog.coffee"]}
             star={t["supportdialog.star"]}
         />
@@ -164,7 +163,7 @@ const languages = [
                         title={t["tools.cleanup.title"]}
                         description={t["tools.cleanup.desc"]}
                         icon="/icons/tools/clean.png"
-                        tools={[
+                        scripts={[
                             {
                                 title: t["tools.cleanup.cleanmgr"],
                                 inputId: "cleanmgr",
@@ -186,7 +185,7 @@ const languages = [
                         title={t["tools.repair.title"]}
                         description={t["tools.repair.desc"]}
                         icon="/icons/tools/sfc.png"
-                        tools={[
+                        scripts={[
                             {
                                 title: t["tools.repair.dism"],
                                 inputId: "dism",
@@ -243,8 +242,7 @@ const languages = [
                             {
                                 title: t["debloat.features.consumer"],
                                 inputId: "consumerfeatures",
-                                description:
-                                    t["debloat.features.consumer.desc"],
+                                description: t["debloat.features.consumer.desc"],
                             },
                             {
                                 title: t["debloat.features.hyperv"],
@@ -1029,7 +1027,7 @@ const languages = [
                         title={t["telemetry.update.title"]}
                         description={t["telemetry.update.desc"]}
                         icon="/icons/telemetry/update.svg"
-                        tools={[
+                        scripts={[
                             {
                                 title: t["common.none"],
                                 inputId: "none",
@@ -1063,19 +1061,15 @@ const languages = [
                         title={t["telemetry.updatesettings.title"]}
                         description={t["telemetry.updatesettings.desc"]}
                         icon="/icons/telemetry/settings.svg"
-                        tools={[
+                        scripts={[
                             {
-                                title: t[
-                                    "telemetry.deliveryoptimization.title"
-                                ],
-                                description:
-                                    t["telemetry.deliveryoptimization.desc"],
+                                title: t["telemetry.deliveryoptimization.title"],
+                                description: t["telemetry.deliveryoptimization.desc"],
                                 inputId: "deliveryoptimization",
                             },
                             {
                                 title: t["telemetry.meteredconnection.title"],
-                                description:
-                                    t["telemetry.meteredconnection.desc"],
+                                description: t["telemetry.meteredconnection.desc"],
                                 inputId: "meteredconnection",
                             },
                             {
@@ -1142,7 +1136,7 @@ const languages = [
                         title={t["performance.dns.title"]}
                         description=""
                         icon="/icons/performance/dns.png"
-                        tools={[
+                        scripts={[
                             {
                                 title: t["common.none"],
                                 inputId: "none",
@@ -1188,7 +1182,7 @@ const languages = [
                         title={t["performance.powerplan.title"]}
                         description=""
                         icon="/icons/performance/powerplan.svg"
-                        tools={[
+                        scripts={[
                             {
                                 title: t["common.none"],
                                 inputId: "none",
@@ -1202,17 +1196,13 @@ const languages = [
                                 group: "powerplan",
                             },
                             {
-                                title: t[
-                                    "performance.powerplan.highperformance"
-                                ],
+                                title: t["performance.powerplan.highperformance"],
                                 inputId: "highperformance",
                                 radio: true,
                                 group: "powerplan",
                             },
                             {
-                                title: t[
-                                    "performance.powerplan.ultimateperformance"
-                                ],
+                                title: t["performance.powerplan.ultimateperformance"],
                                 inputId: "ultimateperformance",
                                 radio: true,
                                 group: "powerplan",
@@ -1226,25 +1216,19 @@ const languages = [
                         title={t["performance.powerplansettings.title"]}
                         description={t["performance.powerplansettings.desc"]}
                         icon="/icons/performance/powerplansettings.svg"
-                        tools={[
+                        scripts={[
                             {
-                                title: t[
-                                    "performance.powerplansettings.powermanagement"
-                                ],
+                                title: t["performance.powerplansettings.powermanagement"],
                                 inputId: "powermanagement",
                                 group: "powerplansettings",
                             },
                             {
-                                title: t[
-                                    "performance.powerplansettings.usbsuspending"
-                                ],
+                                title: t["performance.powerplansettings.usbsuspending"],
                                 inputId: "usbsuspending",
                                 group: "powerplansettings",
                             },
                             {
-                                title: t[
-                                    "performance.powerplansettings.disktimeout"
-                                ],
+                                title: t["performance.powerplansettings.disktimeout"],
                                 inputId: "disktimeout",
                                 group: "powerplansettings",
                             },
@@ -2350,11 +2334,7 @@ const languages = [
                                     <p></p>
                                 </div>
                             </div>
-                            <img
-                                class="chevron"
-                                src="/icons/chevron-down.png"
-                                alt=""
-                            />
+                            <img class="chevron" src="/icons/chevron-down.png" alt="" />
                         </summary>
 
                         <ButtonEntry
@@ -2409,10 +2389,7 @@ const languages = [
                                         </p>
                                     </div>
                                 </div>
-                                <button
-                                    class="use-lang-btn"
-                                    data-locale={lang.code}
-                                >
+                                <button class="use-lang-btn" data-locale={lang.code}>
                                     {t["localizations.useLanguage"]}
                                 </button>
                             </div>

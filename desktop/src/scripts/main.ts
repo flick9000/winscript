@@ -1,0 +1,650 @@
+import { writeTextFile, readTextFile, mkdir } from "@tauri-apps/plugin-fs";
+import { tempDir, join } from "@tauri-apps/api/path";
+import { Command } from "@tauri-apps/plugin-shell";
+import { app } from "@tauri-apps/api";
+import { version, locale as getOsLocale } from "@tauri-apps/plugin-os";
+import { Effect, getCurrentWindow } from "@tauri-apps/api/window";
+import { ask, save, open } from "@tauri-apps/plugin-dialog";
+import { check } from "@tauri-apps/plugin-updater";
+import { relaunch } from "@tauri-apps/plugin-process";
+import { openUrl } from "@tauri-apps/plugin-opener";
+import { getMatches } from "@tauri-apps/plugin-cli";
+import { generateAutounattend } from "@shared/scripts/unattend";
+
+async function loadConfig() {
+    const matches = await getMatches();
+    if (matches.args.import) {
+        const path = matches.args.import.value?.toString();
+
+        if (!path) {
+            return;
+        }
+
+        try {
+            const checkboxes =
+                document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+            const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+            const contents = await readTextFile(path);
+            const settings = JSON.parse(contents);
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = settings[checkbox.id];
+                checkbox.dispatchEvent(new Event("change"));
+            });
+
+            radios.forEach((radio) => {
+                radio.checked = settings[radio.id];
+                radio.dispatchEvent(new Event("change"));
+            });
+        } catch (error) {
+            console.error("Error loading config:", error);
+        }
+    }
+}
+
+function getSupportedLocales() {
+    const buttons = document.querySelectorAll(".use-lang-btn");
+    return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
+}
+
+async function detectOsLocale() {
+    const supported = getSupportedLocales();
+    const osLang = await getOsLocale();
+
+    if (!osLang) return null;
+
+    // Exact match
+    if (supported.has(osLang)) {
+        return osLang;
+    }
+
+    // Prefix match: "de-DE" → "de"
+    const prefix = osLang.split("-")[0];
+    if (prefix !== osLang && supported.has(prefix)) {
+        return prefix;
+    }
+    return null;
+}
+
+async function loadLocale() {
+    // Saved preference wins
+    let locale = localStorage.getItem("locale");
+    if (locale) {
+        const supported = getSupportedLocales();
+        if (supported.has(locale)) {
+            if (locale !== "en" && !window.location.href.includes(locale)) {
+                window.location.href = `/${locale}`;
+            }
+        }
+        return;
+    }
+
+    // No saved preference - use OS locale
+    const osLocale = await detectOsLocale();
+    if (osLocale && osLocale !== "en") {
+        localStorage.setItem("locale", osLocale);
+        window.location.href = `/${osLocale}`;
+    }
+}
+
+// Alert if an update is available (for portable)
+async function alertForUpdates() {
+    let updateAsk;
+
+    updateAsk = await ask("An update is available. Do you want to update?", {
+        title: "Update Available",
+        kind: "info",
+        okLabel: "Go to GitHub",
+        cancelLabel: "Later",
+    });
+
+    if (updateAsk === true) {
+        await openUrl("https://github.com/flick9000/winscript/releases/latest");
+    } else {
+        return;
+    }
+}
+
+// Checks if an update is available and performs it
+async function checkAndUpdate() {
+    try {
+        const update = await check();
+        if (!update) return;
+
+        let updateAsk = await ask("An update is available. Do you want to update?", {
+            title: "Update Available",
+            kind: "info",
+            okLabel: "Update",
+            cancelLabel: "Later",
+        });
+
+        if (updateAsk === true) {
+            await update.downloadAndInstall();
+            await relaunch();
+        } else {
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+        alertForUpdates();
+    }
+}
+
+async function isInstalled() {
+    const update = await check();
+    if (!update) return;
+
+    const script = `
+$processes = Get-Process -Name "winscript*" -ErrorAction SilentlyContinue
+$isInstalled = $false
+foreach ($process in $processes) {
+    if ($process.Path) {
+        $uninstaller = Join-Path (Split-Path $process.Path) "uninstall.exe"
+
+        if (Test-Path $uninstaller) {
+            $isInstalled = $true
+            break
+        }
+    }
+}
+@{ isPortable = -not $isInstalled } | ConvertTo-Json -Compress
+  `;
+
+    const shell = Command.create("powershell", [
+        "-NoProfile",
+        "-WindowStyle",
+        "Hidden",
+        "-Command",
+        script,
+    ]);
+
+    const result = await shell.execute();
+    const { isPortable } = JSON.parse(result.stdout);
+
+    if (isPortable) {
+        alertForUpdates();
+    } else {
+        checkAndUpdate();
+    }
+}
+
+isInstalled();
+
+// Apply Mica if OS = Windows 11
+function isWindows11() {
+    const osVersion = version();
+    const buildNumber = parseInt(osVersion.split(".")[2], 10);
+    return buildNumber >= 22631;
+}
+
+function applyMica() {
+    try {
+        if (isWindows11()) {
+            getCurrentWindow().setEffects({ effects: [Effect.Mica] });
+        } else {
+            document.body.style.backgroundColor = "var(--background)";
+        }
+    } catch (error) {
+        console.error(error);
+        document.body.style.backgroundColor = "var(--background)";
+    }
+}
+
+async function hasWindowsTerminal() {
+    try {
+        const check = Command.create("where", ["wt"]);
+        const output = await check.execute();
+        return output.code === 0;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+applyMica();
+
+await loadLocale();
+
+// Show window manually on startup (remove this when mica bug at startup is fixed)
+getCurrentWindow().show();
+
+// Prevent context menu
+document.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+});
+
+async function displayVersion() {
+    const versionElement = document.getElementById("version");
+    if (!versionElement) return;
+
+    try {
+        const version = await app.getVersion();
+        versionElement.textContent = `${version}`;
+    } catch (error) {
+        versionElement.textContent = ``;
+        console.error("Failed to get app version:", error);
+    }
+}
+
+displayVersion();
+
+document.querySelector(".nav-icon")?.addEventListener("click", () => {
+    const navbar = document.getElementById("sidebar");
+    const content = document.querySelector(".content");
+    const paragraphs = document.querySelectorAll<HTMLParagraphElement>(
+        ".content-entry:not(.about) p",
+    );
+
+    if (!navbar || !content) return;
+
+    if (!navbar.classList.contains("responsive")) {
+        navbar.classList.add("responsive");
+        content.classList.add("responsive");
+        navbar.style.animation = "slide-in 0.3s ease forwards";
+        paragraphs.forEach((p) => {
+            p.style.display = "none";
+        });
+    } else {
+        navbar.style.animation = "slide-out 0.3s ease forwards";
+        content.classList.remove("responsive");
+        paragraphs.forEach((p) => {
+            p.style.display = "block";
+        });
+        setTimeout(() => {
+            navbar.classList.remove("responsive");
+            navbar.style.animation = "";
+        }, 300);
+    }
+});
+
+const tabs = document.querySelectorAll<HTMLDivElement>(".sidebar-entry");
+const contents = document.querySelectorAll(".tab-content");
+const title = document.getElementById("content-header");
+
+if (tabs.length > 0 && contents.length > 0) {
+    tabs[0].classList.add("active");
+    contents[0].classList.add("active");
+
+    if (title) title.textContent = tabs[0].textContent || "WinScript";
+}
+
+// Titlebar button goes to languages tab
+document.querySelector('button[data-tab="localizations-tab"]')?.addEventListener("click", () => {
+    tabs[9].click();
+});
+
+// Remove 'active' from all other content divs
+contents.forEach((content, index) => {
+    if (index !== 0) {
+        content.classList.remove("active");
+    }
+});
+
+// Add click event to each tab button
+tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        contents.forEach((c) => c.classList.remove("active"));
+
+        tab.classList.add("active");
+        contents[index].classList.add("active");
+
+        if (title) title.textContent = tab.textContent;
+    });
+});
+
+// Import & Export
+const importBtn = document.getElementById("importBtn");
+const exportBtn = document.getElementById("exportBtn");
+const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+
+exportBtn?.addEventListener("click", async () => {
+    let settings: Record<string, boolean> = {};
+    checkboxes.forEach((checkbox) => {
+        settings[checkbox.id] = checkbox.checked;
+    });
+
+    radios.forEach((radio) => {
+        settings[radio.id] = radio.checked;
+    });
+
+    try {
+        const filePath = await save({
+            filters: [
+                {
+                    name: "JSON",
+                    extensions: ["json"],
+                },
+            ],
+        });
+
+        if (filePath) {
+            await writeTextFile(filePath, JSON.stringify(settings, null, 2));
+        }
+    } catch (error) {
+        console.error("Error saving file:", error);
+    }
+});
+
+importBtn?.addEventListener("click", async () => {
+    try {
+        const filePath = await open({
+            filters: [
+                {
+                    name: "JSON",
+                    extensions: ["json"],
+                },
+            ],
+        });
+
+        if (filePath) {
+            const contents = await readTextFile(filePath);
+
+            const settings = JSON.parse(contents);
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = settings[checkbox.id];
+                checkbox.dispatchEvent(new Event("change"));
+            });
+
+            radios.forEach((radio) => {
+                radio.checked = settings[radio.id];
+                radio.dispatchEvent(new Event("change"));
+            });
+        }
+    } catch (error) {
+        console.error("Error importing settings:", error);
+    }
+});
+
+// Shortcuts
+const windowsSettings = document.getElementById("openSettings");
+const deviceManager = document.getElementById("openDeviceManager");
+const controlPanel = document.getElementById("openControlPanel");
+const visualEffects = document.getElementById("openVisualEffects");
+const pageFile = document.getElementById("openPageFile");
+const msConfig = document.getElementById("openMSConfig");
+
+windowsSettings?.addEventListener("click", () => {
+    Command.create("cmd", ["/c", "start", "ms-settings:"]).execute();
+});
+deviceManager?.addEventListener("click", () => {
+    Command.create("cmd", ["/c", "start", "devmgmt.msc"]).execute();
+});
+controlPanel?.addEventListener("click", () => {
+    Command.create("cmd", ["/c", "start", "control"]).execute();
+});
+visualEffects?.addEventListener("click", () => {
+    Command.create("cmd", ["/c", "start", "SystemPropertiesPerformance"]).execute();
+});
+pageFile?.addEventListener("click", () => {
+    Command.create("cmd", ["/c", "SystemPropertiesPerformance /pagefile"]).execute();
+});
+
+msConfig?.addEventListener("click", () => {
+    Command.create("cmd", ["/c", "start", "msconfig"]).execute();
+});
+
+// MAS Checkbox
+const masCheckbox = document.getElementById("installmas");
+const masContainer = document.querySelector(".mas-container");
+
+if (masCheckbox instanceof HTMLInputElement && masContainer instanceof HTMLDivElement) {
+    masCheckbox.addEventListener("change", () => {
+        masContainer.style.display = masCheckbox.checked ? "block" : "none";
+    });
+}
+
+// OneDrive Checkbox
+const onedriveCheckbox = document.getElementById("onedrive");
+let onedriveChanging = false;
+
+onedriveCheckbox?.addEventListener("click", async (e) => {
+    if (!(onedriveCheckbox instanceof HTMLInputElement)) return;
+
+    if (onedriveChanging) {
+        onedriveChanging = false;
+        return;
+    }
+
+    onedriveCheckbox.checked = false;
+
+    if (!onedriveChanging) {
+        const onedriveAsk = await ask(
+            "Uninstalling OneDrive will delete all of your OneDrive files, make sure to backup if you wish to proceed. Do you want to continue?",
+            {
+                title: "Uninstall OneDrive",
+            },
+        );
+
+        if (onedriveAsk) {
+            onedriveChanging = true;
+            onedriveCheckbox.checked = true;
+            onedriveCheckbox.dispatchEvent(new Event("change"));
+        }
+    }
+});
+
+// Restore Point Checkbox
+const restoreCheckbox = document.getElementById("restorepoint") as HTMLInputElement;
+const restoreContainer = document.querySelector(".restore-container") as HTMLDivElement;
+restoreCheckbox?.addEventListener("change", () => {
+    restoreContainer.style.display = restoreCheckbox.checked ? "block" : "none";
+});
+
+// App Search Bar
+const searchBar = document.getElementById("searchBar") as HTMLInputElement;
+searchBar?.addEventListener("input", () => {
+    const searchValue = searchBar.value.toLowerCase();
+    const detailsElements = document.querySelectorAll<HTMLDetailsElement>("#install-tab details");
+
+    detailsElements.forEach((details) => {
+        const entries = [...details.querySelectorAll<HTMLDivElement>(".content-entry")];
+        const summary = details.querySelector("summary");
+
+        let hasMatch = false;
+
+        entries.forEach((entry) => {
+            if (!entry.isSameNode(summary)) {
+                const isMatch = entry.textContent.toLowerCase().includes(searchValue);
+                entry.style.display = isMatch ? "" : "none";
+                hasMatch ||= isMatch;
+            }
+        });
+
+        if (!searchValue) {
+            details.style.display = "";
+            details.open = false;
+            entries.forEach((entry) => (entry.style.display = ""));
+        } else {
+            details.style.display = hasMatch ? "" : "none";
+            details.open = hasMatch;
+        }
+    });
+});
+
+// Update apps button
+const updateBtn = document.getElementById("updateBtn");
+const packageManager = document.getElementById("packageManager");
+const chocoUpdateCommand = "choco upgrade all -y";
+const wingetUpdateCommand =
+    "winget upgrade --all --include-unknown --silent --accept-source-agreements --accept-package-agreements";
+
+async function updateApps(packageUpdateCommand: string) {
+    const hasWt = await hasWindowsTerminal();
+    const args = ["/c", "start"];
+    if (hasWt) args.push("wt");
+    args.push(
+        "powershell",
+        "-NoProfile",
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        packageUpdateCommand,
+    );
+
+    Command.create("cmd", args).execute();
+}
+
+updateBtn?.addEventListener("click", () => {
+    if (!packageManager) return;
+    if (packageManager instanceof HTMLInputElement) {
+        if (packageManager.value === "chocolatey") {
+            updateApps(chocoUpdateCommand);
+        } else if (packageManager.value === "winget") {
+            updateApps(wingetUpdateCommand);
+        }
+    }
+});
+
+// Copy to clipboard button
+document.getElementById("copyBtn")?.addEventListener("click", function () {
+    var textContent = document.getElementById("code")?.innerText;
+    if (!textContent) return;
+
+    try {
+        navigator.clipboard.writeText(textContent);
+    } catch (error) {
+        console.error("Error copying to clipboard:", error);
+    }
+});
+
+// Generate autounattend.xml button
+document.getElementById("autounattendBtn")?.addEventListener("click", async () => {
+    const autoattendScript = await generateAutounattend();
+    if (!autoattendScript) return;
+
+    try {
+        const filePath = await save({
+            defaultPath: "autounattend.xml",
+            filters: [
+                {
+                    name: "XML",
+                    extensions: ["xml"],
+                },
+            ],
+        });
+
+        if (filePath) {
+            await writeTextFile(filePath, autoattendScript);
+        }
+    } catch (error) {
+        console.error("Error saving autoattend:", error);
+    }
+});
+
+// Update the indicator text
+document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
+    const checkbox = wrapper.querySelector('input[type="checkbox"]');
+    const radio = wrapper.querySelector('input[type="radio"]');
+    const indicator = wrapper.querySelector(".indicator");
+
+    if (checkbox instanceof HTMLInputElement) {
+        checkbox.addEventListener("change", () => {
+            if (indicator) {
+                indicator.textContent = checkbox.checked
+                    ? indicator.getAttribute("data-on") || "On"
+                    : indicator.getAttribute("data-off") || "Off";
+            }
+        });
+    }
+
+    if (radio) {
+        radio.addEventListener("change", () => {
+            const radioName = radio.getAttribute("name");
+            document
+                .querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${radioName}"]`)
+                .forEach((r) => {
+                    const parentWrapper = r.closest(".checkbox-wrapper");
+                    if (parentWrapper) {
+                        const indicator = parentWrapper.querySelector(".indicator");
+                        if (!indicator) return;
+                        indicator.textContent = r.checked
+                            ? indicator.getAttribute("data-on") || "On"
+                            : indicator.getAttribute("data-off") || "Off";
+                    }
+                });
+        });
+    }
+});
+
+// Run Button
+document.getElementById("runBtn")?.addEventListener("click", async function () {
+    if (!restoreCheckbox.checked) {
+        let restoreAsk = await ask("Do you want to create a restore point?", {
+            title: "Restore Point",
+        });
+
+        if (!restoreContainer) return;
+        restoreContainer.style.display = restoreAsk ? "block" : "none";
+    }
+
+    let textContent = document.getElementById("code")?.innerText;
+    if (!textContent) return;
+
+    // Convert LF to CRLF
+    textContent = textContent.replace(/\n/g, "\r\n");
+
+    try {
+        const tmpDir = await tempDir();
+        const dirPath = await join(tmpDir, "winscript");
+        const filePath = await join(dirPath, "winscript.ps1");
+
+        await mkdir(dirPath, { recursive: true });
+
+        await writeTextFile(filePath, textContent);
+
+        const hasWt = await hasWindowsTerminal();
+
+        const args = hasWt
+            ? [
+                  "/c",
+                  "start",
+                  "wt",
+                  "powershell",
+                  "-NoProfile",
+                  "-NoLogo",
+                  "-ExecutionPolicy",
+                  "Bypass",
+                  "-File",
+                  filePath,
+              ]
+            : [
+                  "/c",
+                  "start",
+                  "powershell",
+                  "-NoProfile",
+                  "-NoLogo",
+                  "-ExecutionPolicy",
+                  "Bypass",
+                  "-File",
+                  filePath,
+              ];
+
+        const command = Command.create("cmd", args);
+
+        command
+            .spawn()
+            .then(() => console.log("Script executed successfully"))
+            .catch((error) => console.error("Error executing script:", error));
+    } catch (error) {
+        console.error("Error:", error);
+    }
+});
+
+// Language switching
+document.querySelectorAll(".localization-entry").forEach((entry) => {
+    const useBtn = entry.querySelector(".use-lang-btn");
+    const locale = useBtn?.getAttribute("data-locale");
+
+    useBtn?.addEventListener("click", (e) => {
+        if (!locale) return;
+        e.stopPropagation();
+
+        window.location.href = `/${locale}`;
+        localStorage.setItem("locale", locale);
+    });
+});
+
+await loadConfig();

@@ -3,12 +3,11 @@ interface Props {
     title: string;
     desc?: string;
     desc2?: string;
-    dontask?: string;
     coffee?: string;
     star?: string;
 }
 
-const { title, desc, desc2, dontask, coffee, star } = Astro.props;
+const { title, desc, desc2, coffee, star } = Astro.props;
 ---
 
 <dialog id="supportDialog">

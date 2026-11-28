@@ -1,0 +1,63 @@
+---
+import ScriptToggle from "./ScriptToggle.astro";
+import ScriptRadio from "./ScriptRadio.astro";
+
+interface Script {
+    title: string;
+    description?: string;
+    inputId: string;
+    radio?: boolean;
+    group?: string;
+}
+
+interface Props {
+    title: string;
+    description: string;
+    icon: string;
+    scripts: Script[];
+    offText?: string;
+    onText?: string;
+}
+
+const { title, description, icon, scripts, offText, onText } = Astro.props;
+---
+
+<details>
+    <summary class="content-entry">
+        <div>
+            <img src={icon} alt={title} />
+            <div>
+                <h1>{title}</h1>
+                <p>{description}</p>
+            </div>
+        </div>
+        <img class="chevron" src="/icons/chevron-down.png" alt="Expand" />
+    </summary>
+
+    {
+        scripts.map((script: Script) => {
+            if (script.radio) {
+                return (
+                    <ScriptRadio
+                        title={script.title}
+                        inputId={script.inputId}
+                        description={script.description}
+                        group={script.group || "default-group"}
+                        offText={offText}
+                        onText={onText}
+                    />
+                );
+            }
+
+            return (
+                <ScriptToggle
+                    title={script.title}
+                    inputId={script.inputId}
+                    description={script.description}
+                    offText={offText}
+                    onText={onText}
+                />
+            );
+        })
+    }
+</details>

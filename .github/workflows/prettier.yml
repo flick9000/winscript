@@ -1,0 +1,33 @@
+name: Compare Files
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    check-sync:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "22"
+
+            - name: Install Sub-project dependencies
+              run: |
+                  npm --prefix desktop ci
+                  npm --prefix website ci
+
+            - name: Prettier check
+              shell: pwsh
+              run: |
+                  $env:NODE_NO_WARNINGS = "1"
+                  npm --prefix desktop run format:check
+                  npm --prefix website run format:check
