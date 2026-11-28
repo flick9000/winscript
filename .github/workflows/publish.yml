@@ -28,7 +28,7 @@ jobs:
             - name: Rust cache
               uses: swatinem/rust-cache@v2
               with:
-                  workspaces: ./app/src-tauri
+                  workspaces: ./desktop/src-tauri
                   shared-key: release
                   save-if: ${{ github.ref == 'refs/heads/main' }}
 
@@ -36,14 +36,14 @@ jobs:
               with:
                   node-version: lts/*
                   cache: npm
-                  cache-dependency-path: app/package-lock.json
+                  cache-dependency-path: desktop/package-lock.json
 
             - name: Install frontend dependencies
-              working-directory: ./app
+              working-directory: ./desktop
               run: npm ci
 
             - name: Build Tauri portable
-              working-directory: ./app
+              working-directory: ./desktop
               run: npm run tauri build -- --no-bundle
               env:
                   GH_TOKEN: ${{ github.token }}
@@ -55,7 +55,7 @@ jobs:
               id: portable
               with:
                   name: portable
-                  path: ./app/src-tauri/target/release/WinScript.exe
+                  path: ./desktop/src-tauri/target/release/WinScript.exe
 
             - name: Sign Tauri portable
               uses: signpath/github-action-submit-signing-request@v2
@@ -71,11 +71,11 @@ jobs:
 
             - name: Copy signed portable to build directory
               run: |
-                  Remove-Item -Path ./app/src-tauri/target/release/WinScript.exe
-                  cp ./signed/WinScript.exe ./app/src-tauri/target/release
+                  Remove-Item -Path ./desktop/src-tauri/target/release/WinScript.exe
+                  cp ./signed/WinScript.exe ./desktop/src-tauri/target/release
 
             - name: Build Tauri installer
-              working-directory: ./app/src-tauri
+              working-directory: ./desktop/src-tauri
               continue-on-error: true
               run: |
                   npm run tauri bundle -- --bundles=nsis --no-binary-patching
@@ -86,14 +86,14 @@ jobs:
 
             - name: Rename Tauri installer
               run: |
-                  Copy-Item "./app/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe" -Destination "./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe"
+                  Copy-Item "./desktop/src-tauri/target/release/bundle/nsis/WinScript_*_x64-setup.exe" -Destination "./desktop/src-tauri/target/release/bundle/nsis/winscript-installer.exe"
 
             - name: Upload Tauri installer
               id: nsis
               uses: actions/upload-artifact@v7
               with:
                   name: installer
-                  path: ./app/src-tauri/target/release/bundle/nsis/winscript-installer.exe
+                  path: ./desktop/src-tauri/target/release/bundle/nsis/winscript-installer.exe
 
             - name: Sign Tauri installer
               uses: signpath/github-action-submit-signing-request@v2
@@ -131,7 +131,7 @@ jobs:
 
             - name: Create latest.json
               shell: pwsh
-              working-directory: ./app
+              working-directory: ./desktop
               run: |
                   $output = npx tauri signer sign -k "${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}" -p "${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}" "../signed/winscript-installer.exe" 2>&1 | Out-String
                   Write-Host $output

@@ -20,12 +20,12 @@ jobs:
               with:
                   node-version: "22"
 
-            - name: Install Sub-project Dependencies
+            - name: Install Sub-project dependencies
               run: |
                   npm --prefix desktop ci
                   npm --prefix website ci
 
-            - name: Run Prettier Check
+            - name: Prettier check
               shell: pwsh
               run: |
                   $env:NODE_NO_WARNINGS = "1"
