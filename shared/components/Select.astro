@@ -1,6 +1,4 @@
 ---
-// Select.astro - Simplified version
-
 interface Option {
     value: string;
     label: string;
@@ -165,32 +163,32 @@ const selectedOption = options.find((option: Option) => option.value === default
 </style>
 
 <script>
-    // @ts-nocheck
     document.addEventListener("DOMContentLoaded", initCustomSelects);
 
     function initCustomSelects() {
         document.querySelectorAll(".custom-select-container").forEach((container) => {
-            const selectElement = container.querySelector(".custom-select");
-            const dropdownElement = container.querySelector(".select-dropdown");
-            const options = container.querySelectorAll(".select-option");
-            const hiddenInput = container.querySelector('input[type="hidden"]');
-            const selectedValue = container.querySelector(".selected-value");
+            const selectElement = container.querySelector<HTMLElement>(".custom-select");
+            const dropdownElement = container.querySelector<HTMLElement>(".select-dropdown");
+            const options = container.querySelectorAll<HTMLElement>(".select-option");
+            const hiddenInput = container.querySelector<HTMLInputElement>('input[type="hidden"]');
+            const selectedValue = container.querySelector<HTMLElement>(".selected-value");
 
-            selectElement.addEventListener("click", () => {
+            selectElement?.addEventListener("click", () => {
                 const isExpanded = selectElement.getAttribute("aria-expanded") === "true";
-                selectElement.setAttribute("aria-expanded", !isExpanded);
-                dropdownElement.classList.toggle("active");
+                selectElement.setAttribute("aria-expanded", String(!isExpanded));
+                dropdownElement?.classList.toggle("active");
             });
 
             // Handle option selection
             options.forEach((option) => {
                 option.addEventListener("click", () => {
                     const value = option.getAttribute("data-value");
-                    const label = option.querySelector("span").textContent.trim();
+                    const label = option.querySelector("span")?.textContent?.trim();
 
-                    hiddenInput.value = value;
-
-                    selectedValue.textContent = label;
+                    if (value && label && selectedValue && hiddenInput) {
+                        hiddenInput.value = value;
+                        selectedValue.textContent = label;
+                    }
 
                     options.forEach((opt) => opt.setAttribute("aria-selected", "false"));
                     option.setAttribute("aria-selected", "true");
@@ -198,40 +196,40 @@ const selectedOption = options.find((option: Option) => option.value === default
                     options.forEach((opt) => opt.classList.remove("selected"));
                     option.classList.add("selected");
 
-                    selectElement.setAttribute("aria-expanded", "false");
-                    dropdownElement.classList.remove("active");
+                    selectElement?.setAttribute("aria-expanded", "false");
+                    dropdownElement?.classList.remove("active");
 
                     const event = new Event("change", { bubbles: true });
-                    hiddenInput.dispatchEvent(event);
+                    hiddenInput?.dispatchEvent(event);
                 });
             });
 
             // Close dropdown when clicking outside
             document.addEventListener("click", (e) => {
-                if (!container.contains(e.target)) {
-                    selectElement.setAttribute("aria-expanded", "false");
-                    dropdownElement.classList.remove("active");
+                if (e.target instanceof Node && !container.contains(e.target)) {
+                    selectElement?.setAttribute("aria-expanded", "false");
+                    dropdownElement?.classList.remove("active");
                 }
             });
 
             // Keyboard navigation
-            selectElement.addEventListener("keydown", (e) => {
+            selectElement?.addEventListener("keydown", (e) => {
                 if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     const isExpanded = selectElement.getAttribute("aria-expanded") === "true";
-                    selectElement.setAttribute("aria-expanded", !isExpanded);
-                    dropdownElement.classList.toggle("active");
+                    selectElement.setAttribute("aria-expanded", String(!isExpanded));
+                    dropdownElement?.classList.toggle("active");
                 } else if (e.key === "Escape") {
                     selectElement.setAttribute("aria-expanded", "false");
-                    dropdownElement.classList.remove("active");
-                } else if (e.key === "ArrowDown" && dropdownElement.classList.contains("active")) {
+                    dropdownElement?.classList.remove("active");
+                } else if (e.key === "ArrowDown" && dropdownElement?.classList.contains("active")) {
                     e.preventDefault();
                     const selected = container.querySelector(
                         '.select-option[aria-selected="true"]',
                     );
                     const next = selected ? selected.nextElementSibling : options[0];
-                    if (next) next.click();
-                } else if (e.key === "ArrowUp" && dropdownElement.classList.contains("active")) {
+                    if (next instanceof HTMLElement) next.click();
+                } else if (e.key === "ArrowUp" && dropdownElement?.classList.contains("active")) {
                     e.preventDefault();
                     const selected = container.querySelector(
                         '.select-option[aria-selected="true"]',
@@ -239,7 +237,7 @@ const selectedOption = options.find((option: Option) => option.value === default
                     const prev = selected
                         ? selected.previousElementSibling
                         : options[options.length - 1];
-                    if (prev) prev.click();
+                    if (prev instanceof HTMLElement) prev.click();
                 }
             });
         });
