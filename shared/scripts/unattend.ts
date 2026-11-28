@@ -5,10 +5,7 @@ export async function generateAutounattend() {
     let script = code.innerText;
 
     script = script.replace(/\n/g, "\r\n");
-    script = script
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;");
+    script = script.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
     const autoattendScript = `<?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">

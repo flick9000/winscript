@@ -21,12 +21,9 @@ async function loadConfig() {
         }
 
         try {
-            const checkboxes = document.querySelectorAll<HTMLInputElement>(
-                'input[type="checkbox"]',
-            );
-            const radios = document.querySelectorAll<HTMLInputElement>(
-                'input[type="radio"]',
-            );
+            const checkboxes =
+                document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+            const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
             const contents = await readTextFile(path);
             const settings = JSON.parse(contents);
 
@@ -47,9 +44,7 @@ async function loadConfig() {
 
 function getSupportedLocales() {
     const buttons = document.querySelectorAll(".use-lang-btn");
-    return new Set(
-        Array.from(buttons).map((btn) => btn.getAttribute("data-locale")),
-    );
+    return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
 }
 
 async function detectOsLocale() {
@@ -116,15 +111,12 @@ async function checkAndUpdate() {
         const update = await check();
         if (!update) return;
 
-        let updateAsk = await ask(
-            "An update is available. Do you want to update?",
-            {
-                title: "Update Available",
-                kind: "info",
-                okLabel: "Update",
-                cancelLabel: "Later",
-            },
-        );
+        let updateAsk = await ask("An update is available. Do you want to update?", {
+            title: "Update Available",
+            kind: "info",
+            okLabel: "Update",
+            cancelLabel: "Later",
+        });
 
         if (updateAsk === true) {
             await update.downloadAndInstall();
@@ -277,11 +269,9 @@ if (tabs.length > 0 && contents.length > 0) {
 }
 
 // Titlebar button goes to languages tab
-document
-    .querySelector('button[data-tab="localizations-tab"]')
-    ?.addEventListener("click", () => {
-        tabs[9].click();
-    });
+document.querySelector('button[data-tab="localizations-tab"]')?.addEventListener("click", () => {
+    tabs[9].click();
+});
 
 // Remove 'active' from all other content divs
 contents.forEach((content, index) => {
@@ -306,12 +296,8 @@ tabs.forEach((tab, index) => {
 // Import & Export
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
-const checkboxes = document.querySelectorAll<HTMLInputElement>(
-    'input[type="checkbox"]',
-);
-const radios = document.querySelectorAll<HTMLInputElement>(
-    'input[type="radio"]',
-);
+const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
 
 exportBtn?.addEventListener("click", async () => {
     let settings: Record<string, boolean> = {};
@@ -389,17 +375,10 @@ controlPanel?.addEventListener("click", () => {
     Command.create("cmd", ["/c", "start", "control"]).execute();
 });
 visualEffects?.addEventListener("click", () => {
-    Command.create("cmd", [
-        "/c",
-        "start",
-        "SystemPropertiesPerformance",
-    ]).execute();
+    Command.create("cmd", ["/c", "start", "SystemPropertiesPerformance"]).execute();
 });
 pageFile?.addEventListener("click", () => {
-    Command.create("cmd", [
-        "/c",
-        "SystemPropertiesPerformance /pagefile",
-    ]).execute();
+    Command.create("cmd", ["/c", "SystemPropertiesPerformance /pagefile"]).execute();
 });
 
 msConfig?.addEventListener("click", () => {
@@ -410,10 +389,7 @@ msConfig?.addEventListener("click", () => {
 const masCheckbox = document.getElementById("installmas");
 const masContainer = document.querySelector(".mas-container");
 
-if (
-    masCheckbox instanceof HTMLInputElement &&
-    masContainer instanceof HTMLDivElement
-) {
+if (masCheckbox instanceof HTMLInputElement && masContainer instanceof HTMLDivElement) {
     masCheckbox.addEventListener("change", () => {
         masContainer.style.display = masCheckbox.checked ? "block" : "none";
     });
@@ -450,12 +426,8 @@ onedriveCheckbox?.addEventListener("click", async (e) => {
 });
 
 // Restore Point Checkbox
-const restoreCheckbox = document.getElementById(
-    "restorepoint",
-) as HTMLInputElement;
-const restoreContainer = document.querySelector(
-    ".restore-container",
-) as HTMLDivElement;
+const restoreCheckbox = document.getElementById("restorepoint") as HTMLInputElement;
+const restoreContainer = document.querySelector(".restore-container") as HTMLDivElement;
 restoreCheckbox?.addEventListener("change", () => {
     restoreContainer.style.display = restoreCheckbox.checked ? "block" : "none";
 });
@@ -464,23 +436,17 @@ restoreCheckbox?.addEventListener("change", () => {
 const searchBar = document.getElementById("searchBar") as HTMLInputElement;
 searchBar?.addEventListener("input", () => {
     const searchValue = searchBar.value.toLowerCase();
-    const detailsElements = document.querySelectorAll<HTMLDetailsElement>(
-        "#install-tab details",
-    );
+    const detailsElements = document.querySelectorAll<HTMLDetailsElement>("#install-tab details");
 
     detailsElements.forEach((details) => {
-        const entries = [
-            ...details.querySelectorAll<HTMLDivElement>(".content-entry"),
-        ];
+        const entries = [...details.querySelectorAll<HTMLDivElement>(".content-entry")];
         const summary = details.querySelector("summary");
 
         let hasMatch = false;
 
         entries.forEach((entry) => {
             if (!entry.isSameNode(summary)) {
-                const isMatch = entry.textContent
-                    .toLowerCase()
-                    .includes(searchValue);
+                const isMatch = entry.textContent.toLowerCase().includes(searchValue);
                 entry.style.display = isMatch ? "" : "none";
                 hasMatch ||= isMatch;
             }
@@ -545,30 +511,28 @@ document.getElementById("copyBtn")?.addEventListener("click", function () {
 });
 
 // Generate autounattend.xml button
-document
-    .getElementById("autounattendBtn")
-    ?.addEventListener("click", async () => {
-        const autoattendScript = await generateAutounattend();
-        if (!autoattendScript) return;
+document.getElementById("autounattendBtn")?.addEventListener("click", async () => {
+    const autoattendScript = await generateAutounattend();
+    if (!autoattendScript) return;
 
-        try {
-            const filePath = await save({
-                defaultPath: "autounattend.xml",
-                filters: [
-                    {
-                        name: "XML",
-                        extensions: ["xml"],
-                    },
-                ],
-            });
+    try {
+        const filePath = await save({
+            defaultPath: "autounattend.xml",
+            filters: [
+                {
+                    name: "XML",
+                    extensions: ["xml"],
+                },
+            ],
+        });
 
-            if (filePath) {
-                await writeTextFile(filePath, autoattendScript);
-            }
-        } catch (error) {
-            console.error("Error saving autoattend:", error);
+        if (filePath) {
+            await writeTextFile(filePath, autoattendScript);
         }
-    });
+    } catch (error) {
+        console.error("Error saving autoattend:", error);
+    }
+});
 
 // Update the indicator text
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
@@ -590,14 +554,11 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
         radio.addEventListener("change", () => {
             const radioName = radio.getAttribute("name");
             document
-                .querySelectorAll<HTMLInputElement>(
-                    `input[type="radio"][name="${radioName}"]`,
-                )
+                .querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${radioName}"]`)
                 .forEach((r) => {
                     const parentWrapper = r.closest(".checkbox-wrapper");
                     if (parentWrapper) {
-                        const indicator =
-                            parentWrapper.querySelector(".indicator");
+                        const indicator = parentWrapper.querySelector(".indicator");
                         if (!indicator) return;
                         indicator.textContent = r.checked
                             ? indicator.getAttribute("data-on") || "On"

@@ -15,9 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function removeScripts(className: string) {
-        parentDiv
-            ?.querySelectorAll(`.${className}`)
-            .forEach((el) => el.remove());
+        parentDiv?.querySelectorAll(`.${className}`).forEach((el) => el.remove());
     }
 
     const scripts: Record<string, string[]> = {
@@ -708,10 +706,7 @@ document.addEventListener("DOMContentLoaded", function () {
             'Remove-Item -Path "$env:LocalAppData\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cache\\*" -Recurse -Force',
             'Remove-Item -Path "$env:LocalAppData\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cookies" -Recurse -Force',
         ],
-        sfc: [
-            "Write-Host '-- Running SFC' -ForegroundColor Magenta",
-            "sfc /scannow",
-        ],
+        sfc: ["Write-Host '-- Running SFC' -ForegroundColor Magenta", "sfc /scannow"],
         dism: [
             "Write-Host '-- Running DISM' -ForegroundColor Magenta",
             "DISM /Online /Cleanup-Image /RestoreHealth",
@@ -1091,9 +1086,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const groupName = radio.name;
 
                 document
-                    .querySelectorAll(
-                        `input[type="radio"][name="${groupName}"]`,
-                    )
+                    .querySelectorAll(`input[type="radio"][name="${groupName}"]`)
                     .forEach((otherRadio) => {
                         if (otherRadio !== radio) removeScripts(otherRadio.id);
                     });
@@ -1135,10 +1128,8 @@ function uncheckAll() {
     const wingetContainer = document.querySelector(".winget-container");
     const installDiv = document.querySelector(".div-install");
 
-    if (chocolateyContainer instanceof HTMLDivElement)
-        chocolateyContainer.style.display = "none";
-    if (wingetContainer instanceof HTMLDivElement)
-        wingetContainer.style.display = "none";
+    if (chocolateyContainer instanceof HTMLDivElement) chocolateyContainer.style.display = "none";
+    if (wingetContainer instanceof HTMLDivElement) wingetContainer.style.display = "none";
     if (installDiv instanceof HTMLDivElement) installDiv.style.display = "none";
 }
 

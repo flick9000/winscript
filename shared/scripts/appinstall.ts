@@ -413,20 +413,15 @@ function appsInstallChocolatey() {
                 : "";
 
         // Display the final URL in the div
-        const divInstall = document.querySelector(
-            ".div-install",
-        ) as HTMLDivElement;
-        const wingetContainer = document.querySelector(
-            ".winget-container",
-        ) as HTMLDivElement;
+        const divInstall = document.querySelector(".div-install") as HTMLDivElement;
+        const wingetContainer = document.querySelector(".winget-container") as HTMLDivElement;
         const chocolateyContainer = document.querySelector(
             ".chocolatey-container",
         ) as HTMLDivElement;
 
         divInstall.style.display = allUrls.length > 0 ? "block" : "none";
         wingetContainer.style.display = "none";
-        chocolateyContainer.style.display =
-            allUrls.length > 0 ? "block" : "none";
+        chocolateyContainer.style.display = allUrls.length > 0 ? "block" : "none";
 
         const commandDisplay = document.querySelector(".commandDisplay");
         if (commandDisplay) commandDisplay.textContent = command;
@@ -436,8 +431,7 @@ function appsInstallChocolatey() {
 
         const manualList = document.getElementById("manualList");
         if (window.manualURLs && window.manualURLs.length > 0 && manualList) {
-            manualList.innerHTML =
-                "Manual packages added: " + window.manualURLs.join(" | ");
+            manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
         }
     }
 
@@ -859,15 +853,11 @@ function appsInstallWinget() {
                 : "";
 
         // Display the final URL in the div
-        const divInstall = document.querySelector(
-            ".div-install",
-        ) as HTMLDivElement;
+        const divInstall = document.querySelector(".div-install") as HTMLDivElement;
         const chocolateyContainer = document.querySelector(
             ".chocolatey-container",
         ) as HTMLDivElement;
-        const wingetContainer = document.querySelector(
-            ".winget-container",
-        ) as HTMLDivElement;
+        const wingetContainer = document.querySelector(".winget-container") as HTMLDivElement;
 
         divInstall.style.display = allUrls.length > 0 ? "block" : "none";
         chocolateyContainer.style.display = "none";
@@ -885,8 +875,7 @@ function appsInstallWinget() {
 
         const manualList = document.getElementById("manualList");
         if (window.manualURLs && window.manualURLs.length > 0 && manualList) {
-            manualList.innerHTML =
-                "Manual packages added: " + window.manualURLs.join(" | ");
+            manualList.innerHTML = "Manual packages added: " + window.manualURLs.join(" | ");
         }
     }
 
@@ -896,9 +885,7 @@ function appsInstallWinget() {
 appsInstallWinget();
 appsInstallChocolatey();
 
-const selectedPackageManager = document.getElementById(
-    "packageManager",
-) as HTMLInputElement;
+const selectedPackageManager = document.getElementById("packageManager") as HTMLInputElement;
 selectedPackageManager?.addEventListener("change", () => {
     if (selectedPackageManager.value === "chocolatey") {
         appsInstallChocolatey();
@@ -915,9 +902,7 @@ function isValidManualId(manualId: string) {
 // Manual IDs button listener
 const addButton = document.getElementById("addApp");
 addButton?.addEventListener("click", () => {
-    const manualInput = document.getElementById(
-        "manualInput",
-    ) as HTMLInputElement;
+    const manualInput = document.getElementById("manualInput") as HTMLInputElement;
     const manualList = document.getElementById("manualList");
     const inputValue = manualInput.value.trim();
 
@@ -941,10 +926,7 @@ addButton?.addEventListener("click", () => {
 const apps = document.querySelectorAll('[js-target="install"]');
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("change", (event) => {
-        if (
-            event.target instanceof Element &&
-            event.target.matches("[js-target=install]")
-        ) {
+        if (event.target instanceof Element && event.target.matches("[js-target=install]")) {
             if (selectedPackageManager.value === "chocolatey") {
                 appsInstallChocolatey();
             } else if (selectedPackageManager.value === "winget") {

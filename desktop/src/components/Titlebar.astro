@@ -50,8 +50,7 @@
         </button>
         <button class="control close">
             <svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor">
-                <path
-                    d="M0.707 0L10 9.293 9.293 10 0 0.707zM9.293 0L10 0.707 0.707 10 0 9.293z"
+                <path d="M0.707 0L10 9.293 9.293 10 0 0.707zM9.293 0L10 0.707 0.707 10 0 9.293z"
                 ></path>
             </svg>
         </button>
@@ -170,12 +169,8 @@
             appWindow.minimize();
         });
         document.querySelector(".close")?.addEventListener("click", () => {
-            const supportDialog = document.getElementById(
-                "supportDialog",
-            ) as HTMLDialogElement;
-            const askCheckbox = document.getElementById(
-                "askPreference",
-            ) as HTMLInputElement;
+            const supportDialog = document.getElementById("supportDialog") as HTMLDialogElement;
+            const askCheckbox = document.getElementById("askPreference") as HTMLInputElement;
             const askPreference = localStorage.getItem("askPreference");
             const coffeeButton = document.getElementById("coffeeButton");
             const exitButton = document.getElementById("exitButton");

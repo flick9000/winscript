@@ -53,12 +53,8 @@ const { title, desc, icon, id, apps, offText, onText } = Astro.props;
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const groupCheckbox = document.querySelectorAll<HTMLInputElement>(
-            "input[id^=debloat-]",
-        );
-        const debloatApps = document.querySelectorAll<HTMLInputElement>(
-            "[js-target=debloat]",
-        );
+        const groupCheckbox = document.querySelectorAll<HTMLInputElement>("input[id^=debloat-]");
+        const debloatApps = document.querySelectorAll<HTMLInputElement>("[js-target=debloat]");
 
         groupCheckbox.forEach((group) => {
             group.addEventListener("change", () => {
@@ -66,9 +62,7 @@ const { title, desc, icon, id, apps, offText, onText } = Astro.props;
                 if (!groupContainer) return;
 
                 const groupItems =
-                    groupContainer.querySelectorAll<HTMLInputElement>(
-                        "[js-target=debloat]",
-                    );
+                    groupContainer.querySelectorAll<HTMLInputElement>("[js-target=debloat]");
                 groupItems.forEach((item) => {
                     item.checked = group.checked;
                     item.dispatchEvent(new Event("change"));
@@ -78,18 +72,13 @@ const { title, desc, icon, id, apps, offText, onText } = Astro.props;
 
         function updateDebloatScript() {
             const allSelectedAppIds = [
-                ...document.querySelectorAll<HTMLInputElement>(
-                    "[js-target=debloat]:checked",
-                ),
+                ...document.querySelectorAll<HTMLInputElement>("[js-target=debloat]:checked"),
             ].map((input) => `"${input.id}"`);
-            const debloatContainer = document.querySelector(
-                ".debloat-container",
-            ) as HTMLDivElement;
+            const debloatContainer = document.querySelector(".debloat-container") as HTMLDivElement;
             const debloatScript = document.getElementById("debloatScript");
             if (!debloatContainer || !debloatScript) return;
 
-            debloatContainer.style.display =
-                allSelectedAppIds.length > 0 ? "block" : "none";
+            debloatContainer.style.display = allSelectedAppIds.length > 0 ? "block" : "none";
 
             const command =
                 allSelectedAppIds.length > 0

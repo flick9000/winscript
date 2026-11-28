@@ -11,12 +11,7 @@ const { title, desc, appId, offText = "Off", onText = "On" } = Astro.props;
         </div>
     </div>
     <div class="checkbox-wrapper">
-        <span
-            class="indicator"
-            id="indicator"
-            data-on={onText}
-            data-off={offText}
-        >
+        <span class="indicator" id="indicator" data-on={onText} data-off={offText}>
             {offText}
         </span>
         <label class="switch">

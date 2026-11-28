@@ -2,15 +2,12 @@ import { generateAutounattend } from "@shared/scripts/unattend";
 
 function getSupportedLocales() {
     const buttons = document.querySelectorAll(".use-lang-btn");
-    return new Set(
-        Array.from(buttons).map((btn) => btn.getAttribute("data-locale")),
-    );
+    return new Set(Array.from(buttons).map((btn) => btn.getAttribute("data-locale")));
 }
 
 function detectBrowserLocale() {
     const supported = getSupportedLocales();
-    const browserLocales =
-        navigator.languages || (navigator.language ? [navigator.language] : []);
+    const browserLocales = navigator.languages || (navigator.language ? [navigator.language] : []);
 
     for (const rawLocale of browserLocales) {
         // Exact match: "de-AT" or "de",
@@ -50,12 +47,8 @@ function loadLocale() {
 document.querySelectorAll(".fa-solid").forEach((icon) => {
     icon.addEventListener("click", () => {
         const navbar = document.getElementById("sidebar");
-        const menuIcon = document.querySelector(
-            ".fa-solid.fa-bars-staggered",
-        ) as HTMLElement;
-        const markIcon = document.querySelector(
-            ".fa-solid.fa-xmark",
-        ) as HTMLElement;
+        const menuIcon = document.querySelector(".fa-solid.fa-bars-staggered") as HTMLElement;
+        const markIcon = document.querySelector(".fa-solid.fa-xmark") as HTMLElement;
 
         if (!navbar || !menuIcon || !markIcon) return;
 
@@ -115,21 +108,14 @@ tabs.forEach((tab, index) => {
 const masCheckbox = document.getElementById("installmas");
 const masContainer = document.querySelector(".mas-container");
 
-if (
-    masCheckbox instanceof HTMLInputElement &&
-    masContainer instanceof HTMLDivElement
-) {
+if (masCheckbox instanceof HTMLInputElement && masContainer instanceof HTMLDivElement) {
     masCheckbox.addEventListener("change", () => {
         masContainer.style.display = masCheckbox.checked ? "block" : "none";
     });
 }
 
-const restoreCheckbox = document.getElementById(
-    "restorepoint",
-) as HTMLInputElement;
-const restoreContainer = document.querySelector(
-    ".restore-container",
-) as HTMLDivElement;
+const restoreCheckbox = document.getElementById("restorepoint") as HTMLInputElement;
+const restoreContainer = document.querySelector(".restore-container") as HTMLDivElement;
 restoreCheckbox?.addEventListener("change", () => {
     restoreContainer.style.display = restoreCheckbox.checked ? "block" : "none";
 });
@@ -138,23 +124,17 @@ restoreCheckbox?.addEventListener("change", () => {
 const searchBar = document.getElementById("searchBar") as HTMLInputElement;
 searchBar?.addEventListener("input", () => {
     const searchValue = searchBar.value.toLowerCase();
-    const detailsElements = document.querySelectorAll<HTMLDetailsElement>(
-        "#install-tab details",
-    );
+    const detailsElements = document.querySelectorAll<HTMLDetailsElement>("#install-tab details");
 
     detailsElements.forEach((details) => {
-        const entries = [
-            ...details.querySelectorAll<HTMLDivElement>(".content-entry"),
-        ];
+        const entries = [...details.querySelectorAll<HTMLDivElement>(".content-entry")];
         const summary = details.querySelector("summary");
 
         let hasMatch = false;
 
         entries.forEach((entry) => {
             if (!entry.isSameNode(summary)) {
-                const isMatch = entry.textContent
-                    .toLowerCase()
-                    .includes(searchValue);
+                const isMatch = entry.textContent.toLowerCase().includes(searchValue);
                 entry.style.display = isMatch ? "" : "none";
                 hasMatch ||= isMatch;
             }
@@ -173,12 +153,8 @@ searchBar?.addEventListener("input", () => {
 
 const importBtn = document.getElementById("importBtn");
 const exportBtn = document.getElementById("exportBtn");
-const checkboxes = document.querySelectorAll<HTMLInputElement>(
-    'input[type="checkbox"]',
-);
-const radios = document.querySelectorAll<HTMLInputElement>(
-    'input[type="radio"]',
-);
+const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+const radios = document.querySelectorAll<HTMLInputElement>('input[type="radio"]');
 
 exportBtn?.addEventListener("click", () => {
     let settings: Record<string, boolean> = {};
@@ -242,36 +218,32 @@ importBtn?.addEventListener("click", () => {
 });
 
 // Copy to clipboard button
-document
-    .getElementById("copyBtn")
-    ?.addEventListener("click", async function () {
-        var textContent = document.getElementById("code")?.innerText;
-        if (!textContent) return;
-        try {
-            await navigator.clipboard.writeText(textContent);
-        } catch (error) {
-            console.error("Error copying to clipboard:", error);
-        }
-    });
+document.getElementById("copyBtn")?.addEventListener("click", async function () {
+    var textContent = document.getElementById("code")?.innerText;
+    if (!textContent) return;
+    try {
+        await navigator.clipboard.writeText(textContent);
+    } catch (error) {
+        console.error("Error copying to clipboard:", error);
+    }
+});
 
-document
-    .getElementById("autounattendBtn")
-    ?.addEventListener("click", async function () {
-        const autoattendScript = await generateAutounattend();
-        if (!autoattendScript) return;
-        try {
-            let blob = new Blob([autoattendScript], { type: "text/plain" });
-            let link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = "autounattend.xml";
+document.getElementById("autounattendBtn")?.addEventListener("click", async function () {
+    const autoattendScript = await generateAutounattend();
+    if (!autoattendScript) return;
+    try {
+        let blob = new Blob([autoattendScript], { type: "text/plain" });
+        let link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "autounattend.xml";
 
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } catch (error) {
-            console.error("Error saving autoattend:", error);
-        }
-    });
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        console.error("Error saving autoattend:", error);
+    }
+});
 
 // Update the indicator text
 document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
@@ -293,14 +265,11 @@ document.querySelectorAll(".checkbox-wrapper").forEach((wrapper) => {
         radio.addEventListener("change", () => {
             const radioName = radio.getAttribute("name");
             document
-                .querySelectorAll<HTMLInputElement>(
-                    `input[type="radio"][name="${radioName}"]`,
-                )
+                .querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${radioName}"]`)
                 .forEach((r) => {
                     const parentWrapper = r.closest(".checkbox-wrapper");
                     if (parentWrapper) {
-                        const indicator =
-                            parentWrapper.querySelector(".indicator");
+                        const indicator = parentWrapper.querySelector(".indicator");
                         if (!indicator) return;
                         indicator.textContent = r.checked
                             ? indicator.getAttribute("data-on") || "On"

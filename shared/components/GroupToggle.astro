@@ -34,11 +34,7 @@ const { title, description, icon, id, scripts, offText, onText } = Astro.props;
         <div class="checkbox-wrapper">
             <img class="chevron" src="/icons/chevron-down.png" alt="" />
             <label class="switch">
-                <input
-                    class="group-checkbox"
-                    id={`group-${id}`}
-                    type="checkbox"
-                />
+                <input class="group-checkbox" id={`group-${id}`} type="checkbox" />
                 <span class="slider"></span>
             </label>
         </div>
@@ -60,8 +56,7 @@ const { title, description, icon, id, scripts, offText, onText } = Astro.props;
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const groupCheckbox =
-            document.querySelectorAll<HTMLInputElement>("input[id^=group-]");
+        const groupCheckbox = document.querySelectorAll<HTMLInputElement>("input[id^=group-]");
 
         groupCheckbox.forEach((group) => {
             group.addEventListener("change", () => {
@@ -69,9 +64,7 @@ const { title, description, icon, id, scripts, offText, onText } = Astro.props;
                 if (!groupContainer) return;
 
                 const groupItems =
-                    groupContainer.querySelectorAll<HTMLInputElement>(
-                        "input:not([id^=group-])",
-                    );
+                    groupContainer.querySelectorAll<HTMLInputElement>("input:not([id^=group-])");
 
                 groupItems.forEach((item) => {
                     if (item.checked !== group.checked) {

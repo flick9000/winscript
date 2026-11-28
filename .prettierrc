@@ -1,6 +1,6 @@
 {
     "tabWidth": 4,
     "plugins": ["prettier-plugin-astro"],
-    "printWidth": 80,
+    "printWidth": 100,
     "endOfLine": "lf"
 }
